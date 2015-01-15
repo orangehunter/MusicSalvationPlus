@@ -1,7 +1,6 @@
 package com.musicsalvation;
 //
 
-import com.example.musicsalvationsdkverson.R;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -24,14 +23,14 @@ implements SurfaceHolder.Callback{
 
 	Bitmap wmap;
 	Bitmap left_back;
-	Bitmap left_exit;    //<<½bÀY-²L¦â  Â÷¶}MENU¥Î
-	Bitmap left_exit2;   //<<½bÀY-²`¦â
+	Bitmap left_exit;    //<<ç®­é ­-æ·ºè‰²  é›¢é–‹MENUç”¨
+	Bitmap left_exit2;   //<<ç®­é ­-æ·±è‰²
 
-	Bitmap menubtn;      //>>½bÀY-²L¦â  ©I¥sMENU¥Î
-	Bitmap menubtn2;    //>>½bÀY-²`¦â
+	Bitmap menubtn;      //>>ç®­é ­-æ·ºè‰²  å‘¼å«MENUç”¨
+	Bitmap menubtn2;    //>>ç®­é ­-æ·±è‰²
 
-	Bitmap left_exitback; //Â÷¶}«ö¶s­I´º
-	Bitmap left_btmback;  //MENU¿ï¶µ­I´º
+	Bitmap left_exitback; //é›¢é–‹æŒ‰éˆ•èƒŒæ™¯
+	Bitmap left_btmback;  //MENUé¸é …èƒŒæ™¯
 	Bitmap btnvol;
 	Bitmap btnvol2;
 	Bitmap chbtmse;
@@ -41,14 +40,14 @@ implements SurfaceHolder.Callback{
 	Bitmap remain;
 	Bitmap remain2;
 
-	//³t«×»P§P©w¹Ï¤ù«Å§i=====================================
+	//é€Ÿåº¦èˆ‡åˆ¤å®šåœ–ç‰‡å®£å‘Š=====================================
 	Bitmap timing;
 	Bitmap timing2;
 	Bitmap timing_back;
 	Bitmap timing_r_arrow;
 	Bitmap timing_l_arrow;
 	Bitmap timing_num[] = new Bitmap [16];
-	//³t«×»P§P©w¹Ï¤ù«Å§i----------------------------------------
+	//é€Ÿåº¦èˆ‡åˆ¤å®šåœ–ç‰‡å®£å‘Š----------------------------------------
 
 
 	Bitmap volchback;
@@ -56,7 +55,7 @@ implements SurfaceHolder.Callback{
 	Bitmap volbtn;
 	Bitmap sechange;
 
-	//¥kÃäÃö¥d¿ï¾Ü°Ï¶ô
+	//å³é‚Šé—œå¡é¸æ“‡å€å¡Š
 	Bitmap right_board;
 	Bitmap right_chmodel;
 	Bitmap right_stage01;
@@ -68,7 +67,7 @@ implements SurfaceHolder.Callback{
 	Bitmap right_normal;
 	Bitmap right_hard;
 
-	//·s«Å§iªºÃø©ö«×»P½bÀY¹Ï¤ù===========================================
+	//æ–°å®£å‘Šçš„é›£æ˜“åº¦èˆ‡ç®­é ­åœ–ç‰‡===========================================
 	Bitmap right_easy_ch;
 	Bitmap right_normal_ch;
 	Bitmap right_hard_ch;
@@ -76,17 +75,17 @@ implements SurfaceHolder.Callback{
 	Bitmap right_arrow_left2;
 	Bitmap right_arrow_right;
 	Bitmap right_arrow_right2;
-	//·s«Å§iªºÃø©ö«×»P½bÀY¹Ï¤ù-------------------------------------------
+	//æ–°å®£å‘Šçš„é›£æ˜“åº¦èˆ‡ç®­é ­åœ–ç‰‡-------------------------------------------
 
-	//²Ä2¡B²Ä3Ãö¥d©Ò»İ­nªº¹Ï¤ù===========================================
+	//ç¬¬2ã€ç¬¬3é—œå¡æ‰€éœ€è¦çš„åœ–ç‰‡===========================================
 	Bitmap right_stage02info;
 	Bitmap right_stage03info;
-	Bitmap right_boss_del;  //¹LÃö¤§«á·|Åã¥ÜªºBOSS¹Ï¤ù
+	Bitmap right_boss_del;  //éé—œä¹‹å¾Œæœƒé¡¯ç¤ºçš„BOSSåœ–ç‰‡
 	Bitmap stagebtn_green;
 	Bitmap stagebtn_green_l;
 	Bitmap right_stage2;
 	Bitmap right_stage3;
-	//²Ä2¡B²Ä3Ãö¥d©Ò»İ­nªº¹Ï¤ù-------------------------------------------
+	//ç¬¬2ã€ç¬¬3é—œå¡æ‰€éœ€è¦çš„åœ–ç‰‡-------------------------------------------
 
 	Bitmap right_start;
 	Bitmap stage01btn0;
@@ -106,7 +105,7 @@ implements SurfaceHolder.Callback{
 	Bitmap model_ch;
 
 
-	Bottom menubtm; //MENU«ö¶s
+	Bottom menubtm; //MENUæŒ‰éˆ•
 	Bottom left_btm1;
 	Bottom left_btm2;
 	Bottom left_btm3;
@@ -128,26 +127,26 @@ implements SurfaceHolder.Callback{
 
 	Bottom stbtn01;
 	boolean st_02_flag;
-	Bottom stbtn02;  //²Ä¤GÃö«ö¶s
+	Bottom stbtn02;  //ç¬¬äºŒé—œæŒ‰éˆ•
 	boolean st_03_flag;
-	Bottom stbtn03;  //²Ä¤TÃö«ö¶s
+	Bottom stbtn03;  //ç¬¬ä¸‰é—œæŒ‰éˆ•
 	Bottom easy;
 	Bottom normal;
 	Bottom hard;
 	Bottom model;
 	Bottom start;
 
-	//½bÀY«ö¶s«Å§i================================================
+	//ç®­é ­æŒ‰éˆ•å®£å‘Š================================================
 	Bottom arrow;
-	//½bÀY«ö¶s«Å§i------------------------------------------------
+	//ç®­é ­æŒ‰éˆ•å®£å‘Š------------------------------------------------
 
 
 	MediaPlayer mp;
 	SoundPool sp;
 	int sp_id[];
 
-	int pointx;//Ä²±±¨ì¿Ã¹õªºx®y¼Ğ
-	int pointy;//Ä²±±¨ì¿Ã¹õªºy®y¼Ğ
+	int pointx;//è§¸æ§åˆ°è¢å¹•çš„xåº§æ¨™
+	int pointy;//è§¸æ§åˆ°è¢å¹•çš„yåº§æ¨™
 	boolean deJump = true;
 
 	float rot=0;
@@ -157,9 +156,9 @@ implements SurfaceHolder.Callback{
 	int x2=0;
 	int alpha2 = 10;
 
-	//FLAG«Å§i°Ï°ì
-	int menuFlag = 0;   //¥@¬É¦a¹Ï¥ª¥b³¡
-	int stageFlag = 0;  //¥k¥b³¡
+	//FLAGå®£å‘Šå€åŸŸ
+	int menuFlag = 0;   //ä¸–ç•Œåœ°åœ–å·¦åŠéƒ¨
+	int stageFlag = 0;  //å³åŠéƒ¨
 
 	int mbgx = -500;
 	int mbgx2 = 13;
@@ -203,14 +202,14 @@ implements SurfaceHolder.Callback{
 	//RANK------------------------------
 	Number num;
 
-	Paint paint;			//µeµ§ªº°Ñ¦Ò
+	Paint paint;			//ç•«ç­†çš„åƒè€ƒ
 	int i=0,j=5;
 	MainActivity activity;
 
 	public MapView(MainActivity mainActivity) {
 		super(mainActivity);
 		this.activity = mainActivity;
-		this.getHolder().addCallback(this);//³]©w¥Í©R©P´Á¦^½Õ±µ¤fªº¹ê²{ªÌ
+		this.getHolder().addCallback(this);//è¨­å®šç”Ÿå‘½å‘¨æœŸå›èª¿æ¥å£çš„å¯¦ç¾è€…
 
 
 	}
@@ -222,8 +221,8 @@ implements SurfaceHolder.Callback{
 	public void surfaceCreated(SurfaceHolder holder) {
 		set_speed=activity.speed+5;
 		set_timing=activity.timing+5;
-		paint = new Paint();//«Ø¥ßµeµ§
-		paint.setAntiAlias(true);//¶}±Ò§Ü¿÷¾¦
+		paint = new Paint();//å»ºç«‹ç•«ç­†
+		paint.setAntiAlias(true);//é–‹å•ŸæŠ—é‹¸é½’
 		wmap =Graphic.bitSize(LoadBitmap( R.drawable.wmap), Constant.DEFULT_WITH, Constant.DEFULT_HIGHT);
 		left_back=Graphic.bitSize(LoadBitmap( R.drawable.menubackground), 846, 871);
 		left_exit = Graphic.bitSize(LoadBitmap( R.drawable.left_exit1), 134, 75);
@@ -259,7 +258,7 @@ implements SurfaceHolder.Callback{
 		right_hard = Graphic.bitSize(LoadBitmap(R.drawable.hardv2), 205, 80);
 		right_start = Graphic.bitSize(LoadBitmap(R.drawable.startv2), 175, 75);
 
-		//Åã¥ÜÃø©ö«×ªº«ö¶s»P®i¶}¿ï³æªº½bÀY===============================================================
+		//é¡¯ç¤ºé›£æ˜“åº¦çš„æŒ‰éˆ•èˆ‡å±•é–‹é¸å–®çš„ç®­é ­===============================================================
 		model_ch =  Graphic.bitSize(LoadBitmap(R.drawable.model), 205, 80);
 		right_easy_ch = Graphic.bitSize(LoadBitmap(R.drawable.easyv2_ch), 205, 80);
 		right_normal_ch = Graphic.bitSize(LoadBitmap(R.drawable.normalv2_ch), 205, 80);
@@ -269,9 +268,9 @@ implements SurfaceHolder.Callback{
 		right_arrow_right = Graphic.bitSize(LoadBitmap(R.drawable.map_arrow_right), 35, 50);
 		right_arrow_right2 = Graphic.bitSize(LoadBitmap(R.drawable.map_arrow_right2), 35, 50);
 
-		//Åã¥ÜÃø©ö«×ªº«ö¶s»P®i¶}¿ï³æªº½bÀY---------------------------------------------------------------
+		//é¡¯ç¤ºé›£æ˜“åº¦çš„æŒ‰éˆ•èˆ‡å±•é–‹é¸å–®çš„ç®­é ­---------------------------------------------------------------
 
-		//·s¼Wªº2¡B3Ãö¥d¸ê°T====================================================================
+		//æ–°å¢çš„2ã€3é—œå¡è³‡è¨Š====================================================================
 		right_stage02info = Graphic.bitSize(LoadBitmap(R.drawable.right_stage02infor), 389, 336);
 		right_stage03info = Graphic.bitSize(LoadBitmap(R.drawable.right_stage03infor), 389, 336);
 		right_stage2 = Graphic.bitSize(LoadBitmap(R.drawable.right_stage02), 266, 62);
@@ -280,7 +279,7 @@ implements SurfaceHolder.Callback{
 		stagebtn_green_l = Graphic.bitSize(LoadBitmap(R.drawable.stagebtn_green_l), 64, 64);
 
 
-		//·s¼Wªº2¡B3Ãö¥d¸ê°T---------------------------------------------------------------------
+		//æ–°å¢çš„2ã€3é—œå¡è³‡è¨Š---------------------------------------------------------------------
 
 		stage01btn0 = Graphic.bitSize(LoadBitmap(R.drawable.stage01btn0), 64, 64);
 		stage01btn = Graphic.bitSize(LoadBitmap(R.drawable.stage01btn1), 64, 64);
@@ -296,7 +295,7 @@ implements SurfaceHolder.Callback{
 		se05 = Graphic.bitSize(LoadBitmap(R.drawable.se05),70 ,70 );
 		se05l = Graphic.bitSize(LoadBitmap(R.drawable.se05l),70 ,70 );
 
-		//³t«×»P§P©w==============================================================
+		//é€Ÿåº¦èˆ‡åˆ¤å®š==============================================================
 		timing_back = Graphic.bitSize(LoadBitmap(R.drawable.timing_back), 390 ,295 );
 		timing_l_arrow = Graphic.bitSize(LoadBitmap(R.drawable.timing_l_arrow),45 ,40 );
 		timing_r_arrow = Graphic.bitSize(LoadBitmap(R.drawable.timing_r_arrow),45 ,40 );
@@ -316,7 +315,7 @@ implements SurfaceHolder.Callback{
 		timing_num[13] = Graphic.bitSize(LoadBitmap(R.drawable.num_08),48 ,48 );
 		timing_num[14] = Graphic.bitSize(LoadBitmap(R.drawable.num_09),48 ,48 );
 		timing_num[15] = Graphic.bitSize(LoadBitmap(R.drawable.num_10),48 ,48 );
-		//³t«×»P§P©w----------------------------------------------------------------------
+		//é€Ÿåº¦èˆ‡åˆ¤å®š----------------------------------------------------------------------
 
 		menubtm = new Bottom(activity, left_exitback, left_exitback, 110, 35);
 		left_btm1= new Bottom(activity, btnvol2, btnvol, 114, 166);
@@ -325,12 +324,12 @@ implements SurfaceHolder.Callback{
 		left_btm4= new Bottom(activity, timing2, timing, 134, 451);
 		left_btm5= new Bottom(activity, remain2, remain, 114, 542);
 
-		//³t«×»P§P©w«ö¶s===========================================================
+		//é€Ÿåº¦èˆ‡åˆ¤å®šæŒ‰éˆ•===========================================================
 		speed_right_arrow = new Bottom(activity , timing_r_arrow,timing_r_arrow, 435 ,545);
 		speed_left_arrow = new Bottom(activity , timing_l_arrow,timing_l_arrow, 322 ,545);
 		timing_left_arrow = new Bottom(activity, timing_l_arrow , timing_l_arrow ,322 , 660);
 		timing_right_arrow = new Bottom(activity, timing_r_arrow , timing_r_arrow ,435 , 660);
-		//³t«×»P§P©w«ö¶s------------------------------------------------------------
+		//é€Ÿåº¦èˆ‡åˆ¤å®šæŒ‰éˆ•------------------------------------------------------------
 
 		sebtm1 = new Bottom(activity, se01, se01l, 390, 390);
 		sebtm2 = new Bottom(activity, se02, se02l, 393, 451);
@@ -377,10 +376,10 @@ implements SurfaceHolder.Callback{
 
 		start = new Bottom(activity, right_start, right_start, 1161, 655);
 
-		//¥Ø«e¨Ï¥ÎªºÃø«×
-		//TODO (¥\¯à«İ¸É)
+		//ç›®å‰ä½¿ç”¨çš„é›£åº¦
+		//TODO (åŠŸèƒ½å¾…è£œ)
 		model = new Bottom(activity, model_ch, model_ch, 969, 655);
-		//¿ï¾ÜÃø«×¨Ï¥Îªº¿ï¾Ü«ö¶s
+		//é¸æ“‡é›£åº¦ä½¿ç”¨çš„é¸æ“‡æŒ‰éˆ•
 		easy  = new Bottom(activity, right_easy_ch, right_easy, 741, 514);
 		normal  = new Bottom(activity, right_normal_ch, right_normal, 741, 588);
 		hard  = new Bottom(activity, right_hard_ch, right_hard, 741, 662);
@@ -426,7 +425,7 @@ implements SurfaceHolder.Callback{
 						e.printStackTrace();
 					}
 					SurfaceHolder myholder=MapView.this.getHolder();
-					Canvas canvas = myholder.lockCanvas();//¨ú±oµe¥¬
+					Canvas canvas = myholder.lockCanvas();//å–å¾—ç•«å¸ƒ
 					onDraw(canvas);
 					if(canvas != null){
 						myholder.unlockCanvasAndPost(canvas);
@@ -438,26 +437,26 @@ implements SurfaceHolder.Callback{
 	}
 	@SuppressLint("DrawAllocation")
 	@Override
-	protected void onDraw(Canvas canvas) {//­«·s©w¸qªºÃ¸¨î¤èªk
+	protected void onDraw(Canvas canvas) {//é‡æ–°å®šç¾©çš„ç¹ªåˆ¶æ–¹æ³•
 		if(canvas!=null){
 			super.onDraw(canvas);
-			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//¥u¦b¿Ã¹õ½d³ò¤ºÃ¸¨î¹Ï¤ù
-			canvas.drawColor(Color.BLACK);//¬É­±³]©w¬°¶Â¦â
+			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//åªåœ¨è¢å¹•ç¯„åœå…§ç¹ªåˆ¶åœ–ç‰‡
+			canvas.drawColor(Color.BLACK);//ç•Œé¢è¨­å®šç‚ºé»‘è‰²
 
 			if(!mp.isPlaying()){
 				mp.prepareAsync();
 				mp.start();
 			}
 
-			Graphic.drawPic(canvas, wmap, 1280/2, 720/2, 0, 255, paint);//¦a¹Ï
+			Graphic.drawPic(canvas, wmap, 1280/2, 720/2, 0, 255, paint);//åœ°åœ–
 			if(stbtn01.getBottom()){
 				Graphic.drawPic(canvas, stage01btn0, 644, 609, 0, 255, paint);
-				stbtn01.drawBtm(canvas, paint,x2);  //²Ä¤@Ãö«ö¶s
+				stbtn01.drawBtm(canvas, paint,x2);  //ç¬¬ä¸€é—œæŒ‰éˆ•
 			}else{
 				stbtn01.drawBtm(canvas, paint);
 			}
 
-			//2¡B3Ãö«ö¶s==============================================================
+			//2ã€3é—œæŒ‰éˆ•==============================================================
 			if(st_02_flag){
 				if(stbtn02.getBottom()){
 					Graphic.drawPic(canvas, stage01btn0, 815, 165, 0, 255, paint);
@@ -476,7 +475,7 @@ implements SurfaceHolder.Callback{
 				}
 			}
 
-			//2¡B3Ãö«ö¶s-------------------------------------------------------------
+			//2ã€3é—œæŒ‰éˆ•-------------------------------------------------------------
 			if(mbgx!=-500){
 				Graphic.drawPic(canvas, left_back, mbgx, 374, rot, 255, paint);
 				Graphic.drawPic(canvas, timing_back, 270, 560, 0, speedbaralpha, paint);
@@ -506,7 +505,7 @@ implements SurfaceHolder.Callback{
 			if(stagecount < 0){
 				stagecount = 0;
 			}
-			//¥ª¥b³¡¿ï³æ±±¨î================================================
+			//å·¦åŠéƒ¨é¸å–®æ§åˆ¶================================================
 			if(menuFlag == 0){
 				menubtm.drawBtm(canvas, paint);
 				Graphic.drawPic(canvas, menubtn, 66, 34, 0, 255, paint);
@@ -531,7 +530,7 @@ implements SurfaceHolder.Callback{
 				if(rot == -360){
 					rot = 0;
 				}
-				//¥ªmenu­I´º
+				//å·¦menuèƒŒæ™¯
 				mbgx=Coordinate.AnalogSpeedMove(mbgx, mbgx2);
 				menubtm.drawBtm(canvas, paint);
 				Graphic.drawPic(canvas, left_exit, 66, 34, 0, 255, paint);
@@ -559,7 +558,7 @@ implements SurfaceHolder.Callback{
 				left_btm3.drawBtm(canvas, paint);
 				left_btm4.drawBtm(canvas, paint);
 				left_btm5.drawBtm(canvas, paint);
-				//¿ï³æ«ö¶s===============================================================
+				//é¸å–®æŒ‰éˆ•===============================================================
 				if(left_btm1.getBottom()){
 					if(sevolmx!=sevolmovex){
 						sevolmx = Coordinate.AnalogSpeedMove(sevolmx, sevolmovex);
@@ -610,20 +609,20 @@ implements SurfaceHolder.Callback{
 					speedbaralpha = 0;
 
 				}
-				//¿ï³æ«ö¶s----------------------------------------------------------------------------------------------------
+				//é¸å–®æŒ‰éˆ•----------------------------------------------------------------------------------------------------
 			}
 
 
-			//¥ª¥b³¡¿ï³æ±±¨î¦Ü¦¹=======================================================
+			//å·¦åŠéƒ¨é¸å–®æ§åˆ¶è‡³æ­¤=======================================================
 
 
-			//¥k¥b³¡Ãö¥d¿ï³æ±±¨î==========================================
+			//å³åŠéƒ¨é—œå¡é¸å–®æ§åˆ¶==========================================
 			switch(stageFlag){
 			case 0:
 				if(right_board_x!=1680){
 					right_board_x=Coordinate.AnalogSpeedMove(right_board_x, 1680);
 					Graphic.drawPic(canvas, right_board, right_board_x, 355, 0, 255, paint);
-					//½bÀYÅã¥Ü==================================================
+					//ç®­é ­é¡¯ç¤º==================================================
 					if(!model.getBottom()){
 
 						Graphic.drawPic(canvas, right_arrow_left, right_board_x-86, 665, 0, 255,  paint);
@@ -632,15 +631,15 @@ implements SurfaceHolder.Callback{
 						Graphic.drawPic(canvas, right_arrow_right, right_board_x-86, 665, 0, 255,  paint);
 						Graphic.drawPic(canvas, right_arrow_right2, right_board_x-86, 665, 0, x2,  paint);
 					}
-					//½bÀYÅã¥Ü----------------------------------------------------
+					//ç®­é ­é¡¯ç¤º----------------------------------------------------
 					start.drawBtm(canvas, paint,right_board_x+101, 645);
 					model.drawBtm(canvas, paint,right_board_x-86, 667);
 
-					//°l¥[±ø¥ó:·íFlag = 0 ·|Åã¥Üeasy=================================================
+					//è¿½åŠ æ¢ä»¶:ç•¶Flag = 0 æœƒé¡¯ç¤ºeasy=================================================
 					if(activity.difficulty==0){
 
 						Graphic.drawPic(canvas, right_easy_ch, right_board_x-86, 655, 0, 255, paint);
-						//°l¥[±ø¥óFlag = 0 ·|Åã¥Üeasy-----------------------------------------------
+						//è¿½åŠ æ¢ä»¶Flag = 0 æœƒé¡¯ç¤ºeasy-----------------------------------------------
 					}else if(activity.difficulty==1){
 
 						Graphic.drawPic(canvas, right_normal_ch, right_board_x-86, 667, 0, 255, paint);	
@@ -695,16 +694,16 @@ implements SurfaceHolder.Callback{
 				break;
 			}
 
-			//·ístageFlag¤£µ¥©ó0¡A´N·|Åã¥ÜÃø©ö«×»P¿ï¾ÜÃø©ö«×
+			//ç•¶stageFlagä¸ç­‰æ–¼0ï¼Œå°±æœƒé¡¯ç¤ºé›£æ˜“åº¦èˆ‡é¸æ“‡é›£æ˜“åº¦
 			if(stageFlag !=0){
 				if(activity.hight_rank[activity.level][activity.difficulty]!=0){
 					Graphic.drawPic(canvas, rank[activity.hight_rank[activity.level][activity.difficulty]-1], right_board_x+68, 585, 0, 255, paint);
 				}
 				num.drawNumberLeftStart(right_board_x-10, 528, activity.hight_score[activity.level][activity.difficulty], Number.Wite, canvas, paint);
-				//°l¥[±ø¥ó:·íFlag = 0 ·|Åã¥Üeasy=================================================
+				//è¿½åŠ æ¢ä»¶:ç•¶Flag = 0 æœƒé¡¯ç¤ºeasy=================================================
 				if(activity.difficulty==0){
 					Graphic.drawPic(canvas, right_easy_ch, right_board_x-86, 655, 0, 255, paint);
-					//°l¥[±ø¥óFlag = 0 ·|Åã¥Üeasy-----------------------------------------------
+					//è¿½åŠ æ¢ä»¶Flag = 0 æœƒé¡¯ç¤ºeasy-----------------------------------------------
 
 				}else if(activity.difficulty==1){
 					Graphic.drawPic(canvas, right_normal_ch, right_board_x-86, 655, 0, 255, paint);
@@ -714,7 +713,7 @@ implements SurfaceHolder.Callback{
 
 				}
 
-				//½bÀYÅã¥Ü=========================================================================
+				//ç®­é ­é¡¯ç¤º=========================================================================
 				if(!model.getBottom()){
 					Graphic.drawPic(canvas, right_arrow_left, right_board_x-150, 655, 0, 255,  paint);
 					Graphic.drawPic(canvas, right_arrow_left2, right_board_x-150, 655, 0, x2,  paint);
@@ -722,13 +721,13 @@ implements SurfaceHolder.Callback{
 					Graphic.drawPic(canvas, right_arrow_right, right_board_x-150, 655, 0, 255,  paint);
 					Graphic.drawPic(canvas, right_arrow_right2, right_board_x-150, 655,0, x2,  paint);
 				}
-				//½bÀY---------------------------------------------------------------------------
+				//ç®­é ­---------------------------------------------------------------------------
 
-				//¥²¶·¦b¿ï¾ÜÃö¥d®É¤~¯à½Õ¾ãÃø©ö«×
+				//å¿…é ˆåœ¨é¸æ“‡é—œå¡æ™‚æ‰èƒ½èª¿æ•´é›£æ˜“åº¦
 				if(model.getBottom()){
 					Graphic.drawPic(canvas, right_chmodel, 741, 588, 0, 255, paint);
 
-					//°l¥[³z©ú«×ÅÜ¤Æ¡A¥Ø«e¿ï¾ÜªºÃø«×¬°«G¡A¨ä¾lÃø«×¬°·t=======================================
+					//è¿½åŠ é€æ˜åº¦è®ŠåŒ–ï¼Œç›®å‰é¸æ“‡çš„é›£åº¦ç‚ºäº®ï¼Œå…¶é¤˜é›£åº¦ç‚ºæš—=======================================
 					if(activity.difficulty==0){
 						easy.drawBtm(canvas, paint, 255);
 						normal.drawBtm(canvas, paint,150);
@@ -743,7 +742,7 @@ implements SurfaceHolder.Callback{
 						hard.drawBtm(canvas, paint, 255);
 					}
 
-					//°l¥[³z©ú«×ÅÜ¤Æ¡A¥Ø«e¿ï¾ÜªºÃø«×¬°«G¡A¨ä¾lÃø«×¬°·t----------------------------------------
+					//è¿½åŠ é€æ˜åº¦è®ŠåŒ–ï¼Œç›®å‰é¸æ“‡çš„é›£åº¦ç‚ºäº®ï¼Œå…¶é¤˜é›£åº¦ç‚ºæš—----------------------------------------
 				}
 			}
 
@@ -756,10 +755,10 @@ implements SurfaceHolder.Callback{
 		pointy=(int) event.getY();
 		switch(event.getAction())
 		{
-		case MotionEvent.ACTION_DOWN://«ö¤U
+		case MotionEvent.ACTION_DOWN://æŒ‰ä¸‹
 			if(deJump == true)
 			{
-				//¥ª¥b³¡¿ï³æ«ö¶s¨Æ¥ó====================================
+				//å·¦åŠéƒ¨é¸å–®æŒ‰éˆ•äº‹ä»¶====================================
 				if(menubtm.isIn(pointx, pointy)){
 					if(menuFlag == 0){
 						sp.play(sp_id[5], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
@@ -844,8 +843,8 @@ implements SurfaceHolder.Callback{
 						}
 					}
 
-					//-------------­µ®Ä«ö¶s¤Á´«°Ï------------------
-					if(left_btm3.getBottom()){ //¥u¦³«ö¶s¬°true®É¤~¥Í®Ä
+					//-------------éŸ³æ•ˆæŒ‰éˆ•åˆ‡æ›å€------------------
+					if(left_btm3.getBottom()){ //åªæœ‰æŒ‰éˆ•ç‚ºtrueæ™‚æ‰ç”Ÿæ•ˆ
 
 						if(sebtm1.isIn(pointx, pointy)){
 							if(!sebtm1.getBottom()){
@@ -940,7 +939,7 @@ implements SurfaceHolder.Callback{
 						sp_Volume_bar.isOn=true;
 					}
 
-					//³t«×»P§P©w«ö¶s¨Æ¥ó====================================================
+					//é€Ÿåº¦èˆ‡åˆ¤å®šæŒ‰éˆ•äº‹ä»¶====================================================
 					if(left_btm4.getBottom())
 					{
 						if(speed_left_arrow.isIn(pointx, pointy)){
@@ -968,18 +967,18 @@ implements SurfaceHolder.Callback{
 							}
 						}
 					}
-					//³t«×»P§P©w«ö¶s¨Æ¥ó-----------------------------------------------------
+					//é€Ÿåº¦èˆ‡åˆ¤å®šæŒ‰éˆ•äº‹ä»¶-----------------------------------------------------
 
 				}
-				//¥ª¥b³¡¿ï³æ«ö¶s¨Æ¥ó¦Ü¦¹=====================================================
+				//å·¦åŠéƒ¨é¸å–®æŒ‰éˆ•äº‹ä»¶è‡³æ­¤=====================================================
 
-				//¥k¥b³¡Ãö¥d«ö¶s¨Æ¥ó¶}©l====================================================
+				//å³åŠéƒ¨é—œå¡æŒ‰éˆ•äº‹ä»¶é–‹å§‹====================================================
 				if(stbtn01.isIn(pointx, pointy)){
 					if(!stbtn01.getBottom()){
 						sp.play(sp_id[10],activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
 						stageFlag = 1;
-						activity.level=0;//³]©wgameview Ãö¥d°Ñ¼Æ
-						activity.difficulty=0;//gameviewÃø«×°Ñ¼Æ
+						activity.level=0;//è¨­å®šgameview é—œå¡åƒæ•¸
+						activity.difficulty=0;//gameviewé›£åº¦åƒæ•¸
 						stbtn01.setBottomTo(true);
 						stbtn02.setBottomTo(false);
 						stbtn03.setBottomTo(false);
@@ -993,13 +992,13 @@ implements SurfaceHolder.Callback{
 						model.setBottomTo(false);
 					}
 				}
-				//²Ä¤GÃö==================================================
+				//ç¬¬äºŒé—œ==================================================
 				if(stbtn02.isIn(pointx, pointy)&&st_02_flag){
 					if(!stbtn02.getBottom()){
 						sp.play(sp_id[10], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
 						stageFlag = 2;
-						activity.level=1;//³]©wgameview Ãö¥d°Ñ¼Æ
-						activity.difficulty=0;//gameviewÃø«×°Ñ¼Æ
+						activity.level=1;//è¨­å®šgameview é—œå¡åƒæ•¸
+						activity.difficulty=0;//gameviewé›£åº¦åƒæ•¸
 						stbtn02.setBottomTo(true);
 						stbtn01.setBottomTo(false);
 						stbtn03.setBottomTo(false);
@@ -1011,14 +1010,14 @@ implements SurfaceHolder.Callback{
 						model.setBottomTo(false);
 					}
 				}
-				//²Ä¤GÃö--------------------------------------------------------
-				//²Ä¤TÃö==================================================
+				//ç¬¬äºŒé—œ--------------------------------------------------------
+				//ç¬¬ä¸‰é—œ==================================================
 				if(stbtn03.isIn(pointx, pointy)&&st_03_flag){
 					if(!stbtn03.getBottom()){
 						sp.play(sp_id[10], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
 						stageFlag = 3;
-						activity.level=2;//³]©wgameview Ãö¥d°Ñ¼Æ
-						activity.difficulty=0;//gameviewÃø«×°Ñ¼Æ
+						activity.level=2;//è¨­å®šgameview é—œå¡åƒæ•¸
+						activity.difficulty=0;//gameviewé›£åº¦åƒæ•¸
 						stbtn03.setBottomTo(true);
 						stbtn01.setBottomTo(false);
 						stbtn02.setBottomTo(false);
@@ -1030,7 +1029,7 @@ implements SurfaceHolder.Callback{
 						model.setBottomTo(false);
 					}
 				}
-				//²Ä¤TÃö--------------------------------------------------------
+				//ç¬¬ä¸‰é—œ--------------------------------------------------------
 
 				if(stageFlag!=0){
 					if(start.isIn(pointx, pointy)){
@@ -1039,7 +1038,7 @@ implements SurfaceHolder.Callback{
 						activity.changeView(0);
 					}
 
-					//Ãø©ö«×½Õ¾ã«ö¶s¨Æ¥ó
+					//é›£æ˜“åº¦èª¿æ•´æŒ‰éˆ•äº‹ä»¶
 					if(model.isIn(pointx, pointy)){
 						if(model.getBottom()){
 
@@ -1052,24 +1051,24 @@ implements SurfaceHolder.Callback{
 					if(model.getBottom()){
 						if(easy.isIn(pointx, pointy)){
 							sp.play(sp_id[9], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
-							activity.difficulty=0;//gameviewÃø«×°Ñ¼Æ
+							activity.difficulty=0;//gameviewé›£åº¦åƒæ•¸
 							model.setBottomTo(false);
 						}
 						if(normal.isIn(pointx, pointy)){
 							sp.play(sp_id[9], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
-							activity.difficulty=1;//gameviewÃø«×°Ñ¼Æ
+							activity.difficulty=1;//gameviewé›£åº¦åƒæ•¸
 							model.setBottomTo(false);
 						}
 						if(hard.isIn(pointx, pointy)){
 							sp.play(sp_id[9], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
-							activity.difficulty=2;//gameviewÃø«×°Ñ¼Æ
+							activity.difficulty=2;//gameviewé›£åº¦åƒæ•¸
 							model.setBottomTo(false);
 						}
 					}
 				}
 
 
-				//¥k¥b³¡Ãö¥d«ö¶s¨Æ¥ó¦Ü¦¹====================================================
+				//å³åŠéƒ¨é—œå¡æŒ‰éˆ•äº‹ä»¶è‡³æ­¤====================================================
 
 			}
 			deJump = false;
@@ -1125,19 +1124,19 @@ implements SurfaceHolder.Callback{
 
 	}
 
-	public void surfaceDestroyed(SurfaceHolder arg0) {//¾P·´®É³Q©I¥s
+	public void surfaceDestroyed(SurfaceHolder arg0) {//éŠ·æ¯€æ™‚è¢«å‘¼å«
 		activity.speed=set_speed-5;
 		activity.timing=set_timing-5;
 		wmap.recycle();
 		left_back.recycle();
-		left_exit.recycle();    //<<½bÀY-²L¦â  Â÷¶}MENU¥Î
-		left_exit2.recycle();   //<<½bÀY-²`¦â
+		left_exit.recycle();    //<<ç®­é ­-æ·ºè‰²  é›¢é–‹MENUç”¨
+		left_exit2.recycle();   //<<ç®­é ­-æ·±è‰²
 
-		menubtn.recycle();      //>>½bÀY-²L¦â  ©I¥sMENU¥Î
-		menubtn2.recycle();    //>>½bÀY-²`¦â
+		menubtn.recycle();      //>>ç®­é ­-æ·ºè‰²  å‘¼å«MENUç”¨
+		menubtn2.recycle();    //>>ç®­é ­-æ·±è‰²
 
-		left_exitback.recycle(); //Â÷¶}«ö¶s­I´º
-		left_btmback.recycle();  //MENU¿ï¶µ­I´º
+		left_exitback.recycle(); //é›¢é–‹æŒ‰éˆ•èƒŒæ™¯
+		left_btmback.recycle();  //MENUé¸é …èƒŒæ™¯
 		btnvol.recycle();
 		btnvol2.recycle();
 		chbtmse.recycle();
@@ -1147,7 +1146,7 @@ implements SurfaceHolder.Callback{
 		remain.recycle();
 		remain2.recycle();
 
-		//³t«×»P§P©w¹Ï¤ù«Å§i=====================================
+		//é€Ÿåº¦èˆ‡åˆ¤å®šåœ–ç‰‡å®£å‘Š=====================================
 		timing.recycle();
 		timing2.recycle();
 		timing_back.recycle();
@@ -1156,7 +1155,7 @@ implements SurfaceHolder.Callback{
 		for(int i=0;i<11;i++){
 			timing_num[i].recycle();
 		}
-		//³t«×»P§P©w¹Ï¤ù«Å§i----------------------------------------
+		//é€Ÿåº¦èˆ‡åˆ¤å®šåœ–ç‰‡å®£å‘Š----------------------------------------
 
 
 		volchback.recycle();
@@ -1164,7 +1163,7 @@ implements SurfaceHolder.Callback{
 		volbtn.recycle();
 		sechange.recycle();
 
-		//¥kÃäÃö¥d¿ï¾Ü°Ï¶ô
+		//å³é‚Šé—œå¡é¸æ“‡å€å¡Š
 		right_board.recycle();
 		right_chmodel.recycle();
 		right_stage01.recycle();
@@ -1175,7 +1174,7 @@ implements SurfaceHolder.Callback{
 		right_normal.recycle();
 		right_hard.recycle();
 
-		//·s«Å§iªºÃø©ö«×»P½bÀY¹Ï¤ù===========================================
+		//æ–°å®£å‘Šçš„é›£æ˜“åº¦èˆ‡ç®­é ­åœ–ç‰‡===========================================
 		right_easy_ch.recycle();
 		right_normal_ch.recycle();
 		right_hard_ch.recycle();
@@ -1183,17 +1182,17 @@ implements SurfaceHolder.Callback{
 		right_arrow_left2.recycle();
 		right_arrow_right.recycle();
 		right_arrow_right2.recycle();
-		//·s«Å§iªºÃø©ö«×»P½bÀY¹Ï¤ù-------------------------------------------
+		//æ–°å®£å‘Šçš„é›£æ˜“åº¦èˆ‡ç®­é ­åœ–ç‰‡-------------------------------------------
 
-		//²Ä2¡B²Ä3Ãö¥d©Ò»İ­nªº¹Ï¤ù===========================================
+		//ç¬¬2ã€ç¬¬3é—œå¡æ‰€éœ€è¦çš„åœ–ç‰‡===========================================
 		right_stage02info.recycle();
 		right_stage03info.recycle();
-		// right_boss_del.recycle();  //¹LÃö¤§«á·|Åã¥ÜªºBOSS¹Ï¤ù
+		// right_boss_del.recycle();  //éé—œä¹‹å¾Œæœƒé¡¯ç¤ºçš„BOSSåœ–ç‰‡
 		stagebtn_green.recycle();
 		stagebtn_green_l.recycle();
 		right_stage2.recycle();
 		right_stage3.recycle();
-		//²Ä2¡B²Ä3Ãö¥d©Ò»İ­nªº¹Ï¤ù-------------------------------------------
+		//ç¬¬2ã€ç¬¬3é—œå¡æ‰€éœ€è¦çš„åœ–ç‰‡-------------------------------------------
 
 		right_start.recycle();
 		stage01btn0.recycle();
@@ -1213,7 +1212,7 @@ implements SurfaceHolder.Callback{
 		model_ch.recycle();
 
 
-		menubtm.recycle(); //MENU«ö¶s
+		menubtm.recycle(); //MENUæŒ‰éˆ•
 		left_btm1.recycle();
 		left_btm2.recycle();
 		left_btm3.recycle();
@@ -1234,17 +1233,17 @@ implements SurfaceHolder.Callback{
 		sebtm5.recycle();
 
 		stbtn01.recycle();
-		stbtn02.recycle();  //²Ä¤GÃö«ö¶s
-		stbtn03.recycle();  //²Ä¤TÃö«ö¶s
+		stbtn02.recycle();  //ç¬¬äºŒé—œæŒ‰éˆ•
+		stbtn03.recycle();  //ç¬¬ä¸‰é—œæŒ‰éˆ•
 		easy.recycle();
 		normal.recycle();
 		hard.recycle();
 		model.recycle();
 		start.recycle();
 
-		//½bÀY«ö¶s«Å§i================================================
+		//ç®­é ­æŒ‰éˆ•å®£å‘Š================================================
 		// arrow.recycle();
-		//½bÀY«ö¶s«Å§i--------------------------------------------------------------------------------
+		//ç®­é ­æŒ‰éˆ•å®£å‘Š--------------------------------------------------------------------------------
 		num.recycle();
 		for(int i=0;i<rank.length;i++){
 			rank[i].recycle();

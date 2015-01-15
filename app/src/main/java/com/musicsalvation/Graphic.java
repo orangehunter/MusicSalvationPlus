@@ -66,12 +66,12 @@ public class Graphic {
 	    return options;
 	}
 	
-	static Bitmap bitSize(Bitmap bf,int f,int g){//????ç¸®æ??
+	static Bitmap bitSize(Bitmap bf,int f,int g){//????è®æ ¼??
 		int bw=0;
 		int bh=0;
 		float scaleWidth=0;
 		float scaleHeight=0;
-		// ??å¾??³è?ç¼©æ?¾ç??matrix????
+		// ??æ•º??å”¾?è»æ‹‡?æ›„??matrix????
 		Matrix matrix = new Matrix();
 		while(scaleWidth<=0&&scaleHeight<=0){
 			bw=bf.getWidth();
@@ -80,9 +80,9 @@ public class Graphic {
 			scaleHeight = Coordinate.CoordinateY(g)/ bh;
 		}
 		matrix.postScale(scaleWidth, scaleHeight);
-		Bitmap bit=Bitmap.createBitmap(bf, 0,0,bw,bh, matrix, true);//ç¸®æ?¾å????
+		Bitmap bit=Bitmap.createBitmap(bf, 0,0,bw,bh, matrix, true);//è®æ ¼?æ›‰????
 		matrix.reset();
-		//bf.recycle();//?·æ?????
+		//bf.recycle();//?ç‘Ÿ?????
 
 		return bit;
 	}
@@ -108,9 +108,9 @@ public class Graphic {
 	}
 
 	static void drawLine(Canvas canvas,int color,int start_x,int start_y,int end_x,int end_y,int with,Paint paint){
-		paint.setColor(color);																	//è¨­å?é¡???
-		paint.setStrokeWidth(with);    //è¨­å?ç·?å¯?
-		canvas.drawLine(Coordinate.CoordinateX(start_x), Coordinate.CoordinateY(start_y), Coordinate.CoordinateX(end_x),Coordinate.CoordinateY( end_y), paint);      //ç¹ªè£½?´ç?
+		paint.setColor(color);																	//é–®å‰–?æ†¿???
+		paint.setStrokeWidth(with);    //é–®å‰–?èº?æ’–?
+		canvas.drawLine(Coordinate.CoordinateX(start_x), Coordinate.CoordinateY(start_y), Coordinate.CoordinateX(end_x),Coordinate.CoordinateY( end_y), paint);      //èœèŠ¾ËŠ?æ¸¡?
 		paint.reset();
 	}
 }

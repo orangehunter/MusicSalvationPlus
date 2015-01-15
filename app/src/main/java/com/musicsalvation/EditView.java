@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.musicsalvationsdkverson.R;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -48,7 +47,7 @@ implements SurfaceHolder.Callback {
 	Bitmap mp_play,mp_pause;
 	Bottom playBtm;
 	static MediaPlayer mp=null;
-	String tittle="¥¼¿ï¾Ü";
+	String tittle="æœªé¸æ“‡";
 
 
 	int chartObject=20;
@@ -90,7 +89,7 @@ implements SurfaceHolder.Callback {
 	public EditView(MainActivity mainActivity){
 		super(mainActivity);
 		this.activity = mainActivity;
-		this.getHolder().addCallback(this);//³]©w¥Í©R©P´Á¦^½Õ±µ¤fªº¹ê²{ªÌ
+		this.getHolder().addCallback(this);//è¨­å®šç”Ÿå‘½å‘¨æœŸå›èª¿æ¥å£çš„å¯¦ç¾è€…
 		Constant.Flag=true;	
 	}
 
@@ -99,8 +98,8 @@ implements SurfaceHolder.Callback {
 	}
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-		paint = new Paint();//«Ø¥ßµeµ§
-		//bottom[A];  A{0:¶ê  ,1:¤è  ,2:¤T¨¤  ,3:¤e ,4:«ö¤U}
+		paint = new Paint();//å»ºç«‹ç•«ç­†
+		//bottom[A];  A{0:åœ“  ,1:æ–¹  ,2:ä¸‰è§’  ,3:å‰ ,4:æŒ‰ä¸‹}
 		int bottomSize=180;
 		int btm_first=130,btm_dis=270;
 		bottom[0]=Graphic.bitSize(LoadBitmap( R.drawable.bottom_round),bottomSize ,bottomSize);
@@ -160,7 +159,7 @@ implements SurfaceHolder.Callback {
 						e.printStackTrace();
 					}*/
 					SurfaceHolder myholder=EditView.this.getHolder();
-					Canvas canvas = myholder.lockCanvas();//¨ú±oµe¥¬
+					Canvas canvas = myholder.lockCanvas();//å–å¾—ç•«å¸ƒ
 					onDraw(canvas);
 					if(canvas != null){
 						myholder.unlockCanvasAndPost(canvas);
@@ -172,18 +171,18 @@ implements SurfaceHolder.Callback {
 
 	@SuppressLint("DrawAllocation")
 	@Override
-	protected void onDraw(Canvas canvas) {//­«·s©w¸qªºÃ¸¨î¤èªk
+	protected void onDraw(Canvas canvas) {//é‡æ–°å®šç¾©çš„ç¹ªåˆ¶æ–¹æ³•
 		if(canvas!=null){
 			super.onDraw(canvas);
-			if(uriFlag){//­µ°T¸ô®|ª¬ºA
+			if(uriFlag){//éŸ³è¨Šè·¯å¾‘ç‹€æ…‹
 				uri=activity.sendUri();
 				if(uri!=null&& loadFlag){
 					tittle=MainActivity.turnUriToName(uri);
 
-					if(mp==null)//°»´ú¼·©ñ¾¹ª«¥ó
+					if(mp==null)//åµæ¸¬æ’¥æ”¾å™¨ç‰©ä»¶
 						mp=new MediaPlayer();
 					try{
-						mp.setDataSource(activity, uri);//¸ü¤J­µÀÉ
+						mp.setDataSource(activity, uri);//è¼‰å…¥éŸ³æª”
 						mp.prepare();
 					} catch (IllegalArgumentException e) {
 					} catch (IllegalStateException e) {
@@ -203,21 +202,21 @@ implements SurfaceHolder.Callback {
 							BtT=json.getJSONObject("T");
 							BtX=json.getJSONObject("X");
 						} catch (JSONException e) {
-							Log.e("EditView","¿é¤Jjson¥¢±Ñ");
+							Log.e("EditView","è¼¸å…¥jsonå¤±æ•—");
 							e.printStackTrace();
 						}
 					}
 					chartscan=new chartScan(activity,BtR,BtS,BtT,BtX,target_dis,"EditView");
 				}
 			}
-			//©³¦â
-			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//¥u¦b¿Ã¹õ½d³ò¤ºÃ¸¨î¹Ï¤ù
-			canvas.drawColor(Color.WHITE);//¬É­±³]©w¬°¥Õ¦â
-			paint.setAntiAlias(true);//¶}±Ò§Ü¿÷¾¦
-			//ÃĞ­±µe­±=============================================================================
-			RectF rf1=new RectF(Coordinate.CoordinateX(20),Coordinate.CoordinateY(25),Coordinate.CoordinateX(960),Coordinate.CoordinateY(450));//³]©wÃĞ­±©³¹Ï¯x§Î
-			RectF rf2=new RectF(Coordinate.CoordinateX(960),Coordinate.CoordinateY(25),Coordinate.CoordinateX(1280),Coordinate.CoordinateY(450));//³]©wÃĞ­±¥kÃä¾B¸n
-			RectF rf3=new RectF(Coordinate.CoordinateX(0),Coordinate.CoordinateY(25),Coordinate.CoordinateX(20),Coordinate.CoordinateY(450));//³]©wÃĞ­±¥ªÃä¾B¸n
+			//åº•è‰²
+			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//åªåœ¨è¢å¹•ç¯„åœå…§ç¹ªåˆ¶åœ–ç‰‡
+			canvas.drawColor(Color.WHITE);//ç•Œé¢è¨­å®šç‚ºç™½è‰²
+			paint.setAntiAlias(true);//é–‹å•ŸæŠ—é‹¸é½’
+			//è­œé¢ç•«é¢=============================================================================
+			RectF rf1=new RectF(Coordinate.CoordinateX(20),Coordinate.CoordinateY(25),Coordinate.CoordinateX(960),Coordinate.CoordinateY(450));//è¨­å®šè­œé¢åº•åœ–çŸ©å½¢
+			RectF rf2=new RectF(Coordinate.CoordinateX(960),Coordinate.CoordinateY(25),Coordinate.CoordinateX(1280),Coordinate.CoordinateY(450));//è¨­å®šè­œé¢å³é‚Šé®ç½©
+			RectF rf3=new RectF(Coordinate.CoordinateX(0),Coordinate.CoordinateY(25),Coordinate.CoordinateX(20),Coordinate.CoordinateY(450));//è¨­å®šè­œé¢å·¦é‚Šé®ç½©
 			paint.setColor(Color.BLACK);
 			canvas.drawRect(rf1, paint);
 			paint.reset();
@@ -225,11 +224,11 @@ implements SurfaceHolder.Callback {
 
 			if(mp!=null){
 				//TODO
-				if(cr_btm_flag){//«öÁä¶ê²£¥Í
+				if(cr_btm_flag){//æŒ‰éµåœ“ç”¢ç”Ÿ
 					try {
 						BtR.put(Integer.toString(mp.getCurrentPosition()/accuracy), true);
 					} catch (JSONException e) {
-						Log.e("EditView","²£¥ÍR¥¢±Ñ");
+						Log.e("EditView","ç”¢ç”ŸRå¤±æ•—");
 						e.printStackTrace();
 					}
 					for(int i=0;i<chartObject;i++){
@@ -241,11 +240,11 @@ implements SurfaceHolder.Callback {
 					}
 				}
 				//TODO
-				if(cs_btm_flag){//«öÁä¤è²£¥Í
+				if(cs_btm_flag){//æŒ‰éµæ–¹ç”¢ç”Ÿ
 					try {
 						BtS.put(Integer.toString(mp.getCurrentPosition()/accuracy), true);
 					} catch (JSONException e) {
-						Log.e("EditView","²£¥ÍS¥¢±Ñ");
+						Log.e("EditView","ç”¢ç”ŸSå¤±æ•—");
 						e.printStackTrace();
 					}
 					for(int i=0;i<chartObject;i++){
@@ -257,11 +256,11 @@ implements SurfaceHolder.Callback {
 					}
 				}
 				//TODO
-				if(ct_btm_flag){//«öÁä¤T¨¤²£¥Í
+				if(ct_btm_flag){//æŒ‰éµä¸‰è§’ç”¢ç”Ÿ
 					try {
 						BtT.put(Integer.toString(mp.getCurrentPosition()/accuracy), true);
 					} catch (JSONException e) {
-						Log.e("EditView","²£¥ÍT¥¢±Ñ");
+						Log.e("EditView","ç”¢ç”ŸTå¤±æ•—");
 						e.printStackTrace();
 					}
 					for(int i=0;i<chartObject;i++){
@@ -273,11 +272,11 @@ implements SurfaceHolder.Callback {
 					}
 				}
 				//TODO
-				if(cx_btm_flag){//«öÁäX²£¥Í
+				if(cx_btm_flag){//æŒ‰éµXç”¢ç”Ÿ
 					try {
 						BtX.put(Integer.toString(mp.getCurrentPosition()/accuracy), true);
 					} catch (JSONException e) {
-						Log.e("EditView","²£¥ÍX¥¢±Ñ");
+						Log.e("EditView","ç”¢ç”ŸXå¤±æ•—");
 						e.printStackTrace();
 					}
 					for(int i=0;i<chartObject;i++){
@@ -289,15 +288,15 @@ implements SurfaceHolder.Callback {
 					}
 				}
 
-				//TODO »İ­n­«¼g
-				//¥şµe­±±½´y===============================================
+				//TODO éœ€è¦é‡å¯«
+				//å…¨ç•«é¢æƒæ===============================================
 				if(chart_FullScanFlag){
 					
 					
 					chart_FullScanFlag=false;
-				}//¥şµe­±±½´y**********************************************************************************************************************
+				}//å…¨ç•«é¢æƒæ**********************************************************************************************************************
 				else{
-					//for(int j=0;j<50;j++){//«ö¶s_¶ê °»´ú
+					//for(int j=0;j<50;j++){//æŒ‰éˆ•_åœ“ åµæ¸¬
 					//int BtTime=mp.getCurrentPosition()+target_dis+j;
 					paint.setColor(Color.BLACK);
 					try{
@@ -362,7 +361,7 @@ implements SurfaceHolder.Callback {
 						}
 						//}
 					}
-					if((mp.getCurrentPosition()+target_dis)%1000<=100 &&mp.isPlaying()&&(mp.getCurrentPosition()+target_dis)<mp.getDuration()){//®É¶¡°ò·Ç½u°»´ú
+					if((mp.getCurrentPosition()+target_dis)%1000<=100 &&mp.isPlaying()&&(mp.getCurrentPosition()+target_dis)<mp.getDuration()){//æ™‚é–“åŸºæº–ç·šåµæ¸¬
 						for(int i=0;i<chartObject;i++){
 							if(line[i].getFlag()==false &&(mp.getCurrentPosition()+target_dis-this.last_line)>900){
 								line[i].start(mp.getCurrentPosition(), target_dis);
@@ -372,7 +371,7 @@ implements SurfaceHolder.Callback {
 						}
 					}
 					int draw_time=mp.getCurrentPosition();
-					for(int i=0;i<chartObject;i++){////«ö¶s/®É¶¡°ò·Ç½uÃ¸¹Ï
+					for(int i=0;i<chartObject;i++){////æŒ‰éˆ•/æ™‚é–“åŸºæº–ç·šç¹ªåœ–
 						if(line[i].getFlag()){
 							line[i].drawChatrLine(draw_time, canvas, paint);
 						}
@@ -395,22 +394,22 @@ implements SurfaceHolder.Callback {
 			canvas.drawRect(rf2, paint);
 			canvas.drawRect(rf3, paint);
 			paint.reset();
-			//ÃĞ­±µe­±***************************************************************************************************************************
-			//­µÀÉ¤å¦r³B²z
+			//è­œé¢ç•«é¢***************************************************************************************************************************
+			//éŸ³æª”æ–‡å­—è™•ç†
 			paint.setTextSize((float) (paint.getTextSize()*1.5));
 			canvas.drawText(tittle,Coordinate.CoordinateX(20) , Coordinate.CoordinateY(23), paint);
 			if(mp!=null && !loadFlag){
 				String min,sec,msec;
 
-				if(mp.getCurrentPosition()/1000/60%60<10)//­pºâ¤ÀÄÁ
+				if(mp.getCurrentPosition()/1000/60%60<10)//è¨ˆç®—åˆ†é˜
 					min="0"+Integer.toString(mp.getCurrentPosition()/1000/60%60);
 				else
 					min=Integer.toString(mp.getCurrentPosition()/1000/60%60);				
-				if(mp.getCurrentPosition()/1000%60<10)//­pºâ¬íÄÁ
+				if(mp.getCurrentPosition()/1000%60<10)//è¨ˆç®—ç§’é˜
 					sec="0"+Integer.toString(mp.getCurrentPosition()/1000%60);
 				else
 					sec=Integer.toString(mp.getCurrentPosition()/1000%60);				
-				if(mp.getCurrentPosition()%1000/10<10)//­pºâ»¨¬í
+				if(mp.getCurrentPosition()%1000/10<10)//è¨ˆç®—è±ªç§’
 					msec="0"+Integer.toString(mp.getCurrentPosition()%1000/10);
 				else
 					msec=Integer.toString(mp.getCurrentPosition()%1000/10);
@@ -422,15 +421,15 @@ implements SurfaceHolder.Callback {
 
 
 
-				if(mp.getDuration()/1000/60%60<10)//­pºâ¤ÀÄÁ
+				if(mp.getDuration()/1000/60%60<10)//è¨ˆç®—åˆ†é˜
 					min="0"+Integer.toString(mp.getDuration()/1000/60%60);
 				else
 					min=Integer.toString(mp.getDuration()/1000/60%60);
-				if(mp.getDuration()/1000%60<10)//­pºâ¬íÄÁ
+				if(mp.getDuration()/1000%60<10)//è¨ˆç®—ç§’é˜
 					sec="0"+Integer.toString(mp.getDuration()/1000%60);
 				else
 					sec=Integer.toString(mp.getDuration()/1000%60);				
-				if(mp.getDuration()%1000/10<10)//­pºâ»¨¬í
+				if(mp.getDuration()%1000/10<10)//è¨ˆç®—è±ªç§’
 					msec="0"+Integer.toString(mp.getDuration()%1000/10);
 				else
 					msec=Integer.toString(mp.getDuration()%1000/10);
@@ -439,7 +438,7 @@ implements SurfaceHolder.Callback {
 				time=min+":"+sec+":"+msec;
 				canvas.drawText(time,Coordinate.CoordinateX(1110) , Coordinate.CoordinateY(525), paint);
 			}
-			//¥D­n«ö¶s
+			//ä¸»è¦æŒ‰éˆ•
 			btm_r.drawBtm(canvas, paint);
 			btm_s.drawBtm(canvas, paint);
 			btm_t.drawBtm(canvas, paint);
@@ -467,7 +466,7 @@ implements SurfaceHolder.Callback {
 					break;
 				}
 			}
-			//·j´M±ø
+			//æœå°‹æ¢
 			msb.drawSeekBar(canvas, paint);
 			if(mp!=null && !loadFlag){
 				if(msbFlag)
@@ -502,7 +501,7 @@ implements SurfaceHolder.Callback {
 		switch(event.getActionMasked())
 		{
 		case MotionEvent.ACTION_DOWN:
-		case MotionEvent.ACTION_POINTER_DOWN://«ö¤U
+		case MotionEvent.ACTION_POINTER_DOWN://æŒ‰ä¸‹
 			PointF f = new PointF();
 			f.x = event.getX(pointerIndex);
 			f.y = event.getY(pointerIndex);
@@ -630,7 +629,7 @@ implements SurfaceHolder.Callback {
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,int height) {
 
 	}
-	public void surfaceDestroyed(SurfaceHolder arg0) {//¾P·´®É³Q©I¥s
+	public void surfaceDestroyed(SurfaceHolder arg0) {//éŠ·æ¯€æ™‚è¢«å‘¼å«
 		if(mp!=null){
 			chartscan.Stop();
 			mp.release();

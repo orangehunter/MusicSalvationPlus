@@ -8,13 +8,13 @@ import android.graphics.Paint;
 
 public class Bottom {
 	MainActivity activity;
-	float x;//¹Ï¤ùªº¤¤¥¡x®y¼Ð
-	float y;//¹Ï¤ùªº¤¤¥¡y®y¼Ð
-	float width;//µêÀÀ«ö¶sªº¼e
-	float height;//µêÀÀ«ö¶sªº°ª
-	Bitmap onBitmap;//«ö¤Uª¬ºAªº¹Ï¤ù
-	Bitmap offBitmap;//¥¼«ö¤Uª¬ºAªº¹Ï¤ù
-	boolean isOn=false;//«ö¤Uª¬ºA¬°true
+	float x;//åœ–ç‰‡çš„ä¸­å¤®xåº§æ¨™
+	float y;//åœ–ç‰‡çš„ä¸­å¤®yåº§æ¨™
+	float width;//è™›æ“¬æŒ‰éˆ•çš„å¯¬
+	float height;//è™›æ“¬æŒ‰éˆ•çš„é«˜
+	Bitmap onBitmap;//æŒ‰ä¸‹ç‹€æ…‹çš„åœ–ç‰‡
+	Bitmap offBitmap;//æœªæŒ‰ä¸‹ç‹€æ…‹çš„åœ–ç‰‡
+	boolean isOn=false;//æŒ‰ä¸‹ç‹€æ…‹ç‚ºtrue
 	int key;
 	public Bottom(MainActivity activity,Bitmap onBitmap,Bitmap offBitmap,int x,int y){
 		this.activity=activity;
@@ -27,22 +27,22 @@ public class Bottom {
 		this.y=Coordinate.CoordinateY(y)-(this.height/2);
 	}
 
-	public void drawBtm(Canvas canvas,Paint paint){//Ã¸»s«ö¶s
+	public void drawBtm(Canvas canvas,Paint paint){//ç¹ªè£½æŒ‰éˆ•
 		if(isOn)
 			canvas.drawBitmap(onBitmap, x, y, paint);
 		else
 			canvas.drawBitmap(offBitmap, x, y,paint);
 	}
-	public void drawBtm(Canvas canvas,Paint paint,int alpha){//Ã¸»s«ö¶s
+	public void drawBtm(Canvas canvas,Paint paint,int alpha){//ç¹ªè£½æŒ‰éˆ•
 		paint.setAlpha(alpha);
 		drawBtm(canvas,paint);
 		paint.reset();
 	} 
-	public void drawBtm(Canvas canvas,Paint paint,int x,int y){//Ã¸»s«ö¶s
+	public void drawBtm(Canvas canvas,Paint paint,int x,int y){//ç¹ªè£½æŒ‰éˆ•
 		move(x,y);
 		drawBtm(canvas,paint);
 	}
-	public void drawBtm(Canvas canvas,Paint paint,int x,int y,int alpha){//Ã¸»s«ö¶s
+	public void drawBtm(Canvas canvas,Paint paint,int x,int y,int alpha){//ç¹ªè£½æŒ‰éˆ•
 		paint.setAlpha(alpha);
 		move(x,y);
 		drawBtm(canvas,paint);
@@ -50,7 +50,7 @@ public class Bottom {
 	}
 	
 	
-	public void setBottom(){//¤Á´««ö¶sª¬ºA
+	public void setBottom(){//åˆ‡æ›æŒ‰éˆ•ç‹€æ…‹
 		this.isOn=!this.isOn;
 	}
 	public boolean getBottom(){
@@ -70,13 +70,13 @@ public class Bottom {
 	public int getKey(){
 		return key;
 	}
-	public Boolean isIn(float pointx,float pointy){//§PÂ_Ä²±±¦ì¸m
+	public Boolean isIn(float pointx,float pointy){//åˆ¤æ–·è§¸æŽ§ä½ç½®
 		if(pointx>=x&&pointx<=x+width&&      	pointy>=y&&pointy<=y+height)
 			return true;
 		return false;
 	}
 	public void recycle(){
-		onBitmap.recycle();//«ö¤Uª¬ºAªº¹Ï¤ù
-		offBitmap.recycle();//¥¼«ö¤Uª¬ºAªº¹Ï¤ù
+		onBitmap.recycle();//æŒ‰ä¸‹ç‹€æ…‹çš„åœ–ç‰‡
+		offBitmap.recycle();//æœªæŒ‰ä¸‹ç‹€æ…‹çš„åœ–ç‰‡
 	}
 }

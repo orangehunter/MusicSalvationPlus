@@ -8,7 +8,6 @@ import java.util.TimerTask;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.musicsalvationsdkverson.R;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,8 +32,8 @@ implements SurfaceHolder.Callback{
 
 
 	boolean startFlag=true;
-	Bitmap bg;   //­I´º
-	Bitmap sight;  //·Ç¬P
+	Bitmap bg;   //èƒŒæ™¯
+	Bitmap sight;  //æº–æ˜Ÿ
 	Bitmap boss;
 	Bitmap game_easy;
 	Bitmap game_normal;
@@ -51,15 +50,15 @@ implements SurfaceHolder.Callback{
 	Bitmap grey_xx;
 	Bitmap grey_triangle;
 
-	//TAG ¯B´å¯¥«Å§i===============================================
+	//TAG æµ®æ¸¸ç ²å®£å‘Š===============================================
 	Bitmap d_red;
 	Bitmap d_blue;
 	Bitmap d_yellow;
 	Bitmap d_green;
 
-	//¯B´å¯¥«Å§i-----------------------------------------------
+	//æµ®æ¸¸ç ²å®£å‘Š-----------------------------------------------
 
-	Bitmap track;  //­y¹D
+	Bitmap track;  //è»Œé“
 
 	Bitmap virus_red;
 	Bitmap virus_yellow;
@@ -72,24 +71,24 @@ implements SurfaceHolder.Callback{
 	Bitmap hit;
 	Bitmap hits;
 
-	Bitmap titlebar;  //ª¬ºAÄæ
+	Bitmap titlebar;  //ç‹€æ…‹æ¬„
 	Bitmap hpbar;
 	Bitmap hpfont;
 	Bitmap hpfont_red;
 
 
-	//«Å§ipause©Ò»İ­nªº¹Ï¤ù==========================================
+	//å®£å‘Špauseæ‰€éœ€è¦çš„åœ–ç‰‡==========================================
 	Bitmap pause;
 	Bitmap pause2;
 	Bitmap pause_back;
-	Bitmap pause_black; //pause®É­n¥Îªº¶Â©³
+	Bitmap pause_black; //pauseæ™‚è¦ç”¨çš„é»‘åº•
 	Bitmap re_play;
 	Bitmap re_start;
 	Bitmap re_map;
-	//«Å§ipause©Ò»İ­nªº¹Ï¤ù-------------------------------------------
+	//å®£å‘Špauseæ‰€éœ€è¦çš„åœ–ç‰‡-------------------------------------------
 
 
-	//TAG ¯S®Ä¥ú«Å§i================================
+	//TAG ç‰¹æ•ˆå…‰å®£å‘Š================================
 	Bitmap[] Cyan 	= new Bitmap [6],
 			Red		= new Bitmap [6],
 			Green 	= new Bitmap [6],
@@ -104,21 +103,21 @@ implements SurfaceHolder.Callback{
 			Effect_Green	=new smallAnimax[Effect_numbers],
 			Effect_Yellow	=new smallAnimax[Effect_numbers],
 			Effect_Blue		=new smallAnimax[Effect_numbers];
-	//¯S®Ä¥ú«Å§i----------------------------------
+	//ç‰¹æ•ˆå…‰å®£å‘Š----------------------------------
 
 	Bottom btn_circle;
 	Bottom btn_square;
 	Bottom btn_xx;
 	Bottom btn_triangle;
 
-	//«Å§iPAUSE¡Bªğ¦^¹CÀ¸¡B±qÀY¶}©l¡Bªğ¦^Ãö¥d¦a¹Ï«ö¶s==================================================
+	//å®£å‘ŠPAUSEã€è¿”å›éŠæˆ²ã€å¾é ­é–‹å§‹ã€è¿”å›é—œå¡åœ°åœ–æŒ‰éˆ•==================================================
 	Bottom btn_pause;
 	Bottom btn_re_play;
 	Bottom btn_re_start;
 	Bottom btn_re_map;
-	//«Å§iPAUSE¡Bªğ¦^¹CÀ¸¡B±qÀY¶}©l¡Bªğ¦^Ãö¥d¦a¹Ï«ö¶s--------------------------------------------------
+	//å®£å‘ŠPAUSEã€è¿”å›éŠæˆ²ã€å¾é ­é–‹å§‹ã€è¿”å›é—œå¡åœ°åœ–æŒ‰éˆ•--------------------------------------------------
 
-	//¹LÃöµ¥¯Å================================================
+	//éé—œç­‰ç´š================================================
 	Bitmap rank_s;
 	Bitmap rank_a;
 	Bitmap rank_b;
@@ -126,15 +125,15 @@ implements SurfaceHolder.Callback{
 	Bitmap rank_d;
 	Bitmap rank_e;
 	Bitmap rank_f;
-	//¹LÃöµ¥¯Å------------------------------------------------
+	//éé—œç­‰ç´š------------------------------------------------
 
-	//¯à¶q±ø¤Á´«=============================================
+	//èƒ½é‡æ¢åˆ‡æ›=============================================
 	Bitmap enebar[] = new Bitmap[10];
 
 	double enebar_speed = 0.1;
 	smallAnimax change_enebar;
 	boolean ene_flag;
-	//¯à¶q±ø¤Á´«---------------------------------------------
+	//èƒ½é‡æ¢åˆ‡æ›---------------------------------------------
 
 
 	int boss_show;
@@ -148,16 +147,16 @@ implements SurfaceHolder.Callback{
 	int boss_x_side=1025;
 	int boss_x_middle=640;
 
-	//BOSS «eÄµ§i==
+	//BOSS å‰è­¦å‘Š==
 	int warning_time=2000;
 	Bitmap warning;
 	int warning_alpha;
 	int warning_alpha_flag;
 	int warning_sound;
 	boolean warning_flag;
-	//BOSS «eÄµ§i--
+	//BOSS å‰è­¦å‘Š--
 
-	//BOSS §ğÀ»==
+	//BOSS æ”»æ“Š==
 	gameChartBottom attack;
 	Bitmap attack_pic_round;
 	Bitmap attack_pic;
@@ -176,7 +175,7 @@ implements SurfaceHolder.Callback{
 	int boss_del_time=3000;
 	int boss_del_sound;
 	boolean boss_del_flag;
-	//BOSS §ğÀ»--
+	//BOSS æ”»æ“Š--
 
 
 	Number score;
@@ -207,15 +206,15 @@ implements SurfaceHolder.Callback{
 	int percent;
 	int sc_score;
 
-	//TAG ±±¨î§P©wÅã¥ÜFLAG==============================
+	//TAG æ§åˆ¶åˆ¤å®šé¡¯ç¤ºFLAG==============================
 	int Hitflag = 0;
 	int Hitcount = 0;
-	//±±¨î§P©wÅã¥ÜFLAG------------------------------
+	//æ§åˆ¶åˆ¤å®šé¡¯ç¤ºFLAG------------------------------
 
 	int pointx;
 	int pointy;
 
-	Paint paint;			//µeµ§ªº°Ñ¦Ò
+	Paint paint;			//ç•«ç­†çš„åƒè€ƒ
 	int i=0,j=5;
 	MainActivity activity;
 
@@ -251,7 +250,7 @@ implements SurfaceHolder.Callback{
 	public GameView(MainActivity mainActivity) {
 		super(mainActivity);
 		this.activity = mainActivity;
-		this.getHolder().addCallback(this);//³]©w¥Í©R©P´Á¦^½Õ±µ¤fªº¹ê²{ªÌ
+		this.getHolder().addCallback(this);//è¨­å®šç”Ÿå‘½å‘¨æœŸå›èª¿æ¥å£çš„å¯¦ç¾è€…
 	}
 
 	/*public Bitmap LoadBitmap(int r,int scale){
@@ -311,8 +310,8 @@ implements SurfaceHolder.Callback{
 
 		sp=new SoundPool(4, AudioManager.STREAM_MUSIC, 5);
 
-		paint = new Paint();//«Ø¥ßµeµ§
-		paint.setAntiAlias(true);//¶}±Ò§Ü¿÷¾¦
+		paint = new Paint();//å»ºç«‹ç•«ç­†
+		paint.setAntiAlias(true);//é–‹å•ŸæŠ—é‹¸é½’
 
 		score =new Number(getResources());
 		if(activity.level<2){
@@ -332,7 +331,7 @@ implements SurfaceHolder.Callback{
 
 
 
-		//pause¹Ï¤ù¸ü¤J=====================================================================
+		//pauseåœ–ç‰‡è¼‰å…¥=====================================================================
 		pause = Graphic.LoadBitmap(getResources(), R.drawable.pause, 205, 78);
 		pause2 = Graphic.LoadBitmap(getResources(), R.drawable.pause2, 205, 78);
 		pause_back = Graphic.LoadBitmap(getResources(), R.drawable.pasue_back, 450, 310);
@@ -342,7 +341,7 @@ implements SurfaceHolder.Callback{
 		re_play = Graphic.LoadBitmap(getResources(), R.drawable.re_play, 390, 75);
 		re_start = Graphic.LoadBitmap(getResources(), R.drawable.re_start, 390, 75);
 
-		//pause¹Ï¤ù¸ü¤J-----------------------------------------------------------------------
+		//pauseåœ–ç‰‡è¼‰å…¥-----------------------------------------------------------------------
 
 
 		circle = Graphic.LoadBitmap(getResources(), R.drawable.btn_circle_v2, 200, 200);
@@ -355,12 +354,12 @@ implements SurfaceHolder.Callback{
 		grey_xx = Graphic.LoadBitmap(getResources(), R.drawable.grey_x, 200, 200);
 
 
-		//TAG ¯B´å¯¥»P¥ú§ô=======================================================================
+		//TAG æµ®æ¸¸ç ²èˆ‡å…‰æŸ=======================================================================
 		d_blue = Graphic.LoadBitmap(getResources(), R.drawable.d_blue, 250, 170);
 		d_red = Graphic.LoadBitmap(getResources(), R.drawable.d_red, 250, 170);
 		d_green = Graphic.LoadBitmap(getResources(), R.drawable.d_green, 260, 130);
 		d_yellow = Graphic.LoadBitmap(getResources(), R.drawable.d_yellow, 260, 130);
-		//¯B´å¯¥»P¥ú§ô------------------------------------------------------------------------
+		//æµ®æ¸¸ç ²èˆ‡å…‰æŸ------------------------------------------------------------------------
 
 
 		track = Graphic.LoadBitmap(getResources(), R.drawable.track_v2, 80, 660);
@@ -390,7 +389,7 @@ implements SurfaceHolder.Callback{
 		rank_b = Graphic.LoadBitmap(getResources(), R.drawable.r_b, 92, 152);
 		rank_a = Graphic.LoadBitmap(getResources(), R.drawable.r_a, 133, 182);
 		rank_s = Graphic.LoadBitmap(getResources(), R.drawable.r_s, 309, 257);
-		//¯S®Ä¥ú¡]´ú¸Õ¤¤¡^
+		//ç‰¹æ•ˆå…‰ï¼ˆæ¸¬è©¦ä¸­ï¼‰
 
 		Cyan[0] 	= Graphic.LoadBitmap(getResources(), R.drawable.cyan00, 150, 150);
 		Cyan[1] 	= Graphic.LoadBitmap(getResources(), R.drawable.cyan01, 150, 150);
@@ -427,7 +426,7 @@ implements SurfaceHolder.Callback{
 		Blue[4] 	= Graphic.LoadBitmap(getResources(), R.drawable.blue04, 150, 150);
 		Blue[5] 	= Graphic.LoadBitmap(getResources(), R.drawable.blue05, 150, 150);
 
-		//¯à¶q±ø¹Ï¤ù
+		//èƒ½é‡æ¢åœ–ç‰‡
 		enebar[0] = Graphic.LoadBitmap(getResources(), R.drawable.enebar00, 1280, 28);
 		enebar[1] = Graphic.LoadBitmap(getResources(), R.drawable.enebar01, 1280, 28);
 		enebar[2] = Graphic.LoadBitmap(getResources(), R.drawable.enebar02, 1280, 28);
@@ -439,12 +438,12 @@ implements SurfaceHolder.Callback{
 		enebar[8] = Graphic.LoadBitmap(getResources(), R.drawable.enebar08, 1280, 28);
 		enebar[9] = Graphic.LoadBitmap(getResources(), R.drawable.enebar09, 1280, 28);
 
-		//BOSS «eÄµ§i==
+		//BOSS å‰è­¦å‘Š==
 		warning=Graphic.LoadBitmap(getResources(), R.drawable.warning, 1280, 178);
 		warning_sound=sp.load(activity, R.raw.warning, 1);
-		//BOSS «eÄµ§i--
+		//BOSS å‰è­¦å‘Š--
 
-		//BOSS §ğÀ»==
+		//BOSS æ”»æ“Š==
 		attack_pic=Graphic.LoadBitmap(getResources(), R.drawable.boss_sight2, 288, 284);
 		attack_pic_round=Graphic.LoadBitmap(getResources(), R.drawable.boss_sight, 288, 284);
 		attack_sight=Graphic.LoadBitmap(getResources(), R.drawable.boss_sihgt_gray, 288, 284);
@@ -458,7 +457,7 @@ implements SurfaceHolder.Callback{
 		boss_del=new bigAnimax(activity, boss_del_num, 640, 500, R.drawable.boss_del00008);
 		boss_del.setPosition(640, 242);
 		boss_del_sound=sp.load(getContext(), R.raw.boss_del, 1);
-		//BOSS §ğÀ»--
+		//BOSS æ”»æ“Š--
 
 		for(int i=0;i<Effect_numbers;i++){
 			Effect_Cyan[i]=new smallAnimax(Cyan);
@@ -486,7 +485,7 @@ implements SurfaceHolder.Callback{
 		btn_triangle = new Bottom(activity, grey_triangle, triangle, 1000, 625);
 		btn_xx = new Bottom(activity, grey_xx, xx, 1180, 495);
 
-		//¯B´å¯¥===========================================================
+		//æµ®æ¸¸ç ²===========================================================
 		/*
 		btn_circle = new Bottom(activity, d_red, d_red, 125, 450);
 		btn_square = new Bottom(activity, grey_square, square, 180, 640);
@@ -494,14 +493,14 @@ implements SurfaceHolder.Callback{
 		btn_xx = new Bottom(activity, d_blue, d_blue, 1155, 450);
 		 */
 
-		//¯B´å¯¥-----------------------------------------------------------
+		//æµ®æ¸¸ç ²-----------------------------------------------------------
 
-		//PAUSE«ö¶s=======================================================
+		//PAUSEæŒ‰éˆ•=======================================================
 		btn_pause = new Bottom(activity, pause2, pause , 90, 105);
 		btn_re_map = new Bottom(activity, re_map, re_map, 640 , 410);
 		btn_re_play = new Bottom(activity, re_play, re_play,640 , 315);
 		btn_re_start = new Bottom(activity, re_start , re_start,640 ,225);
-		//PAUSE«ö¶s---------------------------------------------------------
+		//PAUSEæŒ‰éˆ•---------------------------------------------------------
 
 		chart_r=Graphic.LoadBitmap(getResources(), R.drawable.virus_red, 80, 80);
 		chart_s=Graphic.LoadBitmap(getResources(), R.drawable.virus_yello, 80, 80);
@@ -535,7 +534,7 @@ implements SurfaceHolder.Callback{
 		sp_id[3]=sp.load(activity, R.raw.fall, 1);
 		sp_id[4]=sp.load(activity, R.raw.voice_dog, 1);
 		
-		//PAUSE¥Î®ÄªG­µ
+		//PAUSEç”¨æ•ˆæœéŸ³
 		sp_id[5]=sp.load(activity, R.raw.stagebtn, 1);
 
 		Reset();
@@ -550,7 +549,7 @@ implements SurfaceHolder.Callback{
 						e.printStackTrace();
 					}*/
 					SurfaceHolder myholder=GameView.this.getHolder();
-					Canvas canvas = myholder.lockCanvas();//¨ú±oµe¥¬
+					Canvas canvas = myholder.lockCanvas();//å–å¾—ç•«å¸ƒ
 					onDraw(canvas);
 					if(canvas != null){
 						myholder.unlockCanvasAndPost(canvas);
@@ -564,7 +563,7 @@ implements SurfaceHolder.Callback{
 	@Override
 	protected void onDraw(Canvas canvas) {
 		if(canvas!=null){
-			// TAG ¸ü¤JÃö¥d³]©w¤ÎÃĞ­±ÀÉ===============================================
+			// TAG è¼‰å…¥é—œå¡è¨­å®šåŠè­œé¢æª”===============================================
 			if(startFlag){
 				JSONObject json=null;
 				boss_Flag=false;
@@ -572,10 +571,10 @@ implements SurfaceHolder.Callback{
 				ene_flag=false;
 				boss_x=boss_x_side;
 				String difficulty[]={"_easy","_normal","_hard"};
-				switch(activity.level){//Ãö¥d
+				switch(activity.level){//é—œå¡
 				case 0 :
 					Log.v("Load Charts", "freely_tomorrow"+difficulty[activity.difficulty]);
-					this.boss_show=158000;//TAG BOSS¶i³õ®É¶¡
+					this.boss_show=158000;//TAG BOSSé€²å ´æ™‚é–“
 					boss_kill=231000;
 					json=activity.read( "freely_tomorrow"+difficulty[activity.difficulty]);
 					break;
@@ -610,7 +609,7 @@ implements SurfaceHolder.Callback{
 					cs=new chartScan(activity,BtR,BtS,BtT,BtX,time_dis,"GameView");
 					cs.Start();
 				}else{
-					Log.e("GameView","§ä¤£¨ìÃĞ­±ÀÉ");
+					Log.e("GameView","æ‰¾ä¸åˆ°è­œé¢æª”");
 					activity.changeView(2);
 				}
 
@@ -618,8 +617,8 @@ implements SurfaceHolder.Callback{
 				mp.start();
 				startFlag=false;
 			}
-			//¸ü¤JÃö¥d³]©w¤ÎÃĞ­±ÀÉ---------------------------------------------------------------------------------------------------------------------------
-			//TAG ±½´y=================================================================================
+			//è¼‰å…¥é—œå¡è¨­å®šåŠè­œé¢æª”---------------------------------------------------------------------------------------------------------------------------
+			//TAG æƒæ=================================================================================
 			if(cs.R_scan_flag){
 				for(int i=0;i<chartObject;i++){
 					if(!cr_btm[i].getFlag()){
@@ -655,21 +654,21 @@ implements SurfaceHolder.Callback{
 						break;
 					}
 				}
-			}//±½´y----------------------------------------------------------------------------------------------------------------------------------------------------------
+			}//æƒæ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 			super.onDraw(canvas);
-			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//¥u¦b¿Ã¹õ½d³ò¤ºÃ¸¨î¹Ï¤ù
-			canvas.drawColor(Color.BLACK);//¬É­±³]©w¬°¶Â¦â
-			Graphic.drawPic(canvas, bg, 1280/2, 720/2, 0, 255, paint);//­I´º
+			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//åªåœ¨è¢å¹•ç¯„åœå…§ç¹ªåˆ¶åœ–ç‰‡
+			canvas.drawColor(Color.BLACK);//ç•Œé¢è¨­å®šç‚ºé»‘è‰²
+			Graphic.drawPic(canvas, bg, 1280/2, 720/2, 0, 255, paint);//èƒŒæ™¯
 			Graphic.drawPic(canvas, track, 450, 390, 0, 255, paint);
 			Graphic.drawPic(canvas, track, 575, 390, 0, 255, paint);
 			Graphic.drawPic(canvas, track, 700, 390, 0, 255, paint);
 			Graphic.drawPic(canvas, track, 825, 390, 0, 255, paint);
 
-			//TAG §P©wÅã¥Ü======================================================
+			//TAG åˆ¤å®šé¡¯ç¤º======================================================
 			if(Hitcount > 0)
 			{
-				switch(Hitflag){  //°»´úhitflag¥Ø«eªºª¬ºA
+				switch(Hitflag){  //åµæ¸¬hitflagç›®å‰çš„ç‹€æ…‹
 
 				case 0:
 
@@ -692,7 +691,7 @@ implements SurfaceHolder.Callback{
 			}else if(Hitcount <0){
 				Hitcount = 0;
 			}
-			//§P©wÅã¥Ü--------------------------------------------------------
+			//åˆ¤å®šé¡¯ç¤º--------------------------------------------------------
 
 
 			int now_time=mp.getCurrentPosition()+(activity.timing*10);
@@ -737,7 +736,7 @@ implements SurfaceHolder.Callback{
 			}
 			btn_pause.drawBtm(canvas, paint);
 
-			//PAUSE¿ï³æ±±¨î==========================================================
+			//PAUSEé¸å–®æ§åˆ¶==========================================================
 			if(btn_pause.getBottom()){
 				Graphic.drawPic(canvas, pause_black, 640, 360, 0, 255, paint);
 				Graphic.drawPic(canvas, pause2, 90, 105, 0, 255, paint);
@@ -746,7 +745,7 @@ implements SurfaceHolder.Callback{
 				btn_re_play.drawBtm(canvas, paint);
 				btn_re_start.drawBtm(canvas, paint);
 			}
-			//PAUSE¿ï³æ±±¨î-----------------------------------------------------------
+			//PAUSEé¸å–®æ§åˆ¶-----------------------------------------------------------
 
 
 			//combo============================================
@@ -755,7 +754,7 @@ implements SurfaceHolder.Callback{
 
 
 
-			//TAG ¯S®Ä¥úÃ¸¹Ï===========================================================================
+			//TAG ç‰¹æ•ˆå…‰ç¹ªåœ–===========================================================================
 			for(int i=0;i<Effect_numbers;i++){
 				if(Effect_Cyan[i].getFlag()){
 					Effect_Cyan[i].drawEffect(Effect_speed, canvas, paint);
@@ -778,7 +777,7 @@ implements SurfaceHolder.Callback{
 					Effect_Blue[i].drawEffect(Effect_speed, canvas, paint);
 				}
 			}
-			//¯S®Ä¥úÃ¸¹Ï----------------------------------------------------------------------------
+			//ç‰¹æ•ˆå…‰ç¹ªåœ–----------------------------------------------------------------------------
 
 			Graphic.drawPic(canvas, titlebar, 641, 31, 0, 255, paint);
 			if(!ene_flag){
@@ -806,12 +805,12 @@ implements SurfaceHolder.Callback{
 			}
 			//Graphic.drawPic(canvas, hpbar, 730, 50, 0, 255, paint);
 			//Graphic.drawPic(canvas, hpfont, 95, 50, 0, 255, paint);
-			//TAG HPÀË¬d==========================================================
+			//TAG HPæª¢æŸ¥==========================================================
 			if(hp_x<=190+0*55){
 				activity.changeView(4);
 			}
-			//HPÀË¬d----------------------------------------------------------
-			//¯à¶q±ø¤Á´«¯S®Ä==========================================================================
+			//HPæª¢æŸ¥----------------------------------------------------------
+			//èƒ½é‡æ¢åˆ‡æ›ç‰¹æ•ˆ==========================================================================
 			if(!change_enebar.getFlag()){
 				if(ene_flag){
 					Graphic.drawPic(canvas, enebar[9], 640, 50, 0, 255, paint);
@@ -820,8 +819,8 @@ implements SurfaceHolder.Callback{
 				}
 			}
 			change_enebar.drawEffect(enebar_speed, canvas, paint);
-			//¯à¶q±ø¤Á´«¯S®Ä--------------------------------------------------------------------------
-			// TAG BOSS ¼Ò¦¡ª¬ºA=======================================================================
+			//èƒ½é‡æ¢åˆ‡æ›ç‰¹æ•ˆ--------------------------------------------------------------------------
+			// TAG BOSS æ¨¡å¼ç‹€æ…‹=======================================================================
 			if(mp.getCurrentPosition()>boss_show){
 				if(!boss_del_flag){
 					Graphic.drawPic(canvas, boss, boss_x, boss_y, 0, 255, paint);
@@ -842,22 +841,22 @@ implements SurfaceHolder.Callback{
 					}
 				}
 			}
-			// BOSS ¼Ò¦¡ª¬ºA-------------------------------------------------------------------------------------------------------------------------
+			// BOSS æ¨¡å¼ç‹€æ…‹-------------------------------------------------------------------------------------------------------------------------
 
 			Graphic.drawPic(canvas, title, 132, 20, 0, 255, paint);
 			score.setSize(20, 30);
 			score.drawNumberRightStart(1250, 20, sc_score, Number.Wite, canvas, paint);
 
 
-			//TAG comboÅã¥Ü============================================================
+			//TAG comboé¡¯ç¤º============================================================
 			Graphic.drawPic(canvas, hits, 290, 200, 0, 255, paint);
 			score.setSize(50, 70);
 			score.drawNumberRightStart(230, 190, combo, Number.Cyan, canvas, paint);
-			//comboÅã¥Ü-------------------------------------------------------------
+			//comboé¡¯ç¤º-------------------------------------------------------------
 
 			//Graphic.drawPic(canvas, hpfont_red, 95, 50, 0, 255, paint);
 
-			//Ãø©ö«×
+			//é›£æ˜“åº¦
 			if(activity.difficulty == 0)
 			{
 				Graphic.drawPic(canvas, game_easy, 1180, 105, 0, 255, paint);
@@ -867,7 +866,7 @@ implements SurfaceHolder.Callback{
 				Graphic.drawPic(canvas, game_hard, 1180, 105, 0, 255, paint);
 			}
 
-			//TAG BOSS «eÄµ§i=========================================
+			//TAG BOSS å‰è­¦å‘Š=========================================
 			if(mp.getCurrentPosition()>boss_show-warning_time&&mp.getCurrentPosition()<boss_show&&!warning_flag){
 				sp.play(warning_sound, activity.mp_Voiume, activity.mp_Voiume, 0, 0, 1);
 				warning_flag=true;
@@ -885,9 +884,9 @@ implements SurfaceHolder.Callback{
 					warning_flag=false;
 				}
 			}
-			//BOSS «eÄµ§i------------------------------------------------------------------------
+			//BOSS å‰è­¦å‘Š------------------------------------------------------------------------
 
-			//BOSS §ğÀ»============================================
+			//BOSS æ”»æ“Š============================================
 			if(boss_attack_Flag&&!attack_flag&&!attack_flag2){
 				attack_flag=true;
 				attack_flag2=true;
@@ -926,7 +925,7 @@ implements SurfaceHolder.Callback{
 			if(boss_del_flag){
 				boss_del.drawAnimax(mp.getCurrentPosition(), canvas, paint);
 			}
-			//BOSS §ğÀ»----------------------------------------------------------------------------
+			//BOSS æ”»æ“Š----------------------------------------------------------------------------
 
 			btn_circle.setBottomTo(false);	
 			btn_square.setBottomTo(false);	
@@ -970,7 +969,7 @@ implements SurfaceHolder.Callback{
 		switch(event.getActionMasked())
 		{
 		case MotionEvent.ACTION_DOWN:
-		case MotionEvent.ACTION_POINTER_DOWN://«ö¤U
+		case MotionEvent.ACTION_POINTER_DOWN://æŒ‰ä¸‹
 			PointF f = new PointF();
 			f.x = event.getX(pointerIndex);
 			f.y = event.getY(pointerIndex);
@@ -1058,7 +1057,7 @@ implements SurfaceHolder.Callback{
 				btn_pointer.put(pointerId, 3);
 			}
 
-			//PAUSE«ö¶s¥\¯à==============================================
+			//PAUSEæŒ‰éˆ•åŠŸèƒ½==============================================
 			if(btn_pause.isIn(pointx, pointy)){
 				if(!btn_pause.getBottom()){
 					sp.play(sp_id[5], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
@@ -1071,9 +1070,9 @@ implements SurfaceHolder.Callback{
 					btn_pause.setBottomTo(false);
 				}
 			}
-			//PAUSE«ö¶s¥\¯à----------------------------------------------
+			//PAUSEæŒ‰éˆ•åŠŸèƒ½----------------------------------------------
 
-			//BOSS §ğÀ»«ö¶s=============================================
+			//BOSS æ”»æ“ŠæŒ‰éˆ•=============================================
 			if(attack.btm.isIn(pointx, pointy)&&attack_flag){
 				if((attack.start_time+3000)-mp.getCurrentPosition()<300&&(attack.start_time+3000)-mp.getCurrentPosition()>-300){
 					attack_flag=false;
@@ -1082,10 +1081,10 @@ implements SurfaceHolder.Callback{
 					en=0;
 				}
 			}
-			//BOSS §ğÀ»«ö¶s--------------------------------------------------------------------------
+			//BOSS æ”»æ“ŠæŒ‰éˆ•--------------------------------------------------------------------------
 
-			//ªğ¦^¹CÀ¸¡B±qÀY¶}©l¡Bªğ¦^Ãö¥d¿ï¾Ü«ö¶s¥\¯à================================
-			if(btn_pause.getBottom()){   //¥²¶·¦bPAUSE«ö¶s¬°TRUEªº®É­Ô¤~¥Í®Ä
+			//è¿”å›éŠæˆ²ã€å¾é ­é–‹å§‹ã€è¿”å›é—œå¡é¸æ“‡æŒ‰éˆ•åŠŸèƒ½================================
+			if(btn_pause.getBottom()){   //å¿…é ˆåœ¨PAUSEæŒ‰éˆ•ç‚ºTRUEçš„æ™‚å€™æ‰ç”Ÿæ•ˆ
 
 				if(btn_re_play.isIn(pointx, pointy)){
 					sp.play(sp_id[5], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
@@ -1106,12 +1105,12 @@ implements SurfaceHolder.Callback{
 
 				}
 			}
-			//ªğ¦^¹CÀ¸¡B±qÀY¶}©l¡Bªğ¦^Ãö¥d¿ï¾Ü«ö¶s¥\¯à---------------------------------
+			//è¿”å›éŠæˆ²ã€å¾é ­é–‹å§‹ã€è¿”å›é—œå¡é¸æ“‡æŒ‰éˆ•åŠŸèƒ½---------------------------------
 
 
 
 			//if(startbtm.isIn(pointx, pointy)){
-			//¶i¤J¦a¹Ïµe­±
+			//é€²å…¥åœ°åœ–ç•«é¢
 			//activity.changeView(2);
 			//this.toEditView = 0;
 			//	}
@@ -1145,7 +1144,7 @@ implements SurfaceHolder.Callback{
 
 		return true;
 	}
-	//TAG ¤À¼Æ
+	//TAG åˆ†æ•¸
 	public void scoreAdd(int dis){
 		if(dis<3){
 			if(!ene_flag){
@@ -1226,8 +1225,8 @@ implements SurfaceHolder.Callback{
 
 	}
 
-	public void surfaceDestroyed(SurfaceHolder arg0) {//¾P·´®É³Q©I¥s
-		//TODO ¼È°±¿ï³æ
+	public void surfaceDestroyed(SurfaceHolder arg0) {//éŠ·æ¯€æ™‚è¢«å‘¼å«
+		//TODO æš«åœé¸å–®
 		mp.stop();
 		activity.combo = maxcombo;
 		activity.nice = sc_nice;
@@ -1240,8 +1239,8 @@ implements SurfaceHolder.Callback{
 
 		//warning.recycle();
 
-		bg.recycle();   //­I´º
-		sight.recycle();  //·Ç¬P
+		bg.recycle();   //èƒŒæ™¯
+		sight.recycle();  //æº–æ˜Ÿ
 		boss.recycle();
 		game_easy.recycle();
 		game_normal.recycle();
@@ -1258,27 +1257,27 @@ implements SurfaceHolder.Callback{
 		grey_xx.recycle();
 		grey_triangle.recycle();
 
-		//¯B´å¯¥«Å§i===============================================
+		//æµ®æ¸¸ç ²å®£å‘Š===============================================
 
 		d_red.recycle();
 		d_blue.recycle();
 		d_yellow.recycle();
 		d_green.recycle();
 
-		//¯B´å¯¥«Å§i-----------------------------------------------
+		//æµ®æ¸¸ç ²å®£å‘Š-----------------------------------------------
 
-		//BOSS «eÄµ§i==
+		//BOSS å‰è­¦å‘Š==
 		warning.recycle();
-		//BOSS «eÄµ§i--
-		//BOSS §ğÀ»==
+		//BOSS å‰è­¦å‘Š--
+		//BOSS æ”»æ“Š==
 		attack.recycle();
 		attack_pic_round.recycle();
 		attack_pic.recycle();
 		attack_sight.recycle();
 		beam.recycle();
 		boss_del.recycle();
-		//BOSS §ğÀ»--
-		track.recycle();  //­y¹D
+		//BOSS æ”»æ“Š--
+		track.recycle();  //è»Œé“
 
 		virus_red.recycle();
 		virus_yellow.recycle();
@@ -1291,22 +1290,22 @@ implements SurfaceHolder.Callback{
 		hit.recycle();
 		hits.recycle();
 
-		titlebar.recycle();  //ª¬ºAÄæ
+		titlebar.recycle();  //ç‹€æ…‹æ¬„
 		hpbar.recycle();
 		hpfont.recycle();
 		hpfont_red.recycle();
 
-		//«Å§ipause©Ò»İ­nªº¹Ï¤ù==========================================
+		//å®£å‘Špauseæ‰€éœ€è¦çš„åœ–ç‰‡==========================================
 		pause.recycle();
 		pause2.recycle();
 		pause_back.recycle();
-		pause_black.recycle(); //pause®É­n¥Îªº¶Â©³
+		pause_black.recycle(); //pauseæ™‚è¦ç”¨çš„é»‘åº•
 		re_play.recycle();
 		re_start.recycle();
 		re_map.recycle();
-		//«Å§ipause©Ò»İ­nªº¹Ï¤ù-------------------------------------------
+		//å®£å‘Špauseæ‰€éœ€è¦çš„åœ–ç‰‡-------------------------------------------
 
-		//¯S®Ä¥ú«Å§i================================
+		//ç‰¹æ•ˆå…‰å®£å‘Š================================
 		for(int i=0;i<6;i++){
 			Cyan[i].recycle();
 			Red[i]	.recycle();
@@ -1315,7 +1314,7 @@ implements SurfaceHolder.Callback{
 			Blue[i].recycle();
 		}
 
-		//¹LÃöµ¥¯Å================================================
+		//éé—œç­‰ç´š================================================
 		rank_s.recycle();
 		rank_a.recycle();
 		rank_b.recycle();
@@ -1323,7 +1322,7 @@ implements SurfaceHolder.Callback{
 		rank_d.recycle();
 		rank_e.recycle();
 		rank_f.recycle();
-		//¹LÃöµ¥¯Å------------------------------------------------
+		//éé—œç­‰ç´š------------------------------------------------
 		chart_r.recycle();
 		chart_s.recycle();
 		chart_t.recycle();
@@ -1349,12 +1348,12 @@ implements SurfaceHolder.Callback{
 		btn_xx.recycle();
 		btn_triangle.recycle();
 
-		//«Å§iPAUSE¡Bªğ¦^¹CÀ¸¡B±qÀY¶}©l¡Bªğ¦^Ãö¥d¦a¹Ï«ö¶s==================================================
+		//å®£å‘ŠPAUSEã€è¿”å›éŠæˆ²ã€å¾é ­é–‹å§‹ã€è¿”å›é—œå¡åœ°åœ–æŒ‰éˆ•==================================================
 		btn_pause.recycle();
 		btn_re_play.recycle();
 		btn_re_start.recycle();
 		btn_re_map.recycle();
-		//«Å§iPAUSE¡Bªğ¦^¹CÀ¸¡B±qÀY¶}©l¡Bªğ¦^Ãö¥d¦a¹Ï«ö¶s--------------------------------------------------
+		//å®£å‘ŠPAUSEã€è¿”å›éŠæˆ²ã€å¾é ­é–‹å§‹ã€è¿”å›é—œå¡åœ°åœ–æŒ‰éˆ•--------------------------------------------------
 
 		for(int i=0;i<10;i++){
 			enebar[i].recycle() ;

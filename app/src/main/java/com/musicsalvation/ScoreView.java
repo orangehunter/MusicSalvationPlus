@@ -1,7 +1,6 @@
 package com.musicsalvation;
 //
 
-import com.example.musicsalvationsdkverson.R;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -69,24 +68,24 @@ implements SurfaceHolder.Callback{
 	Bitmap rank_e;
 	Bitmap rank_f;
 	
-	//Â÷¶}»P¦A¬D¾Ô¡B§ó·s¬ö¿ý¹Ï¤ù«Å§i===========================================
+	//é›¢é–‹èˆ‡å†æŒ‘æˆ°ã€æ›´æ–°ç´€éŒ„åœ–ç‰‡å®£å‘Š===========================================
 	Bitmap exit;
 	Bitmap again;
 	Bitmap rank_new;
 	Bitmap rank_gold;
 	Bitmap rank_record;
 	Bitmap score_record;
-	//¦¨ÁZ¼Æ¦r==============================================================================
-	java.lang.Number num;
+	//æˆç¸¾æ•¸å­—==============================================================================
+	Number num;
 	//---------------------------------------------------------------------------------------
 	
 	Bottom exit_btm;
 	Bottom again_btm;
 
-	int pointx;//Ä²±±¨ì¿Ã¹õªºx®y¼Ð
-	int pointy;//Ä²±±¨ì¿Ã¹õªºy®y¼Ð
+	int pointx;//è§¸æŽ§åˆ°èž¢å¹•çš„xåº§æ¨™
+	int pointy;//è§¸æŽ§åˆ°èž¢å¹•çš„yåº§æ¨™
 
-	//Àx¦s¹CÀ¸§P©w¥Î°Ñ¼Æ=======================================
+	//å„²å­˜éŠæˆ²åˆ¤å®šç”¨åƒæ•¸=======================================
 	int sc_nice ;
 	int sc_hit ;
 	int sc_safe ;
@@ -94,26 +93,26 @@ implements SurfaceHolder.Callback{
 	int sc_combo ;
 	int sc_score ;
 	int sc_rank;
-	//Àx¦s¹CÀ¸§P©w¥Î°Ñ¼Æ---------------------------------------
+	//å„²å­˜éŠæˆ²åˆ¤å®šç”¨åƒæ•¸---------------------------------------
 	
-	//TAG «ö¶s­µ«Å§i=======================================
+	//TAG æŒ‰éˆ•éŸ³å®£å‘Š=======================================
 	SoundPool sp;
 	int btn_se;
-	//TAG «ö¶s­µ«Å§i---------------------------------------
+	//TAG æŒ‰éˆ•éŸ³å®£å‘Š---------------------------------------
 
 	int touch_flag=0;
 	boolean clear_flag;
 	boolean new_score_flag;
 	boolean new_rank_flag;
 
-	Paint paint;			//µeµ§ªº°Ñ¦Ò
+	Paint paint;			//ç•«ç­†çš„åƒè€ƒ
 	int i=0,j=10;
 	MainActivity activity;
 
 	public ScoreView(MainActivity mainActivity) {
 		super(mainActivity);
 		this.activity = mainActivity;
-		this.getHolder().addCallback(this);//³]©w¥Í©R©P´Á¦^½Õ±µ¤fªº¹ê²{ªÌ
+		this.getHolder().addCallback(this);//è¨­å®šç”Ÿå‘½å‘¨æœŸå›žèª¿æŽ¥å£çš„å¯¦ç¾è€…
 
 
 	}
@@ -123,10 +122,10 @@ implements SurfaceHolder.Callback{
 	}
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-		paint = new Paint();//«Ø¥ßµeµ§
-		paint.setAntiAlias(true);//¶}±Ò§Ü¿÷¾¦
-		//ªì©l¤Æ=======================================================
-		num =new java.lang.Number(getResources());
+		paint = new Paint();//å»ºç«‹ç•«ç­†
+		paint.setAntiAlias(true);//é–‹å•ŸæŠ—é‹¸é½’
+		//åˆå§‹åŒ–=======================================================
+		num =new Number(activity.getResources());
 		sc_nice = 0;
 		sc_hit = 0;
 		sc_safe = 0;
@@ -137,7 +136,7 @@ implements SurfaceHolder.Callback{
 		clear_flag=false;
 		new_score_flag=false;
 		new_rank_flag=false;
-		//ªì©l¤Æ--------------------------------------------------------------------------------------------
+		//åˆå§‹åŒ–--------------------------------------------------------------------------------------------
 		bg=Graphic.bitSize(LoadBitmap( R.drawable.sv_background), Constant.DEFULT_WITH, Constant.DEFULT_HIGHT);
 		titlebar = Graphic.bitSize(LoadBitmap(R.drawable.title_bar), 1280, 90);
 		rightbar = Graphic.bitSize(LoadBitmap(R.drawable.right_bar), 625, 75);
@@ -183,47 +182,47 @@ implements SurfaceHolder.Callback{
 		rank_a = Graphic.bitSize(LoadBitmap(R.drawable.r_a), 133, 182);
 		rank_s = Graphic.bitSize(LoadBitmap(R.drawable.r_s), 309, 257);
 		
-		//Â÷¶}»P¦A¬D¾Ô¡B§ó·s¬ö¿ý¯S®Ä===========================================
+		//é›¢é–‹èˆ‡å†æŒ‘æˆ°ã€æ›´æ–°ç´€éŒ„ç‰¹æ•ˆ===========================================
 		exit = Graphic.bitSize(LoadBitmap(R.drawable.sc_exit), 215, 95);
 		again = Graphic.bitSize(LoadBitmap(R.drawable.sc_again), 215, 95);
 		rank_gold = Graphic.bitSize(LoadBitmap(R.drawable.rank_gold), 190, 95);
 		rank_new = Graphic.bitSize(LoadBitmap(R.drawable.rank_new), 95, 30);
 		rank_record = Graphic.bitSize(LoadBitmap(R.drawable.rank_record), 610, 180);
 		score_record = Graphic.bitSize(LoadBitmap(R.drawable.score_record), 655, 160);
-		//Â÷¶}»P¦A¬D¾Ô¡B§ó·s¬ö¿ý¯S®Ä---------------------------------------------
+		//é›¢é–‹èˆ‡å†æŒ‘æˆ°ã€æ›´æ–°ç´€éŒ„ç‰¹æ•ˆ---------------------------------------------
 		sp = new SoundPool(1, AudioManager.STREAM_MUSIC, 5);
 		btn_se = sp.load(activity, R.raw.sv_btn, 1);
 		
-		//«ö¶s­µ=========================================
+		//æŒ‰éˆ•éŸ³=========================================
 		
-		//«ö¶s­µ--------------------------
+		//æŒ‰éˆ•éŸ³--------------------------
 		
 		exit_btm = new Bottom(activity, exit, exit, 1120, 670);
 		again_btm = new Bottom(activity, again, again, 825, 670);
-		//§P©w¬O§_¹LÃö==============================================================================
-		//±ø¥ó­×¥¿
-		if(activity.percent > ((int)activity.virus*0.7)&& activity.boss_delete)  //¦pªG¥´À»²v¶W¹L70%¨Ã¥BÀ»±þBOSS
+		//åˆ¤å®šæ˜¯å¦éŽé—œ==============================================================================
+		//æ¢ä»¶ä¿®æ­£
+		if(activity.percent > ((int)activity.virus*0.7)&& activity.boss_delete)  //å¦‚æžœæ‰“æ“ŠçŽ‡è¶…éŽ70%ä¸¦ä¸”æ“Šæ®ºBOSS
 		{
 			clear_flag=true;
 			if(activity.level==2){
 				activity.callAlartDialog("");
 			}
-			//FULL COMBO§P©w¬°S¯Å
+			//FULL COMBOåˆ¤å®šç‚ºSç´š
 			if(activity.combo == activity.virus){   
 				sc_rank=7;
 			}
-			//¥´À»²v¶W¹L90% ¬°A
+			//æ‰“æ“ŠçŽ‡è¶…éŽ90% ç‚ºA
 			else if(activity.percent > ((int)activity.virus*0.9))  
 			{
 				sc_rank=6;
 			}
-			//¥´À»²v¶W¹L80% §C©ó90%¬°B
+			//æ‰“æ“ŠçŽ‡è¶…éŽ80% ä½Žæ–¼90%ç‚ºB
 			else if(activity.percent > ((int)activity.virus*0.8) && activity.percent < ((int)activity.virus*0.9))
 			{
 				sc_rank=5;
 			}
-			//¥´À»²v¶W¹L70% §C©ó80%¬°C
-			else if(activity.percent > ((int)activity.virus*0.7) && activity.percent < ((int)activity.virus*0.8)) //¤j©ó70% ¤p©ó80%
+			//æ‰“æ“ŠçŽ‡è¶…éŽ70% ä½Žæ–¼80%ç‚ºC
+			else if(activity.percent > ((int)activity.virus*0.7) && activity.percent < ((int)activity.virus*0.8)) //å¤§æ–¼70% å°æ–¼80%
 			{
 				sc_rank=4;
 			}
@@ -231,17 +230,17 @@ implements SurfaceHolder.Callback{
 		else
 		{
 			clear_flag=false;
-			//¥´À»²v¶W¹L60% §C©ó70%¬°D
+			//æ‰“æ“ŠçŽ‡è¶…éŽ60% ä½Žæ–¼70%ç‚ºD
 			if(activity.percent > ((int)activity.virus*0.6))
 			{
 				sc_rank=3;
 			}
-			//¥´À»²v¶W¹L50% §C©ó60%¬°E
+			//æ‰“æ“ŠçŽ‡è¶…éŽ50% ä½Žæ–¼60%ç‚ºE
 			else if(activity.percent > ((int)activity.virus*0.5) && activity.percent < ((int)activity.virus*0.6))
 			{
 				sc_rank=2;
 			}
-			//§C©ó50%¥H¤U¤@«ß¬°F
+			//ä½Žæ–¼50%ä»¥ä¸‹ä¸€å¾‹ç‚ºF
 			else
 			{
 				sc_rank=1;
@@ -270,7 +269,7 @@ implements SurfaceHolder.Callback{
 						e.printStackTrace();
 					}
 					SurfaceHolder myholder=ScoreView.this.getHolder();
-					Canvas canvas = myholder.lockCanvas();//¨ú±oµe¥¬
+					Canvas canvas = myholder.lockCanvas();//å–å¾—ç•«å¸ƒ
 					onDraw(canvas);
 					if(canvas != null){
 						myholder.unlockCanvasAndPost(canvas);
@@ -282,12 +281,12 @@ implements SurfaceHolder.Callback{
 	}
 	@SuppressLint("DrawAllocation")
 	@Override
-	protected void onDraw(Canvas canvas) {//­«·s©w¸qªºÃ¸¨î¤èªk
+	protected void onDraw(Canvas canvas) {//é‡æ–°å®šç¾©çš„ç¹ªåˆ¶æ–¹æ³•
 		if(canvas!=null){
 			super.onDraw(canvas);
-			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//¥u¦b¿Ã¹õ½d³ò¤ºÃ¸¨î¹Ï¤ù
-			canvas.drawColor(Color.BLACK);//¬É­±³]©w¬°¶Â¦â
-			Graphic.drawPic(canvas, bg, 1280/2, 720/2, 0, 255, paint);//­I´º
+			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//åªåœ¨èž¢å¹•ç¯„åœå…§ç¹ªåˆ¶åœ–ç‰‡
+			canvas.drawColor(Color.BLACK);//ç•Œé¢è¨­å®šç‚ºé»‘è‰²
+			Graphic.drawPic(canvas, bg, 1280/2, 720/2, 0, 255, paint);//èƒŒæ™¯
 			Graphic.drawPic(canvas, titlebar, 1280/2, 45, 0, 255, paint);
 			Graphic.drawPic(canvas, clearbar, 950, 165, 0, 255, paint);
 
@@ -309,7 +308,7 @@ implements SurfaceHolder.Callback{
 
 			Graphic.drawPic(canvas, title, 290, 40, 0, 255, paint);
 
-			//Ãø©ö«×
+			//é›£æ˜“åº¦
 			if(activity.difficulty == 0)
 			{
 			Graphic.drawPic(canvas, easy, 1150, 45, 0, 255, paint);
@@ -342,7 +341,7 @@ implements SurfaceHolder.Callback{
 			
 
 
-			//¼Æ¦r====================================================================================
+			//æ•¸å­—====================================================================================
 
 			if(sc_nice != activity.nice){
 				sc_nice=Coordinate.AnalogSpeedMove(sc_nice, activity.nice);
@@ -364,18 +363,18 @@ implements SurfaceHolder.Callback{
 			}
 
 			num.setSize(35, 60);
-			num.drawNumberRightStart(630, 180, activity.virus, java.lang.Number.Gray, canvas, paint);
-			num.drawNumberRightStart(630, 270, sc_nice, java.lang.Number.Yellow, canvas, paint);
-			num.drawNumberRightStart(630, 360, sc_hit, java.lang.Number.Cyan, canvas, paint);
-			num.drawNumberRightStart(630, 440, sc_safe, java.lang.Number.Green, canvas, paint);
-			num.drawNumberRightStart(630, 520, sc_miss, java.lang.Number.Red, canvas, paint);
-			num.drawNumberRightStart(1250, 300, sc_combo, java.lang.Number.Blue, canvas, paint);
+			num.drawNumberRightStart(630, 180, activity.virus, Number.Gray, canvas, paint);
+			num.drawNumberRightStart(630, 270, sc_nice, Number.Yellow, canvas, paint);
+			num.drawNumberRightStart(630, 360, sc_hit, Number.Cyan, canvas, paint);
+			num.drawNumberRightStart(630, 440, sc_safe, Number.Green, canvas, paint);
+			num.drawNumberRightStart(630, 520, sc_miss, Number.Red, canvas, paint);
+			num.drawNumberRightStart(1250, 300, sc_combo, Number.Blue, canvas, paint);
 
 			num.setSize(30, 55);
 
-			num.drawNumberRightStart(620, 610, sc_score, java.lang.Number.Wite, canvas, paint);
-			num.drawNumberRightStart(620, 675, activity.hight_score[activity.level][activity.difficulty], java.lang.Number.Wite, canvas, paint);
-			//¼Æ¦r------------------------------------------------------------------------------------
+			num.drawNumberRightStart(620, 610, sc_score, Number.Wite, canvas, paint);
+			num.drawNumberRightStart(620, 675, activity.hight_score[activity.level][activity.difficulty], Number.Wite, canvas, paint);
+			//æ•¸å­—------------------------------------------------------------------------------------
 
 			if(sc_score == activity.score){
 				if(clear_flag){
@@ -407,9 +406,9 @@ implements SurfaceHolder.Callback{
 					break;
 				}
 			}
-			//§P©w¬O§_¹LÃö------------------------------------------------------------------------------
+			//åˆ¤å®šæ˜¯å¦éŽé—œ------------------------------------------------------------------------------
 
-			/*À»±þBOSS»P§_
+			/*æ“Šæ®ºBOSSèˆ‡å¦
 			Graphic.drawPic(canvas, y, 1225, 390, 0, 255, paint);
 			Graphic.drawPic(canvas, n, 1225, 390, 0, 255, paint);
 			 */
@@ -422,7 +421,7 @@ implements SurfaceHolder.Callback{
 
 		switch(event.getAction())
 		{
-		case MotionEvent.ACTION_DOWN://«ö¤U
+		case MotionEvent.ACTION_DOWN://æŒ‰ä¸‹
 			if(deJump == true){
 				if(touch_flag==0){
 					sc_nice = activity.nice;
@@ -447,8 +446,8 @@ implements SurfaceHolder.Callback{
 			}
 			deJump = false;
 			break;
-		case MotionEvent.ACTION_UP://©ï°_
-			if(deJump==false){//¨¾¤î¼u¸õpart2
+		case MotionEvent.ACTION_UP://æŠ¬èµ·
+			if(deJump==false){//é˜²æ­¢å½ˆè·³part2
 
 			}
 			deJump = true;
@@ -464,7 +463,7 @@ implements SurfaceHolder.Callback{
 
 	}
 
-	public void surfaceDestroyed(SurfaceHolder arg0) {//¾P·´®É³Q©I¥s
+	public void surfaceDestroyed(SurfaceHolder arg0) {//éŠ·æ¯€æ™‚è¢«å‘¼å«
 		bg.recycle();
 		titlebar.recycle();
 		rightbar.recycle();
@@ -510,14 +509,14 @@ implements SurfaceHolder.Callback{
 		rank_e.recycle();
 		rank_f.recycle();
 		
-		//Â÷¶}»P¦A¬D¾Ô¡B§ó·s¬ö¿ý¹Ï¤ù«Å§i===========================================
+		//é›¢é–‹èˆ‡å†æŒ‘æˆ°ã€æ›´æ–°ç´€éŒ„åœ–ç‰‡å®£å‘Š===========================================
 		exit.recycle();
 		again.recycle();
 		rank_new.recycle();
 		rank_gold.recycle();
 		rank_record.recycle();
 		score_record.recycle();
-		//¦¨ÁZ¼Æ¦r==============================================================================
+		//æˆç¸¾æ•¸å­—==============================================================================
 		exit_btm.recycle();
 		again_btm.recycle();
 		num.recycle();

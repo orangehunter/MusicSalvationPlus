@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/Bottom.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/Constant.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/Coordinate.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/EditView.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/GameView.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/Graphic.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/MainActivity.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/MainView.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/MapView.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/MySeekBar.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/Number.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/ScoreView.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/StartView.java" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/Bottom.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/Constant.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/Coordinate.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/EditView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/GameView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/Graphic.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/MainActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/MainView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/MapView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/MySeekBar.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/Number.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/ScoreView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/StartView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/TestView.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/Video.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/bigAnimax.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/chartBottom.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/chartLine.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/chartScan.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/gameChartBottom.java" charset="Big5" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/smallAnimax.java" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/Video.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/bigAnimax.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/chartBottom.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/chartLine.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/chartScan.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/gameChartBottom.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/smallAnimax.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-nodpi" charset="Big5" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/raw" charset="Big5" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
 

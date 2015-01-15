@@ -106,11 +106,11 @@ public class bigAnimax {
 			}
 		}
 	}
-	public void setPosition(int x,int y){//³]©w¦ì¸m
+	public void setPosition(int x,int y){//è¨­å®šä½ç½®
 		this.x=x;
 		this.y=y;
 	}
-	public void startByTime(int CurrentPosition,int duration){//±Ò°Ê(¦³³]©wªø«×)
+	public void startByTime(int CurrentPosition,int duration){//å•Ÿå‹•(æœ‰è¨­å®šé•·åº¦)
 		this.duration=duration;
 		this.count_unit=(animaxLength*1.0)/(this.duration*1.0);
 		this.speed=0;
@@ -121,7 +121,7 @@ public class bigAnimax {
 		this.last_draw=0;
 		animax_flag=true;
 	}
-	public void startBySpeed(double speed){//±Ò°Ê(µL³]©wªø«×)
+	public void startBySpeed(double speed){//å•Ÿå‹•(ç„¡è¨­å®šé•·åº¦)
 		this.speed=speed;
 		this.duration=0;
 		count=0;
@@ -130,13 +130,13 @@ public class bigAnimax {
 		this.last_draw=0;
 		animax_flag=true;	
 	}
-	public void pause(){//¼È°±
+	public void pause(){//æš«åœ
 		pause_flag=true;
 	}
-	public void resume(){//¨ú®ø¼È°±
+	public void resume(){//å–æ¶ˆæš«åœ
 		pause_flag=false;		
 	}
-	public boolean getPause(){//¨ú±o¼È°±ª¬ºA
+	public boolean getPause(){//å–å¾—æš«åœç‹€æ…‹
 		return pause_flag;
 	}
 	public int getCount(){

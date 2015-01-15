@@ -8,24 +8,24 @@ import android.util.Log;
 public class MySeekBar {
 	MainActivity activity;
 
-	float btmX;//«ö¶sªº¤¤¥¡x®y¼Ð
-	float btmY;//«ö¶sªº¤¤¥¡y®y¼Ð
+	float btmX;//æŒ‰éˆ•çš„ä¸­å¤®xåº§æ¨™
+	float btmY;//æŒ‰éˆ•çš„ä¸­å¤®yåº§æ¨™
 
-	float barX;//·j´M±øªº¤¤¥¡x®y¼Ð
-	float barY;//·j´M±øªº¤¤¥¡y®y¼Ð
+	float barX;//æœå°‹æ¢çš„ä¸­å¤®xåº§æ¨™
+	float barY;//æœå°‹æ¢çš„ä¸­å¤®yåº§æ¨™
 
-	float btm_width;//«ö¶sªº¼e
-	float btm_height;//«ö¶sªº°ª
+	float btm_width;//æŒ‰éˆ•çš„å¯¬
+	float btm_height;//æŒ‰éˆ•çš„é«˜
 
-	float bar_width;//·j´M±øªº¼e
-	float bar_height;//·j´M±øªº°ª
+	float bar_width;//æœå°‹æ¢çš„å¯¬
+	float bar_height;//æœå°‹æ¢çš„é«˜
 
 	float bar_btn_dis;
 
 	Boolean isOn;
 
-	Bitmap Bar;//·j´M±ø
-	Bitmap Btm;//«ö¶s
+	Bitmap Bar;//æœå°‹æ¢
+	Bitmap Btm;//æŒ‰éˆ•
 
 	public MySeekBar(MainActivity activity,Bitmap Bar,Bitmap Btm,int x,int y){
 		this.activity=activity;
@@ -58,17 +58,17 @@ public class MySeekBar {
 		canvas.drawBitmap(Bar, barX, barY, paint);
 		canvas.drawBitmap(Btm, btmX, btmY, paint);
 	}
-	public void setSeekBarInt(int a){//¾ã¼Æ¦Ê¤À¤ñ³]©w
+	public void setSeekBarInt(int a){//æ•´æ•¸ç™¾åˆ†æ¯”è¨­å®š
 		//Log.v("SeekBar", "Int"+a);
 		this.btmX=(this.barX+(this.btm_width/2))+(this.bar_width-this.btm_width)*(a/100)-(this.btm_width/2);
 		bar_btn_dis=btmX-barX;
 	}
-	public void setSeekBarFloat(float a){//¤p¼Æ¦Ê¤À¤ñ³]©w
+	public void setSeekBarFloat(float a){//å°æ•¸ç™¾åˆ†æ¯”è¨­å®š
 		//Log.v("SeekBar", "Float"+a);
 		this.btmX=(this.barX+(this.btm_width/2))+(this.bar_width-this.btm_width)*(a/100)-(this.btm_width/2);
 		bar_btn_dis=btmX-barX;
 	}
-	public void setSeekBarX(float x){//«ö¶s¦ì¸m³]©w
+	public void setSeekBarX(float x){//æŒ‰éˆ•ä½ç½®è¨­å®š
 		//Log.v("SeekBar", "X"+x);
 		if(x>(this.barX+(this.btm_width/2))&& x<(this.barX+this.bar_width-(this.btm_width/2))){
 			this.btmX=x-(this.btm_width/2);
@@ -81,16 +81,16 @@ public class MySeekBar {
 		}
 		bar_btn_dis=btmX-barX;
 	}
-	public double getSeekBarValue(){//¦^¶Ç¦Ê¤À¤ñ
+	public double getSeekBarValue(){//å›žå‚³ç™¾åˆ†æ¯”
 		return ((this.btmX+(this.btm_width/2))-(this.barX+(this.btm_width/2)))/(this.bar_width-this.btm_width)*100;
 	}
-	public Boolean isOn(float x,float y){//«ö¶s®×¨ì½T»{
+	public Boolean isOn(float x,float y){//æŒ‰éˆ•æ¡ˆåˆ°ç¢ºèª
 		if(x>this.btmX&&x<this.btmX+this.btm_width   &&   y>this.btmY&&y<this.btmY+this.btm_height)
 			return true;
 		return false;
 	}
 	public void recycle(){
-		Bar.recycle();//·j´M±ø
-		Btm.recycle();//«ö¶s
+		Bar.recycle();//æœå°‹æ¢
+		Btm.recycle();//æŒ‰éˆ•
 	}
 }

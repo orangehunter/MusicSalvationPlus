@@ -1,6 +1,5 @@
 package com.musicsalvation;
 
-import com.example.musicsalvationsdkverson.R;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
