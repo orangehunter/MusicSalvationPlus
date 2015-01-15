@@ -90,6 +90,14 @@ public class Graphic {
 		Bitmap temp=Bitmap.createBitmap(bt, start_x,start_y, width, height);
 		return temp;
 	}
+    static Bitmap MirrorFlipHorizontal(Bitmap bf){//鏡像水平翻轉
+        Matrix matrix = new Matrix();
+        matrix.postScale(-1,1);
+        Bitmap bit=Bitmap.createBitmap(bf, 0,0,bf.getWidth(),bf.getHeight(), matrix, true);
+        matrix.reset();
+
+        return bit;
+    }
 
 	static void drawPic(Canvas canvas,Bitmap bit,int mid_x,int mid_y,float rot,int alpha,Paint paint){
 		paint.setAntiAlias(true);
@@ -113,4 +121,9 @@ public class Graphic {
 		canvas.drawLine(Coordinate.CoordinateX(start_x), Coordinate.CoordinateY(start_y), Coordinate.CoordinateX(end_x),Coordinate.CoordinateY( end_y), paint);      //蝜芾ˊ?渡?
 		paint.reset();
 	}
+    static void drawRect(Canvas canvas,int color,int start_x,int start_y,int end_x,int end_y,Paint paint){
+        paint.setColor(color);
+        canvas.drawRect(Coordinate.CoordinateX(start_x), Coordinate.CoordinateY(start_y), Coordinate.CoordinateX(end_x),Coordinate.CoordinateY( end_y), paint);
+        paint.reset();
+    }
 }
