@@ -1,8 +1,10 @@
-package com.musicsalvation;
+package com.musicsalvation.EditView;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+
+import com.musicsalvation.Graphic;
 
 public class chartLine {
 	int start;

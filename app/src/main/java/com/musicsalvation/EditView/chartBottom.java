@@ -1,10 +1,13 @@
-package com.musicsalvation;
+package com.musicsalvation.EditView;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public class gameChartBottom {
+import com.musicsalvation.Bottom;
+import com.musicsalvation.MainActivity;
+
+public class chartBottom {
 	int ID;
 	int start;
 	int target;
@@ -15,10 +18,10 @@ public class gameChartBottom {
 	int time_dis;
 	double move_unit,move;
 	Bottom btm;
-
-	public gameChartBottom(int start,int target,int end,MainActivity activity,Bitmap on,Bitmap off,int x){
-		this.pointx=x;
-		btm=new Bottom(activity, on, off, pointx, -1000);
+	
+	public chartBottom(int start,int target,int end,MainActivity activity,Bitmap on,Bitmap off,int y){
+		this.pointy=y;
+		btm=new Bottom(activity, on, off, -1000, pointy);
 		btm.setBottomTo(false);
 		this.start=start;
 		this.target=target;
@@ -31,32 +34,25 @@ public class gameChartBottom {
 		this.start_time=start_time;
 		this.flag=true;
 	}
-	public boolean drawChartBottom(int now_time,Canvas canvas,Paint paint){
+	public void drawChartBottom(int now_time,Canvas canvas,Paint paint){
 		move_unit=(start-target)/(time_dis*1.0);
 		move=(now_time*1.0)-(start_time);
-		pointy=(int)(start-move_unit*move);
+		pointx=(int)(start-move_unit*move);
 		btm.move(pointx, pointy);
 		btm.drawBtm(canvas, paint);
-		if(pointy>=end){
+		if(pointx<=end)
 			this.flag=false;
-			return true;
-		}else{
-			return false;
-		}
-	}
-	public int getY(){
-		return pointy;
-	}
-	public void stop(){
-		flag=false;
 	}
 	public boolean getFlag(){
 		return flag;
+	}
+	public void cancel(){
+		this.flag=false;
 	}
 	public int getId(){
 		return ID;
 	}
 public void recycle(){
-	 btm.recycle();
+		btm.recycle();
 	}
 }

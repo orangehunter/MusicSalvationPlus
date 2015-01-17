@@ -12,7 +12,6 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,6 +29,9 @@ import android.view.Window;
 import android.view.WindowManager;
 //import android.widget.Toast;
 import android.widget.Toast;
+
+import com.musicsalvation.EditView.EditView;
+import com.musicsalvation.GameView.GameView;
 
 @SuppressLint({ "HandlerLeak", "NewApi" })
 public class MainActivity extends Activity{
@@ -52,33 +54,33 @@ public class MainActivity extends Activity{
 	//影片選擇------------------------------------------------------------
 
 	//判定與分數===================================
-	int virus = 0;  //病毒數量
-	int percent = 0; //判定是否過關數量
-	int nice = 0;
-	int hit = 0;
-	int safe = 0;
-	int miss = 0;
-	int score = 0;
-	int combo = 0;  
-	boolean boss_delete;
+    public int virus = 0;  //病毒數量
+	public int percent = 0; //判定是否過關數量
+	public int nice = 0;
+	public int hit = 0;
+	public int safe = 0;
+	public int miss = 0;
+	public int score = 0;
+	public int combo = 0;
+	public boolean boss_delete;
 	//判定與分數-----------------------------------
 
 	//選關參數=====================================
-	int level;//關卡
+    public int level;//關卡
 	int levels=3;//關卡總數
-	int difficulty;//難度
+	public int difficulty;//難度
 	int [][]hight_score=new int [levels][3];
 	int [][]hight_rank=new int [levels][3];
-	Boolean [][]level_clear=new Boolean[levels][3];
+	public Boolean [][]level_clear=new Boolean[levels][3];
 	//選關參數-------------------------------------
 
 	//存檔用參數====================================
-	float mp_Voiume;
-	float sp_Voiume;
-	int sp_num;
-	int timing;
-	int speed;
-	int animax_buffer;
+    public float mp_Voiume;
+	public float sp_Voiume;
+	public int sp_num;
+	public int timing;
+	public int speed;
+	public int animax_buffer;
 	//存檔用參數-------------------------------------
 	public void changeView(int what)//
 	{

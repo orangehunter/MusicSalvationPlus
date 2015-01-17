@@ -2,8 +2,8 @@ package com.musicsalvation;
 
 
 public class Constant {
-static int SCREEN_WIDTH;
-static int SCREEN_HIGHT;
+public static int SCREEN_WIDTH;
+public static int SCREEN_HIGHT;
 
 //直屏
 static int DEFULT_WITH=1280;
@@ -16,7 +16,7 @@ static int DEFULT_HIGHT=1280;
 static float GAME_WIDTH_UNIT;
 static float SCREEN_HEIGHT_UNIT;
 
-static boolean Flag;
+public static boolean Flag;
 static boolean FileDataFlag;
 
 

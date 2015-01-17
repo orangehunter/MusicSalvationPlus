@@ -13,7 +13,7 @@ import android.util.Log;
 
 public class Graphic {
 
-	static Bitmap LoadBitmap(Resources rs,int r,int x,int y,int scale){
+	public static Bitmap LoadBitmap(Resources rs, int r, int x, int y, int scale){
 		try{
 		 InputStream inputStream = rs.openRawResource(r);
 		 Bitmap s=BitmapFactory.decodeStream(inputStream, null, getBitmapOptions(scale));
@@ -23,7 +23,7 @@ public class Graphic {
 		}
 		//return BitmapFactory.decodeResource(getResources(), r);
 	}
-	static Bitmap LoadBitmap(Resources rs,int r,int x,int y){
+	public static Bitmap LoadBitmap(Resources rs, int r, int x, int y){
 		InputStream inputStream = rs.openRawResource(r);
 		BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
         bmpFactoryOptions.inJustDecodeBounds = true;
@@ -56,7 +56,7 @@ public class Graphic {
         }
      return bitmap;
 	}
-	static BitmapFactory.Options getBitmapOptions(int scale){
+	public static BitmapFactory.Options getBitmapOptions(int scale){
 	    BitmapFactory.Options options = new BitmapFactory.Options();
 	    options.inJustDecodeBounds=false;
 		options.inPreferredConfig=Bitmap.Config.ARGB_4444;
@@ -66,7 +66,7 @@ public class Graphic {
 	    return options;
 	}
 	
-	static Bitmap bitSize(Bitmap bf,int f,int g){//????蝮格??
+	public static Bitmap bitSize(Bitmap bf, int f, int g){//????蝮格??
 		int bw=0;
 		int bh=0;
 		float scaleWidth=0;
@@ -86,11 +86,11 @@ public class Graphic {
 
 		return bit;
 	}
-	static Bitmap CutArea(Bitmap bt,int start_x,int start_y,int width,int height){
+	public static Bitmap CutArea(Bitmap bt, int start_x, int start_y, int width, int height){
 		Bitmap temp=Bitmap.createBitmap(bt, start_x,start_y, width, height);
 		return temp;
 	}
-    static Bitmap MirrorFlipHorizontal(Bitmap bf){//鏡像水平翻轉
+    public Bitmap MirrorFlipHorizontal(Bitmap bf){//鏡像水平翻轉
         Matrix matrix = new Matrix();
         matrix.postScale(-1,1);
         Bitmap bit=Bitmap.createBitmap(bf, 0,0,bf.getWidth(),bf.getHeight(), matrix, true);
@@ -99,7 +99,7 @@ public class Graphic {
         return bit;
     }
 
-	static void drawPic(Canvas canvas,Bitmap bit,int mid_x,int mid_y,float rot,int alpha,Paint paint){
+	public static void drawPic(Canvas canvas, Bitmap bit, int mid_x, int mid_y, float rot, int alpha, Paint paint){
 		paint.setAntiAlias(true);
 		paint.setAlpha(alpha);
 		float x=Coordinate.CoordinateX(mid_x),y=Coordinate.CoordinateY(mid_y);
@@ -115,13 +115,13 @@ public class Graphic {
 		paint.reset();
 	}
 
-	static void drawLine(Canvas canvas,int color,int start_x,int start_y,int end_x,int end_y,int with,Paint paint){
+	public static void drawLine(Canvas canvas, int color, int start_x, int start_y, int end_x, int end_y, int with, Paint paint){
 		paint.setColor(color);																	//閮剖?憿???
 		paint.setStrokeWidth(with);    //閮剖?蝺?撖?
 		canvas.drawLine(Coordinate.CoordinateX(start_x), Coordinate.CoordinateY(start_y), Coordinate.CoordinateX(end_x),Coordinate.CoordinateY( end_y), paint);      //蝜芾ˊ?渡?
 		paint.reset();
 	}
-    static void drawRect(Canvas canvas,int color,int start_x,int start_y,int end_x,int end_y,Paint paint){
+    public void drawRect(Canvas canvas,int color,int start_x,int start_y,int end_x,int end_y,Paint paint){
         paint.setColor(color);
         canvas.drawRect(Coordinate.CoordinateX(start_x), Coordinate.CoordinateY(start_y), Coordinate.CoordinateX(end_x),Coordinate.CoordinateY( end_y), paint);
         paint.reset();

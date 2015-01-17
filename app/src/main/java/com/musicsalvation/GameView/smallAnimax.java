@@ -1,8 +1,10 @@
-package com.musicsalvation;
+package com.musicsalvation.GameView;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+
+import com.musicsalvation.Graphic;
 
 public class smallAnimax {
 	
@@ -56,7 +58,7 @@ public class smallAnimax {
 		if(animax_flag){
 			animax_count_flag=count_unit*(CurrentPosition-start_position);
 			if(((int)animax_count_flag)<pic_number){
-				Graphic.drawPic(canvas, pic[((int)animax_count_flag)], x, y, 0, 255, paint);
+				Graphic.drawPic(canvas, pic[((int) animax_count_flag)], x, y, 0, 255, paint);
 			}else{
 				animax_flag=false;
 			}

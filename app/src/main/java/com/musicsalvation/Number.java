@@ -9,11 +9,11 @@ import android.graphics.Paint;
 
 public class Number {
 	static final int Blue=0;
-	static final int Cyan=1;
+	public static final int Cyan=1;
 	static final int Green=2;
 	static final int Gray=3;
 	static final int Red=4;
-	static final int Wite=5;
+	public static final int Wite=5;
 	static final int Yellow=6;
 
 	final int default_width=35;

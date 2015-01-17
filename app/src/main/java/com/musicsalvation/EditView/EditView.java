@@ -1,4 +1,4 @@
-package com.musicsalvation;
+package com.musicsalvation.EditView;
 
 import java.io.IOException;
 
@@ -22,6 +22,14 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.musicsalvation.Bottom;
+import com.musicsalvation.Constant;
+import com.musicsalvation.Coordinate;
+import com.musicsalvation.Graphic;
+import com.musicsalvation.MainActivity;
+import com.musicsalvation.MySeekBar;
+import com.musicsalvation.R;
+
 @SuppressLint({ "ViewConstructor", "WrongCall", "UseSparseArrays", "ClickableViewAccessibility" })
 public class EditView extends  SurfaceView
 implements SurfaceHolder.Callback {
@@ -38,11 +46,11 @@ implements SurfaceHolder.Callback {
 	Bitmap bottom[]=new Bitmap[5];
 	Bottom btm_r,btm_s,btm_t,btm_x;
 
-	static JSONObject 
-	BtR=new JSONObject()
-	,BtS=new JSONObject()
-	,BtT=new JSONObject()
-	,BtX=new JSONObject();
+	static JSONObject
+            BtR=new JSONObject()
+            ,BtS=new JSONObject()
+            ,BtT=new JSONObject()
+            ,BtX=new JSONObject();
 
 	Bitmap mp_play,mp_pause;
 	Bottom playBtm;
@@ -59,7 +67,7 @@ implements SurfaceHolder.Callback {
 	,ct_on
 	,cx_on
 	,c_off;
-	chartBottom 
+	chartBottom
 	cr_btm[]=new chartBottom[chartObject]
 			,cs_btm[]=new chartBottom[chartObject]
 					,ct_btm[]=new chartBottom[chartObject]
@@ -90,7 +98,7 @@ implements SurfaceHolder.Callback {
 		super(mainActivity);
 		this.activity = mainActivity;
 		this.getHolder().addCallback(this);//設定生命周期回調接口的實現者
-		Constant.Flag=true;	
+		Constant.Flag=true;
 	}
 
 	public Bitmap LoadBitmap(int r){
@@ -102,7 +110,7 @@ implements SurfaceHolder.Callback {
 		//bottom[A];  A{0:圓  ,1:方  ,2:三角  ,3:叉 ,4:按下}
 		int bottomSize=180;
 		int btm_first=130,btm_dis=270;
-		bottom[0]=Graphic.bitSize(LoadBitmap( R.drawable.bottom_round),bottomSize ,bottomSize);
+		bottom[0]= Graphic.bitSize(LoadBitmap(R.drawable.bottom_round), bottomSize, bottomSize);
 		bottom[1]=Graphic.bitSize(LoadBitmap( R.drawable.bottom_square) ,bottomSize ,bottomSize);
 		bottom[2]=Graphic.bitSize(LoadBitmap( R.drawable.bottom_trangle),bottomSize ,bottomSize);
 		bottom[3]=Graphic.bitSize(LoadBitmap(R.drawable.bottom_x),bottomSize ,bottomSize);

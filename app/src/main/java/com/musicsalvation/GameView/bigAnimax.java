@@ -1,9 +1,12 @@
-package com.musicsalvation;
+package com.musicsalvation.GameView;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.Log;
+
+import com.musicsalvation.Graphic;
+import com.musicsalvation.MainActivity;
 
 public class bigAnimax {
 	Boolean animax_flag=false;
@@ -53,7 +56,7 @@ public class bigAnimax {
 				}
 			}else{
 				if(bit[i]==null){
-					bit[i]=Graphic.LoadBitmap(activity.getResources(), r+i, pic_width, pic_hight,2);
+					bit[i]= Graphic.LoadBitmap(activity.getResources(), r + i, pic_width, pic_hight, 2);
 				}
 			}
 		}

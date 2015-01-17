@@ -1,11 +1,12 @@
-package com.musicsalvation;
+package com.musicsalvation.EditView;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import org.json.JSONObject;
 
-import android.util.Log;
+import com.musicsalvation.GameView.GameView;
+import com.musicsalvation.MainActivity;
 
 
 public class chartScan {
@@ -17,10 +18,10 @@ public class chartScan {
 
 	String view;	
 
-	boolean R_scan_flag=false;
-	boolean S_scan_flag=false;
-	boolean T_scan_flag=false;
-	boolean X_scan_flag=false;
+	public boolean R_scan_flag=false;
+	public boolean S_scan_flag=false;
+	public boolean T_scan_flag=false;
+	public boolean X_scan_flag=false;
 	int R_scan_id;
 	int S_scan_id;
 	int T_scan_id;
@@ -97,9 +98,9 @@ public class chartScan {
 
 	public void mainScan(){
 		if(this.view.equals("EditView")){
-			scan_time_flag=EditView.mp.getCurrentPosition();
+			scan_time_flag= EditView.mp.getCurrentPosition();
 		}else if(this.view.equals("GameView")){
-			scan_time_flag=GameView.mp.getCurrentPosition();
+			scan_time_flag= GameView.mp.getCurrentPosition();
 			//+(activity.timing*10);
 		}
 		scan_time_flag=(scan_time_flag+dis)/100;

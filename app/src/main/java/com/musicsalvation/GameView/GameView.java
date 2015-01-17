@@ -1,16 +1,11 @@
-package com.musicsalvation;
+package com.musicsalvation.GameView;
 //
-
-import java.io.InputStream;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -25,6 +20,10 @@ import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import com.musicsalvation.*;
+import com.musicsalvation.EditView.chartScan;
+import com.musicsalvation.Number;
 
 @SuppressLint({ "ViewConstructor", "WrongCall", "ClickableViewAccessibility", "NewApi" })
 public class GameView extends SurfaceView
@@ -97,7 +96,7 @@ implements SurfaceHolder.Callback{
 
 	int Effect_numbers=5;
 	double Effect_speed=0.5;
-	smallAnimax  []
+	smallAnimax[]
 			Effect_Cyan		=new smallAnimax[Effect_numbers],
 			Effect_Red		=new smallAnimax[Effect_numbers],
 			Effect_Green	=new smallAnimax[Effect_numbers],
@@ -178,7 +177,7 @@ implements SurfaceHolder.Callback{
 	//BOSS 攻擊--
 
 
-	Number score;
+	com.musicsalvation.Number score;
 
 	double hp_point[][]={{0.5,0.3,0.2,0.3},{0.3,0.1,0.1,0.5},{0.1,0.1,0.0,0.8}};
 	double hp;
@@ -221,7 +220,7 @@ implements SurfaceHolder.Callback{
 	SoundPool sp;
 	int sp_id[];
 
-	static MediaPlayer mp;
+	public static MediaPlayer mp;
 	chartScan cs;
 
 	static JSONObject 
