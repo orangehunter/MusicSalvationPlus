@@ -3,6 +3,6 @@ package com.musicsalvation.EditView;
 /**
  * Created by michael on 2015/1/6.
  */
-public class point {
+public class lines {
     int x,y;
 }

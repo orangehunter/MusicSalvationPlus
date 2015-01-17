@@ -34,8 +34,8 @@ public class chartEditScreen {
             ,BtT=new JSONObject()
             ,BtX=new JSONObject();
 
-    SparseArray<point> timeLines=new SparseArray<point>();
-    SparseArray<point> timeCalibration=new SparseArray<point>();
+    SparseArray<lines> timeLines=new SparseArray<lines>();
+    SparseArray<calibration> timeCalibration= new SparseArray<calibration>();
 
 
     public chartEditScreen(MainActivity activity,int left,int right,int up,int down){
