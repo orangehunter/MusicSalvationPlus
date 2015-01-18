@@ -12,7 +12,6 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,6 +30,9 @@ import android.view.WindowManager;
 //import android.widget.Toast;
 import android.widget.Toast;
 
+import com.musicsalvation.EditView.EditView;
+import com.musicsalvation.GameView.GameView;
+
 @SuppressLint({ "HandlerLeak", "NewApi" })
 public class MainActivity extends Activity{
 	int first_activity=0;
@@ -41,46 +43,45 @@ public class MainActivity extends Activity{
 	MapView mapview;
 	GameView gameview;
 	ScoreView scoreview;
-	TestView testview;
 	Video video;
 
 	Intent intent;
 	Intent deintent;
 	Uri uri;
 
-	//¼v¤ù¿ï¾Ü====================================
+	//å½±ç‰‡é¸æ“‡====================================
 	int video_select=0;
-	//¼v¤ù¿ï¾Ü------------------------------------------------------------
+	//å½±ç‰‡é¸æ“‡------------------------------------------------------------
 
-	//§P©w»P¤À¼Æ===================================
-	int virus = 0;  //¯f¬r¼Æ¶q
-	int percent = 0; //§P©w¬O§_¹LÃö¼Æ¶q
-	int nice = 0;
-	int hit = 0;
-	int safe = 0;
-	int miss = 0;
-	int score = 0;
-	int combo = 0;  
-	boolean boss_delete;
-	//§P©w»P¤À¼Æ-----------------------------------
+	//åˆ¤å®šèˆ‡åˆ†æ•¸===================================
+    public int virus = 0;  //ç—…æ¯’æ•¸é‡
+	public int percent = 0; //åˆ¤å®šæ˜¯å¦éé—œæ•¸é‡
+	public int nice = 0;
+	public int hit = 0;
+	public int safe = 0;
+	public int miss = 0;
+	public int score = 0;
+	public int combo = 0;
+	public boolean boss_delete;
+	//åˆ¤å®šèˆ‡åˆ†æ•¸-----------------------------------
 
-	//¿ïÃö°Ñ¼Æ=====================================
-	int level;//Ãö¥d
-	int levels=3;//Ãö¥dÁ`¼Æ
-	int difficulty;//Ãø«×
+	//é¸é—œåƒæ•¸=====================================
+    public int level;//é—œå¡
+	int levels=3;//é—œå¡ç¸½æ•¸
+	public int difficulty;//é›£åº¦
 	int [][]hight_score=new int [levels][3];
 	int [][]hight_rank=new int [levels][3];
-	Boolean [][]level_clear=new Boolean[levels][3];
-	//¿ïÃö°Ñ¼Æ-------------------------------------
+	public Boolean [][]level_clear=new Boolean[levels][3];
+	//é¸é—œåƒæ•¸-------------------------------------
 
-	//¦sÀÉ¥Î°Ñ¼Æ====================================
-	float mp_Voiume;
-	float sp_Voiume;
-	int sp_num;
-	int timing;
-	int speed;
-	int animax_buffer;
-	//¦sÀÉ¥Î°Ñ¼Æ-------------------------------------
+	//å­˜æª”ç”¨åƒæ•¸====================================
+    public float mp_Voiume;
+	public float sp_Voiume;
+	public int sp_num;
+	public int timing;
+	public int speed;
+	public int animax_buffer;
+	//å­˜æª”ç”¨åƒæ•¸-------------------------------------
 	public void changeView(int what)//
 	{
 		Message msg = myHandler.obtainMessage(what); 
@@ -88,37 +89,34 @@ public class MainActivity extends Activity{
 		nowView=what;
 	} 
 
-	Handler myHandler = new Handler(){//³B²z¦U­ÓSurfaceView¶Ç°eªº°T®§
+	Handler myHandler = new Handler(){//è™•ç†å„å€‹SurfaceViewå‚³é€çš„è¨Šæ¯
 		public void handleMessage(Message msg) {
 			switch(msg.what)//
 			{
 			case 0:
-				//goToStartView();//ªì©l
+				//goToStartView();//åˆå§‹
 				startVideo();
 				break;
 			case 1:
-				goToMainView();//¥D­n
+				goToMainView();//ä¸»è¦
 				break;
 			case 2:
-				goToMapView();//¦a¹Ï
+				goToMapView();//åœ°åœ–
 				break;
 			case 3:
-				goToGameView();//´åÀ¸
+				goToGameView();//æ¸¸æˆ²
 				break;
 			case 4:
-				goToScoreView();//±o¤À
+				goToScoreView();//å¾—åˆ†
 				break;
 			case 5:
-				goToLastView();//µ²§ô
+				goToLastView();//çµæŸ
 				break;
 			case 6:
 				goToEditView();
 				break;
 			case 7:
 				chooseFile();
-				break;
-			case 8:
-				goToTestView();
 				break;
 			case 255:
 				Exit();
@@ -136,15 +134,7 @@ public class MainActivity extends Activity{
 		video.requestFocus();
 		video.setFocusableInTouchMode(true);
 	}
-	protected void goToTestView() {
-		if(testview==null)
-		{
-			testview=new TestView(this);
-		}
-		setContentView(testview);
-		testview.requestFocus();
-		testview.setFocusableInTouchMode(true);
-	}
+
 	protected void goToEditView() {
 		if(editview==null)
 		{
@@ -167,8 +157,8 @@ public class MainActivity extends Activity{
 			mainview=new MainView(this);
 		}
 		setContentView(mainview);
-		mainview.requestFocus();//¨ú±oµJÂI
-		mainview.setFocusableInTouchMode(true);//³]¬°¥iÄ²±±
+		mainview.requestFocus();//å–å¾—ç„¦é»
+		mainview.setFocusableInTouchMode(true);//è¨­ç‚ºå¯è§¸æ§
 	}
 	private void goToMapView() {
 		if(mapview==null)
@@ -176,8 +166,8 @@ public class MainActivity extends Activity{
 			mapview=new MapView(this);
 		}
 		setContentView(mapview);
-		mapview.requestFocus();//¨ú±oµJÂI
-		mapview.setFocusableInTouchMode(true);//³]¬°¥iÄ²±±
+		mapview.requestFocus();//å–å¾—ç„¦é»
+		mapview.setFocusableInTouchMode(true);//è¨­ç‚ºå¯è§¸æ§
 	}
 	private void goToGameView() {
 		if(gameview==null)
@@ -185,8 +175,8 @@ public class MainActivity extends Activity{
 			gameview=new GameView(this);
 		}
 		setContentView(gameview);
-		gameview.requestFocus();//¨ú±oµJÂI
-		gameview.setFocusableInTouchMode(true);//³]¬°¥iÄ²±±
+		gameview.requestFocus();//å–å¾—ç„¦é»
+		gameview.setFocusableInTouchMode(true);//è¨­ç‚ºå¯è§¸æ§
 	}
 	private void goToScoreView() {
 		if(scoreview==null)
@@ -194,35 +184,35 @@ public class MainActivity extends Activity{
 			scoreview=new ScoreView(this);
 		}
 		setContentView(scoreview);
-		scoreview.requestFocus();//¨ú±oµJÂI
+		scoreview.requestFocus();//å–å¾—ç„¦é»
 		scoreview.setFocusableInTouchMode(true);
 
 	}
 	private void goToLastView() {
-		// TODO ¦Û°Ê²£¥Íªº¤èªk Stub
+		// TODO è‡ªå‹•ç”¢ç”Ÿçš„æ–¹æ³• Stub
 
 	}
 	private void Exit() {
 		writeData();
-		System.exit(0);//Â÷¶}´åÀ¸
+		System.exit(0);//é›¢é–‹æ¸¸æˆ²
 	}
 
-	public void callAlartDialog(String what)//Alert°T®§¶Ç°e
+	public void callAlartDialog(String what)//Alertè¨Šæ¯å‚³é€
 	{
 		Message msg = toastHandler.obtainMessage(1,what); 
 		toastHandler.sendMessage(msg);
 	} 
-	Handler toastHandler = new Handler(){//³B²z¦U­ÓSurfaceView¶Ç°eªºAlert°T®§
+	Handler toastHandler = new Handler(){//è™•ç†å„å€‹SurfaceViewå‚³é€çš„Alertè¨Šæ¯
 		public void handleMessage(Message msg) {
 			createAlartDialog((String)msg.obj);
 		}
 	};
-	public void createAlartDialog(String msg){//Åã¥ÜAlert
+	public void createAlartDialog(String msg){//é¡¯ç¤ºAlert
 		
 		Builder MyAlertDialog = new Builder(this);
-		MyAlertDialog.setTitle("®¥³ß!");
-		MyAlertDialog.setMessage("±z¯}Ãö¤F!\n²{¦bÁôÂÃ­n¯À¤w¸g¸ÑÂêÅo\n¦^¼ĞÃDµe­±¬İ¬İ§a¡I");
-		//«Ø¥ß«ö¤U«ö¶s
+		MyAlertDialog.setTitle("æ­å–œ!");
+		MyAlertDialog.setMessage("æ‚¨ç ´é—œäº†!\nç¾åœ¨éš±è—è¦ç´ å·²ç¶“è§£é–å›‰\nå›æ¨™é¡Œç•«é¢çœ‹çœ‹å§ï¼");
+		//å»ºç«‹æŒ‰ä¸‹æŒ‰éˆ•
 		DialogInterface.OnClickListener OkClick = new DialogInterface.OnClickListener()
 		{
 		public void onClick(DialogInterface dialog, int which) {
@@ -235,8 +225,8 @@ public class MainActivity extends Activity{
 		
 		}
 		};
-		MyAlertDialog.setPositiveButton("½T»{",OkClick );
-		MyAlertDialog.setNegativeButton("¨ú®ø",noClick );
+		MyAlertDialog.setPositiveButton("ç¢ºèª",OkClick );
+		MyAlertDialog.setNegativeButton("å–æ¶ˆ",noClick );
 		MyAlertDialog.show();
 	}
 
@@ -244,17 +234,17 @@ public class MainActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		//´åÀ¸¹Lµ{¤¤¥u®e³\½Õ¾ã¦h´CÅé­µ¶q¡A¦Ó¤£®e³\½Õ¾ã³q¸Ü­µ¶q
+		//æ¸¸æˆ²éç¨‹ä¸­åªå®¹è¨±èª¿æ•´å¤šåª’é«”éŸ³é‡ï¼Œè€Œä¸å®¹è¨±èª¿æ•´é€šè©±éŸ³é‡
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);//¥h±¼¼ĞÃD
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);//å»æ‰æ¨™é¡Œ
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);//¥h±¼¼ĞÀY
-		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//±j¨î¾î«Ì
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);//å»æ‰æ¨™é ­
+		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//å¼·åˆ¶æ©«å±
 
-		//¨ú±o¸ÑªR«×
+		//å–å¾—è§£æåº¦
 		DisplayMetrics dm=new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
-		//µ¹±`¼ÆÃş§O¤¤ªº¿Ã¹õ°ª©M¼eµ¹¤©­È
+		//çµ¦å¸¸æ•¸é¡åˆ¥ä¸­çš„è¢å¹•é«˜å’Œå¯¬çµ¦äºˆå€¼
 		if(dm.widthPixels>dm.heightPixels)
 		{
 			Constant.SCREEN_WIDTH=dm.widthPixels;
@@ -264,7 +254,7 @@ public class MainActivity extends Activity{
 			Constant.SCREEN_HIGHT=dm.widthPixels;
 			Constant.SCREEN_WIDTH=dm.heightPixels;
 		}
-		if(Constant.SCREEN_HIGHT>Constant.SCREEN_WIDTH/16*9)//±N¿Ã¹õ©T©w¬°16:9
+		if(Constant.SCREEN_HIGHT>Constant.SCREEN_WIDTH/16*9)//å°‡è¢å¹•å›ºå®šç‚º16:9
 			Constant.SCREEN_HIGHT=Constant.SCREEN_WIDTH/16*9;
 		else
 			Constant.SCREEN_WIDTH=Constant.SCREEN_HIGHT/9*16;
@@ -273,7 +263,7 @@ public class MainActivity extends Activity{
 		Constant.SCREEN_HEIGHT_UNIT= ((float)Constant.SCREEN_HIGHT/Constant.DEFULT_HIGHT);
 		//Toast.makeText(this, "widthPixels"+dm.widthPixels+"heightPixels"+dm.heightPixels, Toast.LENGTH_LONG).show();
 		readData();
-		changeView(first_activity);//¶i¤J"Åwªï¬É­±"
+		changeView(first_activity);//é€²å…¥"æ­¡è¿ç•Œé¢"
 	}
 
 
@@ -298,8 +288,8 @@ public class MainActivity extends Activity{
 				Constant.Flag=false;
 				this.changeView(2);
 				break;
-			case 0://Åwªï¬É­±
-			case 1://¥D±±¨î¬É­±
+			case 0://æ­¡è¿ç•Œé¢
+			case 1://ä¸»æ§åˆ¶ç•Œé¢
 				Exit();
 				break;
 
@@ -313,37 +303,37 @@ public class MainActivity extends Activity{
 		return false;
 
 	}
-	public void chooseFile(){//ÀÉ®×¿ï¾Ü¾¹³]©w
-		Intent intent = new Intent( Intent.ACTION_GET_CONTENT);//ACTION_PICK,android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI );						// «Ø¥ß "¿ï¾ÜÀÉ®× Action" ªº Intent
-		intent.setType("audio/*");														// ¹LÂoÀÉ®×®æ¦¡
-		Intent deintent = Intent.createChooser(intent, "¿ï¾ÜÀÉ®×");		// «Ø¥ß "ÀÉ®×¿ï¾Ü¾¹" ªº Intent  (²Ä¤G­Ó°Ñ¼Æ: ¿ï¾Ü¾¹ªº¼ĞÃD)
-		startActivityForResult( deintent, 0 );									// ¤Á´«¨ìÀÉ®×¿ï¾Ü¾¹ (¥¦ªº³B²zµ²ªG, ·|Ä²µo onActivityResult ¨Æ¥ó)
+	public void chooseFile(){//æª”æ¡ˆé¸æ“‡å™¨è¨­å®š
+		Intent intent = new Intent( Intent.ACTION_GET_CONTENT);//ACTION_PICK,android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI );						// å»ºç«‹ "é¸æ“‡æª”æ¡ˆ Action" çš„ Intent
+		intent.setType("audio/*");														// éæ¿¾æª”æ¡ˆæ ¼å¼
+		Intent deintent = Intent.createChooser(intent, "é¸æ“‡æª”æ¡ˆ");		// å»ºç«‹ "æª”æ¡ˆé¸æ“‡å™¨" çš„ Intent  (ç¬¬äºŒå€‹åƒæ•¸: é¸æ“‡å™¨çš„æ¨™é¡Œ)
+		startActivityForResult( deintent, 0 );									// åˆ‡æ›åˆ°æª”æ¡ˆé¸æ“‡å™¨ (å®ƒçš„è™•ç†çµæœ, æœƒè§¸ç™¼ onActivityResult äº‹ä»¶)
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 
-		// ¦³¿ï¾ÜÀÉ®×
+		// æœ‰é¸æ“‡æª”æ¡ˆ
 		// Looper.prepare();
 		if ( resultCode == RESULT_OK )
 		{
-			// ¨ú±oÀÉ®×ªº Uri
+			// å–å¾—æª”æ¡ˆçš„ Uri
 			uri = data.getData();
 			if( uri != null )
 			{
-				Toast.makeText(this, "ÀÉ®×¤w¿ï¾Ü!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, "æª”æ¡ˆå·²é¸æ“‡!", Toast.LENGTH_SHORT).show();
 				this.changeView(6);
 				Constant.Flag=true;
 			}
 			else
 			{
-				Toast.makeText(this, "µL®ÄªºÀÉ®×¸ô®| !", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, "ç„¡æ•ˆçš„æª”æ¡ˆè·¯å¾‘ !", Toast.LENGTH_SHORT).show();
 			}
 		}
 		else
 		{
-			Toast.makeText(this, "¨ú®ø¿ï¾ÜÀÉ®× !", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "å–æ¶ˆé¸æ“‡æª”æ¡ˆ !", Toast.LENGTH_SHORT).show();
 		}
 		//Looper.loop();
 	}
@@ -379,10 +369,10 @@ public class MainActivity extends Activity{
 		return c;
 	}
 
-	public JSONObject read(Uri uri){//ÃĞ­±Åª¨ú
+	public JSONObject read(Uri uri){//è­œé¢è®€å–
 		//String fileName=turnUriToName(uri)+".chart";
 		JSONObject json=null;
-		String content=""; //¤º®e
+		String content=""; //å…§å®¹
 		byte[] buff = new byte[1024];
 
 		try {
@@ -398,21 +388,21 @@ public class MainActivity extends Activity{
 			json=new JSONObject(content);
 			file.close();
 		} catch (FileNotFoundException e) {
-			Log.e("read", "§ä¤£¨ìÀÉ®×");
+			Log.e("read", "æ‰¾ä¸åˆ°æª”æ¡ˆ");
 			e.printStackTrace();
 		} catch (IOException e) {
-			Log.e("read", "Åª¨úÀÉ®×¥¢±Ñ");
+			Log.e("read", "è®€å–æª”æ¡ˆå¤±æ•—");
 			e.printStackTrace();
 		} catch (JSONException e) {
-			Log.e("read", "¼g¤Jjson¥¢±Ñ");
+			Log.e("read", "å¯«å…¥jsonå¤±æ•—");
 			e.printStackTrace();
 		};
 		return json;
 	}
-	public JSONObject read(String name){//ÃĞ­±Åª¨ú
+	public JSONObject read(String name){//è­œé¢è®€å–
 		//String fileName=turnUriToName(uri)+".chart";
 		JSONObject json=null;
-		String content=""; //¤º®e
+		String content=""; //å…§å®¹
 		byte[] buff = new byte[1024];
 
 		try {
@@ -428,19 +418,19 @@ public class MainActivity extends Activity{
 			json=new JSONObject(content);
 			file.close();
 		} catch (FileNotFoundException e) {
-			Log.e("read", "§ä¤£¨ìÀÉ®×");
+			Log.e("read", "æ‰¾ä¸åˆ°æª”æ¡ˆ");
 			e.printStackTrace();
 		} catch (IOException e) {
-			Log.e("read", "Åª¨úÀÉ®×¥¢±Ñ");
+			Log.e("read", "è®€å–æª”æ¡ˆå¤±æ•—");
 			e.printStackTrace();
 		} catch (JSONException e) {
-			Log.e("read", "¼g¤Jjson¥¢±Ñ");
+			Log.e("read", "å¯«å…¥jsonå¤±æ•—");
 			e.printStackTrace();
 		};
 		return json;
 	}
 
-	public  void write(Uri uri,JSONObject btR,JSONObject btS,JSONObject btT,JSONObject btX){//ÃĞ­±¼g¤J
+	public  void write(Uri uri,JSONObject btR,JSONObject btS,JSONObject btT,JSONObject btX){//è­œé¢å¯«å…¥
 		JSONObject json=new JSONObject();
 		try {
 			json.put("R", btR);
@@ -448,7 +438,7 @@ public class MainActivity extends Activity{
 			json.put("T",btT);
 			json.put("X", btX);
 		} catch (JSONException e) {
-			Log.e("write", "µLªk±N°Ñ¼Æ¾É¤Jjson");
+			Log.e("write", "ç„¡æ³•å°‡åƒæ•¸å°å…¥json");
 			e.printStackTrace();
 		}
 		try {
@@ -462,7 +452,7 @@ public class MainActivity extends Activity{
 			//FileOutputStream writer = openFileOutput(fileName, Context.MODE_PRIVATE);
 			writer.write(json.toString().getBytes());
 			writer.close();
-			Log.v("write", "¸ê®Æ¼g¤J¦¨¥\");
+			Log.v("write", "è³‡æ–™å¯«å…¥æˆåŠŸ");
 		} catch (FileNotFoundException e) {
 			Log.e("write", "FileNotFoundException");
 			e.printStackTrace();
@@ -472,10 +462,10 @@ public class MainActivity extends Activity{
 		}
 	}
 
-	public void readData(){//TAG ¦sÀÉÅª¨ú
+	public void readData(){//TAG å­˜æª”è®€å–
 		String fileName="Data.save";
 		JSONObject json=null;
-		String content=""; //¤º®e
+		String content=""; //å…§å®¹
 		byte[] buff = new byte[1024];
 
 		try {
@@ -528,15 +518,15 @@ public class MainActivity extends Activity{
 			writeData();
 			e.printStackTrace();
 		} catch (IOException e) {
-			Log.v("Data","Åª¨úÀÉ®×¥¢±Ñ");
+			Log.v("Data","è®€å–æª”æ¡ˆå¤±æ•—");
 			e.printStackTrace();
 		} catch (JSONException e) {
-			Log.v("Data","¼g¤Jjson¥¢±Ñ");
+			Log.v("Data","å¯«å…¥jsonå¤±æ•—");
 			e.printStackTrace();
 		};
 	}
 
-	public  void writeData(){//¦sÀÉ¼g¤J
+	public  void writeData(){//å­˜æª”å¯«å…¥
 		JSONObject json=new JSONObject();
 		try {
 			json.put("mp_Voiume", String.valueOf(mp_Voiume));
@@ -557,7 +547,7 @@ public class MainActivity extends Activity{
 				}
 			}
 		} catch (JSONException e) {
-			Log.v("Data","µLªk±N°Ñ¼Æ¾É¤Jjson");
+			Log.v("Data","ç„¡æ³•å°‡åƒæ•¸å°å…¥json");
 			e.printStackTrace();
 		}
 		try {

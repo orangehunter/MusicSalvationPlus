@@ -1,7 +1,6 @@
 package com.musicsalvation;
 //
 
-import com.example.musicsalvationsdkverson.R;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -50,8 +49,8 @@ implements SurfaceHolder.Callback{
 
 	boolean toEditView=false;
 
-	int pointx;//Ä²±±¨ì¿Ã¹õªºx®y¼Ğ
-	int pointy;//Ä²±±¨ì¿Ã¹õªºy®y¼Ğ
+	int pointx;//è§¸æ§åˆ°è¢å¹•çš„xåº§æ¨™
+	int pointy;//è§¸æ§åˆ°è¢å¹•çš„yåº§æ¨™
 	int apa=10;
 	int a=0;
 
@@ -75,25 +74,25 @@ implements SurfaceHolder.Callback{
 	int alpha = 5;
 	int alpha2 = 0;
 
-	//­I´º­µ¼Ö«Å§i¡A§ó§ï¬°°}¦C====================================
+	//èƒŒæ™¯éŸ³æ¨‚å®£å‘Šï¼Œæ›´æ”¹ç‚ºé™£åˆ—====================================
 
 	MediaPlayer back_mp;
 
-	//­I´º­µ¼Ö«Å§i------------------------------------
+	//èƒŒæ™¯éŸ³æ¨‚å®£å‘Š------------------------------------
 
-	//­µ®Ä«Å§i=======================================
+	//éŸ³æ•ˆå®£å‘Š=======================================
 	SoundPool sp;
 	int btn_se[] = new int[2];
-	//­µ®Ä«Å§i---------------------------------------
+	//éŸ³æ•ˆå®£å‘Š---------------------------------------
 
-	Paint paint;			//µeµ§ªº°Ñ¦Ò
+	Paint paint;			//ç•«ç­†çš„åƒè€ƒ
 	int i=0,j=10;
 	MainActivity activity;
 
 	public MainView(MainActivity mainActivity) {
 		super(mainActivity);
 		this.activity = mainActivity;
-		this.getHolder().addCallback(this);//³]©w¥Í©R©P´Á¦^½Õ±µ¤fªº¹ê²{ªÌ
+		this.getHolder().addCallback(this);//è¨­å®šç”Ÿå‘½å‘¨æœŸå›èª¿æ¥å£çš„å¯¦ç¾è€…
 
 
 	}
@@ -103,8 +102,8 @@ implements SurfaceHolder.Callback{
 	}
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-		paint = new Paint();//«Ø¥ßµeµ§
-		paint.setAntiAlias(true);//¶}±Ò§Ü¿÷¾¦
+		paint = new Paint();//å»ºç«‹ç•«ç­†
+		paint.setAntiAlias(true);//é–‹å•ŸæŠ—é‹¸é½’
 		main_back=			Graphic.bitSize(LoadBitmap( R.drawable.main_back3), Constant.DEFULT_WITH, Constant.DEFULT_HIGHT);
 		main_back2=			Graphic.bitSize(LoadBitmap( R.drawable.main_back2), Constant.DEFULT_WITH, Constant.DEFULT_HIGHT);
 		main_back3=			Graphic.bitSize(LoadBitmap( R.drawable.tellyouworld), Constant.DEFULT_WITH, Constant.DEFULT_HIGHT);
@@ -133,7 +132,7 @@ implements SurfaceHolder.Callback{
 			staffList=	new Bottom(activity,staff,staff,640,650);
 		}
 
-		//¸ü¤J­µ¼Ö=============================================================
+		//è¼‰å…¥éŸ³æ¨‚=============================================================
 		if(!hidden_flag){
 			back_mp=MediaPlayer.create(this.getContext(), R.raw.tell_your_world_piano);
 		}else{
@@ -146,7 +145,7 @@ implements SurfaceHolder.Callback{
 		sp=new SoundPool(4, AudioManager.STREAM_MUSIC, 5);
 		btn_se[0] = sp.load(activity, R.raw.start, 1);
 		btn_se[1] = sp.load(activity, R.raw.title_touch, 1);
-		//¸ü¤J­µ¼Ö-------------------------------------------------------------
+		//è¼‰å…¥éŸ³æ¨‚-------------------------------------------------------------
 
 
 		Constant.Flag=true;
@@ -161,7 +160,7 @@ implements SurfaceHolder.Callback{
 						e.printStackTrace();
 					}
 					SurfaceHolder myholder=MainView.this.getHolder();
-					Canvas canvas = myholder.lockCanvas();//¨ú±oµe¥¬
+					Canvas canvas = myholder.lockCanvas();//å–å¾—ç•«å¸ƒ
 					onDraw(canvas);
 					if(canvas != null){
 						myholder.unlockCanvasAndPost(canvas);
@@ -175,11 +174,11 @@ implements SurfaceHolder.Callback{
 
 	@SuppressLint("DrawAllocation")
 	@Override
-	protected void onDraw(Canvas canvas) {//­«·s©w¸qªºÃ¸¨î¤èªk
+	protected void onDraw(Canvas canvas) {//é‡æ–°å®šç¾©çš„ç¹ªåˆ¶æ–¹æ³•
 		if(canvas!=null){
 			super.onDraw(canvas);
-			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//¥u¦b¿Ã¹õ½d³ò¤ºÃ¸¨î¹Ï¤ù
-			canvas.drawColor(Color.BLACK);//¬É­±³]©w¬°¶Â¦â
+			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//åªåœ¨è¢å¹•ç¯„åœå…§ç¹ªåˆ¶åœ–ç‰‡
+			canvas.drawColor(Color.BLACK);//ç•Œé¢è¨­å®šç‚ºé»‘è‰²
 
 			if(!back_mp.isPlaying()){
 				back_mp.prepareAsync();
@@ -193,15 +192,15 @@ implements SurfaceHolder.Callback{
 					a = -7;
 				}
 				apa+= a;
-				Graphic.drawPic(canvas, main_back, 1280/2, 720/2, 0, 255, paint);//­I´º
+				Graphic.drawPic(canvas, main_back, 1280/2, 720/2, 0, 255, paint);//èƒŒæ™¯
 				Graphic.drawPic(canvas, main_back2, 1280/2, 720/2, 0, apa, paint);
 			}else{
-				Graphic.drawPic(canvas, main_back3, 1280/2, 720/2, 0, 255, paint);//­I´º
+				Graphic.drawPic(canvas, main_back3, 1280/2, 720/2, 0, 255, paint);//èƒŒæ™¯
 			}
 
 			if(mainFlag==0){
 				if(i<250)
-					i+=j;//³z©ú«×°Ñ¼Æ
+					i+=j;//é€æ˜åº¦åƒæ•¸
 				Graphic.drawPic(canvas, main_title, mtx, mty, 0, i, paint);//Title
 				mty=Coordinate.AnalogSpeedMove(mty, mty1);
 				if(mty==mty1){
@@ -247,15 +246,15 @@ implements SurfaceHolder.Callback{
 		if(mainFlag==0){
 			switch(event.getAction())
 			{
-			case MotionEvent.ACTION_DOWN://«ö¤U
+			case MotionEvent.ACTION_DOWN://æŒ‰ä¸‹
 				if(deJump == true){
 					sp.play(btn_se[1], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
 					mainFlag=1;
 				}
 				deJump = false;
 				break;
-			case MotionEvent.ACTION_UP://©ï°_
-				if(deJump==false){//¨¾¤î¼u¸õpart2
+			case MotionEvent.ACTION_UP://æŠ¬èµ·
+				if(deJump==false){//é˜²æ­¢å½ˆè·³part2
 
 				}
 				deJump = true;
@@ -266,8 +265,8 @@ implements SurfaceHolder.Callback{
 			switch(event.getAction())
 			{
 			//......................................................................................
-			case MotionEvent.ACTION_DOWN://«ö¤U
-				if(deJump==true){//¨¾¤î¼u¸õpart1
+			case MotionEvent.ACTION_DOWN://æŒ‰ä¸‹
+				if(deJump==true){//é˜²æ­¢å½ˆè·³part1
 					if(startbtm.isIn(pointx, pointy)){
 						sp.play(btn_se[0], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
 						this.toEditView = true;
@@ -286,10 +285,10 @@ implements SurfaceHolder.Callback{
 				deJump=false;
 				break;
 				//.....................................................................................
-			case MotionEvent.ACTION_UP://©ï°_
-				if(deJump==false){//¨¾¤î¼u¸õpart2
+			case MotionEvent.ACTION_UP://æŠ¬èµ·
+				if(deJump==false){//é˜²æ­¢å½ˆè·³part2
 					if(startbtm.isIn(pointx, pointy)){
-						//¶i¤J¦a¹Ïµe­±
+						//é€²å…¥åœ°åœ–ç•«é¢
 						if(this.toEditView){
 							activity.video_select=1;
 							activity.changeView(0);
@@ -319,7 +318,7 @@ implements SurfaceHolder.Callback{
 
 	}
 
-	public void surfaceDestroyed(SurfaceHolder arg0) {//¾P·´®É³Q©I¥s
+	public void surfaceDestroyed(SurfaceHolder arg0) {//éŠ·æ¯€æ™‚è¢«å‘¼å«
 		main_back.recycle();
 		main_back2.recycle();
 		main_back3.recycle();

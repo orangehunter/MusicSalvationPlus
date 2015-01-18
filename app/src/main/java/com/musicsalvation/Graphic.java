@@ -13,7 +13,7 @@ import android.util.Log;
 
 public class Graphic {
 
-	static Bitmap LoadBitmap(Resources rs,int r,int x,int y,int scale){
+	public static Bitmap LoadBitmap(Resources rs, int r, int x, int y, int scale){
 		try{
 		 InputStream inputStream = rs.openRawResource(r);
 		 Bitmap s=BitmapFactory.decodeStream(inputStream, null, getBitmapOptions(scale));
@@ -23,7 +23,7 @@ public class Graphic {
 		}
 		//return BitmapFactory.decodeResource(getResources(), r);
 	}
-	static Bitmap LoadBitmap(Resources rs,int r,int x,int y){
+	public static Bitmap LoadBitmap(Resources rs, int r, int x, int y){
 		InputStream inputStream = rs.openRawResource(r);
 		BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
         bmpFactoryOptions.inJustDecodeBounds = true;
@@ -56,7 +56,7 @@ public class Graphic {
         }
      return bitmap;
 	}
-	static BitmapFactory.Options getBitmapOptions(int scale){
+	public static BitmapFactory.Options getBitmapOptions(int scale){
 	    BitmapFactory.Options options = new BitmapFactory.Options();
 	    options.inJustDecodeBounds=false;
 		options.inPreferredConfig=Bitmap.Config.ARGB_4444;
@@ -66,12 +66,12 @@ public class Graphic {
 	    return options;
 	}
 	
-	static Bitmap bitSize(Bitmap bf,int f,int g){//????Á∏ÆÊ??
+	public static Bitmap bitSize(Bitmap bf, int f, int g){//????ËùÆÊ†º??
 		int bw=0;
 		int bh=0;
 		float scaleWidth=0;
 		float scaleHeight=0;
-		// ??Âæ??≥Ë?Áº©Ê?æÁ??matrix????
+		// ??Êï∫??Âîæ?ËùªÊãá?ÊõÑ??matrix????
 		Matrix matrix = new Matrix();
 		while(scaleWidth<=0&&scaleHeight<=0){
 			bw=bf.getWidth();
@@ -80,18 +80,26 @@ public class Graphic {
 			scaleHeight = Coordinate.CoordinateY(g)/ bh;
 		}
 		matrix.postScale(scaleWidth, scaleHeight);
-		Bitmap bit=Bitmap.createBitmap(bf, 0,0,bw,bh, matrix, true);//Á∏ÆÊ?æÂ????
+		Bitmap bit=Bitmap.createBitmap(bf, 0,0,bw,bh, matrix, true);//ËùÆÊ†º?Êõâ????
 		matrix.reset();
-		//bf.recycle();//?∑Ê?????
+		//bf.recycle();//?Áëü?????
 
 		return bit;
 	}
-	static Bitmap CutArea(Bitmap bt,int start_x,int start_y,int width,int height){
+	public static Bitmap CutArea(Bitmap bt, int start_x, int start_y, int width, int height){
 		Bitmap temp=Bitmap.createBitmap(bt, start_x,start_y, width, height);
 		return temp;
 	}
+    public Bitmap MirrorFlipHorizontal(Bitmap bf){//Èè°ÂÉèÊ∞¥Âπ≥ÁøªËΩâ
+        Matrix matrix = new Matrix();
+        matrix.postScale(-1,1);
+        Bitmap bit=Bitmap.createBitmap(bf, 0,0,bf.getWidth(),bf.getHeight(), matrix, true);
+        matrix.reset();
 
-	static void drawPic(Canvas canvas,Bitmap bit,int mid_x,int mid_y,float rot,int alpha,Paint paint){
+        return bit;
+    }
+
+	public static void drawPic(Canvas canvas, Bitmap bit, int mid_x, int mid_y, float rot, int alpha, Paint paint){
 		paint.setAntiAlias(true);
 		paint.setAlpha(alpha);
 		float x=Coordinate.CoordinateX(mid_x),y=Coordinate.CoordinateY(mid_y);
@@ -107,10 +115,15 @@ public class Graphic {
 		paint.reset();
 	}
 
-	static void drawLine(Canvas canvas,int color,int start_x,int start_y,int end_x,int end_y,int with,Paint paint){
-		paint.setColor(color);																	//Ë®≠Â?È°???
-		paint.setStrokeWidth(with);    //Ë®≠Â?Á∑?ÂØ?
-		canvas.drawLine(Coordinate.CoordinateX(start_x), Coordinate.CoordinateY(start_y), Coordinate.CoordinateX(end_x),Coordinate.CoordinateY( end_y), paint);      //Áπ™Ë£Ω?¥Á?
+	public static void drawLine(Canvas canvas, int color, int start_x, int start_y, int end_x, int end_y, int with, Paint paint){
+		paint.setColor(color);																	//ÈñÆÂâñ?ÊÜø???
+		paint.setStrokeWidth(with);    //ÈñÆÂâñ?Ëù∫?Êíñ?
+		canvas.drawLine(Coordinate.CoordinateX(start_x), Coordinate.CoordinateY(start_y), Coordinate.CoordinateX(end_x),Coordinate.CoordinateY( end_y), paint);      //ËùúËäæÀä?Ê∏°?
 		paint.reset();
 	}
+    public void drawRect(Canvas canvas,int color,int start_x,int start_y,int end_x,int end_y,Paint paint){
+        paint.setColor(color);
+        canvas.drawRect(Coordinate.CoordinateX(start_x), Coordinate.CoordinateY(start_y), Coordinate.CoordinateX(end_x),Coordinate.CoordinateY( end_y), paint);
+        paint.reset();
+    }
 }

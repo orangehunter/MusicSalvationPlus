@@ -1,7 +1,6 @@
 package com.musicsalvation;
 
 
-import com.example.musicsalvationsdkverson.R;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
@@ -16,7 +15,7 @@ import android.view.SurfaceView;
 public class StartView extends SurfaceView
 implements SurfaceHolder.Callback{
 	Bitmap logo;
-	Paint paint;			//µeµ§ªº°Ñ¦Ò
+	Paint paint;			//ç•«ç­†çš„åƒè€ƒ
 	int i=0,j=5;
 	MainActivity activity;
 
@@ -26,23 +25,23 @@ implements SurfaceHolder.Callback{
 	public StartView(MainActivity mainActivity) {
 		super(mainActivity);
 		this.activity = mainActivity;
-		this.getHolder().addCallback(this);//³]©w¥Í©R©P´Á¦^½Õ±µ¤fªº¹ê²{ªÌ
-		paint = new Paint();//«Ø¥ßµeµ§
-		paint.setAntiAlias(true);//¶}±Ò§Ü¿÷¾¦
+		this.getHolder().addCallback(this);//è¨­å®šç”Ÿå‘½å‘¨æœŸå›èª¿æ¥å£çš„å¯¦ç¾è€…
+		paint = new Paint();//å»ºç«‹ç•«ç­†
+		paint.setAntiAlias(true);//é–‹å•ŸæŠ—é‹¸é½’
 		logo=Graphic.bitSize(LoadBitmap(R.drawable.llc), 1280, 720);
 	}
 	@Override
-	protected void onDraw(Canvas canvas) {//­«·s©w¸qªºÃ¸¨î¤èªk
+	protected void onDraw(Canvas canvas) {//é‡æ–°å®šç¾©çš„ç¹ªåˆ¶æ–¹æ³•
 		if(canvas!=null){
 			super.onDraw(canvas);
-			paint.setAntiAlias(true);	//¶}±Ò§Ü¿÷¾¦
-			//Ã¸¨î¶Â¶ñ¥R¯x§Î²M­I´º
-			paint.setColor(Color.BLACK);//³]©wµeµ§±m¦â
+			paint.setAntiAlias(true);	//é–‹å•ŸæŠ—é‹¸é½’
+			//ç¹ªåˆ¶é»‘å¡«å……çŸ©å½¢æ¸…èƒŒæ™¯
+			paint.setColor(Color.BLACK);//è¨­å®šç•«ç­†å½©è‰²
 			paint.setAlpha(255);
 			canvas.drawRect(0, 0, Constant.SCREEN_WIDTH, Constant.SCREEN_HIGHT, paint);
 			paint.reset();
 
-			i+=j;//³z©ú«×°Ñ¼Æ
+			i+=j;//é€æ˜åº¦åƒæ•¸
 			
 			Graphic.drawPic(canvas, logo, 1280/2, 720/2, 0, i, paint);
 		}
@@ -59,7 +58,7 @@ implements SurfaceHolder.Callback{
 			{
 				while(i<250){
 					SurfaceHolder myholder=StartView.this.getHolder();
-					Canvas canvas = myholder.lockCanvas();//¨ú±oµe¥¬
+					Canvas canvas = myholder.lockCanvas();//å–å¾—ç•«å¸ƒ
 					onDraw(canvas);
 					if(canvas != null){
 						myholder.unlockCanvasAndPost(canvas);
@@ -69,7 +68,7 @@ implements SurfaceHolder.Callback{
 			}
 		}.start();
 	}
-	public void surfaceDestroyed(SurfaceHolder arg0) {//¾P·´®É³Q©I¥s
+	public void surfaceDestroyed(SurfaceHolder arg0) {//éŠ·æ¯€æ™‚è¢«å‘¼å«
 
 	}
 }
