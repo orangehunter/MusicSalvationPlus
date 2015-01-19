@@ -56,7 +56,7 @@ public class bigAnimax {
 				}
 			}else{
 				if(bit[i]==null){
-					bit[i]= Graphic.LoadBitmap(activity.getResources(), r + i, pic_width, pic_hight, 2);
+					bit[i]= Graphic.LoadBitmap(activity.getResources(), r + i, pic_width, pic_hight, 2,false);
 				}
 			}
 		}
@@ -75,7 +75,7 @@ public class bigAnimax {
 						bit[count-1].recycle();
 						}
 						if(bit[buffer]==null){
-						bit[buffer]=Graphic.LoadBitmap(activity.getResources(), r+buffer, pic_width, pic_hight,2);
+						bit[buffer]=Graphic.LoadBitmap(activity.getResources(), r+buffer, pic_width, pic_hight,2,false);
 						Log.v("LoadAnimax", ""+buffer);
 						}
 						

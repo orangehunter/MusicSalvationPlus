@@ -163,8 +163,12 @@ implements SurfaceHolder.Callback{
 					Canvas canvas = myholder.lockCanvas();//取得畫布
 					onDraw(canvas);
 					if(canvas != null){
-						myholder.unlockCanvasAndPost(canvas);
-					}
+                        try {
+                            myholder.unlockCanvasAndPost(canvas);
+                        }catch (Exception e){
+
+                        }
+                    }
 				}
 
 			}

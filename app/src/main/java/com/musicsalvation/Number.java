@@ -34,7 +34,7 @@ public class Number {
 		origin[6]=LoadBitmap(res,R.drawable.num_yellow);
 		for(int i=0;i<7;i++){
 			for(int k=0;k<10;k++){
-				nums[i][k]=Graphic.CutArea(origin[i], 0+k*default_width, 0, default_width, default_height);
+				nums[i][k]=Graphic.cutArea(origin[i], 0+k*default_width, 0, default_width, default_height);
 			}
 			origin[i].recycle();
 		}

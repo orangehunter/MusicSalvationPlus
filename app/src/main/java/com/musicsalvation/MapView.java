@@ -407,9 +407,9 @@ implements SurfaceHolder.Callback{
 		num=new Number(getResources());
 		num.setSize(30, 40);
 		rank=new Bitmap[7];
-		rank[6]=Graphic.LoadBitmap(getResources(), R.drawable.r_s, 45,60);
+		rank[6]=Graphic.LoadBitmap(getResources(), R.drawable.r_s, 45,60,true);
 		for(int i=0;i<=5;i++){
-			rank[i]=Graphic.LoadBitmap(getResources(), R.drawable.r_f-i, 45, 60);
+			rank[i]=Graphic.LoadBitmap(getResources(), R.drawable.r_f-i, 45, 60,true);
 		}
 
 		Constant.Flag=true;

@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.SparseArray;
 
+import com.musicsalvation.R;
 import com.musicsalvation.Coordinate;
 import com.musicsalvation.Graphic;
 import com.musicsalvation.MainActivity;
@@ -35,29 +36,34 @@ public class chartEditScreen {
             ,BtX=new JSONObject();
 
     SparseArray<lines> timeLines=new SparseArray<lines>();
-    SparseArray<calibration> timeCalibration= new SparseArray<calibration>();
+    calibration ca;
 
 
-    public chartEditScreen(MainActivity activity,int left,int right,int up,int down){
+    public chartEditScreen(MainActivity activity,int left,int up,int right,int down){
         this.left=left;
         this.right=right;
         this.up=up;
         this.down=down;
+        Rp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_round   ,80,80,false);
+        Sp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_square  ,80,80,false);
+        Tp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_trangle ,80,80,false);
+        Xp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_x       ,80,80,false);
+        ca=new calibration(0,left,up,right,down,40);
     }
 
     public void draw(Canvas canvas,Paint paint,int currentTime){
         RectF rf1=new RectF(Coordinate.CoordinateX(left),Coordinate.CoordinateY(up),Coordinate.CoordinateX(right),Coordinate.CoordinateY(down));//設定譜面底圖矩形
-        RectF rf2=new RectF(Coordinate.CoordinateX(right),Coordinate.CoordinateY(up),Coordinate.CoordinateX(right)+Rp.getWidth(),Coordinate.CoordinateY(down));//設定譜面右邊遮罩
-        RectF rf3=new RectF(Coordinate.CoordinateX(left)-Rp.getWidth(),Coordinate.CoordinateY(up),Coordinate.CoordinateX(left),Coordinate.CoordinateY(down));//設定譜面左邊遮罩
+        //RectF rf2=new RectF(Coordinate.CoordinateX(right),Coordinate.CoordinateY(up),Coordinate.CoordinateX(right)+Rp.getWidth(),Coordinate.CoordinateY(down));//設定譜面右邊遮罩
+        //RectF rf3=new RectF(Coordinate.CoordinateX(left)-Rp.getWidth(),Coordinate.CoordinateY(up),Coordinate.CoordinateX(left),Coordinate.CoordinateY(down));//設定譜面左邊遮罩
         paint.setColor(Color.BLACK);
         canvas.drawRect(rf1, paint);
         paint.reset();
         Graphic.drawLine(canvas, Color.GREEN, left + (right - left) / 2, up, left + (right - left) / 2, down, 3, paint);
-
+        ca.draw(0,canvas,paint);
 
         paint.setColor(Color.WHITE);
-        canvas.drawRect(rf2, paint);
-        canvas.drawRect(rf3, paint);
+        //canvas.drawRect(rf2, paint);
+        //canvas.drawRect(rf3, paint);
         paint.reset();
     }
 

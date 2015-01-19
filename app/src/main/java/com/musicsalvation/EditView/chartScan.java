@@ -98,7 +98,7 @@ public class chartScan {
 
 	public void mainScan(){
 		if(this.view.equals("EditView")){
-			scan_time_flag= EditView.mp.getCurrentPosition();
+			//scan_time_flag= EditView.mp.getCurrentPosition();
 		}else if(this.view.equals("GameView")){
 			scan_time_flag= GameView.mp.getCurrentPosition();
 			//+(activity.timing*10);

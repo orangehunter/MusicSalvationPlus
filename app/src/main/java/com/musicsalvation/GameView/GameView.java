@@ -314,138 +314,138 @@ implements SurfaceHolder.Callback{
 
 		score =new Number(getResources());
 		if(activity.level<2){
-			bg=Graphic.LoadBitmap(getResources(), R.drawable.gamemap01, 1280, 720);
+			bg=Graphic.LoadBitmap(getResources(), R.drawable.gamemap01, 1280, 720,false);
 		}else{
-			bg=Graphic.LoadBitmap(getResources(), R.drawable.stage03_bg, 1280, 720);
+			bg=Graphic.LoadBitmap(getResources(), R.drawable.stage03_bg, 1280, 720,false);
 		}
 
-		sight =	Graphic.LoadBitmap(getResources(), R.drawable.sightv2, 100, 100);
+		sight =	Graphic.LoadBitmap(getResources(), R.drawable.sightv2, 100, 100,true);
 		//cpu   = Graphic.LoadBitmap(LoadBitmap(R.drawable.cpu_chips), 162, 162);
 
 
 
-		game_easy = Graphic.LoadBitmap(getResources(), R.drawable.easyv2, 205, 78);
-		game_normal = Graphic.LoadBitmap(getResources(), R.drawable.normalv2psd, 205, 78);
-		game_hard = Graphic.LoadBitmap(getResources(), R.drawable.hardv2, 205, 78);
+		game_easy = Graphic.LoadBitmap(getResources(), R.drawable.easyv2, 205, 78,true);
+		game_normal = Graphic.LoadBitmap(getResources(), R.drawable.normalv2psd, 205, 78,true);
+		game_hard = Graphic.LoadBitmap(getResources(), R.drawable.hardv2, 205, 78,true);
 
 
 
 		//pause圖片載入=====================================================================
-		pause = Graphic.LoadBitmap(getResources(), R.drawable.pause, 205, 78);
-		pause2 = Graphic.LoadBitmap(getResources(), R.drawable.pause2, 205, 78);
-		pause_back = Graphic.LoadBitmap(getResources(), R.drawable.pasue_back, 450, 310);
-		pause_black = Graphic.LoadBitmap(getResources(), R.drawable.pause_black, 1280, 720);
+		pause = Graphic.LoadBitmap(getResources(), R.drawable.pause, 205, 78,true);
+		pause2 = Graphic.LoadBitmap(getResources(), R.drawable.pause2, 205, 78,true);
+		pause_back = Graphic.LoadBitmap(getResources(), R.drawable.pasue_back, 450, 310,true);
+		pause_black = Graphic.LoadBitmap(getResources(), R.drawable.pause_black, 1280, 720,true);
 
-		re_map = Graphic.LoadBitmap(getResources(), R.drawable.return_map, 390, 75);
-		re_play = Graphic.LoadBitmap(getResources(), R.drawable.re_play, 390, 75);
-		re_start = Graphic.LoadBitmap(getResources(), R.drawable.re_start, 390, 75);
+		re_map = Graphic.LoadBitmap(getResources(), R.drawable.return_map, 390, 75,true);
+		re_play = Graphic.LoadBitmap(getResources(), R.drawable.re_play, 390, 75,true);
+		re_start = Graphic.LoadBitmap(getResources(), R.drawable.re_start, 390, 75,true);
 
 		//pause圖片載入-----------------------------------------------------------------------
 
 
-		circle = Graphic.LoadBitmap(getResources(), R.drawable.btn_circle_v2, 200, 200);
-		square = Graphic.LoadBitmap(getResources(), R.drawable.btn_square_v2, 200, 200);
-		triangle = Graphic.LoadBitmap(getResources(), R.drawable.btn_triangle_v2, 200, 200);
-		xx = Graphic.LoadBitmap(getResources(), R.drawable.btn_x_v2, 200, 200);
-		grey_circle = Graphic.LoadBitmap(getResources(), R.drawable.grey_circle, 200, 200);
-		grey_square = Graphic.LoadBitmap(getResources(), R.drawable.grey_square, 200, 200);
-		grey_triangle = Graphic.LoadBitmap(getResources(), R.drawable.grey_tirangle, 200, 200);
-		grey_xx = Graphic.LoadBitmap(getResources(), R.drawable.grey_x, 200, 200);
+		circle = Graphic.LoadBitmap(getResources(), R.drawable.btn_circle_v2, 200, 200,true);
+		square = Graphic.LoadBitmap(getResources(), R.drawable.btn_square_v2, 200, 200,true);
+		triangle = Graphic.LoadBitmap(getResources(), R.drawable.btn_triangle_v2, 200, 200,true);
+		xx = Graphic.LoadBitmap(getResources(), R.drawable.btn_x_v2, 200, 200,true);
+		grey_circle = Graphic.LoadBitmap(getResources(), R.drawable.grey_circle, 200, 200,true);
+		grey_square = Graphic.LoadBitmap(getResources(), R.drawable.grey_square, 200, 200,true);
+		grey_triangle = Graphic.LoadBitmap(getResources(), R.drawable.grey_tirangle, 200, 200,true);
+		grey_xx = Graphic.LoadBitmap(getResources(), R.drawable.grey_x, 200, 200,true);
 
 
 		//TAG 浮游砲與光束=======================================================================
-		d_blue = Graphic.LoadBitmap(getResources(), R.drawable.d_blue, 250, 170);
-		d_red = Graphic.LoadBitmap(getResources(), R.drawable.d_red, 250, 170);
-		d_green = Graphic.LoadBitmap(getResources(), R.drawable.d_green, 260, 130);
-		d_yellow = Graphic.LoadBitmap(getResources(), R.drawable.d_yellow, 260, 130);
+		d_blue = Graphic.LoadBitmap(getResources(), R.drawable.d_blue, 250, 170,true);
+		d_red = Graphic.LoadBitmap(getResources(), R.drawable.d_red, 250, 170,true);
+		d_green = Graphic.LoadBitmap(getResources(), R.drawable.d_green, 260, 130,true);
+		d_yellow = Graphic.LoadBitmap(getResources(), R.drawable.d_yellow, 260, 130,true);
 		//浮游砲與光束------------------------------------------------------------------------
 
 
-		track = Graphic.LoadBitmap(getResources(), R.drawable.track_v2, 80, 660);
+		track = Graphic.LoadBitmap(getResources(), R.drawable.track_v2, 80, 660,true);
 
-		virus_blue = Graphic.LoadBitmap(getResources(), R.drawable.virus_blue, 80, 80);
-		virus_red = Graphic.LoadBitmap(getResources(), R.drawable.virus_red, 80, 80);
-		virus_yellow = Graphic.LoadBitmap(getResources(), R.drawable.virus_yello, 80, 80);
-		virus_green = Graphic.LoadBitmap(getResources(), R.drawable.virus_green, 80, 80);
+		virus_blue = Graphic.LoadBitmap(getResources(), R.drawable.virus_blue, 80, 80,true);
+		virus_red = Graphic.LoadBitmap(getResources(), R.drawable.virus_red, 80, 80,true);
+		virus_yellow = Graphic.LoadBitmap(getResources(), R.drawable.virus_yello, 80, 80,true);
+		virus_green = Graphic.LoadBitmap(getResources(), R.drawable.virus_green, 80, 80,true);
 
-		nice = Graphic.LoadBitmap(getResources(), R.drawable.nice, 175, 55);
-		hit = Graphic.LoadBitmap(getResources(), R.drawable.hit, 175, 55);
-		safe = Graphic.LoadBitmap(getResources(), R.drawable.safe, 175, 55);
-		miss = Graphic.LoadBitmap(getResources(), R.drawable.miss, 175, 55);
-		hits =  Graphic.LoadBitmap(getResources(), R.drawable.hits, 155, 80);
+		nice = Graphic.LoadBitmap(getResources(), R.drawable.nice, 175, 55,true);
+		hit = Graphic.LoadBitmap(getResources(), R.drawable.hit, 175, 55,true);
+		safe = Graphic.LoadBitmap(getResources(), R.drawable.safe, 175, 55,true);
+		miss = Graphic.LoadBitmap(getResources(), R.drawable.miss, 175, 55,true);
+		hits =  Graphic.LoadBitmap(getResources(), R.drawable.hits, 155, 80,true);
 
-		titlebar = Graphic.LoadBitmap(getResources(), R.drawable.titlebar, 1280, 63);
-		hpbar = Graphic.LoadBitmap(getResources(), R.drawable.hpbar2, 1100, 23);
-		hpfont = Graphic.LoadBitmap(getResources(), R.drawable.hpfont0, 80, 25);
-		hpfont_red = Graphic.LoadBitmap(getResources(), R.drawable.hpfont_red0, 80, 25);
-		title = Graphic.LoadBitmap(getResources(), R.drawable.game_title_1+activity.level, 260, 30);
-		boss = Graphic.LoadBitmap(getResources(), R.drawable.boss1, 200, 185);
+		titlebar = Graphic.LoadBitmap(getResources(), R.drawable.titlebar, 1280, 63,true);
+		hpbar = Graphic.LoadBitmap(getResources(), R.drawable.hpbar2, 1100, 23,true);
+		hpfont = Graphic.LoadBitmap(getResources(), R.drawable.hpfont0, 80, 25,true);
+		hpfont_red = Graphic.LoadBitmap(getResources(), R.drawable.hpfont_red0, 80, 25,true);
+		title = Graphic.LoadBitmap(getResources(), R.drawable.game_title_1+activity.level, 260, 30,true);
+		boss = Graphic.LoadBitmap(getResources(), R.drawable.boss1, 200, 185,true);
 
-		rank_f = Graphic.LoadBitmap(getResources(), R.drawable.r_f, 86, 146);
-		rank_e = Graphic.LoadBitmap(getResources(), R.drawable.r_e, 99, 152);
-		rank_d = Graphic.LoadBitmap(getResources(), R.drawable.r_d, 124, 152);
-		rank_c = Graphic.LoadBitmap(getResources(), R.drawable.r_c, 117, 176);
-		rank_b = Graphic.LoadBitmap(getResources(), R.drawable.r_b, 92, 152);
-		rank_a = Graphic.LoadBitmap(getResources(), R.drawable.r_a, 133, 182);
-		rank_s = Graphic.LoadBitmap(getResources(), R.drawable.r_s, 309, 257);
+		rank_f = Graphic.LoadBitmap(getResources(), R.drawable.r_f, 86, 146,true);
+		rank_e = Graphic.LoadBitmap(getResources(), R.drawable.r_e, 99, 152,true);
+		rank_d = Graphic.LoadBitmap(getResources(), R.drawable.r_d, 124, 152,true);
+		rank_c = Graphic.LoadBitmap(getResources(), R.drawable.r_c, 117, 176,true);
+		rank_b = Graphic.LoadBitmap(getResources(), R.drawable.r_b, 92, 152,true);
+		rank_a = Graphic.LoadBitmap(getResources(), R.drawable.r_a, 133, 182,true);
+		rank_s = Graphic.LoadBitmap(getResources(), R.drawable.r_s, 309, 257,true);
 		//特效光（測試中）
 
-		Cyan[0] 	= Graphic.LoadBitmap(getResources(), R.drawable.cyan00, 150, 150);
-		Cyan[1] 	= Graphic.LoadBitmap(getResources(), R.drawable.cyan01, 150, 150);
-		Cyan[2] 	= Graphic.LoadBitmap(getResources(), R.drawable.cyan02, 150, 150);
-		Cyan[3] 	= Graphic.LoadBitmap(getResources(), R.drawable.cyan03, 150, 150);
-		Cyan[4] 	= Graphic.LoadBitmap(getResources(), R.drawable.cyan04, 150, 150);
-		Cyan[5] 	= Graphic.LoadBitmap(getResources(), R.drawable.cyan05, 150, 150);
+		Cyan[0] 	= Graphic.LoadBitmap(getResources(), R.drawable.cyan00, 150, 150,true);
+		Cyan[1] 	= Graphic.LoadBitmap(getResources(), R.drawable.cyan01, 150, 150,true);
+		Cyan[2] 	= Graphic.LoadBitmap(getResources(), R.drawable.cyan02, 150, 150,true);
+		Cyan[3] 	= Graphic.LoadBitmap(getResources(), R.drawable.cyan03, 150, 150,true);
+		Cyan[4] 	= Graphic.LoadBitmap(getResources(), R.drawable.cyan04, 150, 150,true);
+		Cyan[5] 	= Graphic.LoadBitmap(getResources(), R.drawable.cyan05, 150, 150,true);
 
-		Red[0] 		= Graphic.LoadBitmap(getResources(), R.drawable.red00, 150, 150);
-		Red[1] 		= Graphic.LoadBitmap(getResources(), R.drawable.red01, 150, 150);
-		Red[2] 		= Graphic.LoadBitmap(getResources(), R.drawable.red02, 150, 150);
-		Red[3] 		= Graphic.LoadBitmap(getResources(), R.drawable.red03, 150, 150);
-		Red[4] 		= Graphic.LoadBitmap(getResources(), R.drawable.red04, 150, 150);
-		Red[5] 		= Graphic.LoadBitmap(getResources(), R.drawable.red05, 150, 150);
+		Red[0] 		= Graphic.LoadBitmap(getResources(), R.drawable.red00, 150, 150,true);
+		Red[1] 		= Graphic.LoadBitmap(getResources(), R.drawable.red01, 150, 150,true);
+		Red[2] 		= Graphic.LoadBitmap(getResources(), R.drawable.red02, 150, 150,true);
+		Red[3] 		= Graphic.LoadBitmap(getResources(), R.drawable.red03, 150, 150,true);
+		Red[4] 		= Graphic.LoadBitmap(getResources(), R.drawable.red04, 150, 150,true);
+		Red[5] 		= Graphic.LoadBitmap(getResources(), R.drawable.red05, 150, 150,true);
 
-		Yellow[0] 	= Graphic.LoadBitmap(getResources(), R.drawable.yellow00, 150, 150);
-		Yellow[1] 	= Graphic.LoadBitmap(getResources(), R.drawable.yellow01, 150, 150);
-		Yellow[2] 	= Graphic.LoadBitmap(getResources(), R.drawable.yellow02, 150, 150);
-		Yellow[3] 	= Graphic.LoadBitmap(getResources(), R.drawable.yellow03, 150, 150);
-		Yellow[4] 	= Graphic.LoadBitmap(getResources(), R.drawable.yellow04, 150, 150);
-		Yellow[5] 	= Graphic.LoadBitmap(getResources(), R.drawable.yellow05, 150, 150);
+		Yellow[0] 	= Graphic.LoadBitmap(getResources(), R.drawable.yellow00, 150, 150,true);
+		Yellow[1] 	= Graphic.LoadBitmap(getResources(), R.drawable.yellow01, 150, 150,true);
+		Yellow[2] 	= Graphic.LoadBitmap(getResources(), R.drawable.yellow02, 150, 150,true);
+		Yellow[3] 	= Graphic.LoadBitmap(getResources(), R.drawable.yellow03, 150, 150,true);
+		Yellow[4] 	= Graphic.LoadBitmap(getResources(), R.drawable.yellow04, 150, 150,true);
+		Yellow[5] 	= Graphic.LoadBitmap(getResources(), R.drawable.yellow05, 150, 150,true);
 
-		Green[0] 	= Graphic.LoadBitmap(getResources(), R.drawable.green00, 150, 150);
-		Green[1] 	= Graphic.LoadBitmap(getResources(), R.drawable.green01, 150, 150);
-		Green[2] 	= Graphic.LoadBitmap(getResources(), R.drawable.green02, 150, 150);
-		Green[3] 	= Graphic.LoadBitmap(getResources(), R.drawable.green03, 150, 150);
-		Green[4] 	= Graphic.LoadBitmap(getResources(), R.drawable.green04, 150, 150);
-		Green[5] 	= Graphic.LoadBitmap(getResources(), R.drawable.green05, 150, 150);
+		Green[0] 	= Graphic.LoadBitmap(getResources(), R.drawable.green00, 150, 150,true);
+		Green[1] 	= Graphic.LoadBitmap(getResources(), R.drawable.green01, 150, 150,true);
+		Green[2] 	= Graphic.LoadBitmap(getResources(), R.drawable.green02, 150, 150,true);
+		Green[3] 	= Graphic.LoadBitmap(getResources(), R.drawable.green03, 150, 150,true);
+		Green[4] 	= Graphic.LoadBitmap(getResources(), R.drawable.green04, 150, 150,true);
+		Green[5] 	= Graphic.LoadBitmap(getResources(), R.drawable.green05, 150, 150,true);
 
-		Blue[0] 	= Graphic.LoadBitmap(getResources(), R.drawable.blue00, 150, 150);
-		Blue[1] 	= Graphic.LoadBitmap(getResources(), R.drawable.blue01, 150, 150);
-		Blue[2] 	= Graphic.LoadBitmap(getResources(), R.drawable.blue02, 150, 150);
-		Blue[3] 	= Graphic.LoadBitmap(getResources(), R.drawable.blue03, 150, 150);
-		Blue[4] 	= Graphic.LoadBitmap(getResources(), R.drawable.blue04, 150, 150);
-		Blue[5] 	= Graphic.LoadBitmap(getResources(), R.drawable.blue05, 150, 150);
+		Blue[0] 	= Graphic.LoadBitmap(getResources(), R.drawable.blue00, 150, 150,true);
+		Blue[1] 	= Graphic.LoadBitmap(getResources(), R.drawable.blue01, 150, 150,true);
+		Blue[2] 	= Graphic.LoadBitmap(getResources(), R.drawable.blue02, 150, 150,true);
+		Blue[3] 	= Graphic.LoadBitmap(getResources(), R.drawable.blue03, 150, 150,true);
+		Blue[4] 	= Graphic.LoadBitmap(getResources(), R.drawable.blue04, 150, 150,true);
+		Blue[5] 	= Graphic.LoadBitmap(getResources(), R.drawable.blue05, 150, 150,true);
 
 		//能量條圖片
-		enebar[0] = Graphic.LoadBitmap(getResources(), R.drawable.enebar00, 1280, 28);
-		enebar[1] = Graphic.LoadBitmap(getResources(), R.drawable.enebar01, 1280, 28);
-		enebar[2] = Graphic.LoadBitmap(getResources(), R.drawable.enebar02, 1280, 28);
-		enebar[3] = Graphic.LoadBitmap(getResources(), R.drawable.enebar03, 1280, 28);
-		enebar[4] = Graphic.LoadBitmap(getResources(), R.drawable.enebar04, 1280, 28);
-		enebar[5] = Graphic.LoadBitmap(getResources(), R.drawable.enebar05, 1280, 28);
-		enebar[6] = Graphic.LoadBitmap(getResources(), R.drawable.enebar06, 1280, 28);
-		enebar[7] = Graphic.LoadBitmap(getResources(), R.drawable.enebar07, 1280, 28);
-		enebar[8] = Graphic.LoadBitmap(getResources(), R.drawable.enebar08, 1280, 28);
-		enebar[9] = Graphic.LoadBitmap(getResources(), R.drawable.enebar09, 1280, 28);
+		enebar[0] = Graphic.LoadBitmap(getResources(), R.drawable.enebar00, 1280, 28,true);
+		enebar[1] = Graphic.LoadBitmap(getResources(), R.drawable.enebar01, 1280, 28,true);
+		enebar[2] = Graphic.LoadBitmap(getResources(), R.drawable.enebar02, 1280, 28,true);
+		enebar[3] = Graphic.LoadBitmap(getResources(), R.drawable.enebar03, 1280, 28,true);
+		enebar[4] = Graphic.LoadBitmap(getResources(), R.drawable.enebar04, 1280, 28,true);
+		enebar[5] = Graphic.LoadBitmap(getResources(), R.drawable.enebar05, 1280, 28,true);
+		enebar[6] = Graphic.LoadBitmap(getResources(), R.drawable.enebar06, 1280, 28,true);
+		enebar[7] = Graphic.LoadBitmap(getResources(), R.drawable.enebar07, 1280, 28,true);
+		enebar[8] = Graphic.LoadBitmap(getResources(), R.drawable.enebar08, 1280, 28,true);
+		enebar[9] = Graphic.LoadBitmap(getResources(), R.drawable.enebar09, 1280, 28,true);
 
 		//BOSS 前警告==
-		warning=Graphic.LoadBitmap(getResources(), R.drawable.warning, 1280, 178);
+		warning=Graphic.LoadBitmap(getResources(), R.drawable.warning, 1280, 178,true);
 		warning_sound=sp.load(activity, R.raw.warning, 1);
 		//BOSS 前警告--
 
 		//BOSS 攻擊==
-		attack_pic=Graphic.LoadBitmap(getResources(), R.drawable.boss_sight2, 288, 284);
-		attack_pic_round=Graphic.LoadBitmap(getResources(), R.drawable.boss_sight, 288, 284);
-		attack_sight=Graphic.LoadBitmap(getResources(), R.drawable.boss_sihgt_gray, 288, 284);
+		attack_pic=Graphic.LoadBitmap(getResources(), R.drawable.boss_sight2, 288, 284,true);
+		attack_pic_round=Graphic.LoadBitmap(getResources(), R.drawable.boss_sight, 288, 284,true);
+		attack_sight=Graphic.LoadBitmap(getResources(), R.drawable.boss_sihgt_gray, 288, 284,true);
 		attack=new gameChartBottom(-200, 495, 900, activity, attack_pic, attack_pic, 1280/2);
 
 		beam=new bigAnimax(activity, beam_num, 900, 450, R.drawable.beam_00);
@@ -501,10 +501,10 @@ implements SurfaceHolder.Callback{
 		btn_re_start = new Bottom(activity, re_start , re_start,640 ,225);
 		//PAUSE按鈕---------------------------------------------------------
 
-		chart_r=Graphic.LoadBitmap(getResources(), R.drawable.virus_red, 80, 80);
-		chart_s=Graphic.LoadBitmap(getResources(), R.drawable.virus_yello, 80, 80);
-		chart_t=Graphic.LoadBitmap(getResources(), R.drawable.virus_green, 80, 80);
-		chart_x=Graphic.LoadBitmap(getResources(), R.drawable.virus_blue, 80, 80);
+		chart_r=Graphic.LoadBitmap(getResources(), R.drawable.virus_red, 80, 80,true);
+		chart_s=Graphic.LoadBitmap(getResources(), R.drawable.virus_yello, 80, 80,true);
+		chart_t=Graphic.LoadBitmap(getResources(), R.drawable.virus_green, 80, 80,true);
+		chart_x=Graphic.LoadBitmap(getResources(), R.drawable.virus_blue, 80, 80,true);
 
 		for(int i=0;i<chartObject;i++){
 			cr_btm[i]=new gameChartBottom(-100,600, 820,activity, chart_r, chart_r,450);
