@@ -8,10 +8,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.musicsalvation.MainActivity;
+import com.musicsalvation.R;
 import com.musicsalvation.Graphic;
 import com.musicsalvation.Constant;
 
@@ -19,7 +21,10 @@ import com.musicsalvation.Constant;
 public class EditView extends SurfaceView implements SurfaceHolder.Callback{
     MainActivity activity;
     Paint paint;			//畫筆的參考
+    MediaPlayer mp;
     chartEditScreen ce;
+
+    int current;
 
     public EditView(MainActivity mainActivity) {
         super(mainActivity);
@@ -31,8 +36,9 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
      public void surfaceCreated(SurfaceHolder holder) {
         paint = new Paint();//建立畫筆
         paint.setAntiAlias(true);//開啟抗鋸齒
-        ce=new chartEditScreen(activity,150,150,1130,570);
-
+        ce=new chartEditScreen(activity,150,100,1130,570);
+        mp.create(activity,R.raw.freely_tomorrow);//activity.song);
+        current=0;
         new Thread(){
             @SuppressLint("WrongCall")
             public void run(){
@@ -60,7 +66,10 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
             paint.setAlpha(255);
             canvas.drawRect(0, 0, Constant.SCREEN_WIDTH, Constant.SCREEN_HIGHT, paint);
             paint.reset();
-            ce.draw(canvas,paint,0);
+            try {
+                current=mp.getCurrentPosition();
+            }catch (Exception e){}
+            ce.draw(canvas,paint,current);
         }
     }
     @Override

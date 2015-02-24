@@ -18,6 +18,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -44,10 +45,6 @@ public class MainActivity extends Activity{
 	GameView gameview;
 	ScoreView scoreview;
 	Video video;
-
-	Intent intent;
-	Intent deintent;
-	Uri uri;
 
 	//影片選擇====================================
 	int video_select=0;
@@ -82,6 +79,10 @@ public class MainActivity extends Activity{
 	public int speed;
 	public int animax_buffer;
 	//存檔用參數-------------------------------------
+
+    //自由模式參數===================================
+    public Uri song;
+    //自由模式參數-----------------------------------
 	public void changeView(int what)//
 	{
 		Message msg = myHandler.obtainMessage(what); 
@@ -319,8 +320,8 @@ public class MainActivity extends Activity{
 		if ( resultCode == RESULT_OK )
 		{
 			// 取得檔案的 Uri
-			uri = data.getData();
-			if( uri != null )
+			song = data.getData();
+			if( song != null )
 			{
 				Toast.makeText(this, "檔案已選擇!", Toast.LENGTH_SHORT).show();
 				this.changeView(6);
@@ -344,9 +345,9 @@ public class MainActivity extends Activity{
 		String type = mime.getExtensionFromMimeType(cR.getType(uri));
 		return type;
 	}*/
-	public Uri sendUri(){
-		return uri;
-	}
+	/*public Uri sendUri(){
+		return song;
+	}*/
 
 	public static String turnUriToName(Uri u){
 		String a=u.toString(),b="";
@@ -569,11 +570,20 @@ public class MainActivity extends Activity{
 			e.printStackTrace();
 		}
 	}
-
-	@Override 
+    @Override
 	public void onResume(){
 		Constant.setFlag(true);
 		changeView(nowView);
+        if(Build.VERSION.SDK_INT>18){
+            getWindow().getDecorView().setSystemUiVisibility(
+                    this.getWindow().getDecorView().SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | this.getWindow().getDecorView().SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | this.getWindow().getDecorView().SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | this.getWindow().getDecorView().SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | this.getWindow().getDecorView().SYSTEM_UI_FLAG_FULLSCREEN
+                    | this.getWindow().getDecorView().SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    | this.getWindow().getDecorView().INVISIBLE);
+        }
 		super.onResume();
 	}
 	@Override 

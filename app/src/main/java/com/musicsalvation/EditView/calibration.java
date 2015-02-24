@@ -39,9 +39,9 @@ public class calibration {
             if (i%10==0) {
                 li.lengh =line_length;
             }else if (i%5==0){
-                li.lengh =line_length/2;
+                li.lengh =line_length/3*2;
             }else{
-                li.lengh =line_length/4;
+                li.lengh =line_length/3;
             }
             timeLines.put(i,li);
         }

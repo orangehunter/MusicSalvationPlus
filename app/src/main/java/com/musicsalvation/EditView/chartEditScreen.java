@@ -48,7 +48,7 @@ public class chartEditScreen {
         Sp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_square  ,80,80,false);
         Tp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_trangle ,80,80,false);
         Xp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_x       ,80,80,false);
-        ca=new calibration(0,left,up,right,down,40);
+        ca=new calibration(0,left,up,right,down,30);
     }
 
     public void draw(Canvas canvas,Paint paint,int currentTime){
