@@ -48,7 +48,7 @@ public class chartEditScreen {
         Sp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_square  ,80,80,false);
         Tp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_trangle ,80,80,false);
         Xp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_x       ,80,80,false);
-        ca=new calibration(0,left,up,right,down,30);
+        ca=new calibration(/*0,*/left,up,right,down,30);
     }
 
     public void draw(Canvas canvas,Paint paint,int currentTime){
@@ -59,7 +59,7 @@ public class chartEditScreen {
         canvas.drawRect(rf1, paint);
         paint.reset();
         Graphic.drawLine(canvas, Color.GREEN, left + (right - left) / 2, up, left + (right - left) / 2, down, 3, paint);
-        ca.draw(0,canvas,paint);
+        ca.draw(currentTime,canvas,paint);
 
         paint.setColor(Color.WHITE);
         //canvas.drawRect(rf2, paint);

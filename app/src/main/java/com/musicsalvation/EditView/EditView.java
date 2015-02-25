@@ -24,7 +24,7 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
     MediaPlayer mp;
     chartEditScreen ce;
 
-    int current;
+    int current=0;
 
     public EditView(MainActivity mainActivity) {
         super(mainActivity);
@@ -37,7 +37,8 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
         paint = new Paint();//建立畫筆
         paint.setAntiAlias(true);//開啟抗鋸齒
         ce=new chartEditScreen(activity,150,100,1130,570);
-        mp.create(activity,R.raw.freely_tomorrow);//activity.song);
+        mp=MediaPlayer.create(activity, R.raw.freely_tomorrow);//activity.song);
+        mp.start();
         current=0;
         new Thread(){
             @SuppressLint("WrongCall")
@@ -66,10 +67,29 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
             paint.setAlpha(255);
             canvas.drawRect(0, 0, Constant.SCREEN_WIDTH, Constant.SCREEN_HIGHT, paint);
             paint.reset();
-            try {
-                current=mp.getCurrentPosition();
+            try {current=mp.getCurrentPosition();
             }catch (Exception e){}
             ce.draw(canvas,paint,current);
+            if(mp!=null) {
+                String min, sec, msec;
+
+                if (mp.getCurrentPosition() / 1000 / 60 % 60 < 10)//計算分鐘
+                    min = "0" + Integer.toString(mp.getCurrentPosition() / 1000 / 60 % 60);
+                else
+                    min = Integer.toString(mp.getCurrentPosition() / 1000 / 60 % 60);
+                if (mp.getCurrentPosition() / 1000 % 60 < 10)//計算秒鐘
+                    sec = "0" + Integer.toString(mp.getCurrentPosition() / 1000 % 60);
+                else
+                    sec = Integer.toString(mp.getCurrentPosition() / 1000 % 60);
+                if (mp.getCurrentPosition() % 1000 / 10 < 10)//計算豪秒
+                    msec = "0" + Integer.toString(mp.getCurrentPosition() % 1000 / 10);
+                else
+                    msec = Integer.toString(mp.getCurrentPosition() % 1000 / 10);
+
+
+                String time = min + ":" + sec + ":" + msec;
+                Graphic.drawText(canvas,time,1110,650,Color.BLACK,24,paint);
+            }
         }
     }
     @Override
@@ -77,6 +97,7 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
 
     }
     public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
-
+        mp.stop();
+        mp.release();
     }
 }

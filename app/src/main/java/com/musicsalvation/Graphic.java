@@ -152,4 +152,12 @@ public class Graphic {
         canvas.drawRect(Coordinate.CoordinateX(start_x), Coordinate.CoordinateY(start_y), Coordinate.CoordinateX(end_x),Coordinate.CoordinateY( end_y), paint);
         paint.reset();
     }
+    public static void drawText(Canvas canvas,String st,int start_x,int start_y,int color,int size,Paint paint){
+        paint.setColor(color);
+        paint.setTextSize(Coordinate.CoordinateX(size));
+        try {
+            canvas.drawText(st, Coordinate.CoordinateX(start_x), Coordinate.CoordinateY(start_y), paint);
+        }catch (Exception e){};
+        paint.reset();
+    }
 }
