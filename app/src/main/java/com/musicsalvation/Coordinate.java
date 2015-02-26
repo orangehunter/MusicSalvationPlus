@@ -7,14 +7,14 @@ public class Coordinate {
 	public static float CoordinateX(int x){
 		return  (x*GAME_WIDTH_UNIT);
 	}
-	public static int DeCoordinateX(float x){
+	public static int DeCoordinateX(double x){
 		return  (int)(x/GAME_WIDTH_UNIT);
 	}
 
 	public static float CoordinateY(int y){
 		return  (y*SCREEN_HEIGHT_UNIT);
 	}
-	public static int DeCoordinateY(float y){
+	public static int DeCoordinateY(double y){
 		return  (int)(y/SCREEN_HEIGHT_UNIT);
 	}
 	

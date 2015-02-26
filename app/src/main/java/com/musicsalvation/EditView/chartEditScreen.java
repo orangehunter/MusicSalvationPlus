@@ -25,8 +25,12 @@ public class chartEditScreen {
     int down;
 
     int time_current;
-    int time_total=1000;
-    int time_gap_unit;
+    int time_lv;
+    final int sec_1=0;
+    final int sec_10=1;
+    final int sec_20=2;
+    final int sec_30=3;
+
 
     Bitmap Rp,Sp,Tp,Xp;
     static JSONObject
@@ -40,6 +44,7 @@ public class chartEditScreen {
 
 
     public chartEditScreen(MainActivity activity,int left,int up,int right,int down){
+        time_lv=sec_10;
         this.left=left;
         this.right=right;
         this.up=up;
@@ -59,7 +64,7 @@ public class chartEditScreen {
         canvas.drawRect(rf1, paint);
         paint.reset();
         Graphic.drawLine(canvas, Color.GREEN, left + (right - left) / 2, up, left + (right - left) / 2, down, 3, paint);
-        ca.draw(currentTime,canvas,paint);
+        ca.draw(currentTime,time_lv,canvas,paint);
 
         paint.setColor(Color.WHITE);
         //canvas.drawRect(rf2, paint);
@@ -67,12 +72,22 @@ public class chartEditScreen {
         paint.reset();
     }
 
-    public boolean isIn(int x,int y){
-        if (x>left&&x<right&&y>up&&y<down) {
+    public boolean isIn(double x,double y){
+        if (Coordinate.DeCoordinateX(x)>left&&Coordinate.DeCoordinateX(x)<right&&Coordinate.DeCoordinateY(y)>up&&Coordinate.DeCoordinateY(y)<down) {
             return true;
         }else {
             return false;
         }
     }
-
+    public void reLv(int a){
+        if (a==1){
+            if (time_lv<sec_30){
+                time_lv+=a;
+            }
+        }else if(a==-1){
+            if (time_lv>sec_1){
+                time_lv+=a;
+            }
+        }
+    }
 }
