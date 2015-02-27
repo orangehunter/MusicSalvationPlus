@@ -11,7 +11,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.MotionEvent;
 import android.util.SparseArray;
-import android.util.Log;
 
 import com.musicsalvation.MainActivity;
 import com.musicsalvation.R;
@@ -38,8 +37,9 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
     public void surfaceCreated(SurfaceHolder holder) {
         paint = new Paint();//建立畫筆
         paint.setAntiAlias(true);//開啟抗鋸齒
-        ce=new chartEditScreen(activity,150,100,1130,570);
+
         mp=MediaPlayer.create(activity, R.raw.freely_tomorrow);//activity.song);
+        ce=new chartEditScreen(activity,150,100,1130,570,mp.getDuration());
         mp.start();
         current=0;
         new Thread(){
@@ -94,7 +94,9 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
     }
     SparseArray<Point> pointers = new SparseArray<Point>();
     boolean ce_zoom_flag=false;
-    int ce_zoom_id1,ce_zoom_id2,ce_zoom_dis;
+    boolean ce_move_flag=false;
+    int ce_touch_id1 =-1, ce_touch_id2 =-1;
+    double ce_zoom_dis;
     @Override
     public  boolean onTouchEvent(MotionEvent event){
         int pointerIndex=event.getActionIndex();
@@ -109,13 +111,15 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
                 fd.down_y=fd.y;
                 pointers.put(pointerId,fd);
                 if (ce.isIn(fd.x,fd.y)&&pointerIndex==0){
+                ce_touch_id1 =pointerId;
+                ce_move_flag=true;
+        }
+                if (ce.isIn(fd.x,fd.y)&& ce_touch_id1 !=-1&&pointerIndex==1){
+                    ce_move_flag=false;
                     ce_zoom_flag=true;
-                    ce_zoom_id1=pointerId;
-                }
-                if (ce.isIn(fd.x,fd.y)&&ce_zoom_flag&&pointerIndex==1){
-                    ce_zoom_id2=pointerId;
-                    Point tmp1=pointers.get(ce_zoom_id1),tmp2=pointers.get(ce_zoom_id2);
-                    ce_zoom_dis=(int)Math.sqrt(Math.pow((tmp1.down_x - tmp2.down_x), 2) + Math.pow((tmp1.down_y - tmp2.down_y), 2));
+                    ce_touch_id2 =pointerId;
+                    Point tmp1=pointers.get(ce_touch_id1),tmp2=pointers.get(ce_touch_id2);
+                    ce_zoom_dis=Math.sqrt(Math.pow((tmp1.down_x - tmp2.down_x), 2) + Math.pow((tmp1.down_y - tmp2.down_y), 2));
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -127,16 +131,29 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
                     }
                 }
                 try {
+                    Point tmp1,tmp2;
+                    double tmp_dis;
+                    if (ce_move_flag){
+                        if (mp.isPlaying()){
+                            mp.pause();
+                        }
+                        tmp1=pointers.get(ce_touch_id1);
+                        tmp_dis=tmp1.down_x-tmp1.x;
+                        ce.Move(tmp_dis);
+                    }
                     if (ce_zoom_flag) {
-                        Point tmp1 = pointers.get(ce_zoom_id1), tmp2 = pointers.get(ce_zoom_id2);
-                        int tmp_dis = (int) Math.sqrt(Math.pow((tmp1.x - tmp2.x), 2) + Math.pow((tmp1.y - tmp2.y), 2));
+                        tmp1 = pointers.get(ce_touch_id1);
+                        tmp2 = pointers.get(ce_touch_id2);
+                        tmp_dis =  Math.sqrt(Math.pow((tmp1.x - tmp2.x), 2) + Math.pow((tmp1.y - tmp2.y), 2));
                         if (tmp_dis > ce_zoom_dis * 2) {
                             ce.reLv(1);
                             ce_zoom_flag=false;
+                            ce_touch_id1 =-1;
                         }
                         if (tmp_dis < ce_zoom_dis / 2) {
                             ce.reLv(-1);
                             ce_zoom_flag=false;
+                            ce_touch_id1 =-1;
                         }
                     }
                 }catch (Exception e){}
@@ -148,8 +165,26 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
                 fu.x=event.getX(pointerIndex);
                 fu.y=event.getY(pointerIndex);
                 pointers.remove(pointerId);
-                if(pointerId==ce_zoom_id1||pointerId==ce_zoom_id2){
-                    ce_zoom_flag=false;
+                if (ce_zoom_flag) {
+                    if (pointerId == ce_touch_id1 || pointerId == ce_touch_id2) {
+                        ce_zoom_flag = false;
+                        ce_touch_id1 = -1;
+                    }
+                }
+                if (ce_move_flag){
+                    if (pointerId==ce_touch_id1){
+                        if (!mp.isPlaying()){
+                            int tmp=ce.setMove();
+                            if (tmp<0)
+                                tmp=0;
+                            if (tmp>mp.getDuration())
+                                tmp=mp.getDuration();
+                            mp.seekTo(tmp);
+                            mp.start();
+                        }
+                        ce_move_flag=false;
+                        ce_touch_id1=-1;
+                    }
                 }
                 break;
         }

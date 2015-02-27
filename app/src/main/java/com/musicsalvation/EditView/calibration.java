@@ -11,24 +11,23 @@ import com.musicsalvation.Graphic;
  * Created by michael on 2015/1/17.
  */
 public class calibration {
-    int Duration=240000;
+    chartEditScreen ce;
+    //int Duration=240000;
     int start_y;
     int end_y;
     int start_x;
     int end_x;
     int x_length;
-    int unit;//刻度間隔
-
     final int sec_1=0;
     final int sec_10=1;
     final int sec_20=2;
     final int sec_30=3;
+
     SparseArray<lines> Line;
     SparseArray<String> String_lv[];
-    double unit_lv[];//每0.1sec移動單位
-    public calibration(/*int Duration,*/int start_x,int start_y,int end_x,int end_y,int line_length) {
+    public calibration(chartEditScreen ce,int Duration,int start_x,int start_y,int end_x,int end_y,int line_length) {
+        this.ce=ce;
         Line = new SparseArray<lines>();
-
         String_lv = new SparseArray[4];
         String_lv[0] = new SparseArray<String>();
         String_lv[1] = new SparseArray<String>();
@@ -39,12 +38,7 @@ public class calibration {
         this.end_x = end_x;
         this.end_y = end_y;
         x_length = end_x - start_x;
-        unit = x_length / 5 / 10;//間隔距離
-        unit_lv = new double[4];
-        unit_lv[0] = unit;//每大格1秒 每0.01秒移動距離
-        unit_lv[1] = unit_lv[0] / 10;//每大格10秒 每0.01秒移動距離
-        unit_lv[2] = unit_lv[1] / 2;//每大格20秒 每0.01秒移動距離
-        unit_lv[3] = unit_lv[1] / 3;//每大格30秒 每0.01秒移動距離
+
 
         int counter = 0;
         int c_1 = 0;
@@ -73,7 +67,7 @@ public class calibration {
         int stringCounter = 0;
         for (int i = 0; i <= (c_1 * 10); i++) {
             lines li = new lines();
-            li.x = start_x + (x_length / 2) + unit * i;
+            li.x = start_x + (x_length / 2) + ce.unit * i;
             li.y = start_y;
             li.string_code = -1;
 
@@ -90,22 +84,22 @@ public class calibration {
         }
     }
 
-    public void draw(int currentTime,int time_lv,Canvas canvas,Paint paint){
+    public void draw(int time_lv,Canvas canvas,Paint paint){
         double move=0;
-        move=(currentTime/100)*unit_lv[time_lv];
+        move=(ce.time_current/100)*ce.unit_lv[time_lv];
         int line_start=0;
         switch (time_lv){
             case sec_1:
-                line_start=(currentTime/100)-26;
+                line_start=(ce.time_current/100)-26;
                 break;
             case sec_10:
-                line_start=(currentTime/100/10)-26;
+                line_start=(ce.time_current/100/10)-26;
                 break;
             case sec_20:
-                line_start=(currentTime/100/20)-26;
+                line_start=(ce.time_current/100/20)-26;
                 break;
             case sec_30:
-                line_start=(currentTime/100/30)-26;
+                line_start=(ce.time_current/100/30)-26;
                 break;
         }
         if (line_start<0){

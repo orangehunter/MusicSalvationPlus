@@ -24,12 +24,18 @@ public class chartEditScreen {
     int up;
     int down;
 
-    int time_current;
-    int time_lv;
+    static int time_current;
+    int move=0;
+
+
+    static int time_lv;
     final int sec_1=0;
     final int sec_10=1;
     final int sec_20=2;
     final int sec_30=3;
+
+    static int unit;//刻度間隔
+    static double unit_lv[];//每0.1sec移動單位
 
 
     Bitmap Rp,Sp,Tp,Xp;
@@ -43,8 +49,14 @@ public class chartEditScreen {
     calibration ca;
 
 
-    public chartEditScreen(MainActivity activity,int left,int up,int right,int down){
+    public chartEditScreen(MainActivity activity,int left,int up,int right,int down,int Duration){
         time_lv=sec_10;
+        unit = (right-left) / 5 / 10;//間隔距離
+        unit_lv = new double[4];
+        unit_lv[0] = unit;//每大格1秒 每0.1秒移動距離
+        unit_lv[1] = unit_lv[0] / 10;//每大格10秒 每0.1秒移動距離
+        unit_lv[2] = unit_lv[1] / 2;//每大格20秒 每0.1秒移動距離
+        unit_lv[3] = unit_lv[1] / 3;//每大格30秒 每0.1秒移動距離
         this.left=left;
         this.right=right;
         this.up=up;
@@ -53,10 +65,11 @@ public class chartEditScreen {
         Sp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_square  ,80,80,false);
         Tp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_trangle ,80,80,false);
         Xp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_x       ,80,80,false);
-        ca=new calibration(/*0,*/left,up,right,down,30);
+        ca=new calibration(this,Duration,left,up,right,down,30);
     }
 
     public void draw(Canvas canvas,Paint paint,int currentTime){
+        time_current=currentTime+move;
         RectF rf1=new RectF(Coordinate.CoordinateX(left),Coordinate.CoordinateY(up),Coordinate.CoordinateX(right),Coordinate.CoordinateY(down));//設定譜面底圖矩形
         //RectF rf2=new RectF(Coordinate.CoordinateX(right),Coordinate.CoordinateY(up),Coordinate.CoordinateX(right)+Rp.getWidth(),Coordinate.CoordinateY(down));//設定譜面右邊遮罩
         //RectF rf3=new RectF(Coordinate.CoordinateX(left)-Rp.getWidth(),Coordinate.CoordinateY(up),Coordinate.CoordinateX(left),Coordinate.CoordinateY(down));//設定譜面左邊遮罩
@@ -64,12 +77,21 @@ public class chartEditScreen {
         canvas.drawRect(rf1, paint);
         paint.reset();
         Graphic.drawLine(canvas, Color.GREEN, left + (right - left) / 2, up, left + (right - left) / 2, down, 3, paint);
-        ca.draw(currentTime,time_lv,canvas,paint);
+        ca.draw(time_lv,canvas,paint);
 
         paint.setColor(Color.WHITE);
         //canvas.drawRect(rf2, paint);
         //canvas.drawRect(rf3, paint);
         paint.reset();
+    }
+
+    public void Move(double dis){
+        move=(int)(dis/unit_lv[time_lv])*100;
+    }
+    public int setMove(){
+        int tmp=time_current;
+        move=0;
+        return tmp;
     }
 
     public boolean isIn(double x,double y){
