@@ -12,6 +12,7 @@ import android.view.SurfaceView;
 import android.view.MotionEvent;
 import android.util.SparseArray;
 
+import com.musicsalvation.Charts;
 import com.musicsalvation.MainActivity;
 import com.musicsalvation.R;
 import com.musicsalvation.Graphic;
@@ -22,6 +23,7 @@ import com.musicsalvation.Point;
 public class EditView extends SurfaceView implements SurfaceHolder.Callback{
     MainActivity activity;
     Paint paint;			//畫筆的參考
+    Charts charts;
     MediaPlayer mp;
     chartEditScreen ce;
 
