@@ -45,44 +45,9 @@ public class MainActivity extends Activity{
 	GameView gameview;
 	ScoreView scoreview;
 	Video video;
+    public static FilesAndData io;
 
-	//影片選擇====================================
-	int video_select=0;
-	//影片選擇------------------------------------------------------------
 
-	//判定與分數===================================
-    public int virus = 0;  //病毒數量
-	public int percent = 0; //判定是否過關數量
-	public int nice = 0;
-	public int hit = 0;
-	public int safe = 0;
-	public int miss = 0;
-	public int score = 0;
-	public int combo = 0;
-	public boolean boss_delete;
-	//判定與分數-----------------------------------
-
-	//選關參數=====================================
-    public int level;//關卡
-	int levels=3;//關卡總數
-	public int difficulty;//難度
-	int [][]hight_score=new int [levels][3];
-	int [][]hight_rank=new int [levels][3];
-	public Boolean [][]level_clear=new Boolean[levels][3];
-	//選關參數-------------------------------------
-
-	//存檔用參數====================================
-    public float mp_Voiume;
-	public float sp_Voiume;
-	public int sp_num;
-	public int timing;
-	public int speed;
-	public int animax_buffer;
-	//存檔用參數-------------------------------------
-
-    //自由模式參數===================================
-    public Uri song;
-    //自由模式參數-----------------------------------
 	public void changeView(int what)//
 	{
 		Message msg = myHandler.obtainMessage(what); 
@@ -194,7 +159,7 @@ public class MainActivity extends Activity{
 
 	}
 	private void Exit() {
-		writeData();
+        this.io.writeData();
 		System.exit(0);//離開游戲
 	}
 
@@ -263,7 +228,7 @@ public class MainActivity extends Activity{
 		Constant.GAME_WIDTH_UNIT= ((float)Constant.SCREEN_WIDTH/Constant.DEFULT_WITH);
 		Constant.SCREEN_HEIGHT_UNIT= ((float)Constant.SCREEN_HIGHT/Constant.DEFULT_HIGHT);
 		//Toast.makeText(this, "widthPixels"+dm.widthPixels+"heightPixels"+dm.heightPixels, Toast.LENGTH_LONG).show();
-		readData();
+		this.io.readData();
 		changeView(first_activity);//進入"歡迎界面"
 	}
 
@@ -320,8 +285,8 @@ public class MainActivity extends Activity{
 		if ( resultCode == RESULT_OK )
 		{
 			// 取得檔案的 Uri
-			song = data.getData();
-			if( song != null )
+			this.io.song = data.getData();
+			if( this.io.song != null )
 			{
 				Toast.makeText(this, "檔案已選擇!", Toast.LENGTH_SHORT).show();
 				this.changeView(6);
@@ -349,7 +314,7 @@ public class MainActivity extends Activity{
 		return song;
 	}*/
 
-	public static String turnUriToName(Uri u){
+	/*public static String turnUriToName(Uri u){
 		String a=u.toString(),b="";
 		for(int i=a.length();i>0;i--){
 			if(a.substring(i-1, i).equals("/")){
@@ -552,8 +517,8 @@ public class MainActivity extends Activity{
 			e.printStackTrace();
 		}
 		try {
-			/*String fileName="Data.save";
-			FileOutputStream writer = openFileOutput(fileName, Context.MODE_PRIVATE);*/
+			//String fileName="Data.save";
+			//FileOutputStream writer = openFileOutput(fileName, Context.MODE_PRIVATE);
 			File sdCard = Environment.getExternalStorageDirectory();
 			File dir = new File (sdCard.getAbsolutePath() + "/MusicSelvation_datas/data");
 			dir.mkdirs();
@@ -569,7 +534,7 @@ public class MainActivity extends Activity{
 			Log.v("Data","IOException");
 			e.printStackTrace();
 		}
-	}
+	}*/
     @Override
 	public void onResume(){
 		Constant.setFlag(true);
@@ -599,7 +564,7 @@ public class MainActivity extends Activity{
 	}
 	@Override
 	protected void onDestroy() {
-		writeData();
+        this.io.writeData();
 		super.onDestroy();
 	}
 

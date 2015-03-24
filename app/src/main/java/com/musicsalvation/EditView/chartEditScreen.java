@@ -39,15 +39,11 @@ public class chartEditScreen {
 
 
     Bitmap Rp,Sp,Tp,Xp;
-    static JSONObject
-            BtR=new JSONObject()
-            ,BtS=new JSONObject()
-            ,BtT=new JSONObject()
-            ,BtX=new JSONObject();
+
 
     SparseArray<lines> timeLines=new SparseArray<lines>();
     calibration ca;
-
+    chart ct;
 
     public chartEditScreen(MainActivity activity,int left,int up,int right,int down,int Duration){
         time_lv=sec_10;

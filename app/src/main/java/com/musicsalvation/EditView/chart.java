@@ -18,7 +18,8 @@ public class chart {
     final int sec_10=1;
     final int sec_20=2;
     final int sec_30=3;
-	public chart(chartEditScreen ce,,int start_x,int start_y,int end_x,int end_y){
+	public chart(chartEditScreen ce,int start_x,int start_y,int end_x,int end_y){
+        this.ce=ce;
 
     }
 
