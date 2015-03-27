@@ -19,6 +19,7 @@ import org.json.JSONObject;
  */
 
 public class chartEditScreen {
+    MainActivity activity;
     int left;
     int right;
     int up;
@@ -27,6 +28,7 @@ public class chartEditScreen {
     static int time_current;
     int move=0;
 
+    static int accuracy=100;
 
     static int time_lv;
     final int sec_1=0;
@@ -46,6 +48,7 @@ public class chartEditScreen {
     chart ct;
 
     public chartEditScreen(MainActivity activity,int left,int up,int right,int down,int Duration){
+        this.activity=activity;
         time_lv=sec_10;
         unit = (right-left) / 5 / 10;//間隔距離
         unit_lv = new double[4];

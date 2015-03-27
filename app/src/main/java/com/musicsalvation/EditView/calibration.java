@@ -86,20 +86,20 @@ public class calibration {
 
     public void draw(int time_lv,Canvas canvas,Paint paint){
         double move=0;
-        move=(ce.time_current/100)*ce.unit_lv[time_lv];
+        move=(ce.time_current/ce.accuracy)*ce.unit_lv[time_lv];
         int line_start=0;
         switch (time_lv){
             case sec_1:
-                line_start=(ce.time_current/100)-26;
+                line_start=(ce.time_current/ce.accuracy)-26;
                 break;
             case sec_10:
-                line_start=(ce.time_current/100/10)-26;
+                line_start=(ce.time_current/ce.accuracy/10)-26;
                 break;
             case sec_20:
-                line_start=(ce.time_current/100/20)-26;
+                line_start=(ce.time_current/ce.accuracy/20)-26;
                 break;
             case sec_30:
-                line_start=(ce.time_current/100/30)-26;
+                line_start=(ce.time_current/ce.accuracy/30)-26;
                 break;
         }
         if (line_start<0){

@@ -33,7 +33,6 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
         super(mainActivity);
         this.activity = mainActivity;
         this.getHolder().addCallback(this);//設定生命周期回調接口的實現者
-
     }
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
