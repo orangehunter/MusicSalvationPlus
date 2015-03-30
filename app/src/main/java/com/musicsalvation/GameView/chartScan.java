@@ -46,7 +46,7 @@ public class chartScan {
 		this.activity=activity;
 		this.view=view;
 		dis=time_dis;
-		build(ct.BtR,ct.BtS,ct.BtT,ct.BtX);
+		//build(ct.BtR,ct.BtS,ct.BtT,ct.BtX);
 	}
 	public void build(JSONObject R,JSONObject S,JSONObject T,JSONObject X){
 		reset();

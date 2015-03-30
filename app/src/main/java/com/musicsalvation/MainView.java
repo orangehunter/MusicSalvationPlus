@@ -120,7 +120,7 @@ implements SurfaceHolder.Callback{
 		exitbtm = 	new Bottom(activity, exit, exit, 640, 643);
 		hidden_flag=false;
 		for(int i=0;i<3;i++){
-			if(activity.level_clear[2][i]){
+			if(activity.io.level_clear[2][i]){
 				hidden_flag=true;
 			}
 		}
@@ -138,7 +138,7 @@ implements SurfaceHolder.Callback{
 		}else{
 			back_mp=MediaPlayer.create(this.getContext(), R.raw.tellpiano);
 		}
-		back_mp.setVolume(activity.mp_Voiume, activity.mp_Voiume);
+		back_mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
 		back_mp.setLooping(true);
 		back_mp.start();
 
@@ -252,7 +252,7 @@ implements SurfaceHolder.Callback{
 			{
 			case MotionEvent.ACTION_DOWN://按下
 				if(deJump == true){
-					sp.play(btn_se[1], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+					sp.play(btn_se[1], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 					mainFlag=1;
 				}
 				deJump = false;
@@ -272,16 +272,16 @@ implements SurfaceHolder.Callback{
 			case MotionEvent.ACTION_DOWN://按下
 				if(deJump==true){//防止彈跳part1
 					if(startbtm.isIn(pointx, pointy)){
-						sp.play(btn_se[0], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+						sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 						this.toEditView = true;
 					}
 					if(exitbtm.isIn(pointx, pointy)){
-						sp.play(btn_se[0], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+						sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 						exitbtm.setBottomTo(true);
 					}
 					if(hidden_flag){
 						if(staffList.isIn(pointx, pointy)){
-							activity.video_select=3;
+							activity.io.video_select=3;
 							activity.changeView(0);
 						}
 					}
@@ -294,7 +294,7 @@ implements SurfaceHolder.Callback{
 					if(startbtm.isIn(pointx, pointy)){
 						//進入地圖畫面
 						if(this.toEditView){
-							activity.video_select=1;
+							activity.io.video_select=1;
 							activity.changeView(0);
 						}
 					}

@@ -19,41 +19,41 @@ import java.io.IOException;
  */
 public class FilesAndData {
     //影片選擇====================================
-    int video_select=0;
+    public static int video_select=0;
     //影片選擇------------------------------------------------------------
 
     //判定與分數===================================
-    public int virus = 0;  //病毒數量
-    public int percent = 0; //判定是否過關數量
-    public int nice = 0;
-    public int hit = 0;
-    public int safe = 0;
-    public int miss = 0;
-    public int score = 0;
-    public int combo = 0;
-    public boolean boss_delete;
+    public static int virus = 0;  //病毒數量
+    public static int percent = 0; //判定是否過關數量
+    public static int nice = 0;
+    public static int hit = 0;
+    public static int safe = 0;
+    public static int miss = 0;
+    public static int score = 0;
+    public static int combo = 0;
+    public static boolean boss_delete;
     //判定與分數-----------------------------------
 
     //選關參數=====================================
-    public int level;//關卡
-    int levels=3;//關卡總數
-    public int difficulty;//難度
-    int [][]hight_score=new int [levels][3];
-    int [][]hight_rank=new int [levels][3];
-    public Boolean [][]level_clear=new Boolean[levels][3];
+    public static int level;//關卡
+    public static int levels=3;//關卡總數
+    public static int difficulty;//難度
+    public static int [][]hight_score=new int [levels][3];
+    public static int [][]hight_rank=new int [levels][3];
+    public static Boolean [][]level_clear=new Boolean[levels][3];
     //選關參數-------------------------------------
 
     //存檔用參數====================================
-    public float mp_Voiume;
-    public float sp_Voiume;
-    public int sp_num;
-    public int timing;
-    public int speed;
-    public int animax_buffer;
+    public static float mp_Voiume;
+    public static float sp_Voiume;
+    public static int sp_num;
+    public static int timing;
+    public static int speed;
+    public static int animax_buffer;
     //存檔用參數-------------------------------------
 
     //自由模式參數===================================
-    public Uri song;
+    public static Uri song;
     //自由模式參數-----------------------------------
     public static String turnUriToName(Uri u){
         String a=u.toString(),b="";
@@ -76,7 +76,7 @@ public class FilesAndData {
         return c;
     }
 
-    public Charts read(Uri uri){//譜面讀取
+    public static Charts read(Uri uri){//譜面讀取
         //String fileName=turnUriToName(uri)+".chart";
         JSONObject json=null;
         String content=""; //內容
@@ -107,7 +107,7 @@ public class FilesAndData {
         Charts ct;
         ct= new Charts();
         if(json!=null) {
-            try {
+            /*try {
                 ct.BtR = json.getJSONObject("R");
                 ct.BtS = json.getJSONObject("S");
                 ct.BtT = json.getJSONObject("T");
@@ -115,11 +115,11 @@ public class FilesAndData {
             } catch (JSONException e) {
                 Log.e("GameView", "JSON load fail");
                 e.printStackTrace();
-            }
+            }*/
         }
         return ct;
     }
-    public Charts read(String name){//譜面讀取
+    public static Charts read(String name){//譜面讀取
         //String fileName=turnUriToName(uri)+".chart";
         JSONObject json=null;
         String content=""; //內容
@@ -150,7 +150,7 @@ public class FilesAndData {
         Charts ct;
         ct= new Charts();
         if(json!=null) {
-            try {
+            /*try {
                 ct.BtR = json.getJSONObject("R");
                 ct.BtS = json.getJSONObject("S");
                 ct.BtT = json.getJSONObject("T");
@@ -158,12 +158,12 @@ public class FilesAndData {
             } catch (JSONException e) {
                 Log.e("GameView", "JSON load fail");
                 e.printStackTrace();
-            }
+            }*/
         }
         return ct;
     }
 
-    public  void write(Uri uri,JSONObject btR,JSONObject btS,JSONObject btT,JSONObject btX){//譜面寫入
+    public static  void write(Uri uri,JSONObject btR,JSONObject btS,JSONObject btT,JSONObject btX){//譜面寫入
         JSONObject json=new JSONObject();
         try {
             json.put("R", btR);
@@ -195,7 +195,7 @@ public class FilesAndData {
         }
     }
 
-    public void readData(){//TAG 存檔讀取
+    public static void readData(){//TAG 存檔讀取
         String fileName="Data.save";
         JSONObject json=null;
         String content=""; //內容
@@ -259,7 +259,7 @@ public class FilesAndData {
         };
     }
 
-    public  void writeData(){//存檔寫入
+    public static void writeData(){//存檔寫入
         JSONObject json=new JSONObject();
         try {
             json.put("mp_Voiume", String.valueOf(mp_Voiume));

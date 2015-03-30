@@ -13,6 +13,7 @@ public class Charts {
     public Charts(){
         chart=new JSONObject();
     }
+
     public void put(int time,String key,int type){
         try {
             JSONObject tmp;
@@ -43,7 +44,7 @@ public class Charts {
                 chart.remove(time_s);
             }
         } catch (JSONException e) {
-            Log.e("Charts put error",""+e);
+            Log.e("Charts remove error",""+e);
         }
     }
 }
