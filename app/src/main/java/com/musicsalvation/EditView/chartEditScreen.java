@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 public class chartEditScreen {
     MainActivity activity;
+    EditView ev;
     int left;
     int right;
     int up;
@@ -47,8 +48,9 @@ public class chartEditScreen {
     calibration ca;
     chart ct;
 
-    public chartEditScreen(MainActivity activity,int left,int up,int right,int down,int Duration){
+    public chartEditScreen(MainActivity activity,EditView ev,int left,int up,int right,int down,int Duration){
         this.activity=activity;
+        this.ev=ev;
         time_lv=sec_10;
         unit = (right-left) / 5 / 10;//間隔距離
         unit_lv = new double[4];
@@ -65,6 +67,7 @@ public class chartEditScreen {
         Tp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_trangle ,80,80,false);
         Xp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_x       ,80,80,false);
         ca=new calibration(this,Duration,left,up,right,down,30);
+        ct=new chart(this,left,up,right,down);
     }
 
     public void draw(Canvas canvas,Paint paint,int currentTime){

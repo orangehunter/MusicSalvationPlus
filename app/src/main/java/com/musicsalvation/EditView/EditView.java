@@ -3,6 +3,7 @@ package com.musicsalvation.EditView;
 
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -27,6 +28,8 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
     MediaPlayer mp;
     chartEditScreen ce;
 
+    Bitmap BR,BS,BT,BX;
+
     int current=0;
 
     public EditView(MainActivity mainActivity) {
@@ -40,7 +43,13 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
         paint.setAntiAlias(true);//開啟抗鋸齒
 
         mp=MediaPlayer.create(activity, R.raw.freely_tomorrow);//activity.song);
-        ce=new chartEditScreen(activity,150,100,1130,570,mp.getDuration());
+        ce=new chartEditScreen(activity,this,150,100,1130,570,mp.getDuration());
+
+        BR=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_round,150,150,true);
+        BS=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_square,150,150,true);
+        BT=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_trangle,150,150,true);
+        BX=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_x,150,150,true);
+
         mp.start();
         current=0;
         new Thread(){
@@ -196,6 +205,10 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
 
     }
     public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
+        BR.recycle();
+        BS.recycle();
+        BT.recycle();
+        BX.recycle();
         mp.stop();
         mp.release();
     }
