@@ -49,23 +49,28 @@ public class chart {
     }
     int main_counter=0;
     public void draw(int time_lv,Canvas canvas,Paint paint){
-        if (ce.time_current+ time_side_dis[time_lv]>chart_key.keyAt(last_chart)) {
+        while (ce.time_current+ time_side_dis[time_lv]>chart_key.keyAt(last_chart)) {
             if (last_chart<chart_key.size()-1) {
                 last_chart++;
+            }else {
+                break;
             }
         }
         main_counter=last_chart;
         JSONObject tmp;
+        int key_time;
         do{
             tmp=chart_key.get(chart_key.keyAt(main_counter));
+            key_time=chart_key.keyAt(main_counter);
             if (tmp==null){
                 Log.e("chart draw","chart_key volume is null.");
             }else{
+                int point_x= (int) (start_x+(end_x-start_x)+(((ce.time_current/ce.accuracy)-key_time)*ce.unit_lv[time_lv]));
                 switch (tmp.optInt("R",0)){
                     case 0:
                         break;
                     case 1:
-                    Graphic.drawPic(canvas,ev.BR,150,150,0,255,paint);
+                    Graphic.drawPic(canvas,ev.BR,point_x,150,0,255,paint);
                         break;
                     case 2:
 
