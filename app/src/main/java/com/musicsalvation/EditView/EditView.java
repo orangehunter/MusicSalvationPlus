@@ -13,6 +13,7 @@ import android.view.SurfaceView;
 import android.view.MotionEvent;
 import android.util.SparseArray;
 
+import com.musicsalvation.Bottom;
 import com.musicsalvation.Charts;
 import com.musicsalvation.MainActivity;
 import com.musicsalvation.R;
@@ -29,6 +30,10 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
     chartEditScreen ce;
 
     Bitmap BR,BS,BT,BX,BB;
+    Bottom btn_r;
+    Bottom btn_s;
+    Bottom btn_t;
+    Bottom btn_x;
 
     int current=0;
 
@@ -50,6 +55,10 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
         BT=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_trangle,150,150,true);
         BX=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_x,150,150,true);
         BB=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_pushed,150,150,true);
+        btn_r=new Bottom(activity,BB,BR,100, 495);
+        btn_s = new Bottom(activity, BB, BS, 280, 625);
+        btn_t = new Bottom(activity, BB, BT, 1000, 625);
+        btn_x = new Bottom(activity, BB, BX, 1180, 495);
 
         mp.start();
         current=0;
@@ -74,14 +83,15 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
             super.onDraw(canvas);
             paint.setAntiAlias(true);	//開啟抗鋸齒
             //繪制黑填充矩形清背景
-            paint.setColor(Color.WHITE);//設定畫筆彩色
-            paint.setAlpha(255);
-            canvas.drawRect(0, 0, Constant.SCREEN_WIDTH, Constant.SCREEN_HIGHT, paint);
-            paint.reset();
-            try {current=mp.getCurrentPosition();
-            }catch (Exception e){}
-            ce.draw(canvas,paint,current);
-            if(mp!=null) {
+                paint.setColor(Color.WHITE);//設定畫筆彩色
+                paint.setAlpha(255);
+                canvas.drawRect(0, 0, Constant.SCREEN_WIDTH, Constant.SCREEN_HIGHT, paint);
+                paint.reset();
+                try {current=mp.getCurrentPosition();
+                }catch (Exception e){}
+                ce.draw(canvas,paint,current);
+                Graphic.drawPic(canvas,BR);
+                if(mp!=null) {
                 String min, sec, msec;
 
                 if (mp.getCurrentPosition() / 1000 / 60 % 60 < 10)//計算分鐘
