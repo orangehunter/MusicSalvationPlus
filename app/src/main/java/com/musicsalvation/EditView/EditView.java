@@ -28,7 +28,7 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
     MediaPlayer mp;
     chartEditScreen ce;
 
-    Bitmap BR,BS,BT,BX;
+    Bitmap BR,BS,BT,BX,BB;
 
     int current=0;
 
@@ -43,12 +43,13 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
         paint.setAntiAlias(true);//開啟抗鋸齒
 
         mp=MediaPlayer.create(activity, R.raw.freely_tomorrow);//activity.song);
-        ce=new chartEditScreen(activity,this,150,100,1130,570,mp.getDuration());
+        ce=new chartEditScreen(activity,this,150,50,1130,520,mp.getDuration());
 
         BR=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_round,150,150,true);
         BS=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_square,150,150,true);
         BT=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_trangle,150,150,true);
         BX=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_x,150,150,true);
+        BB=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_pushed,150,150,true);
 
         mp.start();
         current=0;
@@ -205,10 +206,12 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
 
     }
     public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
+        ce.recycle();
         BR.recycle();
         BS.recycle();
         BT.recycle();
         BX.recycle();
+        BB.recycle();
         mp.stop();
         mp.release();
     }

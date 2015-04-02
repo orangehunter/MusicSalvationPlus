@@ -40,9 +40,7 @@ public class chartEditScreen {
     static int unit;//刻度間隔
     static double unit_lv[];//每0.1sec移動單位
 
-
-    Bitmap Rp,Sp,Tp,Xp;
-
+    int y1,y2,y3,y4;
 
     SparseArray<lines> timeLines=new SparseArray<lines>();
     calibration ca;
@@ -62,12 +60,12 @@ public class chartEditScreen {
         this.right=right;
         this.up=up;
         this.down=down;
-        Rp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_round   ,80,80,false);
-        Sp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_square  ,80,80,false);
-        Tp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_trangle ,80,80,false);
-        Xp=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_x       ,80,80,false);
+        y1=up+((down-up)/5)*1;
+        y2=up+((down-up)/5)*2;
+        y3=up+((down-up)/5)*3;
+        y4=up+((down-up)/5)*4;
         ca=new calibration(this,Duration,left,up,right,down,30);
-        ct=new chart(this,left,up,right,down);
+        //ct=new chart(activity,this,left,up,right,down);
     }
 
     public void draw(Canvas canvas,Paint paint,int currentTime){
@@ -78,7 +76,11 @@ public class chartEditScreen {
         paint.setColor(Color.BLACK);
         canvas.drawRect(rf1, paint);
         paint.reset();
-        Graphic.drawLine(canvas, Color.GREEN, left + (right - left) / 2, up, left + (right - left) / 2, down, 3, paint);
+        Graphic.drawLine(canvas,Color.YELLOW,left,y1,right,y1,1,paint);
+        Graphic.drawLine(canvas,Color.YELLOW,left,y2,right,y2,1,paint);
+        Graphic.drawLine(canvas,Color.YELLOW,left,y3,right,y3,1,paint);
+        Graphic.drawLine(canvas,Color.YELLOW,left,y4,right,y4,1,paint);
+        Graphic.drawLine(canvas, Color.RED, left + (right - left) / 2, up, left + (right - left) / 2, down, 3, paint);
         ca.draw(time_lv,canvas,paint);
 
         paint.setColor(Color.WHITE);
@@ -113,5 +115,8 @@ public class chartEditScreen {
                 time_lv+=a;
             }
         }
+    }
+    public void recycle(){
+        ct.recycle();
     }
 }
