@@ -22,10 +22,10 @@ public class calibration {
     final int sec_10=1;
     final int sec_20=2;
     final int sec_30=3;
-
+    int color;
     SparseArray<lines> Line;
     SparseArray<String> String_lv[];
-    public calibration(chartEditScreen ce,int Duration,int start_x,int start_y,int end_x,int end_y,int line_length) {
+    public calibration(chartEditScreen ce,int Duration,int start_x,int start_y,int end_x,int end_y,int line_length,int line_color) {
         this.ce=ce;
         Line = new SparseArray<lines>();
         String_lv = new SparseArray[4];
@@ -38,6 +38,7 @@ public class calibration {
         this.end_x = end_x;
         this.end_y = end_y;
         x_length = end_x - start_x;
+        color=line_color;
 
 
         int counter = 0;
@@ -111,9 +112,9 @@ public class calibration {
             try {
                 li = Line.get(i);
                 if ((li.x - move) <= end_x && (li.x - move) >= start_x) {
-                    Graphic.drawLine(canvas, Color.BLACK, li.x - (int) move, li.y, li.x - (int) move, li.y - li.lengh, 2, paint);
+                    Graphic.drawLine(canvas, color, li.x - (int) move, li.y, li.x - (int) move, li.y - li.lengh, 2, paint);
                     if (li.string_code > -1 && String_lv[time_lv].get(li.string_code) != null) {
-                        Graphic.drawText(canvas, String_lv[time_lv].get(li.string_code), li.x - (int) move, li.y - (li.lengh + 5), Color.BLACK, 12, paint);
+                        Graphic.drawText(canvas, String_lv[time_lv].get(li.string_code), li.x - (int) move, li.y - (li.lengh + 5), color, 12, paint);
                     }
                 }
             }catch (Exception e){}
