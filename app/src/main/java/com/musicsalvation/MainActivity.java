@@ -1,15 +1,5 @@
 package com.musicsalvation;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
@@ -17,14 +7,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
@@ -207,26 +194,7 @@ public class MainActivity extends Activity{
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉標頭
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//強制橫屏
 
-		//取得解析度
-		DisplayMetrics dm=new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(dm);
-		//給常數類別中的螢幕高和寬給予值
-		if(dm.widthPixels>dm.heightPixels)
-		{
-			Constant.SCREEN_WIDTH=dm.widthPixels;
-			Constant.SCREEN_HIGHT=dm.heightPixels;
-		}else
-		{
-			Constant.SCREEN_HIGHT=dm.widthPixels;
-			Constant.SCREEN_WIDTH=dm.heightPixels;
-		}
-		if(Constant.SCREEN_HIGHT>Constant.SCREEN_WIDTH/16*9)//將螢幕固定為16:9
-			Constant.SCREEN_HIGHT=Constant.SCREEN_WIDTH/16*9;
-		else
-			Constant.SCREEN_WIDTH=Constant.SCREEN_HIGHT/9*16;
 
-		Constant.GAME_WIDTH_UNIT= ((float)Constant.SCREEN_WIDTH/Constant.DEFULT_WITH);
-		Constant.SCREEN_HEIGHT_UNIT= ((float)Constant.SCREEN_HIGHT/Constant.DEFULT_HIGHT);
 		//Toast.makeText(this, "widthPixels"+dm.widthPixels+"heightPixels"+dm.heightPixels, Toast.LENGTH_LONG).show();
 		this.io.readData();
 		changeView(first_activity);//進入"歡迎界面"
@@ -539,6 +507,7 @@ public class MainActivity extends Activity{
 	public void onResume(){
 		Constant.setFlag(true);
 		changeView(nowView);
+        DisplayMetrics dm=new DisplayMetrics();
         if(Build.VERSION.SDK_INT>18){
             getWindow().getDecorView().setSystemUiVisibility(
                     this.getWindow().getDecorView().SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -548,7 +517,32 @@ public class MainActivity extends Activity{
                     | this.getWindow().getDecorView().SYSTEM_UI_FLAG_FULLSCREEN
                     | this.getWindow().getDecorView().SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                     | this.getWindow().getDecorView().INVISIBLE);
+            getWindowManager().getDefaultDisplay().getRealMetrics(dm);
+        }else{
+            //取得解析度
+            getWindowManager().getDefaultDisplay().getMetrics(dm);
         }
+        //給常數類別中的螢幕高和寬給予值
+        if(dm.widthPixels>dm.heightPixels)
+        {
+            Constant.SYSTEM_WIDTH=dm.widthPixels;
+            Constant.SYSTEM_HIGHT=dm.heightPixels;
+        }else
+        {
+            Constant.SYSTEM_HIGHT=dm.widthPixels;
+            Constant.SYSTEM_WIDTH=dm.heightPixels;
+        }
+		if(Constant.SYSTEM_HIGHT>Constant.SYSTEM_WIDTH/16*9) {//將螢幕固定為16:9
+            Constant.SCREEN_HIGHT = Constant.SYSTEM_WIDTH / 16 * 9;//Y座標校正
+            Constant.SCREEN_WIDTH=Constant.SYSTEM_WIDTH;
+        }
+		else{
+            Constant.SCREEN_WIDTH = Constant.SYSTEM_HIGHT / 9 * 16;//X座標校正
+            Constant.SCREEN_HIGHT=Constant.SYSTEM_HIGHT;
+        }
+
+        Constant.SCREEN_WIDTH_UNIT = ((float)Constant.SCREEN_WIDTH/Constant.DEFULT_WIDTH);
+        Constant.SCREEN_HEIGHT_UNIT= ((float)Constant.SCREEN_HIGHT/Constant.DEFULT_HIGHT);
 		super.onResume();
 	}
 	@Override 
