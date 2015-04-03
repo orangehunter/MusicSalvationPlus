@@ -7,12 +7,14 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.Log;
 import android.util.SparseArray;
+import android.widget.Switch;
 
 import com.musicsalvation.Charts;
 import com.musicsalvation.Graphic;
 import com.musicsalvation.MainActivity;
 import com.musicsalvation.R;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
@@ -35,7 +37,7 @@ public class chart {
 
     int last_chart=0;
     int time_side_dis[]={30,300,600,900};
-    SparseArray<JSONObject> chart_key;
+    static SparseArray<JSONObject> chart_key;
     public chart(MainActivity activity,chartEditScreen ce,int start_x,int start_y,int end_x,int end_y){
         BR=new Bitmap[2];
         BR[0]=Graphic.LoadBitmap(activity.getResources(), R.drawable.bottom_round  ,80,80,false);
@@ -90,41 +92,68 @@ public class chart {
                 Log.e("chart draw","chart_key volume is null.");
             }else{
                 int point_x= (int) (start_x+(end_x-start_x)+(((ce.time_current/ce.accuracy)-key_time)*ce.unit_lv[time_lv]));
-
                 if (tmp.optInt("R",0)!=0){
-                    if (tmp.optInt("R")==3){
-                        finalDraw_key.put(finalDraw_counter,key_time);
-                        finalDraw_volume.put(finalDraw_counter,"R");
-                        finalDraw_counter++;
-                    }else {
-                        Graphic.drawPic(canvas, BR[tmp.optInt("R") - 1], point_x, ce.y1, 0, 255, paint);
+                    switch(tmp.optInt("R")){
+                        case 1:
+                        case 2:
+                            Graphic.drawPic(canvas, BR[0], point_x, ce.y1, 0, 255, paint);
+                            break ;
+                        case 3:
+                            Graphic.drawPic(canvas, BR[1], point_x, ce.y1, 0, 255, paint);
+                            break;
+                        case 4:
+                            finalDraw_key.put(finalDraw_counter,key_time);
+                            finalDraw_volume.put(finalDraw_counter,"R");
+                            finalDraw_counter++;
+                            break;
                     }
                 }
                 if (tmp.optInt("S",0)!=0){
-                    if (tmp.optInt("S")==3){
-                        finalDraw_key.put(finalDraw_counter,key_time);
-                        finalDraw_volume.put(finalDraw_counter,"S");
-                        finalDraw_counter++;
-                    }else {
-                        Graphic.drawPic(canvas, BS[tmp.optInt("S") - 1], point_x, ce.y2, 0, 255, paint);
+                    switch(tmp.optInt("S")){
+                        case 1:
+                        case 2:
+                            Graphic.drawPic(canvas, BS[0], point_x, ce.y1, 0, 255, paint);
+                            break ;
+                        case 3:
+                            Graphic.drawPic(canvas, BS[1], point_x, ce.y1, 0, 255, paint);
+                            break;
+                        case 4:
+                            finalDraw_key.put(finalDraw_counter,key_time);
+                            finalDraw_volume.put(finalDraw_counter,"S");
+                            finalDraw_counter++;
+                            break;
                     }
                 }
                 if (tmp.optInt("T",0)!=0){
-                    if (tmp.optInt("T")==3){
-                        finalDraw_key.put(finalDraw_counter,key_time);
-                        finalDraw_volume.put(finalDraw_counter,"T");
-                        finalDraw_counter++;
-                    }else {
-                        Graphic.drawPic(canvas,BT[tmp.optInt("T")-1],point_x,ce.y3,0,255,paint);
+                    switch(tmp.optInt("T")){
+                        case 1:
+                        case 2:
+                            Graphic.drawPic(canvas, BT[0], point_x, ce.y1, 0, 255, paint);
+                            break ;
+                        case 3:
+                            Graphic.drawPic(canvas, BT[1], point_x, ce.y1, 0, 255, paint);
+                            break;
+                        case 4:
+                            finalDraw_key.put(finalDraw_counter,key_time);
+                            finalDraw_volume.put(finalDraw_counter,"T");
+                            finalDraw_counter++;
+                            break;
                     }
                 }
                 if (tmp.optInt("X",0)!=0){
-                    if (tmp.optInt("X")==3){
-                        finalDraw_key.put(finalDraw_counter,key_time);
-                        finalDraw_volume.put(finalDraw_counter,"X");
-                        finalDraw_counter++;
-                    }else {
-                        Graphic.drawPic(canvas,BX[tmp.optInt("X")-1],point_x,ce.y4,0,255,paint);
+                    switch(tmp.optInt("X")){
+                        case 1:
+                        case 2:
+                            Graphic.drawPic(canvas, BX[0], point_x, ce.y1, 0, 255, paint);
+                            break ;
+                        case 3:
+                            Graphic.drawPic(canvas, BX[1], point_x, ce.y1, 0, 255, paint);
+                            break;
+                        case 4:
+                            finalDraw_key.put(finalDraw_counter,key_time);
+                            finalDraw_volume.put(finalDraw_counter,"X");
+                            finalDraw_counter++;
+                            break;
                     }
                 }
             }
@@ -152,6 +181,50 @@ public class chart {
         }
 
     }
+    public void put_long(int key_start,int key_end,String btn){
+        put(key_start,btn,2);
+        for (int i=key_start+1;i<key_end;i++){
+            put(i,btn,3);
+        }
+        put(key_end,btn,4);
+    }
+    public void put(int key,String btn,int volum){
+        JSONObject tmp;
+        try {
+            if (chart_key.get(key)==null){
+                tmp=new JSONObject();
+                tmp.put(btn,volum);
+                chart_key.put(key,tmp);
+            }else{
+                tmp=chart_key.get(key);
+                tmp.put(btn,volum);
+                chart_key.remove(key);
+                chart_key.put(key,tmp);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public void drag(int from,int to,String btn,int type){
+        if (type==1){
+            remove(from,btn);
+            put(to,btn,1);
+        }else{
+            
+        }
+    }
+    public void remove(int key,String btn){
+        JSONObject tmp;
+        if (chart_key.get(key).length()>1){
+            tmp=chart_key.get(key);
+            tmp.remove(btn);
+            chart_key.remove(key);
+            chart_key.put(key,tmp);
+        }else{
+            chart_key.remove(key);
+        }
+    }
+
 
     public int STI(String key){
         return Integer.valueOf(key);

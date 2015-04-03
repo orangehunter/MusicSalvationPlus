@@ -117,6 +117,6 @@ public class chartEditScreen {
         }
     }
     public void recycle(){
-        ct.recycle();
+        //ct.recycle();
     }
 }
