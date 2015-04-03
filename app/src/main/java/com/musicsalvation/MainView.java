@@ -11,8 +11,6 @@ import android.graphics.Rect;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
-import android.provider.MediaStore.Audio;
-import android.provider.MediaStore.Audio.Media;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -104,9 +102,9 @@ implements SurfaceHolder.Callback{
 	public void surfaceCreated(SurfaceHolder holder) {
 		paint = new Paint();//建立畫筆
 		paint.setAntiAlias(true);//開啟抗鋸齒
-		main_back=			Graphic.bitSize(LoadBitmap( R.drawable.main_back3), Constant.DEFULT_WITH, Constant.DEFULT_HIGHT);
-		main_back2=			Graphic.bitSize(LoadBitmap( R.drawable.main_back2), Constant.DEFULT_WITH, Constant.DEFULT_HIGHT);
-		main_back3=			Graphic.bitSize(LoadBitmap( R.drawable.tellyouworld), Constant.DEFULT_WITH, Constant.DEFULT_HIGHT);
+		main_back=			Graphic.bitSize(LoadBitmap( R.drawable.main_back3), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		main_back2=			Graphic.bitSize(LoadBitmap( R.drawable.main_back2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		main_back3=			Graphic.bitSize(LoadBitmap( R.drawable.tellyouworld), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		main_title=			Graphic.bitSize(LoadBitmap( R.drawable.main_title ),730 ,269 );
 		main_touchstart=	Graphic.bitSize(LoadBitmap( R.drawable.main_touchstart ), 594, 85);
 		main_left=			Graphic.bitSize(LoadBitmap( R.drawable.main_left ),(440/2), (583/2));

@@ -29,8 +29,6 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
     MediaPlayer mp;
     chartEditScreen ce;
 
-    Bitmap back;
-
     Bitmap BR,BS,BT,BX,BB;
     Bottom btn_r;
     Bottom btn_s;
@@ -50,9 +48,7 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
         paint.setAntiAlias(true);//開啟抗鋸齒
 
         mp=MediaPlayer.create(activity, R.raw.freely_tomorrow);//activity.song);
-        ce=new chartEditScreen(activity,this,180,50,1100,545,mp.getDuration());
-
-        back=Graphic.LoadBitmap(activity.getResources(),R.drawable.edit_view_back,1280,720,false);
+        ce=new chartEditScreen(activity,this,150,50,1130,520,mp.getDuration());
 
         BR=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_round,150,150,true);
         BS=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_square,150,150,true);
@@ -87,19 +83,15 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
             super.onDraw(canvas);
             paint.setAntiAlias(true);	//開啟抗鋸齒
             //繪制黑填充矩形清背景
-            paint.setColor(Color.WHITE);//設定畫筆彩色
-            paint.setAlpha(255);
-            canvas.drawRect(0, 0, Constant.SCREEN_WIDTH, Constant.SCREEN_HIGHT, paint);
-            paint.reset();
-            Graphic.drawPic(canvas,back,1280/2,720/2,0,255,paint);
-            try {current=mp.getCurrentPosition();
-            }catch (Exception e){}
-            ce.draw(canvas,paint,current);
-            btn_r.drawBtm(canvas,paint);
-            btn_s.drawBtm(canvas,paint);
-            btn_t.drawBtm(canvas,paint);
-            btn_x.drawBtm(canvas,paint);
-            if(mp!=null) {
+                paint.setColor(Color.WHITE);//設定畫筆彩色
+                paint.setAlpha(255);
+                canvas.drawRect(0, 0, Constant.SCREEN_WIDTH, Constant.SCREEN_HIGHT, paint);
+                paint.reset();
+                try {current=mp.getCurrentPosition();
+                }catch (Exception e){}
+                ce.draw(canvas,paint,current);
+                //Graphic.drawPic(canvas,BR);
+                if(mp!=null) {
                 String min, sec, msec;
 
                 if (mp.getCurrentPosition() / 1000 / 60 % 60 < 10)//計算分鐘
@@ -117,7 +109,7 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
 
 
                 String time = min + ":" + sec + ":" + msec;
-                Graphic.drawText(canvas,time,1280/2,570,Color.WHITE,24,paint);
+                Graphic.drawText(canvas,time,1110,650,Color.BLACK,24,paint);
             }
         }
     }
@@ -140,9 +132,9 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
                 fd.down_y=fd.y;
                 pointers.put(pointerId,fd);
                 if (ce.isIn(fd.x,fd.y)&&pointerIndex==0){
-                    ce_touch_id1 =pointerId;
-                    ce_move_flag=true;
-                }
+                ce_touch_id1 =pointerId;
+                ce_move_flag=true;
+        }
                 if (ce.isIn(fd.x,fd.y)&& ce_touch_id1 !=-1&&pointerIndex==1){
                     ce_move_flag=false;
                     ce_zoom_flag=true;
@@ -225,7 +217,6 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
     }
     public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
         ce.recycle();
-        back.recycle();
         BR.recycle();
         BS.recycle();
         BT.recycle();

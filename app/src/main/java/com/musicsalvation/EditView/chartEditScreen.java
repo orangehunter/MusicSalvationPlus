@@ -64,7 +64,7 @@ public class chartEditScreen {
         y2=up+((down-up)/5)*2;
         y3=up+((down-up)/5)*3;
         y4=up+((down-up)/5)*4;
-        ca=new calibration(this,Duration,left,up,right,down,30,Color.WHITE);
+        ca=new calibration(this,Duration,left,up,right,down,30);
         //ct=new chart(activity,this,left,up,right,down);
     }
 
