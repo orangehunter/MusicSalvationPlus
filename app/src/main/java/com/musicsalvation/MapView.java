@@ -223,7 +223,7 @@ implements SurfaceHolder.Callback{
 		set_timing=activity.io.timing+5;
 		paint = new Paint();//建立畫筆
 		paint.setAntiAlias(true);//開啟抗鋸齒
-		wmap =Graphic.bitSize(LoadBitmap( R.drawable.wmap), Constant.DEFULT_WITH, Constant.DEFULT_HIGHT);
+		wmap =Graphic.bitSize(LoadBitmap( R.drawable.wmap), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		left_back=Graphic.bitSize(LoadBitmap( R.drawable.menubackground), 846, 871);
 		left_exit = Graphic.bitSize(LoadBitmap( R.drawable.left_exit1), 134, 75);
 		left_exit2 = Graphic.bitSize(LoadBitmap( R.drawable.left_exit2), 134, 75);

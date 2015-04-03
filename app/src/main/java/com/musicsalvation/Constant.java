@@ -8,7 +8,7 @@ public static int SCREEN_HIGHT;
     public static int SYSTEM_HIGHT;
 
 //橫屏
-static int DEFULT_WITH=1280;
+static int DEFULT_WIDTH=1280;
 static int DEFULT_HIGHT=720;
 //直屏
 /*

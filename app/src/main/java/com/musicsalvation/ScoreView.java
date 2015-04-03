@@ -137,7 +137,7 @@ implements SurfaceHolder.Callback{
 		new_score_flag=false;
 		new_rank_flag=false;
 		//初始化--------------------------------------------------------------------------------------------
-		bg=Graphic.bitSize(LoadBitmap( R.drawable.sv_background), Constant.DEFULT_WITH, Constant.DEFULT_HIGHT);
+		bg=Graphic.bitSize(LoadBitmap( R.drawable.sv_background), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		titlebar = Graphic.bitSize(LoadBitmap(R.drawable.title_bar), 1280, 90);
 		rightbar = Graphic.bitSize(LoadBitmap(R.drawable.right_bar), 625, 75);
 		leftbar  = Graphic.bitSize(LoadBitmap(R.drawable.left_bar), 620, 75);
