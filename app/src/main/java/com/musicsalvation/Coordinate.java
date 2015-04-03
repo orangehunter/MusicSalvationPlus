@@ -4,14 +4,12 @@ public class Coordinate {
 	static float SCREEN_WIDTH_UNIT =(float) (Constant.SCREEN_WIDTH/1280.0);
 	static float SCREEN_HEIGHT_UNIT=(float) (Constant.SCREEN_HIGHT/720.0);
 
-    static double redress_x;
-    static double redress_y;
 
 	public static float CoordinateX(int x){
 		return  (x*SCREEN_WIDTH_UNIT);
 	}
 	public static int DeCoordinateX(double x){
-		return  (int)(x/ SCREEN_WIDTH_UNIT);
+		return  (int)(x/SCREEN_WIDTH_UNIT);
 	}
 
 	public static float CoordinateY(int y){
