@@ -3,6 +3,7 @@ package com.musicsalvation.EditView;
 
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -19,7 +20,7 @@ import com.musicsalvation.MainActivity;
 import com.musicsalvation.R;
 import com.musicsalvation.Graphic;
 import com.musicsalvation.Constant;
-import com.musicsalvation.Point;
+import com.musicsalvation.touchPoint;
 
 @SuppressLint("ViewConstructor")
 public class EditView extends SurfaceView implements SurfaceHolder.Callback{
@@ -29,7 +30,13 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
     MediaPlayer mp;
     chartEditScreen ce;
 
-    Bitmap back;
+    Bitmap back,frame;
+    Bitmap btn_del_0,btn_del_1;
+    Bitmap btn_edt_0,btn_edt_1;
+    Bitmap play,pause,save;
+    Bottom btn_del_mod,btn_edt_mod,btn_mp_ctrl,btn_save;
+    boolean del_mod_flag;
+    boolean drag_flag;
 
     Bitmap BR,BS,BT,BX,BB;
     Bottom btn_r;
@@ -52,19 +59,40 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
         mp=MediaPlayer.create(activity, R.raw.freely_tomorrow);//activity.song);
         ce=new chartEditScreen(activity,this,180,50,1100,545,mp.getDuration());
 
-        back=Graphic.LoadBitmap(activity.getResources(),R.drawable.edit_view_back,1280,720,false);
+        Resources rs=activity.getResources();
+        back=Graphic.LoadBitmap(rs,R.drawable.edit_view_back,1280,720,false);
+        frame=Graphic.LoadBitmap(rs,R.drawable.edit_view_frame,925,501,false);
 
-        BR=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_round,150,150,true);
-        BS=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_square,150,150,true);
-        BT=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_trangle,150,150,true);
-        BX=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_x,150,150,true);
-        BB=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_pushed,150,150,true);
-        btn_r=new Bottom(activity,BB,BR,100, 495);
-        btn_s = new Bottom(activity, BB, BS, 280, 625);
-        btn_t = new Bottom(activity, BB, BT, 1000, 625);
-        btn_x = new Bottom(activity, BB, BX, 1180, 495);
+        btn_del_0=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_del_0,247,125,true);
+        btn_del_1=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_del_1,247,125,true);
+        btn_del_mod=new Bottom(activity,btn_del_0,btn_del_1,517,665);
+        btn_del_mod.setBottomTo(true);//將刪除模式按鈕設為滅
 
-        mp.start();
+        btn_edt_0=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_edit_0,247,125,true);
+        btn_edt_1=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_edit_1,247,125,true);
+        btn_edt_mod=new Bottom(activity,btn_edt_0,btn_edt_1,763,665);
+
+        play=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_play,164,182,false);
+        pause=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_pause,164,182,false);
+        save=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_save,141,216,false);
+        boolean mp_ctrl=false;
+        btn_mp_ctrl=new Bottom(activity,play,pause,93,163);
+        btn_save=new Bottom(activity,save,save,1180,180);
+
+        del_mod_flag=false;//將刪除模式關閉
+        drag_flag=false;//拖曳功能初始值
+
+        int btn_size=175;
+        BR=Graphic.LoadBitmap(rs,R.drawable.bottom_round,btn_size,btn_size,true);
+        BS=Graphic.LoadBitmap(rs,R.drawable.bottom_square,btn_size,btn_size,true);
+        BT=Graphic.LoadBitmap(rs,R.drawable.bottom_trangle,btn_size,btn_size,true);
+        BX=Graphic.LoadBitmap(rs,R.drawable.bottom_x,btn_size,btn_size,true);
+        BB=Graphic.LoadBitmap(rs,R.drawable.bottom_pushed,btn_size,btn_size,true);
+        btn_r=new Bottom(activity,BB,BR,90, 455);
+        btn_s = new Bottom(activity, BB, BS, 265, 625);
+        btn_t = new Bottom(activity, BB, BT, 1015, 625);
+        btn_x = new Bottom(activity, BB, BX, 1190, 455);
+
         current=0;
         new Thread(){
             @SuppressLint("WrongCall")
@@ -94,11 +122,19 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
             Graphic.drawPic(canvas,back,1280/2,720/2,0,255,paint);
             try {current=mp.getCurrentPosition();
             }catch (Exception e){}
-            ce.draw(canvas,paint,current);
+            ce.draw(canvas, paint, current);
+            Graphic.drawPic(canvas,frame,640,295,0,255,paint);
             btn_r.drawBtm(canvas,paint);
             btn_s.drawBtm(canvas,paint);
             btn_t.drawBtm(canvas,paint);
             btn_x.drawBtm(canvas,paint);
+
+            btn_edt_mod.drawBtm(canvas,paint);
+            btn_del_mod.drawBtm(canvas,paint);
+
+            btn_mp_ctrl.drawBtm(canvas,paint);
+            btn_save.drawBtm(canvas,paint);
+
             if(mp!=null) {
                 String min, sec, msec;
 
@@ -121,7 +157,7 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
             }
         }
     }
-    SparseArray<Point> pointers = new SparseArray<Point>();
+    SparseArray<touchPoint> pointers = new SparseArray<touchPoint>();
     boolean ce_zoom_flag=false;
     boolean ce_move_flag=false;
     int ce_touch_id1 =-1, ce_touch_id2 =-1;
@@ -133,34 +169,43 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
         switch (event.getActionMasked()){
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN://按下
-                Point fd=new Point();
+                touchPoint fd=new touchPoint();
                 fd.x=event.getX(pointerIndex);
                 fd.y=event.getY(pointerIndex);
                 fd.down_x=fd.x;
                 fd.down_y=fd.y;
+                if (mp!=null)
+                    fd.down_time=mp.getCurrentPosition()/ce.accuracy;
                 pointers.put(pointerId,fd);
                 if (ce.isIn(fd.x,fd.y)&&pointerIndex==0){
-                    ce_touch_id1 =pointerId;
-                    ce_move_flag=true;
+                    if (ce.ct.isIn(fd.x,fd.y)){
+                        if (mp.isPlaying())
+                            mp.pause();
+
+                    }else {
+                        ce_touch_id1 = pointerId;
+                        ce_move_flag = true;
+                    }
                 }
                 if (ce.isIn(fd.x,fd.y)&& ce_touch_id1 !=-1&&pointerIndex==1){
                     ce_move_flag=false;
                     ce_zoom_flag=true;
                     ce_touch_id2 =pointerId;
-                    Point tmp1=pointers.get(ce_touch_id1),tmp2=pointers.get(ce_touch_id2);
+                    touchPoint tmp1=pointers.get(ce_touch_id1),tmp2=pointers.get(ce_touch_id2);
                     ce_zoom_dis=Math.sqrt(Math.pow((tmp1.down_x - tmp2.down_x), 2) + Math.pow((tmp1.down_y - tmp2.down_y), 2));
                 }
+
                 break;
             case MotionEvent.ACTION_MOVE:
                 for (int size = event.getPointerCount(), i = 0; i < size; i++) {
-                    Point fm =pointers.get(event.getPointerId(i));
+                    touchPoint fm =pointers.get(event.getPointerId(i));
                     if (fm != null) {
                         fm.x = event.getX(i);
                         fm.y = event.getY(i);
                     }
                 }
                 try {
-                    Point tmp1,tmp2;
+                    touchPoint tmp1,tmp2;
                     double tmp_dis;
                     if (ce_move_flag){
                         if (mp.isPlaying()){
@@ -190,7 +235,8 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_CANCEL:
-                Point fu=new Point();
+                touchPoint fu=new touchPoint();
+                int now=mp.getCurrentPosition()/ce.accuracy;
                 fu.x=event.getX(pointerIndex);
                 fu.y=event.getY(pointerIndex);
                 pointers.remove(pointerId);
@@ -215,9 +261,39 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
                         ce_touch_id1=-1;
                     }
                 }
+                if (btn_r.isIn(fu.x,fu.y)){
+                    put(now,fu,"R");
+                }
+                if (btn_s.isIn(fu.x,fu.y)){
+                    put(now,fu,"S");
+                }
+                if (btn_t.isIn(fu.x,fu.y)){
+                    put(now,fu,"T");
+                }
+                if (btn_x.isIn(fu.x,fu.y)){
+                    put(now,fu,"X");
+                }
+                if (btn_mp_ctrl.isIn(fu.x,fu.y)){
+                    if (mp.isPlaying()){
+                        mp.pause();
+                        btn_mp_ctrl.setBottomTo(true);
+                    }else{
+                        mp.start();
+                        btn_mp_ctrl.setBottomTo(false);
+                    }
+                }
                 break;
         }
         return true;
+    }
+    public void put(int now,touchPoint po,String btn){
+        if (mp!=null) {
+            if (now - po.down_time >= 5) {
+                ce.ct.put_long(po.down_time, now, btn);
+            } else {
+                ce.ct.put(po.down_time, btn, 1);
+            }
+        }
     }
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
@@ -226,6 +302,16 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
     public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
         ce.recycle();
         back.recycle();
+        frame.recycle();
+        btn_del_0.recycle();
+        btn_del_1.recycle();
+        btn_edt_0.recycle();
+        btn_edt_1.recycle();
+
+        play.recycle();
+        pause.recycle();
+        save.recycle();
+
         BR.recycle();
         BS.recycle();
         BT.recycle();

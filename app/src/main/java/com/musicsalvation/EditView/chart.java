@@ -69,10 +69,14 @@ public class chart {
 
     JSONObject tmp;
     int key_time;
+    SparseArray<Point>isInIndex;
+    SparseArray<Point>isInIndex_tmp=new SparseArray<Point>();
+    Point isIn_point;
     SparseArray<Integer>finalDraw_key;
     SparseArray<String>finalDraw_volume;
 
     public void draw(int time_lv,Canvas canvas,Paint paint){
+        int isInIndex_tmp_counter=0;
         while (ce.time_current+ time_side_dis[time_lv]>chart_key.keyAt(last_chart)) {
             if (last_chart<chart_key.size()-1) {
                 last_chart++;
@@ -93,72 +97,99 @@ public class chart {
             }else{
                 int point_x= (int) (start_x+(end_x-start_x)+(((ce.time_current/ce.accuracy)-key_time)*ce.unit_lv[time_lv]));
                 if (tmp.optInt("R",0)!=0){
+                    Point point=new Point(key_time,"R",tmp.optInt("R"),point_x,ce.y1);
                     switch(tmp.optInt("R")){
                         case 1:
                         case 2:
                             Graphic.drawPic(canvas, BR[0], point_x, ce.y1, 0, 255, paint);
+                            point.setPic(BR[0].getWidth(), BR[0].getHeight());
                             break ;
                         case 3:
                             Graphic.drawPic(canvas, BR[1], point_x, ce.y1, 0, 255, paint);
+                            point.setPic(BR[1].getWidth(), BR[1].getHeight());
                             break;
                         case 4:
+                            point.setPic(BR[2].getWidth(),BR[2].getHeight());
                             finalDraw_key.put(finalDraw_counter,key_time);
                             finalDraw_volume.put(finalDraw_counter,"R");
                             finalDraw_counter++;
                             break;
                     }
+                    isInIndex_tmp.put(isInIndex_tmp_counter,point);
+                    isInIndex_tmp_counter++;
                 }
                 if (tmp.optInt("S",0)!=0){
+                    Point point=new Point(key_time,"S",tmp.optInt("S"),point_x,ce.y1);
                     switch(tmp.optInt("S")){
                         case 1:
                         case 2:
                             Graphic.drawPic(canvas, BS[0], point_x, ce.y1, 0, 255, paint);
+                            point.setPic(BS[0].getWidth(), BS[0].getHeight());
                             break ;
                         case 3:
                             Graphic.drawPic(canvas, BS[1], point_x, ce.y1, 0, 255, paint);
+                            point.setPic(BS[1].getWidth(), BS[1].getHeight());
                             break;
                         case 4:
+                            point.setPic(BS[2].getWidth(),BS[2].getHeight());
                             finalDraw_key.put(finalDraw_counter,key_time);
                             finalDraw_volume.put(finalDraw_counter,"S");
                             finalDraw_counter++;
                             break;
                     }
+                    isInIndex_tmp.put(isInIndex_tmp_counter,point);
+                    isInIndex_tmp_counter++;
                 }
                 if (tmp.optInt("T",0)!=0){
+                    Point point=new Point(key_time,"T",tmp.optInt("T"),point_x,ce.y1);
                     switch(tmp.optInt("T")){
                         case 1:
                         case 2:
                             Graphic.drawPic(canvas, BT[0], point_x, ce.y1, 0, 255, paint);
+                            point.setPic(BT[0].getWidth(), BT[0].getHeight());
                             break ;
                         case 3:
                             Graphic.drawPic(canvas, BT[1], point_x, ce.y1, 0, 255, paint);
+                            point.setPic(BT[1].getWidth(), BT[1].getHeight());
                             break;
                         case 4:
+                            point.setPic(BT[2].getWidth(),BT[2].getHeight());
                             finalDraw_key.put(finalDraw_counter,key_time);
                             finalDraw_volume.put(finalDraw_counter,"T");
                             finalDraw_counter++;
                             break;
                     }
+                    isInIndex_tmp.put(isInIndex_tmp_counter,point);
+                    isInIndex_tmp_counter++;
                 }
                 if (tmp.optInt("X",0)!=0){
+                    Point point=new Point(key_time,"X",tmp.optInt("X"),point_x,ce.y1);
                     switch(tmp.optInt("X")){
                         case 1:
                         case 2:
                             Graphic.drawPic(canvas, BX[0], point_x, ce.y1, 0, 255, paint);
+                            point.setPic(BX[0].getWidth(), BX[0].getHeight());
                             break ;
                         case 3:
                             Graphic.drawPic(canvas, BX[1], point_x, ce.y1, 0, 255, paint);
+                            point.setPic(BX[1].getWidth(), BX[1].getHeight());
                             break;
                         case 4:
+                            point.setPic(BX[2].getWidth(),BX[2].getHeight());
                             finalDraw_key.put(finalDraw_counter,key_time);
                             finalDraw_volume.put(finalDraw_counter,"X");
                             finalDraw_counter++;
                             break;
                     }
+                    isInIndex_tmp.put(isInIndex_tmp_counter,point);
+                    isInIndex_tmp_counter++;
                 }
             }
             main_counter--;
         }while (ce.time_current-time_side_dis[time_lv]>chart_key.keyAt(main_counter));
+
+        isInIndex=isInIndex_tmp;
+        isInIndex_tmp.clear();
 
         if (finalDraw_counter!=0){
             for (int a=finalDraw_counter;a>0;a--){
@@ -205,14 +236,6 @@ public class chart {
             e.printStackTrace();
         }
     }
-    public void drag(int from,int to,String btn,int type){
-        if (type==1){
-            remove(from,btn);
-            put(to,btn,1);
-        }else{
-            
-        }
-    }
     public void remove(int key,String btn){
         JSONObject tmp;
         if (chart_key.get(key).length()>1){
@@ -224,7 +247,49 @@ public class chart {
             chart_key.remove(key);
         }
     }
+    public void drag(int from,int to,String btn,int type){
+        if (from!=to) {
+            if (type == 1) {
+                remove(from, btn);
+                put(to, btn, 1);
+            } else {
+                int dis = to - from;
+                int tmp_counter=0;
+                if (type != 2) {
+                    tmp_counter=chart_key.indexOfKey(from);
+                    do {
+                        tmp_counter--;
+                    }while(chart_key.get(tmp_counter).optInt(btn,0)!=2);
+                }else {
+                    tmp_counter=from;
+                }
+                remove(tmp_counter,btn);
+                put(tmp_counter+dis,btn,2);
+                tmp_counter++;
+                do {
+                    remove(tmp_counter,btn);
+                    put(tmp_counter+dis,btn,3);
+                    tmp_counter++;
+                }while (chart_key.get(tmp_counter).optInt(btn,0)!=4);
+                remove(tmp_counter,btn);
+                put(tmp_counter+dis,btn,4);
+            }
+        }
+    }
+    public boolean isIn(double x,double y){
+        for (int i=0;i<isInIndex.size();i++){
+            double start_x=isInIndex.get(i).x;
+            double start_y=isInIndex.get(i).y;
+            double end_x=start_x+isInIndex.get(i).width;
+            double end_y=start_y+isInIndex.get(i).hight;
 
+            if (x>start_x&&x<end_x&&y>start_y&&y<end_y){
+                isIn_point=isInIndex.get(i);
+                return true;
+            }
+        }
+        return false;
+    }
 
     public int STI(String key){
         return Integer.valueOf(key);

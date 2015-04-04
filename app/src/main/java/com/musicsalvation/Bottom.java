@@ -75,6 +75,11 @@ public class Bottom {
 			return true;
 		return false;
 	}
+    public Boolean isIn(double pointx,double pointy){//判斷觸控位置
+        if(pointx>=x&&pointx<=x+width&&      	pointy>=y&&pointy<=y+height)
+            return true;
+        return false;
+    }
 	public void recycle(){
 		onBitmap.recycle();//按下狀態的圖片
 		offBitmap.recycle();//未按下狀態的圖片
