@@ -75,7 +75,6 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
         play=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_play,164,182,false);
         pause=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_pause,164,182,false);
         save=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_save,141,216,false);
-        boolean mp_ctrl=false;
         btn_mp_ctrl=new Bottom(activity,play,pause,93,163);
         btn_save=new Bottom(activity,save,save,1180,180);
 
@@ -255,6 +254,7 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
                             if (tmp>mp.getDuration())
                                 tmp=mp.getDuration();
                             mp.seekTo(tmp);
+                            if (btn_mp_ctrl.getBottom())
                             mp.start();
                         }
                         ce_move_flag=false;
@@ -276,10 +276,10 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
                 if (btn_mp_ctrl.isIn(fu.x,fu.y)){
                     if (mp.isPlaying()){
                         mp.pause();
-                        btn_mp_ctrl.setBottomTo(true);
+                        btn_mp_ctrl.setBottomTo(false);
                     }else{
                         mp.start();
-                        btn_mp_ctrl.setBottomTo(false);
+                        btn_mp_ctrl.setBottomTo(true);
                     }
                 }
                 break;

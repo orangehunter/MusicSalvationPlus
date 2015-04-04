@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.Log;
 import android.util.SparseArray;
-import android.widget.Switch;
 
 import com.musicsalvation.Charts;
 import com.musicsalvation.Graphic;
@@ -41,9 +40,11 @@ public class chart {
     public chart(MainActivity activity,chartEditScreen ce,int start_x,int start_y,int end_x,int end_y){
         BR=new Bitmap[2];
         BR[0]=Graphic.LoadBitmap(activity.getResources(), R.drawable.bottom_round  ,80,80,false);
+        BR[1]=Graphic.LoadBitmap(activity.getResources(),R.drawable.btn_long_red_0,60,20,false);
 
         BS=new Bitmap[2];
         BS[0]=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_square  ,80,80,false);
+        //TODO BS[0]=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_square  ,80,80,false);
 
         BT=new Bitmap[2];
         BT[0]=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_trangle ,80,80,false);
@@ -57,21 +58,22 @@ public class chart {
         this.end_y=end_y;
         this.ce=ce;
         chart_key =new SparseArray<JSONObject>();
-        Iterator<String> iter = charts.chart.keys();
-        while (iter.hasNext()) {
-            String key=iter.next();
-            chart_key.put(STI(key),charts.chart.optJSONObject(key));
+        if (charts!=null) {
+            Iterator<String> iter = charts.chart.keys();
+            while (iter.hasNext()) {
+                String key = iter.next();
+                chart_key.put(STI(key), charts.chart.optJSONObject(key));
+            }
         }
-
 
     }
     int main_counter=0;
 
     JSONObject tmp;
     int key_time;
-    SparseArray<Point>isInIndex;
-    SparseArray<Point>isInIndex_tmp=new SparseArray<Point>();
-    Point isIn_point;
+    SparseArray<keyPoint>isInIndex;
+    SparseArray<keyPoint>isInIndex_tmp=new SparseArray<keyPoint>();
+    keyPoint isIn_point;
     SparseArray<Integer>finalDraw_key;
     SparseArray<String>finalDraw_volume;
 
@@ -92,12 +94,10 @@ public class chart {
         do{
             tmp=chart_key.get(chart_key.keyAt(main_counter));
             key_time=chart_key.keyAt(main_counter);
-            if (tmp==null){
-                Log.e("chart draw","chart_key volume is null.");
-            }else{
+            if (tmp!=null){
                 int point_x= (int) (start_x+(end_x-start_x)+(((ce.time_current/ce.accuracy)-key_time)*ce.unit_lv[time_lv]));
                 if (tmp.optInt("R",0)!=0){
-                    Point point=new Point(key_time,"R",tmp.optInt("R"),point_x,ce.y1);
+                    keyPoint point=new keyPoint(key_time,"R",tmp.optInt("R"),point_x,ce.y1);
                     switch(tmp.optInt("R")){
                         case 1:
                         case 2:
@@ -119,7 +119,7 @@ public class chart {
                     isInIndex_tmp_counter++;
                 }
                 if (tmp.optInt("S",0)!=0){
-                    Point point=new Point(key_time,"S",tmp.optInt("S"),point_x,ce.y1);
+                    keyPoint point=new keyPoint(key_time,"S",tmp.optInt("S"),point_x,ce.y1);
                     switch(tmp.optInt("S")){
                         case 1:
                         case 2:
@@ -141,7 +141,7 @@ public class chart {
                     isInIndex_tmp_counter++;
                 }
                 if (tmp.optInt("T",0)!=0){
-                    Point point=new Point(key_time,"T",tmp.optInt("T"),point_x,ce.y1);
+                    keyPoint point=new keyPoint(key_time,"T",tmp.optInt("T"),point_x,ce.y1);
                     switch(tmp.optInt("T")){
                         case 1:
                         case 2:
@@ -163,7 +163,7 @@ public class chart {
                     isInIndex_tmp_counter++;
                 }
                 if (tmp.optInt("X",0)!=0){
-                    Point point=new Point(key_time,"X",tmp.optInt("X"),point_x,ce.y1);
+                    keyPoint point=new keyPoint(key_time,"X",tmp.optInt("X"),point_x,ce.y1);
                     switch(tmp.optInt("X")){
                         case 1:
                         case 2:
@@ -186,6 +186,8 @@ public class chart {
                 }
             }
             main_counter--;
+            if (main_counter<0)
+                break;
         }while (ce.time_current-time_side_dis[time_lv]>chart_key.keyAt(main_counter));
 
         isInIndex=isInIndex_tmp;
@@ -277,18 +279,22 @@ public class chart {
         }
     }
     public boolean isIn(double x,double y){
-        for (int i=0;i<isInIndex.size();i++){
-            double start_x=isInIndex.get(i).x;
-            double start_y=isInIndex.get(i).y;
-            double end_x=start_x+isInIndex.get(i).width;
-            double end_y=start_y+isInIndex.get(i).hight;
+        if (isInIndex!=null) {
+            for (int i = 0; i < isInIndex.size(); i++) {
+                double start_x = isInIndex.get(i).x;
+                double start_y = isInIndex.get(i).y;
+                double end_x = start_x + isInIndex.get(i).width;
+                double end_y = start_y + isInIndex.get(i).hight;
 
-            if (x>start_x&&x<end_x&&y>start_y&&y<end_y){
-                isIn_point=isInIndex.get(i);
-                return true;
+                if (x > start_x && x < end_x && y > start_y && y < end_y) {
+                    isIn_point = isInIndex.get(i);
+                    return true;
+                }
             }
+            return false;
+        }else {
+            return false;
         }
-        return false;
     }
 
     public int STI(String key){

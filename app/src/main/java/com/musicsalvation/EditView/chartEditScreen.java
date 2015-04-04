@@ -65,7 +65,7 @@ public class chartEditScreen {
         y3=up+((down-up)/5)*3;
         y4=up+((down-up)/5)*4;
         ca=new calibration(this,Duration,left,up,right,down,30,Color.WHITE);
-        //ct=new chart(activity,this,left,up,right,down);
+        ct=new chart(activity,this,left,up,right,down);
     }
 
     public void draw(Canvas canvas,Paint paint,int currentTime){
@@ -82,6 +82,7 @@ public class chartEditScreen {
         Graphic.drawLine(canvas,Color.YELLOW,left,y4,right,y4,1,paint);
         Graphic.drawLine(canvas, Color.RED, left + (right - left) / 2, up, left + (right - left) / 2, down, 3, paint);
         ca.draw(time_lv,canvas,paint);
+        ct.draw(time_lv,canvas,paint);
 
         paint.setColor(Color.WHITE);
         //canvas.drawRect(rf2, paint);
@@ -117,6 +118,6 @@ public class chartEditScreen {
         }
     }
     public void recycle(){
-        //ct.recycle();
+        ct.recycle();
     }
 }
