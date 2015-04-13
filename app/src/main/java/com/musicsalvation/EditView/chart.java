@@ -44,13 +44,15 @@ public class chart {
 
         BS=new Bitmap[2];
         BS[0]=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_square  ,80,80,false);
-        //TODO BS[0]=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_square  ,80,80,false);
+        BS[1]=Graphic.LoadBitmap(activity.getResources(),R.drawable.btn_long_yellow_0  ,80,80,false);
 
         BT=new Bitmap[2];
         BT[0]=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_trangle ,80,80,false);
+        BS[1]=Graphic.LoadBitmap(activity.getResources(),R.drawable.btn_long_green_0,80,80,false);
 
         BX=new Bitmap[2];
         BX[0]=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_x       ,80,80,false);
+        BS[1]=Graphic.LoadBitmap(activity.getResources(),R.drawable.btn_long_blue_0  ,80,80,false);
 
         this.start_x=start_x;
         this.start_y=start_y;
@@ -95,7 +97,7 @@ public class chart {
             tmp=chart_key.get(chart_key.keyAt(main_counter));
             key_time=chart_key.keyAt(main_counter);
             if (tmp!=null){
-                int point_x= (int) (start_x+(end_x-start_x)+(((ce.time_current/ce.accuracy)-key_time)*ce.unit_lv[time_lv]));
+                int point_x= (int) (start_x+((end_x-start_x)/2)-(((ce.time_current/ce.accuracy)-key_time)*ce.unit_lv[time_lv]));
                 if (tmp.optInt("R",0)!=0){
                     keyPoint point=new keyPoint(key_time,"R",tmp.optInt("R"),point_x,ce.y1);
                     switch(tmp.optInt("R")){
@@ -109,7 +111,7 @@ public class chart {
                             point.setPic(BR[1].getWidth(), BR[1].getHeight());
                             break;
                         case 4:
-                            point.setPic(BR[2].getWidth(),BR[2].getHeight());
+                            point.setPic(BR[0].getWidth(),BR[0].getHeight());
                             finalDraw_key.put(finalDraw_counter,key_time);
                             finalDraw_volume.put(finalDraw_counter,"R");
                             finalDraw_counter++;
@@ -123,15 +125,15 @@ public class chart {
                     switch(tmp.optInt("S")){
                         case 1:
                         case 2:
-                            Graphic.drawPic(canvas, BS[0], point_x, ce.y1, 0, 255, paint);
+                            Graphic.drawPic(canvas, BS[0], point_x, ce.y2, 0, 255, paint);
                             point.setPic(BS[0].getWidth(), BS[0].getHeight());
                             break ;
                         case 3:
-                            Graphic.drawPic(canvas, BS[1], point_x, ce.y1, 0, 255, paint);
+                            Graphic.drawPic(canvas, BS[1], point_x, ce.y2, 0, 255, paint);
                             point.setPic(BS[1].getWidth(), BS[1].getHeight());
                             break;
                         case 4:
-                            point.setPic(BS[2].getWidth(),BS[2].getHeight());
+                            point.setPic(BS[0].getWidth(),BS[0].getHeight());
                             finalDraw_key.put(finalDraw_counter,key_time);
                             finalDraw_volume.put(finalDraw_counter,"S");
                             finalDraw_counter++;
@@ -141,19 +143,19 @@ public class chart {
                     isInIndex_tmp_counter++;
                 }
                 if (tmp.optInt("T",0)!=0){
-                    keyPoint point=new keyPoint(key_time,"T",tmp.optInt("T"),point_x,ce.y1);
+                    keyPoint point=new keyPoint(key_time,"T",tmp.optInt("T"),point_x,ce.y3);
                     switch(tmp.optInt("T")){
                         case 1:
                         case 2:
-                            Graphic.drawPic(canvas, BT[0], point_x, ce.y1, 0, 255, paint);
+                            Graphic.drawPic(canvas, BT[0], point_x, ce.y3, 0, 255, paint);
                             point.setPic(BT[0].getWidth(), BT[0].getHeight());
                             break ;
                         case 3:
-                            Graphic.drawPic(canvas, BT[1], point_x, ce.y1, 0, 255, paint);
+                            Graphic.drawPic(canvas, BT[1], point_x, ce.y3, 0, 255, paint);
                             point.setPic(BT[1].getWidth(), BT[1].getHeight());
                             break;
                         case 4:
-                            point.setPic(BT[2].getWidth(),BT[2].getHeight());
+                            point.setPic(BT[0].getWidth(),BT[0].getHeight());
                             finalDraw_key.put(finalDraw_counter,key_time);
                             finalDraw_volume.put(finalDraw_counter,"T");
                             finalDraw_counter++;
@@ -163,19 +165,19 @@ public class chart {
                     isInIndex_tmp_counter++;
                 }
                 if (tmp.optInt("X",0)!=0){
-                    keyPoint point=new keyPoint(key_time,"X",tmp.optInt("X"),point_x,ce.y1);
+                    keyPoint point=new keyPoint(key_time,"X",tmp.optInt("X"),point_x,ce.y4);
                     switch(tmp.optInt("X")){
                         case 1:
                         case 2:
-                            Graphic.drawPic(canvas, BX[0], point_x, ce.y1, 0, 255, paint);
+                            Graphic.drawPic(canvas, BX[0], point_x, ce.y4, 0, 255, paint);
                             point.setPic(BX[0].getWidth(), BX[0].getHeight());
                             break ;
                         case 3:
-                            Graphic.drawPic(canvas, BX[1], point_x, ce.y1, 0, 255, paint);
+                            Graphic.drawPic(canvas, BX[1], point_x, ce.y4, 0, 255, paint);
                             point.setPic(BX[1].getWidth(), BX[1].getHeight());
                             break;
                         case 4:
-                            point.setPic(BX[2].getWidth(),BX[2].getHeight());
+                            point.setPic(BX[0].getWidth(),BX[0].getHeight());
                             finalDraw_key.put(finalDraw_counter,key_time);
                             finalDraw_volume.put(finalDraw_counter,"X");
                             finalDraw_counter++;
@@ -193,9 +195,9 @@ public class chart {
         isInIndex=isInIndex_tmp;
         isInIndex_tmp.clear();
 
-        if (finalDraw_counter!=0){
+        /*if (finalDraw_key.size()!=&&finalDraw_volume.size()!=0){
             for (int a=finalDraw_counter;a>0;a--){
-                int point_x= (int) (start_x+(end_x-start_x)+(((ce.time_current/ce.accuracy)-finalDraw_key.get(a))*ce.unit_lv[time_lv]));
+                int point_x= (int) (start_x+((end_x-start_x)/2)-(((ce.time_current/ce.accuracy)-key_time)*ce.unit_lv[time_lv]));
                 switch (finalDraw_volume.get(a)){
                     case "R":
                         Graphic.drawPic(canvas, BR[0], point_x, ce.y1, 0, 255, paint);
@@ -211,7 +213,7 @@ public class chart {
                         break;
                 }
             }
-        }
+        }*/
 
     }
     public void put_long(int key_start,int key_end,String btn){
