@@ -75,7 +75,7 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
         play=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_play,164,182,false);
         pause=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_pause,164,182,false);
         save=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_save,141,216,false);
-        btn_mp_ctrl=new Bottom(activity,play,pause,93,163);
+        btn_mp_ctrl=new Bottom(activity,pause,play,93,163);
         btn_save=new Bottom(activity,save,save,1180,180);
 
         del_mod_flag=false;//將刪除模式關閉
@@ -219,12 +219,12 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
                         tmp2 = pointers.get(ce_touch_id2);
                         tmp_dis =  Math.sqrt(Math.pow((tmp1.x - tmp2.x), 2) + Math.pow((tmp1.y - tmp2.y), 2));
                         if (tmp_dis > ce_zoom_dis * 2) {
-                            ce.reLv(1);
+                            ce.reLv(-1);
                             ce_zoom_flag=false;
                             ce_touch_id1 =-1;
                         }
                         if (tmp_dis < ce_zoom_dis / 2) {
-                            ce.reLv(-1);
+                            ce.reLv(1);
                             ce_zoom_flag=false;
                             ce_touch_id1 =-1;
                         }
@@ -234,8 +234,12 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_CANCEL:
-                touchPoint fu=new touchPoint();
-                int now=mp.getCurrentPosition()/ce.accuracy;
+                touchPoint fu;
+                if (pointers.get(pointerIndex)!=null) {
+                    fu = pointers.get(pointerIndex);
+                }else{
+                    fu=new touchPoint();
+                }
                 fu.x=event.getX(pointerIndex);
                 fu.y=event.getY(pointerIndex);
                 pointers.remove(pointerId);
@@ -243,6 +247,8 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
                     if (pointerId == ce_touch_id1 || pointerId == ce_touch_id2) {
                         ce_zoom_flag = false;
                         ce_touch_id1 = -1;
+                        if (btn_mp_ctrl.getBottom())
+                            mp.start();
                     }
                 }
                 if (ce_move_flag){
@@ -255,23 +261,23 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
                                 tmp=mp.getDuration();
                             mp.seekTo(tmp);
                             if (btn_mp_ctrl.getBottom())
-                            mp.start();
+                                mp.start();
                         }
                         ce_move_flag=false;
                         ce_touch_id1=-1;
                     }
                 }
                 if (btn_r.isIn(fu.x,fu.y)){
-                    put(now,fu,"R");
+                    put(fu.down_time,fu,"R");
                 }
                 if (btn_s.isIn(fu.x,fu.y)){
-                    put(now,fu,"S");
+                    put(fu.down_time,fu,"S");
                 }
                 if (btn_t.isIn(fu.x,fu.y)){
-                    put(now,fu,"T");
+                    put(fu.down_time,fu,"T");
                 }
                 if (btn_x.isIn(fu.x,fu.y)){
-                    put(now,fu,"X");
+                    put(fu.down_time,fu,"X");
                 }
                 if (btn_mp_ctrl.isIn(fu.x,fu.y)){
                     if (mp.isPlaying()){
@@ -288,11 +294,11 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
     }
     public void put(int now,touchPoint po,String btn){
         if (mp!=null) {
-            if (now - po.down_time >= 5) {
-                ce.ct.put_long(po.down_time, now, btn);
-            } else {
-                ce.ct.put(po.down_time, btn, 1);
-            }
+            //if (now - po.down_time >= 5) {
+            //  ce.ct.put_long(po.down_time, now, btn);
+            //} else {
+            ce.ct.put(now, btn, 1);
+            //}
         }
     }
     @Override

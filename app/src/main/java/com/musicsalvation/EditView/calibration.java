@@ -19,9 +19,9 @@ public class calibration {
     int end_x;
     int x_length;
     final int sec_1=0;
-    final int sec_10=1;
-    final int sec_20=2;
-    final int sec_30=3;
+    final int sec_5=1;
+    final int sec_10=2;
+    final int sec_20=3;
     int color;
     SparseArray<lines> Line;
     SparseArray<String> String_lv[];
@@ -51,15 +51,15 @@ public class calibration {
                 String_lv[0].put(c_1, getString(counter));
                 c_1++;
             }
-            if (counter % 10000 == 0) {
+            if (counter % 5000 == 0) {
                 String_lv[1].put(c_2, getString(counter));
                 c_2++;
             }
-            if (counter % 20000 == 0) {
+            if (counter % 10000 == 0) {
                 String_lv[2].put(c_3, getString(counter));
                 c_3++;
             }
-            if (counter % 30000 == 0) {
+            if (counter % 20000 == 0) {
                 String_lv[3].put(c_4, getString(counter));
                 c_4++;
             }
@@ -93,14 +93,14 @@ public class calibration {
             case sec_1:
                 line_start=(ce.time_current/ce.accuracy)-26;
                 break;
+            case sec_5:
+                line_start=(ce.time_current/ce.accuracy/5)-26;
+                break;
             case sec_10:
                 line_start=(ce.time_current/ce.accuracy/10)-26;
                 break;
             case sec_20:
                 line_start=(ce.time_current/ce.accuracy/20)-26;
-                break;
-            case sec_30:
-                line_start=(ce.time_current/ce.accuracy/30)-26;
                 break;
         }
         if (line_start<0){

@@ -33,9 +33,9 @@ public class chartEditScreen {
 
     static int time_lv;
     final int sec_1=0;
-    final int sec_10=1;
-    final int sec_20=2;
-    final int sec_30=3;
+    final int sec_5=1;
+    final int sec_10=2;
+    final int sec_20=3;
 
     static int unit;//刻度間隔
     static double unit_lv[];//每0.1sec移動單位
@@ -53,9 +53,9 @@ public class chartEditScreen {
         unit = (right-left) / 5 / 10;//間隔距離
         unit_lv = new double[4];
         unit_lv[0] = unit;//每大格1秒 每0.1秒移動距離
-        unit_lv[1] = unit_lv[0] / 10;//每大格10秒 每0.1秒移動距離
-        unit_lv[2] = unit_lv[1] / 2;//每大格20秒 每0.1秒移動距離
-        unit_lv[3] = unit_lv[1] / 3;//每大格30秒 每0.1秒移動距離
+        unit_lv[1] = unit_lv[0] / 5;//每大格5秒 每0.1秒移動距離
+        unit_lv[2] = unit_lv[0] / 10;//每大格10秒 每0.1秒移動距離
+        unit_lv[3] = unit_lv[0] / 20;//每大格20秒 每0.1秒移動距離
         this.left=left;
         this.right=right;
         this.up=up;
@@ -108,7 +108,7 @@ public class chartEditScreen {
     }
     public void reLv(int a){
         if (a==1){
-            if (time_lv<sec_30){
+            if (time_lv<sec_20){
                 time_lv+=a;
             }
         }else if(a==-1){
