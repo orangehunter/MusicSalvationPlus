@@ -49,7 +49,7 @@ public class chartEditScreen {
     public chartEditScreen(MainActivity activity,EditView ev,int left,int up,int right,int down,int Duration){
         this.activity=activity;
         this.ev=ev;
-        time_lv=sec_10;
+        time_lv=sec_5;
         unit = (right-left) / 5 / 10;//間隔距離
         unit_lv = new double[4];
         unit_lv[0] = unit;//每大格1秒 每0.1秒移動距離

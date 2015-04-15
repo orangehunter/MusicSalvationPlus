@@ -3,6 +3,7 @@ package com.musicsalvation;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
+import android.util.SparseArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,6 +19,10 @@ import java.io.IOException;
  * Created by user on 2015/3/24.
  */
 public class FilesAndData {
+    MainActivity activity;
+    public FilesAndData(MainActivity activity) throws FileNotFoundException, IOException {
+        this.activity=activity;
+    }
     //影片選擇====================================
     public static int video_select=0;
     //影片選擇------------------------------------------------------------
@@ -55,6 +60,22 @@ public class FilesAndData {
     //自由模式參數===================================
     public static Uri song;
     //自由模式參數-----------------------------------
+    public static File getChartDir(){
+        File root = Environment.getDataDirectory();
+        File dir = new File (root.getAbsolutePath() + "/charts");
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+        return dir;
+    }
+    public static File getDataDir(){
+        File root = Environment.getDataDirectory();
+        File dir = new File (root.getAbsolutePath() + "/Datas");
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+        return dir;
+    }
     public static String turnUriToName(Uri u){
         String a=u.toString(),b="";
         for(int i=a.length();i>0;i--){
@@ -75,122 +96,41 @@ public class FilesAndData {
         }
         return c;
     }
-
-    public static Charts read(Uri uri){//譜面讀取
-        //String fileName=turnUriToName(uri)+".chart";
-        JSONObject json=null;
+    public static Charts readChart(String fileName){//譜面讀取
+        Charts ct=new Charts();
         String content=""; //內容
         byte[] buff = new byte[1024];
 
         try {
-            File sdCard = Environment.getExternalStorageDirectory();
-            File dir = new File (sdCard.getAbsolutePath() + "/MusicSelvation_datas/charts");
-            dir.mkdirs();
-            File files = new File(dir, turnUriToName(uri)+".chart");
-            FileInputStream file =new FileInputStream(files);
-            //FileInputStream file=openFileInput(fileName);
-            while((file.read(buff))!=-1){
-                content+=new String(buff).trim();
-            }
-            json=new JSONObject(content);
-            file.close();
-        } catch (FileNotFoundException e) {
-            Log.e("read", "找不到檔案");
-            e.printStackTrace();
-        } catch (IOException e) {
-            Log.e("read", "讀取檔案失敗");
-            e.printStackTrace();
-        } catch (JSONException e) {
-            Log.e("read", "寫入json失敗");
-            e.printStackTrace();
-        };
-        Charts ct;
-        ct= new Charts();
-        if(json!=null) {
-            /*try {
-                ct.BtR = json.getJSONObject("R");
-                ct.BtS = json.getJSONObject("S");
-                ct.BtT = json.getJSONObject("T");
-                ct.BtX = json.getJSONObject("X");
-            } catch (JSONException e) {
-                Log.e("GameView", "JSON load fail");
-                e.printStackTrace();
-            }*/
-        }
-        return ct;
-    }
-    public static Charts read(String name){//譜面讀取
-        //String fileName=turnUriToName(uri)+".chart";
-        JSONObject json=null;
-        String content=""; //內容
-        byte[] buff = new byte[1024];
 
-        try {
-            File sdCard = Environment.getExternalStorageDirectory();
-            File dir = new File (sdCard.getAbsolutePath() + "/MusicSelvation_datas/charts");
-            dir.mkdirs();
-            File files = new File(dir, name+".chart");
-            FileInputStream file =new FileInputStream(files);
-            //FileInputStream file=openFileInput(fileName);
-            while((file.read(buff))!=-1){
-                content+=new String(buff).trim();
+            File dir = getChartDir();
+            File files = new File(dir, fileName + ".charts");
+            FileInputStream file = new FileInputStream(files);
+            while ((file.read(buff)) != -1) {
+                content += new String(buff).trim();
             }
-            json=new JSONObject(content);
-            file.close();
-        } catch (FileNotFoundException e) {
-            Log.e("read", "找不到檔案");
-            e.printStackTrace();
-        } catch (IOException e) {
-            Log.e("read", "讀取檔案失敗");
-            e.printStackTrace();
-        } catch (JSONException e) {
-            Log.e("read", "寫入json失敗");
-            e.printStackTrace();
-        };
-        Charts ct;
-        ct= new Charts();
-        if(json!=null) {
-            /*try {
-                ct.BtR = json.getJSONObject("R");
-                ct.BtS = json.getJSONObject("S");
-                ct.BtT = json.getJSONObject("T");
-                ct.BtX = json.getJSONObject("X");
-            } catch (JSONException e) {
-                Log.e("GameView", "JSON load fail");
-                e.printStackTrace();
-            }*/
+            JSONObject json = new JSONObject(content);
+            ct.chart=json;
+        }catch (Exception e){
+            Log.e("writeChart",""+e);
         }
         return ct;
     }
 
-    public static  void write(Uri uri,JSONObject btR,JSONObject btS,JSONObject btT,JSONObject btX){//譜面寫入
-        JSONObject json=new JSONObject();
+    public static  void writeChart(String fileName,Charts ct){//譜面寫入
+        JSONObject json=ct.chart;
         try {
-            json.put("R", btR);
-            json.put("S", btS);
-            json.put("T",btT);
-            json.put("X", btX);
-        } catch (JSONException e) {
-            Log.e("write", "無法將參數導入json");
-            e.printStackTrace();
-        }
-        try {
-            File sdCard = Environment.getExternalStorageDirectory();
-            File dir = new File (sdCard.getAbsolutePath() + "/MusicSelvation_datas/charts");
-            dir.mkdirs();
-            File file = new File(dir, turnUriToName(uri)+".chart");
+            File dir = getDataDir();
+            File file = new File(dir, fileName+".charts");
             FileOutputStream writer =new FileOutputStream(file);
-
-            //String fileName=turnUriToName(uri)+".chart";
-            //FileOutputStream writer = openFileOutput(fileName, Context.MODE_PRIVATE);
             writer.write(json.toString().getBytes());
             writer.close();
-            Log.v("write", "資料寫入成功");
+            Log.v("Chart", "writeChart");
         } catch (FileNotFoundException e) {
-            Log.e("write", "FileNotFoundException");
+            Log.v("Chart","FileNotFoundException");
             e.printStackTrace();
         } catch (IOException e) {
-            Log.e("write", "IOException");
+            Log.v("Chart","IOException");
             e.printStackTrace();
         }
     }
@@ -202,9 +142,8 @@ public class FilesAndData {
         byte[] buff = new byte[1024];
 
         try {
-            File sdCard = Environment.getExternalStorageDirectory();
-            File dir = new File (sdCard.getAbsolutePath() + "/MusicSelvation_datas/data");
-            dir.mkdirs();
+
+            File dir = getDataDir();
             File files = new File(dir,fileName);
             FileInputStream file =new FileInputStream(files);
             //FileInputStream file=openFileInput(fileName);
@@ -284,11 +223,7 @@ public class FilesAndData {
             e.printStackTrace();
         }
         try {
-			/*String fileName="Data.save";
-			FileOutputStream writer = openFileOutput(fileName, Context.MODE_PRIVATE);*/
-            File sdCard = Environment.getExternalStorageDirectory();
-            File dir = new File (sdCard.getAbsolutePath() + "/MusicSelvation_datas/data");
-            dir.mkdirs();
+            File dir = getDataDir();
             File file = new File(dir, "Data.save");
             FileOutputStream writer =new FileOutputStream(file);
             writer.write(json.toString().getBytes());

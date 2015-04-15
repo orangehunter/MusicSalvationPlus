@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
@@ -25,7 +26,6 @@ import com.musicsalvation.GameView.GameView;
 public class MainActivity extends Activity{
     int first_activity=0;
     int nowView=0;
-    StartView startview;
     MainView mainview;
     EditView editview;
     MapView mapview;
@@ -96,13 +96,6 @@ public class MainActivity extends Activity{
         setContentView(editview);
         editview.requestFocus();
         editview.setFocusableInTouchMode(true);
-    }
-    private void goToStartView() {
-        if(startview==null)
-        {
-            startview=new StartView(this);
-        }
-        setContentView(startview);
     }
     private void goToMainView() {
         if(mainview==null)
@@ -186,7 +179,11 @@ public class MainActivity extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        try {
+            io=new FilesAndData(this);
+        }catch (Exception e){
+            Log.e("FileData",""+e);
+        }
         //游戲過程中只容許調整多媒體音量，而不容許調整通話音量
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉標題
