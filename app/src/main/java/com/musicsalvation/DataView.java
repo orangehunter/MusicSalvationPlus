@@ -21,7 +21,6 @@ public class DataView extends SurfaceView
 implements SurfaceHolder.Callback{
 
 	boolean deJump=true;
-	boolean hidden_flag;
 
 	Bitmap dv_background;
 	Bitmap dv_pumen_bar;
@@ -32,48 +31,30 @@ implements SurfaceHolder.Callback{
 	Bitmap dv_newbtn_1;
 	Bitmap dv_heavybtn_0;
 	Bitmap dv_heavybtn_1;
-	Bitmap main_right;
-	Bitmap main_title;
-	Bitmap main_touchstart;
+	Bitmap dv_easybtn_0;
+	Bitmap dv_easybtn_1;
+	Bitmap dv_normalbtn_0;
+	Bitmap dv_normalbtn_1;
+	Bitmap dv_hardbtn_0;
+	Bitmap dv_hardbtn_1;
+    Bitmap dv_seachbtn_0;
+    Bitmap dv_seachbtn_1;
 
-	Bitmap left_xia;
-	Bitmap right_miku;
-	Bitmap staff;
+    //按鈕宣告
+	Bottom newbtn;
+	Bottom heavybtn;
+	Bottom easybtn;
+    Bottom normalbtn;
+    Bottom hardbtn;
+    Bottom seachbtn;
+    Bottom pumenbtn[] = new Bottom[5];
 
-	Bottom startbtm;
-	Bottom exitbtm;
-	Bottom staffList;
-
-
-
-	int mainFlag=0;
-
-	boolean toEditView=false;
 
 	int pointx;//觸控到螢幕的x座標
 	int pointy;//觸控到螢幕的y座標
-	int apa=10;
-	int a=0;
 
-	int mtx=640;
-	int mty=-200;
-	int mty1=360;
-	int mty2=200;
-
-	int mtoy=600;
-	int mtoa=0;
-	int mtoc=20;
-
-	int mlx=-220;
-	int mlx1=220-60;
-	int mly=700;
-
-	int mrx=1280+333;
-	int mrx1=1280-333+190;
-	int mry=700;
-
-	int alpha = 5;
-	int alpha2 = 0;
+    int btn_wsize = 155;
+    int btn_hsize = 100;
 
 	//背景音樂宣告，更改為陣列====================================
 
@@ -82,8 +63,8 @@ implements SurfaceHolder.Callback{
 	//背景音樂宣告------------------------------------
 
 	//音效宣告=======================================
-	SoundPool sp;
-	int btn_se[] = new int[2];
+	/*SoundPool sp;
+	int btn_se[] = new int[2];*/
 	//音效宣告---------------------------------------
 
 	Paint paint;			//畫筆的參考
@@ -105,20 +86,37 @@ implements SurfaceHolder.Callback{
 	public void surfaceCreated(SurfaceHolder holder) {
 		paint = new Paint();//建立畫筆
 		paint.setAntiAlias(true);//開啟抗鋸齒
-        dv_background=			Graphic.bitSize(LoadBitmap( R.drawable.main_back3), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-        dv_pumen_bar=			Graphic.bitSize(LoadBitmap( R.drawable.main_back2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		main_back3=			Graphic.bitSize(LoadBitmap( R.drawable.tellyouworld), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		main_title=			Graphic.bitSize(LoadBitmap( R.drawable.main_title ),730 ,269 );
-		main_touchstart=	Graphic.bitSize(LoadBitmap( R.drawable.main_touchstart ), 594, 85);
-		main_left=			Graphic.bitSize(LoadBitmap( R.drawable.main_left ),(440/2), (583/2));
-		main_right=			Graphic.bitSize(LoadBitmap( R.drawable.main_right), (666/2), (644/2));
-		left_xia =          Graphic.bitSize(LoadBitmap( R.drawable.xia), 385, 717);
-		right_miku =        Graphic.bitSize(LoadBitmap( R.drawable.mikuv3_img2), 620, 717);
-		start =  			Graphic.bitSize(LoadBitmap( R.drawable.start), 314,85);
-		exit  =  			Graphic.bitSize(LoadBitmap( R.drawable.exit), 314,85);
+        dv_background=			Graphic.bitSize(LoadBitmap( R.drawable.dv_background), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+        dv_pumen_bar=			Graphic.bitSize(LoadBitmap( R.drawable.dv_pumen_bar), 1235, 100);
+		dv_easybtn_0=			Graphic.bitSize(LoadBitmap( R.drawable.dv_easybtn_0), btn_wsize, btn_hsize);
+		dv_easybtn_1=			Graphic.bitSize(LoadBitmap( R.drawable.dv_easybtn_1 ),btn_wsize ,btn_hsize );
+		dv_hardbtn_0=	        Graphic.bitSize(LoadBitmap( R.drawable.dv_hardbtn_0 ), btn_wsize, btn_hsize);
+		dv_hardbtn_1=			Graphic.bitSize(LoadBitmap( R.drawable.dv_hardbtn_1 ),btn_wsize, btn_hsize);
+		dv_heavybtn_0=			Graphic.bitSize(LoadBitmap( R.drawable.dv_heavybtn_0), btn_wsize, btn_hsize);
+		dv_heavybtn_1 =          Graphic.bitSize(LoadBitmap( R.drawable.dv_heavybtn_1), btn_wsize, btn_hsize);
+		dv_newbtn_0 =        Graphic.bitSize(LoadBitmap( R.drawable.dv_newbtn_0), btn_wsize, btn_hsize);
+		dv_newbtn_1 =  			Graphic.bitSize(LoadBitmap( R.drawable.dv_newbtn_1), btn_wsize,btn_hsize);
+		dv_normalbtn_0  =  			Graphic.bitSize(LoadBitmap( R.drawable.dv_normalbtn_0), btn_wsize,btn_hsize);
+        dv_normalbtn_1  =  			Graphic.bitSize(LoadBitmap( R.drawable.dv_normalbtn_1), btn_wsize,btn_hsize);
+        dv_seachbtn_0  =  			Graphic.bitSize(LoadBitmap( R.drawable.dv_seachbtn_0), 320,btn_hsize);
+        dv_seachbtn_1  =  			Graphic.bitSize(LoadBitmap( R.drawable.dv_seachbtn_1), 320,btn_hsize);
 
-		startbtm = 	new Bottom(activity, start,start, 640, 518);
-		exitbtm = 	new Bottom(activity, exit, exit, 640, 643);
+		newbtn = 	new Bottom(activity, dv_newbtn_1,dv_newbtn_1, 120, 68);
+		heavybtn = 	new Bottom(activity, dv_hardbtn_1, dv_heavybtn_1, 300, 68);
+        easybtn = 	new Bottom(activity, dv_easybtn_1, dv_easybtn_0, 480, 68);
+        normalbtn = new Bottom(activity, dv_normalbtn_1, dv_normalbtn_0, 660, 68);
+        hardbtn = 	new Bottom(activity, dv_hardbtn_0, dv_heavybtn_1, 840, 68);
+        seachbtn = 	new Bottom(activity, dv_seachbtn_1, dv_seachbtn_0, 1100, 68);
+
+        pumenbtn[0] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 190);
+        pumenbtn[1] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 305);
+        pumenbtn[2] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 420);
+        pumenbtn[3] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 535);
+        pumenbtn[4] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 650);
+
+
+
+        /*
 		hidden_flag=false;
 		for(int i=0;i<3;i++){
 			if(activity.io.level_clear[2][i]){
@@ -146,8 +144,8 @@ implements SurfaceHolder.Callback{
 		sp=new SoundPool(4, AudioManager.STREAM_MUSIC, 5);
 		btn_se[0] = sp.load(activity, R.raw.start, 1);
 		btn_se[1] = sp.load(activity, R.raw.title_touch, 1);
+		*/
 		//載入音樂-------------------------------------------------------------
-
 
 		Constant.Flag=true;
 		new Thread(){
@@ -185,77 +183,148 @@ implements SurfaceHolder.Callback{
 			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
 			canvas.drawColor(Color.BLACK);//界面設定為黑色
 
-			if(!back_mp.isPlaying()){
-				back_mp.prepareAsync();
-				back_mp.start();
-			}
-			if(!hidden_flag){
-				if(apa<= 10){
-					a =7;
-				} 
-				if(apa >240){
-					a = -7;
-				}
-				apa+= a;
-				Graphic.drawPic(canvas, main_back, 1280/2, 720/2, 0, 255, paint);//背景
-				Graphic.drawPic(canvas, main_back2, 1280/2, 720/2, 0, apa, paint);
-			}else{
-				Graphic.drawPic(canvas, main_back3, 1280/2, 720/2, 0, 255, paint);//背景
-			}
+            Graphic.drawPic(canvas, dv_background, 1280/2, 720/2, 0, 255, paint);//背景
 
-			if(mainFlag==0){
-				if(i<250)
-					i+=j;//透明度參數
-				Graphic.drawPic(canvas, main_title, mtx, mty, 0, i, paint);//Title
-				mty=Coordinate.AnalogSpeedMove(mty, mty1);
-				if(mty==mty1){
-					mtoa+=mtoc;
-					Graphic.drawPic(canvas, main_touchstart, 1280/2, mtoy, 0, mtoa, paint);
-					if(mtoa>235)
-						mtoc=-7;
-					if(mtoa<20)
-						mtoc=7;
-				}
+            newbtn.drawBtm(canvas,paint);
+            heavybtn.drawBtm(canvas,paint);
+            easybtn.drawBtm(canvas,paint);
+            normalbtn.drawBtm(canvas,paint);
+            hardbtn.drawBtm(canvas,paint);
+            seachbtn.drawBtm(canvas,paint);
 
-				paint.reset();
-			}
-			if(mainFlag==1){
-				Graphic.drawPic(canvas, main_title, mtx, mty, 0, 255, paint);//Title
-				mty=Coordinate.AnalogSpeedMove(mty, mty2);
+            pumenbtn[0].drawBtm(canvas,paint);
+            pumenbtn[1].drawBtm(canvas, paint);
+            pumenbtn[2].drawBtm(canvas, paint);
+            pumenbtn[3].drawBtm(canvas, paint);
+            pumenbtn[4].drawBtm(canvas, paint);
 
-				Graphic.drawPic(canvas, left_xia, mlx, mly, 0, 255, paint);//Left
-				mlx=Coordinate.AnalogSpeedMove(mlx, mlx1);
+            if(newbtn.getBottom()){
 
-				Graphic.drawPic(canvas, right_miku, mrx, mry, 0, 255, paint);//Right
-				mrx=Coordinate.AnalogSpeedMove(mrx, mrx1);
+            }
+            if(heavybtn.getBottom()){
 
-				/*alpha2+=alpha;
-				if(alpha2 > 250){
-					alpha = -10;
-				}
-				if(alpha2 <100){
-					alpha = 10;
-				}*/
-				startbtm.drawBtm(canvas, paint);
-				exitbtm.drawBtm(canvas, paint);
-				if(hidden_flag){
-					staffList.drawBtm(canvas, paint);
-				}
-			}
+            }
+            if(easybtn.getBottom()){
+
+            }
+            if(normalbtn.getBottom()){
+
+            }
+            if(hardbtn.getBottom()){
+
+            }
+            if(seachbtn.getBottom()){
+
+            }
+            if(pumenbtn[0].getBottom()){
+
+            }
+            if(pumenbtn[1].getBottom()){
+
+            }
+            if(pumenbtn[2].getBottom()){
+
+            }
+            if(pumenbtn[3].getBottom()){
+
+            }
+            if(pumenbtn[4].getBottom()){
+
+            }
+
+
+
+				//paint.reset();
+
+
 		}
 	}
 	@Override
 	public boolean onTouchEvent(MotionEvent event){
 		pointx=(int) event.getX();
 		pointy=(int) event.getY();
-		if(mainFlag==0){
+
 			switch(event.getAction())
 			{
 			case MotionEvent.ACTION_DOWN://按下
-				if(deJump == true){
-					sp.play(btn_se[1], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-					mainFlag=1;
-				}
+				if(deJump == true) {
+
+                    //標籤列按鈕管理區---------------------------------
+                    if(newbtn.isIn(pointx,pointy)){
+                        newbtn.setBottomTo(true);
+                        heavybtn.setBottomTo(false);
+                        easybtn.setBottomTo(false);
+                        normalbtn.setBottomTo(false);
+                        hardbtn.setBottomTo(false);
+                        seachbtn.setBottomTo(false);
+                    }
+                    if(heavybtn.isIn(pointx,pointy)){
+                        newbtn.setBottomTo(false);
+                        heavybtn.setBottomTo(true);
+                        easybtn.setBottomTo(false);
+                        normalbtn.setBottomTo(false);
+                        hardbtn.setBottomTo(false);
+                        seachbtn.setBottomTo(false);
+                    }
+                    if(easybtn.isIn(pointx,pointy)){
+                        newbtn.setBottomTo(false);
+                        heavybtn.setBottomTo(false);
+                        easybtn.setBottomTo(true);
+                        normalbtn.setBottomTo(false);
+                        hardbtn.setBottomTo(false);
+                        seachbtn.setBottomTo(false);
+                    }
+                    if(normalbtn.isIn(pointx,pointy)){
+                        newbtn.setBottomTo(false);
+                        heavybtn.setBottomTo(false);
+                        easybtn.setBottomTo(false);
+                        normalbtn.setBottomTo(true);
+                        hardbtn.setBottomTo(false);
+                        seachbtn.setBottomTo(false);
+
+                    }
+                    if(hardbtn.isIn(pointx,pointy)){
+                        newbtn.setBottomTo(false);
+                        heavybtn.setBottomTo(false);
+                        easybtn.setBottomTo(false);
+                        normalbtn.setBottomTo(false);
+                        hardbtn.setBottomTo(true);
+                        seachbtn.setBottomTo(false);
+
+                    }
+                    if(seachbtn.isIn(pointx,pointy)){
+                        newbtn.setBottomTo(false);
+                        heavybtn.setBottomTo(false);
+                        easybtn.setBottomTo(false);
+                        normalbtn.setBottomTo(false);
+                        hardbtn.setBottomTo(false);
+                        seachbtn.setBottomTo(true);
+
+                    }
+                    //標籤列按鈕管理區=========================================
+
+                    //譜面詳細資訊按鈕管理區-----------------------------------
+                    if(pumenbtn[0].isIn(pointx,pointy)){
+                        activity.changeView(9);
+                    }
+                    if(pumenbtn[1].isIn(pointx,pointy)){
+                        activity.changeView(9);
+
+                    }
+                    if(pumenbtn[2].isIn(pointx,pointy)){
+                        activity.changeView(9);
+
+                    }
+                    if(pumenbtn[3].isIn(pointx,pointy)){
+                        activity.changeView(9);
+
+                    }
+                    if(pumenbtn[4].isIn(pointx,pointy)){
+                        activity.changeView(9);
+
+                    }
+
+                }
 				deJump = false;
 				break;
 			case MotionEvent.ACTION_UP://抬起
@@ -265,55 +334,7 @@ implements SurfaceHolder.Callback{
 				deJump = true;
 				break;
 			}
-		}
-		if(mainFlag==1){
-			switch(event.getAction())
-			{
-			//......................................................................................
-			case MotionEvent.ACTION_DOWN://按下
-				if(deJump==true){//防止彈跳part1
-					if(startbtm.isIn(pointx, pointy)){
-						sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-						this.toEditView = true;
-					}
-					if(exitbtm.isIn(pointx, pointy)){
-						sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-						exitbtm.setBottomTo(true);
-					}
-					if(hidden_flag){
-						if(staffList.isIn(pointx, pointy)){
-							activity.io.video_select=3;
-							activity.changeView(0);
-						}
-					}
-				}
-				deJump=false;
-				break;
-				//.....................................................................................
-			case MotionEvent.ACTION_UP://抬起
-				if(deJump==false){//防止彈跳part2
-					if(startbtm.isIn(pointx, pointy)){
-						//進入地圖畫面
-						if(this.toEditView){
-							activity.io.video_select=1;
-							activity.changeView(0);
-						}
-					}
 
-					if(exitbtm.isIn(pointx, pointy)){
-						if(this.toEditView){
-							activity.changeView(6);
-						}else if(exitbtm.getBottom()){
-							exitbtm.setBottomTo(false);
-							activity.changeView(255);
-						}
-					}
-					this.toEditView = false;
-				}
-				deJump=true;
-				break;
-			}
-		}
 		return true;
 	}
 
@@ -324,26 +345,37 @@ implements SurfaceHolder.Callback{
 	}
 
 	public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
-		main_back.recycle();
-		main_back2.recycle();
-		main_back3.recycle();
-		start.recycle();
-		exit.recycle();
-		main_left.recycle();
-		main_right.recycle();
-		main_title.recycle();
-		left_xia.recycle();
-		right_miku.recycle();
-		main_touchstart.recycle();
-		startbtm.recycle();
-		exitbtm.recycle();
-		if(hidden_flag){
-			staff.recycle();
-			staffList.recycle();
-		}
+		dv_background.recycle();
+		dv_pumen_bar.recycle();
+		dv_newbtn_0.recycle();
+		dv_newbtn_1.recycle();
+		dv_easybtn_0.recycle();
+		dv_easybtn_1.recycle();
+		dv_normalbtn_0.recycle();
+		dv_normalbtn_1.recycle();
+		dv_seachbtn_0.recycle();
+		dv_seachbtn_1.recycle();
+		dv_hardbtn_0.recycle();
+		dv_hardbtn_1.recycle();
+        dv_heavybtn_0.recycle();
+        dv_heavybtn_1.recycle();
+
+		newbtn.recycle();
+		hardbtn.recycle();
+        heavybtn.recycle();
+        easybtn.recycle();
+        normalbtn.recycle();
+        hardbtn.recycle();
+        seachbtn.recycle();
+        pumenbtn[0].recycle();
+        pumenbtn[1].recycle();
+        pumenbtn[2].recycle();
+        pumenbtn[3].recycle();
+        pumenbtn[4].recycle();
+
 		back_mp.stop();
 		back_mp.release();
-		sp.release();
+		//sp.release();
 		System.gc();
 		Constant.Flag=false;
 	}
