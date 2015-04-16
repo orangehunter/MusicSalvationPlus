@@ -5,7 +5,6 @@ package com.musicsalvation.EditView;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Log;
 import android.util.SparseArray;
 
 import com.musicsalvation.Charts;
@@ -15,8 +14,6 @@ import com.musicsalvation.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Iterator;
 
 public class chart {
     chartEditScreen ce;
@@ -58,7 +55,7 @@ public class chart {
         this.end_x=end_x;
         this.end_y=end_y;
         this.ce=ce;
-        chart_key =charts.readCharts();
+        chart_key =charts.readChartsKey();
 
     }
     int main_counter=0;
@@ -96,6 +93,9 @@ public class chart {
         while (true){
             if (main_counter>=chart_key.size()&&main_counter!=0){
                 main_counter=chart_key.size()-1;
+            }
+            if (main_counter<0){
+                break;
             }
             tmp=chart_key.get(chart_key.keyAt(main_counter));
             key_time=chart_key.keyAt(main_counter);

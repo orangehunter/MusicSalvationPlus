@@ -3,6 +3,7 @@ package com.musicsalvation.GameView;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.musicsalvation.MainActivity;
@@ -42,12 +43,16 @@ public class chartScan {
 	,BtT=new JSONObject()
 	,BtX=new JSONObject();
 
-	public chartScan(MainActivity activity,Charts ct,int time_dis,String view){
+	public chartScan(MainActivity activity,JSONObject ct,int time_dis,String view){
 		this.activity=activity;
 		this.view=view;
 		dis=time_dis;
-		//build(ct.BtR,ct.BtS,ct.BtT,ct.BtX);
-	}
+        try {
+            build(ct.getJSONObject("R"),ct.getJSONObject("S"),ct.getJSONObject("T"),ct.getJSONObject("X"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 	public void build(JSONObject R,JSONObject S,JSONObject T,JSONObject X){
 		reset();
 		timer = new Timer();

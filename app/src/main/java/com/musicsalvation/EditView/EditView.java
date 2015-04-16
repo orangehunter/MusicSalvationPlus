@@ -57,8 +57,17 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
         paint = new Paint();//建立畫筆
         paint.setAntiAlias(true);//開啟抗鋸齒
 
-        mp=MediaPlayer.create(activity, R.raw.freely_tomorrow);//activity.song);
+        if (activity.io.song_uri!=null) {
+            mp = MediaPlayer.create(activity, activity.io.song_uri);
+        }else{
+            activity.changeView(1);
+        }
         ce=new chartEditScreen(activity,this,180,50,1100,545,mp.getDuration());
+        String n=activity.io.song_name+activity.io.chart_id;
+        if (activity.io.chart_exists(n)){
+            activity.io.readChart(n);
+        }
+
 
         Resources rs=activity.getResources();
         back=Graphic.LoadBitmap(rs,R.drawable.edit_view_back,1280,720,false);
@@ -303,7 +312,8 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
                     }
                 }
                 if (btn_save.isIn(fu.x,fu.y)){
-                    activity.io.writeChart();
+                    String n=activity.io.song_name+activity.io.chart_id;
+                    activity.io.writeChart(n,ce.ct.charts);
                 }
                 break;
         }

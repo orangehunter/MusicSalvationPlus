@@ -11,30 +11,30 @@ import java.util.Iterator;
  * Created by user on 2015/3/19.
  */
 public class Charts {
-    public static JSONObject chart;
+    public static JSONObject charts;
     public Charts(){
-        chart=new JSONObject();
+        charts =new JSONObject();
     }
 
     public JSONObject saveCharts(SparseArray<JSONObject> key) {
-        chart=null;
-        chart=new JSONObject();
+        charts =null;
+        charts =new JSONObject();
         for(int i=0;i<key.size();i++){
             try {
-                chart.put(String.valueOf(key.keyAt(i)),key.valueAt(i));
+                charts.put(String.valueOf(key.keyAt(i)), key.valueAt(i));
             }catch (JSONException e){
                 Log.e("Charts",""+e);
             }
         }
-        return chart;
+        return charts;
     }
-    public SparseArray<JSONObject> readCharts() {
+    public SparseArray<JSONObject> readChartsKey() {
         SparseArray<JSONObject> chart_key =new SparseArray<JSONObject>();
-        if (chart!=null) {
-            Iterator<String> iter = chart.keys();
+        if (charts !=null) {
+            Iterator<String> iter = charts.keys();
             while (iter.hasNext()) {
                 String key = iter.next();
-                chart_key.put(STI(key), chart.optJSONObject(key));
+                chart_key.put(STI(key), charts.optJSONObject(key));
             }
         }
         return chart_key;

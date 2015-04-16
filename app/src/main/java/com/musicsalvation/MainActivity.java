@@ -251,8 +251,8 @@ public class MainActivity extends Activity{
         if ( resultCode == RESULT_OK )
         {
             // 取得檔案的 Uri
-            this.io.song = data.getData();
-            if( this.io.song != null )
+            this.io.song_uri = data.getData();
+            if( this.io.song_uri != null )
             {
                 Toast.makeText(this, "檔案已選擇!", Toast.LENGTH_SHORT).show();
                 this.changeView(6);
@@ -302,7 +302,7 @@ public class MainActivity extends Activity{
     }
 
     public JSONObject read(Uri uri){//譜面讀取
-        //String fileName=turnUriToName(uri)+".chart";
+        //String fileName=turnUriToName(uri)+".charts";
         JSONObject json=null;
         String content=""; //內容
         byte[] buff = new byte[1024];
@@ -311,7 +311,7 @@ public class MainActivity extends Activity{
             File sdCard = Environment.getExternalStorageDirectory();
             File dir = new File (sdCard.getAbsolutePath() + "/MusicSelvation_datas/charts");
             dir.mkdirs();
-            File files = new File(dir, turnUriToName(uri)+".chart");
+            File files = new File(dir, turnUriToName(uri)+".charts");
             FileInputStream file =new FileInputStream(files);
             //FileInputStream file=openFileInput(fileName);
             while((file.read(buff))!=-1){
@@ -332,7 +332,7 @@ public class MainActivity extends Activity{
         return json;
     }
     public JSONObject read(String name){//譜面讀取
-        //String fileName=turnUriToName(uri)+".chart";
+        //String fileName=turnUriToName(uri)+".charts";
         JSONObject json=null;
         String content=""; //內容
         byte[] buff = new byte[1024];
@@ -341,7 +341,7 @@ public class MainActivity extends Activity{
             File sdCard = Environment.getExternalStorageDirectory();
             File dir = new File (sdCard.getAbsolutePath() + "/MusicSelvation_datas/charts");
             dir.mkdirs();
-            File files = new File(dir, name+".chart");
+            File files = new File(dir, name+".charts");
             FileInputStream file =new FileInputStream(files);
             //FileInputStream file=openFileInput(fileName);
             while((file.read(buff))!=-1){
@@ -377,10 +377,10 @@ public class MainActivity extends Activity{
             File sdCard = Environment.getExternalStorageDirectory();
             File dir = new File (sdCard.getAbsolutePath() + "/MusicSelvation_datas/charts");
             dir.mkdirs();
-            File file = new File(dir, turnUriToName(uri)+".chart");
+            File file = new File(dir, turnUriToName(uri)+".charts");
             FileOutputStream writer =new FileOutputStream(file);
 
-            //String fileName=turnUriToName(uri)+".chart";
+            //String fileName=turnUriToName(uri)+".charts";
             //FileOutputStream writer = openFileOutput(fileName, Context.MODE_PRIVATE);
             writer.write(json.toString().getBytes());
             writer.close();

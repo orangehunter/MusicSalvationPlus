@@ -563,7 +563,7 @@ public class GameView extends SurfaceView
         if(canvas!=null){
             // TAG 載入關卡設定及譜面檔===============================================
             if(startFlag){
-                Charts json=null;
+                JSONObject json=null;
                 boss_Flag=false;
                 boss_attack_Flag=false;
                 ene_flag=false;
@@ -574,7 +574,7 @@ public class GameView extends SurfaceView
                         Log.v("Load Charts", "freely_tomorrow"+difficulty[activity.io.difficulty]);
                         this.boss_show=158000;//TAG BOSS進場時間
                         boss_kill=231000;
-                        json=activity.io.read( "freely_tomorrow"+difficulty[activity.io.difficulty]);
+                        json= FilesAndData.readGameChart("freely_tomorrow" + difficulty[activity.io.difficulty]);
                         break;
                     case 1 :
                         Log.v("Load Charts", "spica"+difficulty[activity.io.difficulty]);
@@ -584,13 +584,13 @@ public class GameView extends SurfaceView
                         //boss_kill=10000;
                         percent=50000;
                         en=90;
-                        json=activity.io.read( "spica"+difficulty[activity.io.difficulty]);
+                        json=activity.io.readGameChart("spica" + difficulty[activity.io.difficulty]);
                         break;
                     case 2 :
                         Log.v("Load Charts", "kokoronashi"+difficulty[activity.io.difficulty]);
                         this.boss_show=222000;
                         boss_kill=260000;
-                        json=activity.io.read( "kokoronashi"+difficulty[activity.io.difficulty]);
+                        json=activity.io.readGameChart("kokoronashi" + difficulty[activity.io.difficulty]);
                         break;
                 }
                 activity.io.virus=BtR.length()+BtS.length()+BtT.length()+BtX.length();

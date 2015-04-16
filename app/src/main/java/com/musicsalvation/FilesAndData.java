@@ -3,7 +3,6 @@ package com.musicsalvation;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
-import android.util.SparseArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
 
 /**
  * Created by user on 2015/3/24.
@@ -48,6 +48,12 @@ public class FilesAndData {
     public static Boolean [][]level_clear=new Boolean[levels][3];
     //選關參數-------------------------------------
 
+    //選歌參數======================================
+    public static String song_name;
+    public static int chart_id;
+    public static Uri song_uri;
+    //選歌參數--------------------------------------
+
     //存檔用參數====================================
     public static float mp_Voiume;
     public static float sp_Voiume;
@@ -57,9 +63,6 @@ public class FilesAndData {
     public static int animax_buffer;
     //存檔用參數-------------------------------------
 
-    //自由模式參數===================================
-    public static Uri song;
-    //自由模式參數-----------------------------------
     public static File getChartDir(){
         File root = Environment.getDataDirectory();
         File dir = new File (root.getAbsolutePath() + "/charts");
@@ -96,6 +99,11 @@ public class FilesAndData {
         }
         return c;
     }
+    public static boolean chart_exists(String fileName){
+        File dir = getChartDir();
+        File files = new File(dir, fileName + ".charts");
+        return files.exists();
+    }
     public static Charts readChart(String fileName){//譜面讀取
         Charts ct=new Charts();
         String content=""; //內容
@@ -110,18 +118,75 @@ public class FilesAndData {
                 content += new String(buff).trim();
             }
             JSONObject json = new JSONObject(content);
-            ct.chart=json;
+            ct.charts =json;
         }catch (Exception e){
-            Log.e("writeChart",""+e);
+            Log.e("readChart",""+e);
         }
         return ct;
     }
+    public static JSONObject readGameChart(String fileName){//譜面讀取
+        Charts ct=new Charts();
+        String content=""; //內容
+        byte[] buff = new byte[1024];
+
+        try {
+
+            File dir = getChartDir();
+            File files = new File(dir, fileName + ".charts");
+            FileInputStream file = new FileInputStream(files);
+            while ((file.read(buff)) != -1) {
+                content += new String(buff).trim();
+            }
+            JSONObject json = new JSONObject(content);
+            ct.charts =json;
+        }catch (Exception e){
+            Log.e("readGameChart",""+e);
+        }
+        JSONObject js=new JSONObject();
+        JSONObject Rt,St,Tt,Xt;
+        Rt=new JSONObject();
+        St=new JSONObject();
+        Tt=new JSONObject();
+        Xt=new JSONObject();
+        if (ct!=null) {
+            Iterator<String> iter = ct.charts.keys();
+            while (iter.hasNext()) {
+                String key = iter.next();
+                try {
+                    if (ct.charts.getJSONObject(key).has("R")) {
+                        Rt.put(key,true);
+                    }
+                    if (ct.charts.getJSONObject(key).has("S")) {
+                        St.put(key,true);
+                    }
+                    if (ct.charts.getJSONObject(key).has("T")) {
+                        Tt.put(key,true);
+                    }
+                    if (ct.charts.getJSONObject(key).has("X")) {
+                        Xt.put(key,true);
+                    }
+                }catch (Exception e){
+                    Log.e("readGameChart",""+e);
+                }
+            }
+        }
+        try {
+        js.put("R",Rt);
+        js.put("S",St);
+        js.put("T",Tt);
+        js.put("X",Xt);
+        }catch (Exception e){
+            Log.e("readGameChart",""+e);
+        }
+        return js;
+    }
 
     public static  void writeChart(String fileName,Charts ct){//譜面寫入
-        JSONObject json=ct.chart;
+        JSONObject json=ct.charts;
         try {
             File dir = getDataDir();
             File file = new File(dir, fileName+".charts");
+            Log.v("Chart","write to"+file);
             FileOutputStream writer =new FileOutputStream(file);
             writer.write(json.toString().getBytes());
             writer.close();
