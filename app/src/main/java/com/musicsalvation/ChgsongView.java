@@ -107,8 +107,6 @@ implements SurfaceHolder.Callback{
 		main_back3=			Graphic.bitSize(LoadBitmap( R.drawable.tellyouworld), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		main_title=			Graphic.bitSize(LoadBitmap( R.drawable.main_title ),730 ,269 );
 		main_touchstart=	Graphic.bitSize(LoadBitmap( R.drawable.main_touchstart ), 594, 85);
-		main_left=			Graphic.bitSize(LoadBitmap( R.drawable.main_left ),(440/2), (583/2));
-		main_right=			Graphic.bitSize(LoadBitmap( R.drawable.main_right), (666/2), (644/2));
 		left_xia =          Graphic.bitSize(LoadBitmap( R.drawable.xia), 385, 717);
 		right_miku =        Graphic.bitSize(LoadBitmap( R.drawable.mikuv3_img2), 620, 717);
 		start =  			Graphic.bitSize(LoadBitmap( R.drawable.start), 314,85);

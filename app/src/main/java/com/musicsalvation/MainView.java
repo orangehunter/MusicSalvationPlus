@@ -30,8 +30,6 @@ implements SurfaceHolder.Callback{
 	Bitmap main_back3;
 	Bitmap start;
 	Bitmap exit;
-	Bitmap main_left;
-	Bitmap main_right;
 	Bitmap main_title;
 	Bitmap main_touchstart;
 
@@ -109,8 +107,7 @@ implements SurfaceHolder.Callback{
 		main_back3=			Graphic.bitSize(LoadBitmap( R.drawable.tellyouworld), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		main_title=			Graphic.bitSize(LoadBitmap( R.drawable.main_title ),730 ,269 );
 		main_touchstart=	Graphic.bitSize(LoadBitmap( R.drawable.main_touchstart ), 594, 85);
-		main_left=			Graphic.bitSize(LoadBitmap( R.drawable.main_left ),(440/2), (583/2));
-		main_right=			Graphic.bitSize(LoadBitmap( R.drawable.main_right), (666/2), (644/2));
+
 		left_xia =          Graphic.bitSize(LoadBitmap( R.drawable.xia), 385, 717);
 		right_miku =        Graphic.bitSize(LoadBitmap( R.drawable.mikuv3_img2), 620, 717);
 		start =  			Graphic.bitSize(LoadBitmap( R.drawable.start), 314,85);
@@ -295,7 +292,7 @@ implements SurfaceHolder.Callback{
 						//進入地圖畫面
 						if(this.toEditView){
 							activity.io.video_select=1;
-							activity.changeView(0);
+							activity.changeView(8);
 						}
 					}
 
@@ -328,8 +325,7 @@ implements SurfaceHolder.Callback{
 		main_back3.recycle();
 		start.recycle();
 		exit.recycle();
-		main_left.recycle();
-		main_right.recycle();
+
 		main_title.recycle();
 		left_xia.recycle();
 		right_miku.recycle();

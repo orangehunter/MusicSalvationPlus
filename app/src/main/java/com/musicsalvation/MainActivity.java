@@ -32,7 +32,7 @@ public class MainActivity extends Activity{
     GameView gameview;
     ScoreView scoreview;
     DataView dataview;
-    PumenView pumenView;
+    PumenView pumenview;
     Video video;
     public static FilesAndData io;
 
@@ -75,8 +75,10 @@ public class MainActivity extends Activity{
                     break;
                 case 8:
                     goToDataView();
+                    break;
                 case 9:
                     goToPumenView();
+                    break;
                 case 255:
                     Exit();
                     break;
@@ -157,13 +159,13 @@ public class MainActivity extends Activity{
         dataview.setFocusableInTouchMode(true);
     }
     protected void goToPumenView() {
-        if(pumenView==null)
+        if(pumenview==null)
         {
-            pumenView=new PumenView(this);
+            pumenview=new PumenView(this);
         }
-        setContentView(pumenView);
-        pumenView.requestFocus();
-        pumenView.setFocusableInTouchMode(true);
+        setContentView(pumenview);
+        pumenview.requestFocus();
+        pumenview.setFocusableInTouchMode(true);
     }
     private void goToLastView() {
         // TODO 自動產生的方法 Stub
