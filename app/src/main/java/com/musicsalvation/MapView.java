@@ -767,10 +767,10 @@ implements SurfaceHolder.Callback{
 					else if(menuFlag == 1){
 						sp.play(sp_id[6], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 						left_btm1.setBottomTo(false);
-						left_btm2.setBottomTo(false);
-						left_btm3.setBottomTo(false);
-						left_btm4.setBottomTo(false);
-						left_btm5.setBottomTo(false);
+                        left_btm2.setBottomTo(false);
+                        left_btm3.setBottomTo(false);
+                        left_btm4.setBottomTo(false);
+                        left_btm5.setBottomTo(false);
 						menuFlag = 0;
 					}
 				}

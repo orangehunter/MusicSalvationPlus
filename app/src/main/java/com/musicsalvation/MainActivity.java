@@ -31,6 +31,7 @@ public class MainActivity extends Activity{
     MapView mapview;
     GameView gameview;
     ScoreView scoreview;
+    DataView dataview;
     Video video;
     public static FilesAndData io;
 
@@ -71,6 +72,8 @@ public class MainActivity extends Activity{
                 case 7:
                     chooseFile();
                     break;
+                case 8:
+                    goToDataView();
                 case 255:
                     Exit();
                     break;
@@ -140,6 +143,15 @@ public class MainActivity extends Activity{
         scoreview.requestFocus();//取得焦點
         scoreview.setFocusableInTouchMode(true);
 
+    }
+    protected void goToDataView() {
+        if(dataview==null)
+        {
+            dataview=new DataView(this);
+        }
+        setContentView(dataview);
+        dataview.requestFocus();
+        dataview.setFocusableInTouchMode(true);
     }
     private void goToLastView() {
         // TODO 自動產生的方法 Stub

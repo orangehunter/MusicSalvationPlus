@@ -48,7 +48,8 @@ public class Bottom {
 		drawBtm(canvas,paint);
 		paint.reset();
 	}
-	
+
+
 	
 	public void setBottom(){//切換按鈕狀態
 		this.isOn=!this.isOn;
