@@ -11,7 +11,7 @@ public class Video extends SurfaceView {
 	MainActivity activity;
 	MediaPlayer mp;
 	SurfaceHolder sh;
-	int video[]={	R.raw.llc,
+	int video[]={	R.raw.exl,
 			R.raw.story,
 			R.raw.access,
 			R.raw.staff_csu};

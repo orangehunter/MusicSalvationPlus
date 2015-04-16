@@ -84,10 +84,11 @@ implements SurfaceHolder.Callback{
 		pv_pumennum_2 =          Graphic.bitSize(LoadBitmap( R.drawable.pv_pumennum_2), btn_wsize, btn_hsize);
 		pv_pumennum_3 =        Graphic.bitSize(LoadBitmap( R.drawable.pv_pumennum_3), btn_wsize, btn_hsize);
 
-
         likebtn = 	new Bottom(activity, pv_likebtn_1, pv_likebtn_0, 655, 620);
 		dwbtn = 	new Bottom(activity, pv_dwbtn_1,pv_dwbtn_0, 875, 620);
         sharebtn = 	new Bottom(activity, pv_sharebtn, pv_sharebtn, 1095, 620);
+
+
 
 
 
