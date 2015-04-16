@@ -101,11 +101,11 @@ implements SurfaceHolder.Callback{
         dv_seachbtn_0  =  			Graphic.bitSize(LoadBitmap( R.drawable.dv_seachbtn_0), 320,btn_hsize);
         dv_seachbtn_1  =  			Graphic.bitSize(LoadBitmap( R.drawable.dv_seachbtn_1), 320,btn_hsize);
 
-		newbtn = 	new Bottom(activity, dv_newbtn_1,dv_newbtn_1, 120, 68);
-		heavybtn = 	new Bottom(activity, dv_hardbtn_1, dv_heavybtn_1, 300, 68);
+		newbtn = 	new Bottom(activity, dv_newbtn_1,dv_newbtn_0, 120, 68);
+		heavybtn = 	new Bottom(activity, dv_heavybtn_1, dv_heavybtn_0, 300, 68);
         easybtn = 	new Bottom(activity, dv_easybtn_1, dv_easybtn_0, 480, 68);
         normalbtn = new Bottom(activity, dv_normalbtn_1, dv_normalbtn_0, 660, 68);
-        hardbtn = 	new Bottom(activity, dv_hardbtn_0, dv_heavybtn_1, 840, 68);
+        hardbtn = 	new Bottom(activity, dv_hardbtn_1, dv_hardbtn_0, 840, 68);
         seachbtn = 	new Bottom(activity, dv_seachbtn_1, dv_seachbtn_0, 1100, 68);
 
         pumenbtn[0] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 190);
@@ -113,6 +113,19 @@ implements SurfaceHolder.Callback{
         pumenbtn[2] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 420);
         pumenbtn[3] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 535);
         pumenbtn[4] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 650);
+
+        newbtn.setBottomTo(true);
+        heavybtn.setBottomTo(false);
+        easybtn.setBottomTo(false);
+        normalbtn.setBottomTo(false);
+        hardbtn.setBottomTo(false);
+        seachbtn.setBottomTo(false);
+        pumenbtn[0].setBottomTo(false);
+        pumenbtn[1].setBottomTo(false);
+        pumenbtn[2].setBottomTo(false);
+        pumenbtn[3].setBottomTo(false);
+        pumenbtn[4].setBottomTo(false);
+
 
 
 
@@ -373,8 +386,8 @@ implements SurfaceHolder.Callback{
         pumenbtn[3].recycle();
         pumenbtn[4].recycle();
 
-		back_mp.stop();
-		back_mp.release();
+		//back_mp.stop();
+		//back_mp.release();
 		//sp.release();
 		System.gc();
 		Constant.Flag=false;

@@ -92,6 +92,7 @@ implements SurfaceHolder.Callback{
 
 
 
+
         /*
 		hidden_flag=false;
 		for(int i=0;i<3;i++){
@@ -162,7 +163,7 @@ implements SurfaceHolder.Callback{
             Graphic.drawPic(canvas, pv_background, 1280/2, 720/2, 0, 255, paint);//背景
 
             dwbtn.drawBtm(canvas,paint);
-            likebtn.drawBtm(canvas,paint);
+            likebtn.drawBtm(canvas, paint);
             sharebtn.drawBtm(canvas,paint);
 
 
@@ -196,7 +197,11 @@ implements SurfaceHolder.Callback{
 
 
                     if(likebtn.isIn(pointx,pointy)){
-
+                        if(likebtn.getBottom()) {
+                            likebtn.setBottomTo(false);
+                        }
+                        else
+                            likebtn.setBottomTo(true);
                     }
                     if(dwbtn.isIn(pointx,pointy)){
 
@@ -241,8 +246,8 @@ implements SurfaceHolder.Callback{
 		sharebtn.recycle();
 
 
-		back_mp.stop();
-		back_mp.release();
+		//back_mp.stop();
+		//back_mp.release();
 		//sp.release();
 		System.gc();
 		Constant.Flag=false;
