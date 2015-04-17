@@ -35,6 +35,12 @@ public class MainActivity extends Activity{
     ChgsongView chgsongview;
     DataView dataview;
     ChartView chartview;
+    ChartView_1 chartview1;
+    ChartView_2 chartview2;
+    ChartView_3 chartview3;
+    ChartView_4 chartview4;
+    ChartView_5 chartview5;
+
 
     Video video;
     public static FilesAndData io;
@@ -85,6 +91,19 @@ public class MainActivity extends Activity{
                 case 10:
                     goToDataView();
                     break;
+                case 11:
+                    goToChartView_1();
+                    break;
+                case 12:
+                    goToChartView_2();
+                    break;
+                case 13:
+                    goToChartView_3();
+                    break;
+                case 14:
+                    goToChartView_4();
+                    break;
+
                 case 255:
                     Exit();
                     break;
@@ -175,6 +194,51 @@ public class MainActivity extends Activity{
         chartview.requestFocus();
         chartview.setFocusableInTouchMode(true);
     }
+    protected void goToChartView_1() {
+        if(chartview1 ==null)
+        {
+            chartview1 =new ChartView_1(this);
+        }
+        setContentView(chartview1);
+        chartview1.requestFocus();
+        chartview1.setFocusableInTouchMode(true);
+    }
+    protected void goToChartView_2() {
+        if(chartview2 ==null)
+        {
+            chartview2 =new ChartView_2(this);
+        }
+        setContentView(chartview2);
+        chartview2.requestFocus();
+        chartview2.setFocusableInTouchMode(true);
+    }
+    protected void goToChartView_3() {
+        if(chartview3 ==null)
+        {
+            chartview3 =new ChartView_3(this);
+        }
+        setContentView(chartview3);
+        chartview3.requestFocus();
+        chartview3.setFocusableInTouchMode(true);
+    }
+    protected void goToChartView_4() {
+        if(chartview4 ==null)
+        {
+            chartview4 =new ChartView_4(this);
+        }
+        setContentView(chartview4);
+        chartview4.requestFocus();
+        chartview4.setFocusableInTouchMode(true);
+    }
+    /*protected void goToChartView_5() {
+        if(chartview5 ==null)
+        {
+            chartview5 =new ChartView_5(this);
+        }
+        setContentView(chartview5);
+        chartview5.requestFocus();
+        chartview5.setFocusableInTouchMode(true);
+    }*/
     private void goToLastView() {
         // TODO 自動產生的方法 Stub
 
@@ -248,6 +312,30 @@ public class MainActivity extends Activity{
         {
             switch(nowView)
             {
+                case 14:
+                    Constant.Flag=false;
+                    this.changeView(10);
+                    break;
+                case 13:
+                    Constant.Flag=false;
+                    this.changeView(10);
+                    break;
+                case 12:
+                    Constant.Flag=false;
+                    this.changeView(10);
+                    break;
+                case 11:
+                    Constant.Flag=false;
+                    this.changeView(10);
+                    break;
+                case 9:
+                    Constant.Flag=false;
+                    this.changeView(10);
+                    break;
+                case 10:
+                    Constant.Flag=false;
+                    this.changeView(8);
+                    break;
                 case 8:
                     Constant.Flag=false;
                     this.changeView(1);

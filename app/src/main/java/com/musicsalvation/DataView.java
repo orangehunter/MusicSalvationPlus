@@ -40,6 +40,13 @@ implements SurfaceHolder.Callback{
     Bitmap dv_seachbtn_0;
     Bitmap dv_seachbtn_1;
 
+    Bitmap dv_magicmelody;
+    Bitmap dv_starroadbtn;
+    Bitmap dv_summersoundbtn;
+    Bitmap dv_utabtn;
+    Bitmap dv_windbtn;
+
+
     //按鈕宣告
 	Bottom newbtn;
 	Bottom heavybtn;
@@ -48,6 +55,13 @@ implements SurfaceHolder.Callback{
     Bottom hardbtn;
     Bottom seachbtn;
     Bottom pumenbtn[] = new Bottom[5];
+
+
+    Bottom mgbtn;
+    Bottom starroadbtn;
+    Bottom ssbtn;
+    Bottom utabtn;
+    Bottom windbtn;
 
 
 	int pointx;//觸控到螢幕的x座標
@@ -101,6 +115,14 @@ implements SurfaceHolder.Callback{
         dv_seachbtn_0  =  			Graphic.bitSize(LoadBitmap( R.drawable.dv_seachbtn_0), 320,btn_hsize);
         dv_seachbtn_1  =  			Graphic.bitSize(LoadBitmap( R.drawable.dv_seachbtn_1), 320,btn_hsize);
 
+        dv_magicmelody = Graphic.bitSize(LoadBitmap( R.drawable.dv_magicmelody), 1235, 100);
+        dv_starroadbtn = Graphic.bitSize(LoadBitmap( R.drawable.dv_starroadbtn), 1235, 100);
+        dv_utabtn = Graphic.bitSize(LoadBitmap( R.drawable.dv_utabtn), 1235, 100);
+        dv_summersoundbtn = Graphic.bitSize(LoadBitmap( R.drawable.dv_summersoundbtn), 1235, 100);
+        dv_windbtn = Graphic.bitSize(LoadBitmap( R.drawable.dv_windbtn), 1235, 100);
+
+
+
 		newbtn = 	new Bottom(activity, dv_newbtn_1,dv_newbtn_0, 120, 68);
 		heavybtn = 	new Bottom(activity, dv_heavybtn_1, dv_heavybtn_0, 300, 68);
         easybtn = 	new Bottom(activity, dv_easybtn_1, dv_easybtn_0, 480, 68);
@@ -108,11 +130,11 @@ implements SurfaceHolder.Callback{
         hardbtn = 	new Bottom(activity, dv_hardbtn_1, dv_hardbtn_0, 840, 68);
         seachbtn = 	new Bottom(activity, dv_seachbtn_1, dv_seachbtn_0, 1100, 68);
 
-        pumenbtn[0] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 190);
-        pumenbtn[1] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 305);
-        pumenbtn[2] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 420);
-        pumenbtn[3] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 535);
-        pumenbtn[4] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 650);
+        pumenbtn[0] = new Bottom(activity, dv_magicmelody, dv_magicmelody, 640, 190);
+        pumenbtn[1] = new Bottom(activity, dv_starroadbtn, dv_starroadbtn, 640, 305);
+        pumenbtn[2] = new Bottom(activity, dv_utabtn, dv_utabtn, 640, 420);
+        pumenbtn[3] = new Bottom(activity, dv_summersoundbtn, dv_summersoundbtn, 640, 535);
+        pumenbtn[4] = new Bottom(activity, dv_windbtn, dv_windbtn, 640, 650);
 
         newbtn.setBottomTo(true);
         heavybtn.setBottomTo(false);
