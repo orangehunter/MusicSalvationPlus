@@ -179,8 +179,8 @@ implements SurfaceHolder.Callback{
             likebtn.drawBtm(canvas, paint);
             sharebtn.drawBtm(canvas,paint);
 
-            num.drawNumberLeftStart(135,622,activity.dl,Number.cv_blue,canvas,paint);
-            num.drawNumberLeftStart(345,622,activity.dl,Number.cv_red,canvas,paint);
+            num.drawNumberLeftStart(135,622,activity.io.dl,Number.cv_blue,canvas,paint);
+            num.drawNumberLeftStart(345,622,activity.io.like,Number.cv_red,canvas,paint);
 
 
             if(dwbtn.getBottom()){
@@ -214,18 +214,18 @@ implements SurfaceHolder.Callback{
 
                     if(likebtn.isIn(pointx,pointy)){
                         if(likebtn.getBottom()) {
-                            activity.like++;
+                            activity.io.like++;
                             likebtn.setBottomTo(false);
                         }
                         else
-                            activity.like--;
+                            activity.io.like--;
                             likebtn.setBottomTo(true);
                     }
                     if(dwbtn.isIn(pointx,pointy)){
                         dwbtn.setBottomTo(false);
-                        activity.dl++;
+                        activity.io.dl++;
                     }else
-                        activity.dl--;
+                        activity.io.dl--;
                         dwbtn.setBottomTo(true);
                     if(sharebtn.isIn(pointx,pointy)){
 
