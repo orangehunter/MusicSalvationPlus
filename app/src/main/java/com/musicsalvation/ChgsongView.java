@@ -96,6 +96,8 @@ Bitmap opc[] = new Bitmap [7];
     Bitmap down_1;
     Bottom down_btn;
 
+    Bitmap sonbar;
+
 
 
 
@@ -178,6 +180,8 @@ Bitmap opc[] = new Bitmap [7];
         up_0=Graphic.bitSize(LoadBitmap( R.drawable.fv_up_arrow),129,139);
         down_0=Graphic.bitSize(LoadBitmap( R.drawable.fv_down_arrow),129,139);
 
+        sonbar=Graphic.bitSize(LoadBitmap( R.drawable.fv_choosebar),810,369);
+
         add_btn=new Bottom(activity,add_0,add_0,1230, 44);
         set_btn=new Bottom(activity, set_0, set_0,56, 44);
         pomeChg_1_btn=new Bottom(activity,  pomeChg_1_1,  pomeChg_1_0,189, 653);
@@ -250,16 +254,16 @@ Bitmap opc[] = new Bitmap [7];
 
 
             Graphic.drawPic(canvas,  bg_0, 1280/2, 720/2, 0, 255, paint);//背景在此
-            Graphic.drawPic(canvas,  star, 1280/2+sppp*10, 720/2-sppp*5, 0, 255, paint);//星星
-            Graphic.drawPic(canvas,  star, 1280/2+sppp*3, 716/2-sppp*3, 0, 255, paint);//星星
-            Graphic.drawPic(canvas,  star, 1280/2+sppp, 712/2-sppp*8, 0, 255, paint);//星星
+            Graphic.drawPic(canvas,  star, 1280/2+sppp*12, 720/2-sppp*6, 0, 255, paint);//星星
+            Graphic.drawPic(canvas,  star, 1280/2+sppp*6, 716/2-sppp*4, 0, 255, paint);//星星
+            Graphic.drawPic(canvas,  star, 1280/2+sppp, 712/2-sppp*10, 0, 255, paint);//星星
             Graphic.drawPic(canvas,  bg_1, 1280/2, 720/2, 0, 255, paint);//背景在此-02
 
             sppp++;
-            if(sppp>=12){
+            if(sppp>=10){
                 sppp=0;
             }
-            if(sppp>=10) {
+            if(sppp>=9) {
                 spp++;
                 if (spp >= 7) {
                     spp = 0;
@@ -280,13 +284,13 @@ Bitmap opc[] = new Bitmap [7];
             pomeChg_2_btn.drawBtm(canvas, paint);//普面2 按鈕
             pomeChg_3_btn.drawBtm(canvas, paint);//普面3 按鈕
 
+            Graphic.drawPic(canvas, sonbar, 875, 407, 0, 255, paint);
             play_btn.drawBtm(canvas, paint);
             shar_btn.drawBtm(canvas, paint);
             cart_btn.drawBtm(canvas, paint);
 
             up_btn.drawBtm(canvas, paint);
             down_btn.drawBtm(canvas, paint);
-
 
 
 
