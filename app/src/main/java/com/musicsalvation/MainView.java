@@ -134,9 +134,9 @@ implements SurfaceHolder.Callback{
 
 		//載入音樂=============================================================
 		if(!hidden_flag){
-			back_mp=MediaPlayer.create(this.getContext(), R.raw.tell_your_world_piano);
+			back_mp=MediaPlayer.create(this.getContext(), R.raw.ed_summer_sounds_yuyao);
 		}else{
-			back_mp=MediaPlayer.create(this.getContext(), R.raw.tellpiano);
+			back_mp=MediaPlayer.create(this.getContext(), R.raw.summersounds_instrumental);
 		}
 		back_mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
 		back_mp.setLooping(true);
