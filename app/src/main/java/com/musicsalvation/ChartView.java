@@ -48,8 +48,8 @@ implements SurfaceHolder.Callback{
     int btn_wsize = 155;
     int btn_hsize = 100;
 
-    int like = 0;
-    int dl = 0;
+    boolean likeFlag = true;
+    boolean dlFlag = true;
 
 	//背景音樂宣告，更改為陣列====================================
 
@@ -98,6 +98,10 @@ implements SurfaceHolder.Callback{
 
         num=new Number(getResources());
         num.setSize(27, 35);
+
+
+
+
 
 
 
@@ -210,23 +214,26 @@ implements SurfaceHolder.Callback{
 			{
 			case MotionEvent.ACTION_DOWN://按下
 				if(deJump == true) {
-
-
                     if(likebtn.isIn(pointx,pointy)){
-                        if(likebtn.getBottom()) {
+                        if(likeFlag) {
                             activity.io.like++;
+                            likeFlag = false;
+                            likebtn.setBottomTo(true);
+                        }else if(!likeFlag) {
+                            activity.io.like--;
+                            likeFlag = true;
                             likebtn.setBottomTo(false);
                         }
-                        else
-                            activity.io.like--;
-                            likebtn.setBottomTo(true);
+
                     }
                     if(dwbtn.isIn(pointx,pointy)){
-                        dwbtn.setBottomTo(false);
-                        activity.io.dl++;
-                    }else
-                        activity.io.dl--;
-                        dwbtn.setBottomTo(true);
+                       if(dlFlag){
+                           activity.io.dl++;
+                           dlFlag = false;
+                           dwbtn.setBottomTo(true);
+                       }
+
+                    }
                     if(sharebtn.isIn(pointx,pointy)){
 
                     }
@@ -253,6 +260,7 @@ implements SurfaceHolder.Callback{
 	}
 
 	public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
+
 		pv_background.recycle();
 		pv_pumennum_3.recycle();
 		pv_pumennum_2.recycle();
