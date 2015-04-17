@@ -124,7 +124,7 @@ implements SurfaceHolder.Callback{
 				hidden_flag=true;
 			}
 		}
-		Log.v("mainView", ""+hidden_flag);
+		//Log.v("mainView", ""+hidden_flag);
 		if(hidden_flag){
 			staff =Graphic.bitSize(LoadBitmap(R.drawable.staff), 314, 85);
 			startbtm.move(640, 450);
@@ -301,7 +301,7 @@ implements SurfaceHolder.Callback{
 
 					if(exitbtm.isIn(pointx, pointy)){
 						if(this.toEditView){
-							activity.changeView(6);
+							activity.changeView(7);
 						}else if(exitbtm.getBottom()){
 							exitbtm.setBottomTo(false);
 							activity.changeView(255);

@@ -55,7 +55,8 @@ public class chart {
         this.end_x=end_x;
         this.end_y=end_y;
         this.ce=ce;
-        chart_key =charts.readChartsKey();
+        //charts_obj=new Charts();
+        //chart_key =charts_obj.readChartsKey();
 
     }
     int main_counter=0;

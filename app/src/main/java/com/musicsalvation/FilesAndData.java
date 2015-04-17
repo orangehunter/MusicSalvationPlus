@@ -19,7 +19,7 @@ import java.util.Iterator;
  * Created by user on 2015/3/24.
  */
 public class FilesAndData {
-    MainActivity activity;
+    static MainActivity activity;
     public FilesAndData(MainActivity activity) throws FileNotFoundException, IOException {
         this.activity=activity;
     }
@@ -64,16 +64,18 @@ public class FilesAndData {
     //存檔用參數-------------------------------------
 
     public static File getChartDir(){
-        File root = Environment.getDataDirectory();
-        File dir = new File (root.getAbsolutePath() + "/charts");
+        File root =  Environment.getExternalStorageDirectory();
+        Log.v("getDir",""+root);
+        File dir = new File (root.getAbsolutePath() + "/Music Salvation Data/Charts");
         if(!dir.exists()){
             dir.mkdirs();
         }
         return dir;
     }
     public static File getDataDir(){
-        File root = Environment.getDataDirectory();
-        File dir = new File (root.getAbsolutePath() + "/Datas");
+        File root = Environment.getExternalStorageDirectory();
+        Log.v("getDir",""+root);
+        File dir = new File (root.getAbsolutePath() + "/Music Salvation Data/Datas");
         if(!dir.exists()){
             dir.mkdirs();
         }
@@ -101,7 +103,7 @@ public class FilesAndData {
     }
     public static boolean chart_exists(String fileName){
         File dir = getChartDir();
-        File files = new File(dir, fileName + ".charts");
+        File files = new File(dir, fileName + ".charts_obj");
         return files.exists();
     }
     public static Charts readChart(String fileName){//譜面讀取
@@ -112,16 +114,17 @@ public class FilesAndData {
         try {
 
             File dir = getChartDir();
-            File files = new File(dir, fileName + ".charts");
+            File files = new File(dir, fileName + ".charts_obj");
             FileInputStream file = new FileInputStream(files);
             while ((file.read(buff)) != -1) {
                 content += new String(buff).trim();
             }
             JSONObject json = new JSONObject(content);
-            ct.charts =json;
+            ct.charts_obj =json;
         }catch (Exception e){
             Log.e("readChart",""+e);
         }
+        Log.v("Chart", "readChart");
         return ct;
     }
     public static JSONObject readGameChart(String fileName){//譜面讀取
@@ -132,13 +135,13 @@ public class FilesAndData {
         try {
 
             File dir = getChartDir();
-            File files = new File(dir, fileName + ".charts");
+            File files = new File(dir, fileName + ".charts_obj");
             FileInputStream file = new FileInputStream(files);
             while ((file.read(buff)) != -1) {
                 content += new String(buff).trim();
             }
             JSONObject json = new JSONObject(content);
-            ct.charts =json;
+            ct.charts_obj =json;
         }catch (Exception e){
             Log.e("readGameChart",""+e);
         }
@@ -149,20 +152,20 @@ public class FilesAndData {
         Tt=new JSONObject();
         Xt=new JSONObject();
         if (ct!=null) {
-            Iterator<String> iter = ct.charts.keys();
+            Iterator<String> iter = ct.charts_obj.keys();
             while (iter.hasNext()) {
                 String key = iter.next();
                 try {
-                    if (ct.charts.getJSONObject(key).has("R")) {
+                    if (ct.charts_obj.getJSONObject(key).has("R")) {
                         Rt.put(key,true);
                     }
-                    if (ct.charts.getJSONObject(key).has("S")) {
+                    if (ct.charts_obj.getJSONObject(key).has("S")) {
                         St.put(key,true);
                     }
-                    if (ct.charts.getJSONObject(key).has("T")) {
+                    if (ct.charts_obj.getJSONObject(key).has("T")) {
                         Tt.put(key,true);
                     }
-                    if (ct.charts.getJSONObject(key).has("X")) {
+                    if (ct.charts_obj.getJSONObject(key).has("X")) {
                         Xt.put(key,true);
                     }
                 }catch (Exception e){
@@ -178,25 +181,24 @@ public class FilesAndData {
         }catch (Exception e){
             Log.e("readGameChart",""+e);
         }
+        Log.v("Chart", "readGameChart");
         return js;
     }
 
     public static  void writeChart(String fileName,Charts ct){//譜面寫入
-        JSONObject json=ct.charts;
+        JSONObject json=ct.charts_obj;
         try {
-            File dir = getDataDir();
-            File file = new File(dir, fileName+".charts");
+            File dir = getChartDir();
+            File file = new File(dir, fileName+".charts_obj");
             Log.v("Chart","write to"+file);
             FileOutputStream writer =new FileOutputStream(file);
             writer.write(json.toString().getBytes());
             writer.close();
             Log.v("Chart", "writeChart");
         } catch (FileNotFoundException e) {
-            Log.v("Chart","FileNotFoundException");
-            e.printStackTrace();
+            Log.v("Chart", "" + e);
         } catch (IOException e) {
-            Log.v("Chart","IOException");
-            e.printStackTrace();
+            Log.v("Chart", "IOException");
         }
     }
 

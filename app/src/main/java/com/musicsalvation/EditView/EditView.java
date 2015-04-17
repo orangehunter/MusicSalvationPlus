@@ -62,10 +62,17 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
         }else{
             activity.changeView(1);
         }
-        ce=new chartEditScreen(activity,this,180,50,1100,545,mp.getDuration());
         String n=activity.io.song_name+activity.io.chart_id;
         if (activity.io.chart_exists(n)){
-            activity.io.readChart(n);
+            charts=activity.io.readChart(n);
+        }else {
+            charts=new Charts();
+        }
+        ce=new chartEditScreen(activity,this,180,50,1100,545,mp.getDuration());
+        if (charts!=null) {
+            ce.ct.chart_key = charts.readChartsKey();
+        }else {
+            ce.ct.chart_key=new SparseArray<>();
         }
 
 
@@ -312,8 +319,9 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
                     }
                 }
                 if (btn_save.isIn(fu.x,fu.y)){
+                    charts.saveCharts(ce.ct.chart_key);
                     String n=activity.io.song_name+activity.io.chart_id;
-                    activity.io.writeChart(n,ce.ct.charts);
+                    activity.io.writeChart(n,charts);
                 }
                 break;
         }
