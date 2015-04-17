@@ -62,7 +62,7 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
         }else{
             activity.changeView(1);
         }
-        String n=activity.io.song_name+activity.io.chart_id;
+        String n=activity.io.turnUriToName(activity.io.song_uri)+activity.io.chart_id;
         if (activity.io.chart_exists(n)){
             charts=activity.io.readChart(n);
         }else {
@@ -320,7 +320,7 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
                 }
                 if (btn_save.isIn(fu.x,fu.y)){
                     charts.saveCharts(ce.ct.chart_key);
-                    String n=activity.io.song_name+activity.io.chart_id;
+                    String n=activity.io.turnUriToName(activity.io.song_uri)+activity.io.chart_id;
                     activity.io.writeChart(n,charts);
                 }
                 break;

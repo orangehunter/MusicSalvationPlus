@@ -49,7 +49,8 @@ public class FilesAndData {
     //選關參數-------------------------------------
 
     //選歌參數======================================
-    public static String song_name;
+    public static Uri chosen_song;
+    public static JSONArray song_list;
     public static int chart_id;
     public static Uri song_uri;
     //選歌參數--------------------------------------
@@ -83,6 +84,7 @@ public class FilesAndData {
     }
     public static String turnUriToName(Uri u){
         String a=u.toString(),b="";
+        a=Uri.decode(a);
         for(int i=a.length();i>0;i--){
             if(a.substring(i-1, i).equals("/")){
                 break;
@@ -224,6 +226,7 @@ public class FilesAndData {
             speed=json.optInt("game_speed",1);
             timing=json.getInt("game_timing");
             animax_buffer=json.optInt("animax_buffer", 3);
+            song_list=json.optJSONArray("song_list");
 
             for(int i=0;i<levels;i++){
                 for(int j=0;j<3;j++){
@@ -246,6 +249,7 @@ public class FilesAndData {
             speed=1;
             timing=0;
             animax_buffer=3;
+            song_list=new JSONArray();
             for(int i=0;i<levels;i++){
                 for(int j=0;j<3;j++){
                     level_clear[i][j]=false;
@@ -274,6 +278,7 @@ public class FilesAndData {
             json.put("game_speed",speed);
             json.put("game_timing", timing);
             json.put("animax_buffer", animax_buffer);
+            json.put("song_list",song_list);
 
             json.put("level_data", new JSONArray());
             for(int i=0;i<levels;i++){

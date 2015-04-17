@@ -19,6 +19,7 @@ import android.view.WindowManager;
 //import android.widget.Toast;
 import android.widget.Toast;
 
+import com.musicsalvation.ChgSongView.ChgsongView;
 import com.musicsalvation.EditView.EditView;
 import com.musicsalvation.GameView.GameView;
 
@@ -31,7 +32,7 @@ public class MainActivity extends Activity{
     MapView mapview;
     GameView gameview;
     ScoreView scoreview;
-    ChgsongView  chgsongview;
+    ChgsongView chgsongview;
     DataView dataview;
     ChartView chartview;
 
@@ -291,13 +292,11 @@ public class MainActivity extends Activity{
         if ( resultCode == RESULT_OK )
         {
             // 取得檔案的 Uri
-            this.io.song_uri = data.getData();
-            this.io.song_name=this.io.turnUriToName(this.io.song_uri);
-            this.io.chart_id=1;
-            if( this.io.song_uri != null )
+            this.io.chosen_song = data.getData();
+            if( this.io.chosen_song != null )
             {
                 Toast.makeText(this, "檔案已選擇!", Toast.LENGTH_SHORT).show();
-                this.changeView(6);
+                this.changeView(8);
                 Constant.Flag=true;
             }
             else

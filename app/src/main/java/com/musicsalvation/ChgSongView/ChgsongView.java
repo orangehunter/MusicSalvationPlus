@@ -1,4 +1,4 @@
-package com.musicsalvation;
+package com.musicsalvation.ChgSongView;
 //
 
 import android.annotation.SuppressLint;
@@ -11,10 +11,16 @@ import android.graphics.Rect;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import com.musicsalvation.Bottom;
+import com.musicsalvation.Constant;
+import com.musicsalvation.Graphic;
+import com.musicsalvation.MainActivity;
+import com.musicsalvation.R;
+import com.musicsalvation.Constant;
 
 @SuppressLint({ "ViewConstructor", "WrongCall", "ClickableViewAccessibility" })
 public class ChgsongView extends SurfaceView
@@ -22,22 +28,6 @@ implements SurfaceHolder.Callback{
 
 	boolean deJump=true;
 	boolean hidden_flag;
-
-	Bitmap up;
-    Bitmap down;
-    Bitmap bg;
-    Bitmap rl;
-
-
-
-
-
-
-
-
-
-
-    int xmov =0;
 //---------------------------------------
     //特效
 Bitmap opc[] = new Bitmap [7];
@@ -159,21 +149,34 @@ Bitmap opc[] = new Bitmap [7];
 	public void surfaceCreated(SurfaceHolder holder) {
 		paint = new Paint();//建立畫筆
 		paint.setAntiAlias(true);//開啟抗鋸齒
+        if (activity.io.chosen_song!=null) {
+            boolean has = false;
+            for (int i = 0; i < activity.io.song_list.length(); i++) {
+                if (activity.io.song_list.optString(i).equals(activity.io.turnUriToName(activity.io.song_uri))) {
+                    has = true;
+                    break;
+                }
+            }
+            if (!has) {
+                activity.io.song_list.put(activity.io.turnUriToName(activity.io.song_uri));
+                activity.io.chosen_song=null;
+            }
+        }
 
- star=Graphic.bitSize(LoadBitmap( R.drawable.fv_star),Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+        star= Graphic.bitSize(LoadBitmap(R.drawable.fv_star), 1280, 720);
 
-        opc[0]= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_1),Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-        opc[1]= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_2),Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-        opc[2]= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_3),Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-        opc[3]= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_4),Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-        opc[4]= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_5),Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-        opc[5]= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_6),Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-        opc[6]= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_7),Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+        opc[0]= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_1),1280, 720);
+        opc[1]= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_2),1280, 720);
+        opc[2]= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_3),1280, 720);
+        opc[3]= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_4),1280, 720);
+        opc[4]= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_5),1280, 720);
+        opc[5]= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_6),1280, 720);
+        opc[6]= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_7),1280, 720);
 
 
 
-        bg_0= Graphic.bitSize(LoadBitmap( R.drawable.fv_background),Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-        bg_1= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_part),Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+        bg_0= Graphic.bitSize(LoadBitmap( R.drawable.fv_background),1280, 720);
+        bg_1= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_part),1280, 720);
 
         titl=Graphic.bitSize(LoadBitmap( R.drawable.fv_title),1280,94);
         add_0= Graphic.bitSize(LoadBitmap( R.drawable.fv_addbtn),99,82);
@@ -324,7 +327,9 @@ Bitmap opc[] = new Bitmap [7];
 			{
 			case MotionEvent.ACTION_DOWN://按下
 				if(deJump == true){
-
+                    if(add_btn.isIn(pointx,pointy)){
+                        activity.changeView(7);
+                    }
                     if( pomeChg_1_btn.isIn(pointx, pointy)){
                         pomeChg_1_btn.setBottomTo(true);
                         pomeChg_2_btn.setBottomTo(false);
