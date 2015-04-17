@@ -596,6 +596,11 @@ public class GameView extends SurfaceView
                         boss_kill = 260000;
                         json = activity.io.readGameChart("kokoronashi" + difficulty[activity.io.difficulty]);
                         break;
+                    case 3:
+                        Log.v("Load Charts", "freemode");
+                        this.boss_show=-100;
+                        this.boss_kill=-100;
+                        json=activity.io.readGameChart(activity.io.turnUriToName(activity.io.song_uri)+activity.io.chart_id);
                 }
                 activity.io.virus = BtR.length() + BtS.length() + BtT.length() + BtX.length();
                 cs = new chartScan(activity, json, time_dis, "GameView");

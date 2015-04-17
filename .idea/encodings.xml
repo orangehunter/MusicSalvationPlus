@@ -20,6 +20,8 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/StartView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/musicsalvation/Video.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-nodpi" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-nodpi/cv_bluenum.png" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-nodpi/cv_rednum.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-nodpi/edit_view_back.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-nodpi/edit_view_btn_del_0.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-nodpi/edit_view_btn_del_1.png" charset="UTF-8" />
