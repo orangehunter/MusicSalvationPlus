@@ -6,6 +6,7 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -691,6 +692,19 @@ public class MainActivity extends Activity{
     protected void onDestroy() {
         this.io.writeData();
         super.onDestroy();
+    }
+
+
+    public void shareTo(String subject, String body, String chooserTitle, Bitmap imageUri) {
+
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
+
+        startActivity(Intent.createChooser(sharingIntent, chooserTitle));
+        sharingIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+
     }
 
 }
