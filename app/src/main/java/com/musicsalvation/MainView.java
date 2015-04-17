@@ -28,7 +28,12 @@ implements SurfaceHolder.Callback{
 	/*Bitmap main_back;
 	Bitmap main_back2;
 	Bitmap main_back3;*/
+
+    //特效
+    int spp=0;
+    //特效
     Bitmap mv_background;
+    Bitmap mv_background_2;
 	Bitmap storymode;
 	Bitmap createmode;
 	Bitmap main_title;
@@ -106,7 +111,9 @@ implements SurfaceHolder.Callback{
 		main_back2=			Graphic.bitSize(LoadBitmap( R.drawable.main_back2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		main_back3=			Graphic.bitSize(LoadBitmap( R.drawable.tellyouworld), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		*/
+
         mv_background = Graphic.bitSize(LoadBitmap( R.drawable.mv_background), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+        mv_background_2= Graphic.bitSize(LoadBitmap( R.drawable.mv_background_2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		main_title=			Graphic.bitSize(LoadBitmap( R.drawable.main_title ),730 ,269 );
 		main_touchstart=	Graphic.bitSize(LoadBitmap( R.drawable.main_touchstart ), 594, 85);
 
@@ -190,6 +197,13 @@ implements SurfaceHolder.Callback{
 			}
 
             Graphic.drawPic(canvas, mv_background, 1280/2, 720/2, 0, 255, paint);//背景
+
+            spp=spp+20;
+
+            if (spp>=255){
+                spp=0;
+            }
+            Graphic.drawPic(canvas, mv_background_2, 1280/2, 720/2, 0, 150-spp, paint);//背景
 			/*if(!hidden_flag){
 				if(apa<= 10){
 					a =7;
