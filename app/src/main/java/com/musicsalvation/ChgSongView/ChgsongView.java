@@ -310,19 +310,8 @@ Bitmap opc[] = new Bitmap [7];
 			{
 			case MotionEvent.ACTION_DOWN://按下
 				if(deJump == true){
-<<<<<<< HEAD:app/src/main/java/com/musicsalvation/ChgSongView/ChgsongView.java
                     if(add_btn.isIn(pointx,pointy)){
                         activity.changeView(7);
-=======
-
-                    if(add_btn.isIn(pointx,pointy)){
-                        activity.changeView(10);
-
-                    }
-                    if(set_btn.isIn(pointx,pointy)){
-
-
->>>>>>> origin/Rick:app/src/main/java/com/musicsalvation/ChgsongView.java
                     }
                     if( pomeChg_1_btn.isIn(pointx, pointy)){
                         pomeChg_1_btn.setBottomTo(true);
