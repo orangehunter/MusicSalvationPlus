@@ -232,7 +232,7 @@ implements SurfaceHolder.Callback{
                            dlFlag = false;
                            dwbtn.setBottomTo(true);
                        }
-
+                        sharebtn.setBottomTo(false);
                     }
                     if(sharebtn.isIn(pointx,pointy)){
 
