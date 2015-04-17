@@ -28,6 +28,9 @@ import com.musicsalvation.GameView.GameView;
 public class MainActivity extends Activity{
     int first_activity=0;//修改第一畫面
     int nowView=0;
+
+    public static int like=0;
+    public static int dl=0;
     MainView mainview;
     EditView editview;
     MapView mapview;

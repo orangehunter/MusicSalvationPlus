@@ -38,6 +38,8 @@ implements SurfaceHolder.Callback{
 	Bottom likebtn;
 	Bottom sharebtn;
 
+    Number num;
+
 
 	int pointx;//觸控到螢幕的x座標
 	int pointy;//觸控到螢幕的y座標
@@ -45,6 +47,9 @@ implements SurfaceHolder.Callback{
 
     int btn_wsize = 155;
     int btn_hsize = 100;
+
+    int like = 0;
+    int dl = 0;
 
 	//背景音樂宣告，更改為陣列====================================
 
@@ -90,6 +95,9 @@ implements SurfaceHolder.Callback{
         likebtn = 	new Bottom(activity, pv_likebtn_1, pv_likebtn_0, 655, 620);
 		dwbtn = 	new Bottom(activity, pv_dwbtn_1,pv_dwbtn_0, 875, 620);
         sharebtn = 	new Bottom(activity, pv_sharebtn, pv_sharebtn, 1095, 620);
+
+        num=new Number(getResources());
+        num.setSize(27, 35);
 
 
 
@@ -171,6 +179,9 @@ implements SurfaceHolder.Callback{
             likebtn.drawBtm(canvas, paint);
             sharebtn.drawBtm(canvas,paint);
 
+            num.drawNumberLeftStart(135,622,activity.dl,Number.cv_blue,canvas,paint);
+            num.drawNumberLeftStart(345,622,activity.dl,Number.cv_red,canvas,paint);
+
 
             if(dwbtn.getBottom()){
 
@@ -203,14 +214,19 @@ implements SurfaceHolder.Callback{
 
                     if(likebtn.isIn(pointx,pointy)){
                         if(likebtn.getBottom()) {
+                            activity.like++;
                             likebtn.setBottomTo(false);
                         }
                         else
+                            activity.like--;
                             likebtn.setBottomTo(true);
                     }
                     if(dwbtn.isIn(pointx,pointy)){
-
-                    }
+                        dwbtn.setBottomTo(false);
+                        activity.dl++;
+                    }else
+                        activity.dl--;
+                        dwbtn.setBottomTo(true);
                     if(sharebtn.isIn(pointx,pointy)){
 
                     }
@@ -249,6 +265,8 @@ implements SurfaceHolder.Callback{
 		dwbtn.recycle();
 		likebtn.recycle();
 		sharebtn.recycle();
+        num.recycle();
+        pv_coverback.recycle();
 
 
 		//back_mp.stop();

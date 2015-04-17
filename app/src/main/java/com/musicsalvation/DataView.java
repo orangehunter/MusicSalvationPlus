@@ -71,6 +71,8 @@ implements SurfaceHolder.Callback{
     int btn_wsize = 155;
     int btn_hsize = 100;
 
+
+    Number num;
 	//背景音樂宣告，更改為陣列====================================
 
 	MediaPlayer back_mp;
@@ -144,6 +146,9 @@ implements SurfaceHolder.Callback{
         pumenbtn[2].setBottomTo(false);
         pumenbtn[3].setBottomTo(false);
         pumenbtn[4].setBottomTo(false);
+
+        num=new Number(getResources());
+        num.setSize(20,26);
 
 
 
@@ -229,6 +234,12 @@ implements SurfaceHolder.Callback{
             pumenbtn[2].drawBtm(canvas, paint);
             pumenbtn[3].drawBtm(canvas, paint);
             pumenbtn[4].drawBtm(canvas, paint);
+
+            num.drawNumberLeftStart(1105,170,activity.dl,Number.cv_blue,canvas,paint);
+            num.drawNumberLeftStart(1105,215,activity.like,Number.cv_red,canvas,paint);
+
+
+
 
             if(newbtn.getBottom()){
 
@@ -405,6 +416,7 @@ implements SurfaceHolder.Callback{
         pumenbtn[3].recycle();
         pumenbtn[4].recycle();
 
+        num.recycle();
 		//back_mp.stop();
 		//back_mp.release();
 		//sp.release();
