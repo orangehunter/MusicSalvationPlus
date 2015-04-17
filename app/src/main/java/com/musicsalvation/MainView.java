@@ -141,7 +141,11 @@ implements SurfaceHolder.Callback{
 
 		//載入音樂=============================================================
 		if(!hidden_flag){
+<<<<<<< HEAD
 			back_mp=MediaPlayer.create(this.getContext(), R.raw.club_thump);
+=======
+			back_mp=MediaPlayer.create(this.getContext(), R.raw.summersounds_instrumental);
+>>>>>>> e4eb3b0ff46879c3a9ea8121c33671ef2548f567
 		}else{
 			back_mp=MediaPlayer.create(this.getContext(), R.raw.summersounds_instrumental);
 		}

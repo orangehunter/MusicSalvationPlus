@@ -103,6 +103,7 @@ implements SurfaceHolder.Callback{
 		paint.setAntiAlias(true);//開啟抗鋸齒
         dv_background=			Graphic.bitSize(LoadBitmap( R.drawable.dv_background), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         dv_pumen_bar=			Graphic.bitSize(LoadBitmap( R.drawable.dv_pumen_bar), 1235, 100);
+        dv_starroadbtn=			Graphic.bitSize(LoadBitmap( R.drawable.dv_starroadbtn), 1235, 100);
 		dv_easybtn_0=			Graphic.bitSize(LoadBitmap( R.drawable.dv_easybtn_0), btn_wsize, btn_hsize);
 		dv_easybtn_1=			Graphic.bitSize(LoadBitmap( R.drawable.dv_easybtn_1 ),btn_wsize ,btn_hsize );
 		dv_hardbtn_0=	        Graphic.bitSize(LoadBitmap( R.drawable.dv_hardbtn_0 ), btn_wsize, btn_hsize);
@@ -116,12 +117,7 @@ implements SurfaceHolder.Callback{
         dv_seachbtn_0  =  			Graphic.bitSize(LoadBitmap( R.drawable.dv_seachbtn_0), 320,btn_hsize);
         dv_seachbtn_1  =  			Graphic.bitSize(LoadBitmap( R.drawable.dv_seachbtn_1), 320,btn_hsize);
 
-        dv_magicmelody = Graphic.bitSize(LoadBitmap( R.drawable.dv_magicmelody), 1235, 100);
         dv_starroadbtn = Graphic.bitSize(LoadBitmap( R.drawable.dv_starroadbtn), 1235, 100);
-        dv_utabtn = Graphic.bitSize(LoadBitmap( R.drawable.dv_utabtn), 1235, 100);
-        dv_summersoundbtn = Graphic.bitSize(LoadBitmap( R.drawable.dv_summersoundbtn), 1235, 100);
-        dv_windbtn = Graphic.bitSize(LoadBitmap( R.drawable.dv_windbtn), 1235, 100);
-
 
 
 		newbtn = 	new Bottom(activity, dv_newbtn_1,dv_newbtn_0, 120, 68);
@@ -131,11 +127,11 @@ implements SurfaceHolder.Callback{
         hardbtn = 	new Bottom(activity, dv_hardbtn_1, dv_hardbtn_0, 840, 68);
         seachbtn = 	new Bottom(activity, dv_seachbtn_1, dv_seachbtn_0, 1100, 68);
 
-        pumenbtn[0] = new Bottom(activity, dv_magicmelody, dv_magicmelody, 640, 190);
-        pumenbtn[1] = new Bottom(activity, dv_starroadbtn, dv_starroadbtn, 640, 305);
-        pumenbtn[2] = new Bottom(activity, dv_utabtn, dv_utabtn, 640, 420);
-        pumenbtn[3] = new Bottom(activity, dv_summersoundbtn, dv_summersoundbtn, 640, 535);
-        pumenbtn[4] = new Bottom(activity, dv_windbtn, dv_windbtn, 640, 650);
+        pumenbtn[0] = new Bottom(activity, dv_starroadbtn, dv_starroadbtn, 640, 190);
+        pumenbtn[1] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 305);
+        pumenbtn[2] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 420);
+        pumenbtn[3] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 535);
+        pumenbtn[4] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 650);
 
         newbtn.setBottomTo(true);
         heavybtn.setBottomTo(false);
@@ -344,19 +340,19 @@ implements SurfaceHolder.Callback{
                         activity.changeView(9);
                     }
                     if(pumenbtn[1].isIn(pointx,pointy)){
-                        activity.changeView(9);
+                       // activity.changeView(9);
 
                     }
                     if(pumenbtn[2].isIn(pointx,pointy)){
-                        activity.changeView(9);
+                        //activity.changeView(9);
 
                     }
                     if(pumenbtn[3].isIn(pointx,pointy)){
-                        activity.changeView(9);
+                        //activity.changeView(9);
 
                     }
                     if(pumenbtn[4].isIn(pointx,pointy)){
-                        activity.changeView(9);
+                       // activity.changeView(9);
 
                     }
 

@@ -97,6 +97,16 @@ Bitmap opc[] = new Bitmap [7];
     String zo_score;
     String zo_rank;
 
+    Bitmap dacon;
+    boolean dacon_flag=false;
+
+    Bitmap sicon_1;
+    Bitmap sicon_2;
+
+    Bottom sicon_1_btn;
+    Bottom sicon_2_btn;
+
+
 
 
 
@@ -194,7 +204,11 @@ Bitmap opc[] = new Bitmap [7];
 
         sonbar=Graphic.bitSize(LoadBitmap( R.drawable.fv_choosebar),810,369);
 
-        add_btn=new Bottom(activity,add_0,add_0,1230, 44);
+        dacon=Graphic.bitSize(LoadBitmap( R.drawable.dv_addback),450,210);
+        sicon_1=Graphic.bitSize(LoadBitmap( R.drawable.dv_chartenter_btn),392,74);
+        sicon_2=Graphic.bitSize(LoadBitmap( R.drawable.dv_songadd),392,74);
+
+        add_btn=new Bottom(activity,play_0,add_0,1230, 44);
         set_btn=new Bottom(activity, set_0, set_0,56, 44);
         pomeChg_1_btn=new Bottom(activity,  pomeChg_1_1,  pomeChg_1_0,189, 653);
         pomeChg_2_btn=new Bottom(activity,  pomeChg_2_1,  pomeChg_2_0,282, 653);
@@ -206,6 +220,8 @@ Bitmap opc[] = new Bitmap [7];
         up_btn=new Bottom(activity,   play_0,  up_0,664, 160);
        down_btn=new Bottom(activity,   play_0,  down_0,667, 665);
 
+        sicon_1_btn=new Bottom(activity,   sicon_1, sicon_1,1025, 145);
+        sicon_2_btn=new Bottom(activity,   sicon_2, sicon_2,1025, 235);
 
         pomeChg_1_btn.setBottomTo(true);
         pomeChg_2_btn.setBottomTo(false);
@@ -213,10 +229,10 @@ Bitmap opc[] = new Bitmap [7];
 
 		//載入音樂=============================================================
 		if(!hidden_flag){
-			back_mp=MediaPlayer.create(this.getContext(), R.raw.tell_your_world_piano);
+			back_mp=MediaPlayer.create(this.getContext(), R.raw.cameras);
 
 		}else{
-			back_mp=MediaPlayer.create(this.getContext(), R.raw.tellpiano);
+			back_mp=MediaPlayer.create(this.getContext(), R.raw.cameras);
 		}
 		back_mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
 		back_mp.setLooping(true);
@@ -315,6 +331,13 @@ Bitmap opc[] = new Bitmap [7];
             Graphic.drawText(canvas,zo_rank,238,560 ,Color.BLACK,50,paint);
 
 
+if(dacon_flag) {
+    Graphic.drawPic(canvas, dacon, 1020, 185, 0, 255, paint);
+
+    sicon_1_btn.drawBtm(canvas, paint);
+    sicon_2_btn.drawBtm(canvas, paint);
+}
+
 
         }
 	}
@@ -328,7 +351,18 @@ Bitmap opc[] = new Bitmap [7];
 			case MotionEvent.ACTION_DOWN://按下
 				if(deJump == true){
                     if(add_btn.isIn(pointx,pointy)){
-                        activity.changeView(7);
+                        dacon_flag=!dacon_flag;
+                        //activity.changeView(7);
+                      //TODO 做到一半
+
+                        if(sicon_1_btn.isIn(pointx,pointy)){
+
+                        }
+                        if(sicon_2_btn.isIn(pointx,pointy)){
+
+                        }
+
+
                     }
                     if( pomeChg_1_btn.isIn(pointx, pointy)){
                         pomeChg_1_btn.setBottomTo(true);
@@ -378,13 +412,20 @@ Bitmap opc[] = new Bitmap [7];
                         activity.io.video_select=2;
                         activity.changeView(0);
 
+                        //TODO 遊玩畫面
+
                     }
                     if( shar_btn.isIn(pointx, pointy)){
                         shar_btn.setBottomTo(false);
                         activity.shareTo( "FB",  "google.com.tw",  "FB",sondata);
+                        //TODO 柏仰的網址分享
+
                     }
                     if( cart_btn.isIn(pointx, pointy)){
                         cart_btn.setBottomTo(false);
+                        activity.changeView(6);
+
+                        //TODO 普面編輯器
                     }
 
 
