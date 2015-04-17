@@ -110,22 +110,12 @@ public class songWheel {
         }
     }
     public void change(int ch){
-        if (ch>0){
-            if (now+2<activity.io.song_list.length()) {
-                st[(now+1) % 4] = activity.io.song_list.optString(now + 2);
-            }else {
-                st[(now+1) % 4] ="";
-            }
-        }else {
-            if (now-2>=0){
-                st[(now+1) % 4] = activity.io.song_list.optString(now - 2);
-            }else{
-                st[(now+1) % 4] ="";
-            }
-        }
         if (now+ch>=0&&now+ch<activity.io.song_list.length()) {
             now += ch;
         }
+    }
+    public int getSelected(){
+        return now;
     }
     public void recycle(){
         tag.recycle();

@@ -41,16 +41,18 @@ public class FilesAndData {
 
     //選關參數=====================================
     public static int level;//關卡
-    public static int levels=3;//關卡總數
+    public static int levels=4;//關卡總數
     public static int difficulty;//難度
-    public static int [][]hight_score=new int [levels][3];
-    public static int [][]hight_rank=new int [levels][3];
-    public static Boolean [][]level_clear=new Boolean[levels][3];
+    public static int [][]hight_score=new int [levels][4];
+    public static int [][]hight_rank=new int [levels][4];
+    public static Boolean [][]level_clear=new Boolean[levels][4];
     //選關參數-------------------------------------
 
     //選歌參數======================================
     public static Uri chosen_song;
+    public static int chosen_int;
     public static JSONArray song_list;
+    public static JSONArray uri_list;
     public static int chart_id;
     public static Uri song_uri;
     //選歌參數--------------------------------------
@@ -227,6 +229,7 @@ public class FilesAndData {
             timing=json.getInt("game_timing");
             animax_buffer=json.optInt("animax_buffer", 3);
             song_list=json.optJSONArray("song_list");
+            uri_list=json.optJSONArray("uri_list");
 
             for(int i=0;i<levels;i++){
                 for(int j=0;j<3;j++){
@@ -279,6 +282,7 @@ public class FilesAndData {
             json.put("game_timing", timing);
             json.put("animax_buffer", animax_buffer);
             json.put("song_list",song_list);
+            json.put("uri_list",uri_list);
 
             json.put("level_data", new JSONArray());
             for(int i=0;i<levels;i++){

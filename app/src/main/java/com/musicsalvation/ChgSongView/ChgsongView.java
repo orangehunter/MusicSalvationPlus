@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.net.Uri;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -23,6 +24,7 @@ import com.musicsalvation.R;
 import com.musicsalvation.Constant;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 @SuppressLint({ "ViewConstructor", "WrongCall", "ClickableViewAccessibility" })
 public class ChgsongView extends SurfaceView
@@ -157,7 +159,7 @@ public class ChgsongView extends SurfaceView
             boolean has = false;
             if (activity.io.song_list!=null) {
                 for (int i = 0; i < activity.io.song_list.length(); i++) {
-                    if (activity.io.song_list.optString(i).equals(activity.io.turnUriToName(activity.io.song_uri))) {
+                    if (activity.io.song_list.optString(i).equals(activity.io.turnUriToName(activity.io.chosen_song))) {
                         has = true;
                         break;
                     }
@@ -166,8 +168,14 @@ public class ChgsongView extends SurfaceView
                 activity.io.song_list=new JSONArray();
             }
             if (!has) {
-                activity.io.song_list.put(activity.io.turnUriToName(activity.io.song_uri));
+                activity.io.song_list.put(activity.io.turnUriToName(activity.io.chosen_song));
+                if (activity.io.uri_list==null){
+                    activity.io.uri_list=new JSONArray();
+                }
+                activity.io.uri_list=new JSONArray();
+                activity.io.uri_list.put(activity.io.chosen_song);
                 activity.io.chosen_song=null;
+
             }
         }
         songwheel=new songWheel(activity);
@@ -235,38 +243,38 @@ public class ChgsongView extends SurfaceView
         pomeChg_2_btn.setBottomTo(false);
         pomeChg_3_btn.setBottomTo(false);
 
-		//載入音樂=============================================================
-		if(!hidden_flag){
-			back_mp=MediaPlayer.create(this.getContext(), R.raw.cameras);
+        //載入音樂=============================================================
+        if(!hidden_flag){
+            back_mp=MediaPlayer.create(this.getContext(), R.raw.cameras);
 
-		}else{
-			back_mp=MediaPlayer.create(this.getContext(), R.raw.cameras);
-		}
-		back_mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
-		back_mp.setLooping(true);
-		back_mp.start();
+        }else{
+            back_mp=MediaPlayer.create(this.getContext(), R.raw.cameras);
+        }
+        back_mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
+        back_mp.setLooping(true);
+        back_mp.start();
 
-		sp=new SoundPool(4, AudioManager.STREAM_MUSIC, 5);
-		btn_se[0] = sp.load(activity, R.raw.start, 1);
-		btn_se[1] = sp.load(activity, R.raw.title_touch, 1);
-		//載入音樂-------------------------------------------------------------
+        sp=new SoundPool(4, AudioManager.STREAM_MUSIC, 5);
+        btn_se[0] = sp.load(activity, R.raw.start, 1);
+        btn_se[1] = sp.load(activity, R.raw.title_touch, 1);
+        //載入音樂-------------------------------------------------------------
 
 
-		Constant.Flag=true;
-		new Thread(){
-			@SuppressLint("WrongCall")
-			public void run()
-			{
-				while(Constant.Flag){
-					try {
-						Thread.sleep(20);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					SurfaceHolder myholder=ChgsongView.this.getHolder();
-					Canvas canvas = myholder.lockCanvas();//取得畫布
-					onDraw(canvas);
-					if(canvas != null){
+        Constant.Flag=true;
+        new Thread(){
+            @SuppressLint("WrongCall")
+            public void run()
+            {
+                while(Constant.Flag){
+                    try {
+                        Thread.sleep(20);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    SurfaceHolder myholder=ChgsongView.this.getHolder();
+                    Canvas canvas = myholder.lockCanvas();//取得畫布
+                    onDraw(canvas);
+                    if(canvas != null){
                         try {
                             myholder.unlockCanvasAndPost(canvas);
                         }catch (Exception e){
@@ -338,18 +346,18 @@ public class ChgsongView extends SurfaceView
             //Graphic.drawText(canvas,"test測試2",238,510,Color.BLACK,50,paint);
             Graphic.drawText(canvas,zo_rank,238,560 ,Color.BLACK,50,paint);
             songwheel.draw(canvas,paint);
-if(dacon_flag) {
-    Graphic.drawPic(canvas, dacon, 1020, 185, 0, 255, paint);
+            if(dacon_flag) {
+                Graphic.drawPic(canvas, dacon, 1020, 185, 0, 255, paint);
 
-    sicon_1_btn.drawBtm(canvas, paint);
-    sicon_2_btn.drawBtm(canvas, paint);
-}
+                sicon_1_btn.drawBtm(canvas, paint);
+                sicon_2_btn.drawBtm(canvas, paint);
+            }
 
 
         }
-	}
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
+    }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
         pointx = (int) event.getX();
         pointy = (int) event.getY();
 
@@ -374,6 +382,7 @@ if(dacon_flag) {
                     pomeChg_1_btn.setBottomTo(true);
                     pomeChg_2_btn.setBottomTo(false);
                     pomeChg_3_btn.setBottomTo(false);
+                    activity.io.chart_id=1;
 
                 }
 
@@ -381,12 +390,14 @@ if(dacon_flag) {
                     pomeChg_2_btn.setBottomTo(true);
                     pomeChg_1_btn.setBottomTo(false);
                     pomeChg_3_btn.setBottomTo(false);
+                    activity.io.chart_id=2;
                 }
 
                 if (pomeChg_3_btn.isIn(pointx, pointy)) {
                     pomeChg_3_btn.setBottomTo(true);
                     pomeChg_2_btn.setBottomTo(false);
                     pomeChg_1_btn.setBottomTo(false);
+                    activity.io.chart_id=3;
                 }
 
                 if (play_btn.isIn(pointx, pointy)) {
@@ -415,6 +426,8 @@ if(dacon_flag) {
 
                     if (play_btn.isIn(pointx, pointy)) {
                         play_btn.setBottomTo(false);
+                        activity.io.level=3;
+                        activity.io.chosen_int=songwheel.getSelected();
                         activity.io.video_select = 2;
                         activity.changeView(0);
 
@@ -429,25 +442,27 @@ if(dacon_flag) {
                     }
                     if (cart_btn.isIn(pointx, pointy)) {
                         cart_btn.setBottomTo(false);
+                        activity.io.chosen_int=songwheel.getSelected();
+                        activity.io.song_uri= Uri.parse(activity.io.uri_list.optString(activity.io.chosen_int));
                         activity.changeView(6);
-
-                        //TODO 普面編輯器
                     }
 
 
                     if (up_btn.isIn(pointx, pointy)) {
                         up_btn.setBottomTo(false);
+                        songwheel.change(1);
                     }
                     if (down_btn.isIn(pointx, pointy)) {
                         down_btn.setBottomTo(false);
+                        songwheel.change(-1);
                     }
 
                 }
                 deJump = true;
                 break;
         }
-		return true;
-	}
+        return true;
+    }
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width,int height) {

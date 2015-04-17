@@ -15,6 +15,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.SoundPool;
+import android.net.Uri;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.MotionEvent;
@@ -250,6 +251,7 @@ public class GameView extends SurfaceView
         this.activity = mainActivity;
         this.getHolder().addCallback(this);//設定生命周期回調接口的實現者
     }
+
 
     /*public Bitmap LoadBitmap(int r,int scale){
         try{
@@ -516,17 +518,8 @@ public class GameView extends SurfaceView
             cx_btm[i]=new gameChartBottom(-100,600,820,activity, chart_x, chart_x,825);
         }
 
-        int song[]=new int[3];
-        song[0]=R.raw.celluloid_yuyao;
-        song[1]=R.raw.tipsydessert_yuyao;
-        song[2]=R.raw.kokoronashi_yuyao;
-        mp=MediaPlayer.create(this.getContext(), song[activity.io.level]);
-        mp.setOnCompletionListener(new OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                activity.changeView(4);
-            }
-        });
+
+
 
 
         sp_id=new int[6];
@@ -573,6 +566,10 @@ public class GameView extends SurfaceView
                 ene_flag = false;
                 boss_x = boss_x_side;
                 String difficulty[] = {"_easy", "_normal", "_hard"};
+                int song[]=new int[3];
+                song[0]=R.raw.celluloid_yuyao;
+                song[1]=R.raw.tipsydessert_yuyao;
+                song[2]=R.raw.kokoronashi_yuyao;
                 switch (activity.io.level) {//關卡
                     case 0:
                         Log.v("Load Charts", "celluloid_yuyao" + difficulty[activity.io.difficulty]);
@@ -598,10 +595,24 @@ public class GameView extends SurfaceView
                         break;
                     case 3:
                         Log.v("Load Charts", "freemode");
-                        this.boss_show=-100;
-                        this.boss_kill=-100;
-                        json=activity.io.readGameChart(activity.io.turnUriToName(activity.io.song_uri)+activity.io.chart_id);
+                        this.boss_show=100000000;
+                        this.boss_kill=100000000;
+                        //activity.io.boss_delete=true;
+                        json=activity.io.readGameChart(activity.io.song_list.optString(activity.io.chosen_int)+activity.io.chart_id);
+                        break;
                 }
+                if (activity.io.level==3){
+                    mp=MediaPlayer.create(activity,Uri.parse(activity.io.uri_list.optString(activity.io.chosen_int)));
+                }else {
+                    mp = MediaPlayer.create(this.getContext(), song[activity.io.level]);
+                }
+                mp.setOnCompletionListener(new OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        activity.changeView(4);
+                    }
+                });
+
                 activity.io.virus = BtR.length() + BtS.length() + BtT.length() + BtX.length();
                 cs = new chartScan(activity, json, time_dis, "GameView");
                 cs.Start();

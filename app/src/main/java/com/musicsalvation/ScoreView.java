@@ -435,7 +435,11 @@ implements SurfaceHolder.Callback{
 					activity.changeView(2);
 				}*/
 				if(exit_btm.isIn(pointx, pointy)){
-					activity.changeView(2);
+                    if (activity.io.level!=3) {
+                        activity.changeView(2);
+                    }else {
+                        activity.changeView(8);
+                    }
 					sp.play(btn_se, activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 				}
 				if(again_btm.isIn(pointx, pointy)){
