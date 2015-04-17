@@ -23,7 +23,7 @@ import com.musicsalvation.GameView.GameView;
 
 @SuppressLint({ "HandlerLeak", "NewApi" })
 public class MainActivity extends Activity{
-    int first_activity=0;
+    int first_activity=8;//修改第一畫面
     int nowView=0;
     StartView startview;
     MainView mainview;
@@ -31,6 +31,7 @@ public class MainActivity extends Activity{
     MapView mapview;
     GameView gameview;
     ScoreView scoreview;
+    ChgsongView  chgsongview;
     Video video;
     public static FilesAndData io;
 
@@ -70,6 +71,9 @@ public class MainActivity extends Activity{
                     break;
                 case 7:
                     chooseFile();
+                    break;
+                case 8:
+                    goToChgsongView();
                     break;
                 case 255:
                     Exit();
@@ -139,6 +143,17 @@ public class MainActivity extends Activity{
         setContentView(scoreview);
         scoreview.requestFocus();//取得焦點
         scoreview.setFocusableInTouchMode(true);
+
+    }
+
+    private void  goToChgsongView(){
+        if(chgsongview==null)
+        {
+            chgsongview=new ChgsongView(this);
+        }
+        setContentView(chgsongview);
+        chgsongview.requestFocus();//取得焦點
+        chgsongview.setFocusableInTouchMode(true);
 
     }
     private void goToLastView() {
