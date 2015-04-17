@@ -385,11 +385,8 @@ public class ChgsongView extends SurfaceView
                     pomeChg_1_btn.setBottomTo(true);
                     pomeChg_2_btn.setBottomTo(false);
                     pomeChg_3_btn.setBottomTo(false);
-<<<<<<< HEAD
                     activity.io.chart_id=1;
-=======
                     sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
->>>>>>> origin/RRR
 
                 }
 
@@ -397,22 +394,16 @@ public class ChgsongView extends SurfaceView
                     pomeChg_2_btn.setBottomTo(true);
                     pomeChg_1_btn.setBottomTo(false);
                     pomeChg_3_btn.setBottomTo(false);
-<<<<<<< HEAD
                     activity.io.chart_id=2;
-=======
                     sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
->>>>>>> origin/RRR
                 }
 
                 if (pomeChg_3_btn.isIn(pointx, pointy)) {
                     pomeChg_3_btn.setBottomTo(true);
                     pomeChg_2_btn.setBottomTo(false);
                     pomeChg_1_btn.setBottomTo(false);
-<<<<<<< HEAD
                     activity.io.chart_id=3;
-=======
                     sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
->>>>>>> origin/RRR
                 }
 
                 if (play_btn.isIn(pointx, pointy)) {
