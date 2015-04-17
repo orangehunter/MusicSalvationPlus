@@ -22,6 +22,8 @@ import com.musicsalvation.MainActivity;
 import com.musicsalvation.R;
 import com.musicsalvation.Constant;
 
+import org.json.JSONArray;
+
 @SuppressLint({ "ViewConstructor", "WrongCall", "ClickableViewAccessibility" })
 public class ChgsongView extends SurfaceView
         implements SurfaceHolder.Callback{
@@ -153,11 +155,15 @@ public class ChgsongView extends SurfaceView
         paint.setAntiAlias(true);//開啟抗鋸齒
         if (activity.io.chosen_song!=null) {
             boolean has = false;
-            for (int i = 0; i < activity.io.song_list.length(); i++) {
-                if (activity.io.song_list.optString(i).equals(activity.io.turnUriToName(activity.io.song_uri))) {
-                    has = true;
-                    break;
+            if (activity.io.song_list!=null) {
+                for (int i = 0; i < activity.io.song_list.length(); i++) {
+                    if (activity.io.song_list.optString(i).equals(activity.io.turnUriToName(activity.io.song_uri))) {
+                        has = true;
+                        break;
+                    }
                 }
+            }else {
+                activity.io.song_list=new JSONArray();
             }
             if (!has) {
                 activity.io.song_list.put(activity.io.turnUriToName(activity.io.song_uri));
@@ -331,11 +337,9 @@ public class ChgsongView extends SurfaceView
             Graphic.drawText(canvas,zo_score,238,460,Color.BLACK,50,paint);
             //Graphic.drawText(canvas,"test測試2",238,510,Color.BLACK,50,paint);
             Graphic.drawText(canvas,zo_rank,238,560 ,Color.BLACK,50,paint);
-
-
+            songwheel.draw(canvas,paint);
 if(dacon_flag) {
     Graphic.drawPic(canvas, dacon, 1020, 185, 0, 255, paint);
-            songwheel.draw(canvas,paint);
 
     sicon_1_btn.drawBtm(canvas, paint);
     sicon_2_btn.drawBtm(canvas, paint);
@@ -442,12 +446,6 @@ if(dacon_flag) {
                 deJump = true;
                 break;
         }
-
-
-
-
-
-
 		return true;
 	}
 
@@ -496,8 +494,6 @@ if(dacon_flag) {
         star.recycle();
 
         songwheel.recycle();
-
-
     }
 
 

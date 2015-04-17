@@ -71,39 +71,41 @@ public class songWheel {
             y_now[i]= Coordinate.AnalogSpeedMove(y_now[i],y[Math.abs(now+i)%4]);
             Graphic.drawPic(canvas,tag,x_now[i],y_now[i],0,255,paint);
         }
-        for (int k=0;k<activity.io.song_list.length();k++){
-            point p = point.get(k);
-            if (now+2>k&&now-2<k){
-                if (k==now-2||k==now+2) {
-                    p.x = Coordinate.AnalogSpeedMove(p.x,x[3] );
-                    p.y=Coordinate.AnalogSpeedMove(p.y,y[3]);
-                    point.remove(k);
-                    point.put(k,p);
-                }
-                if (k==now-1) {
-                    p.x = Coordinate.AnalogSpeedMove(p.x,x[2]-200 );
-                    p.y=Coordinate.AnalogSpeedMove(p.y,y[2]+20);
+        if(activity.io.song_list!=null) {
+            for (int k = 0; k < activity.io.song_list.length(); k++) {
+                point p = point.get(k);
+                if (now + 2 > k && now - 2 < k) {
+                    if (k == now - 2 || k == now + 2) {
+                        p.x = Coordinate.AnalogSpeedMove(p.x, x[3]);
+                        p.y = Coordinate.AnalogSpeedMove(p.y, y[3]);
+                        point.remove(k);
+                        point.put(k, p);
+                    }
+                    if (k == now - 1) {
+                        p.x = Coordinate.AnalogSpeedMove(p.x, x[2] - 200);
+                        p.y = Coordinate.AnalogSpeedMove(p.y, y[2] + 20);
+                        point.remove(k);
+                        point.put(k, p);
+                    }
+                    if (k == now + 1) {
+                        p.x = Coordinate.AnalogSpeedMove(p.x, x[0] - 200);
+                        p.y = Coordinate.AnalogSpeedMove(p.y, y[0] + 20);
+                        point.remove(k);
+                        point.put(k, p);
+                    }
+                    if (k == now) {
+                        p.x = Coordinate.AnalogSpeedMove(p.x, x[1] - 200);
+                        p.y = Coordinate.AnalogSpeedMove(p.y, y[1] + 20);
+                        point.remove(k);
+                        point.put(k, p);
+                    }
+                    Graphic.drawText(canvas, activity.io.song_list.optString(k), p.x, p.y, Color.WHITE, 48, paint);
+                } else {
+                    p.x = Coordinate.AnalogSpeedMove(p.x, x[3]);
+                    p.y = Coordinate.AnalogSpeedMove(p.y, y[3]);
                     point.remove(k);
                     point.put(k, p);
                 }
-                if (k==now+1) {
-                    p.x = Coordinate.AnalogSpeedMove(p.x,x[0]-200 );
-                    p.y=Coordinate.AnalogSpeedMove(p.y,y[0]+20);
-                    point.remove(k);
-                    point.put(k,p);
-                }
-                if (k==now) {
-                    p.x = Coordinate.AnalogSpeedMove(p.x,x[1]-200 );
-                    p.y=Coordinate.AnalogSpeedMove(p.y,y[1]+20);
-                    point.remove(k);
-                    point.put(k, p);
-                }
-                Graphic.drawText(canvas,activity.io.song_list.optString(k),p.x,p.y,Color.WHITE,48,paint);
-            }else {
-                p.x = Coordinate.AnalogSpeedMove(p.x,x[3] );
-                p.y=Coordinate.AnalogSpeedMove(p.y,y[3]);
-                point.remove(k);
-                point.put(k,p);
             }
         }
     }
