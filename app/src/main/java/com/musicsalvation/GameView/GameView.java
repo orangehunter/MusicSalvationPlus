@@ -515,7 +515,7 @@ public class GameView extends SurfaceView
         int song[]=new int[3];
         song[0]=R.raw.freely_tomorrow;
         song[1]=R.raw.spica;
-        song[2]=R.raw.kokoronashi;
+        song[2]=R.raw.kokoronashi_yuyao;
         mp=MediaPlayer.create(this.getContext(), song[activity.io.level]);
         mp.setOnCompletionListener(new OnCompletionListener() {
             @Override
