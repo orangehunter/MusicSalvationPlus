@@ -601,7 +601,7 @@ public class GameView extends SurfaceView
                 cs=new chartScan(activity,json,time_dis,"GameView");
                 cs.Start();
             }else{
-                Log.e("GameView","找不到譜面檔");
+                Log.e("GameView","找不到譜面檔"+startFlag);
                 activity.changeView(2);
             }
 
