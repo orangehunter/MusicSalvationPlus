@@ -24,13 +24,14 @@ import com.musicsalvation.Constant;
 
 @SuppressLint({ "ViewConstructor", "WrongCall", "ClickableViewAccessibility" })
 public class ChgsongView extends SurfaceView
-implements SurfaceHolder.Callback{
+        implements SurfaceHolder.Callback{
 
-	boolean deJump=true;
-	boolean hidden_flag;
-//---------------------------------------
+    boolean deJump=true;
+    boolean hidden_flag;
+    //---------------------------------------
     //特效
-Bitmap opc[] = new Bitmap [7];
+    songWheel songwheel;
+    Bitmap opc[] = new Bitmap [7];
     int spp =0 ;
     int sppp=0;
     Bitmap star;
@@ -112,44 +113,44 @@ Bitmap opc[] = new Bitmap [7];
 
 
     //--------------------------------------
-	int mainFlag=0;
+    int mainFlag=0;
 
-	boolean toEditView=false;
+    boolean toEditView=false;
 
-	int pointx;//觸控到螢幕的x座標
-	int pointy;//觸控到螢幕的y座標
-
-
-	//背景音樂宣告，更改為陣列====================================
-
-	MediaPlayer back_mp;
-
-	//背景音樂宣告------------------------------------
-
-	//音效宣告=======================================
-	SoundPool sp;
-	int btn_se[] = new int[2];
-	//音效宣告---------------------------------------
-
-	Paint paint;			//畫筆的參考
-	int i=0,j=10;
-	MainActivity activity;
-
-	public ChgsongView(MainActivity mainActivity) {
-		super(mainActivity);
-		this.activity = mainActivity;
-		this.getHolder().addCallback(this);//設定生命周期回調接口的實現者
+    int pointx;//觸控到螢幕的x座標
+    int pointy;//觸控到螢幕的y座標
 
 
-	}
+    //背景音樂宣告，更改為陣列====================================
 
-	public Bitmap LoadBitmap(int r){
-		return BitmapFactory.decodeResource(getResources(), r);
-	}
-	@Override
-	public void surfaceCreated(SurfaceHolder holder) {
-		paint = new Paint();//建立畫筆
-		paint.setAntiAlias(true);//開啟抗鋸齒
+    MediaPlayer back_mp;
+
+    //背景音樂宣告------------------------------------
+
+    //音效宣告=======================================
+    SoundPool sp;
+    int btn_se[] = new int[2];
+    //音效宣告---------------------------------------
+
+    Paint paint;			//畫筆的參考
+    int i=0,j=10;
+    MainActivity activity;
+
+    public ChgsongView(MainActivity mainActivity) {
+        super(mainActivity);
+        this.activity = mainActivity;
+        this.getHolder().addCallback(this);//設定生命周期回調接口的實現者
+
+
+    }
+
+    public Bitmap LoadBitmap(int r){
+        return BitmapFactory.decodeResource(getResources(), r);
+    }
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        paint = new Paint();//建立畫筆
+        paint.setAntiAlias(true);//開啟抗鋸齒
         if (activity.io.chosen_song!=null) {
             boolean has = false;
             for (int i = 0; i < activity.io.song_list.length(); i++) {
@@ -163,7 +164,7 @@ Bitmap opc[] = new Bitmap [7];
                 activity.io.chosen_song=null;
             }
         }
-
+        songwheel=new songWheel(activity);
         star= Graphic.bitSize(LoadBitmap(R.drawable.fv_star), 1280, 720);
 
         opc[0]= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_1),1280, 720);
@@ -219,7 +220,7 @@ Bitmap opc[] = new Bitmap [7];
         cart_btn=new Bottom(activity,   play_0,  cart_0,628, 519);
 
         up_btn=new Bottom(activity,   play_0,  up_0,664, 160);
-       down_btn=new Bottom(activity,   play_0,  down_0,667, 665);
+        down_btn=new Bottom(activity,   play_0,  down_0,667, 665);
 
         sicon_1_btn=new Bottom(activity,   sicon_1, sicon_1,1025, 145);
         sicon_2_btn=new Bottom(activity,   sicon_2, sicon_2,1025, 235);
@@ -266,20 +267,20 @@ Bitmap opc[] = new Bitmap [7];
 
                         }
                     }
-				}
+                }
 
-			}
-		}.start();
-	}
+            }
+        }.start();
+    }
 
 
-	@SuppressLint("DrawAllocation")
-	@Override
-	protected void onDraw(Canvas canvas) {//重新定義的繪制方法
-		if(canvas!=null){
-			super.onDraw(canvas);
-			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
-			canvas.drawColor(Color.GRAY);//界面設定為黑色
+    @SuppressLint("DrawAllocation")
+    @Override
+    protected void onDraw(Canvas canvas) {//重新定義的繪制方法
+        if(canvas!=null){
+            super.onDraw(canvas);
+            canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
+            canvas.drawColor(Color.GRAY);//界面設定為黑色
 
 
             Graphic.drawPic(canvas,  bg_0, 1280/2, 720/2, 0, 255, paint);//背景在此
@@ -334,6 +335,7 @@ Bitmap opc[] = new Bitmap [7];
 
 if(dacon_flag) {
     Graphic.drawPic(canvas, dacon, 1020, 185, 0, 255, paint);
+            songwheel.draw(canvas,paint);
 
     sicon_1_btn.drawBtm(canvas, paint);
     sicon_2_btn.drawBtm(canvas, paint);
@@ -436,7 +438,6 @@ if(dacon_flag) {
                         down_btn.setBottomTo(false);
                     }
 
-
                 }
                 deJump = true;
                 break;
@@ -450,19 +451,18 @@ if(dacon_flag) {
 		return true;
 	}
 
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width,int height) {
 
-	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,int height) {
+    }
 
-	}
+    public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
 
-	public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
-
-		back_mp.stop();
-		back_mp.release();
-		sp.release();
-		System.gc();
-		Constant.Flag=false;
+        back_mp.stop();
+        back_mp.release();
+        sp.release();
+        System.gc();
+        Constant.Flag=false;
 
         bg_0.recycle();
         bg_1.recycle();
@@ -495,7 +495,7 @@ if(dacon_flag) {
 
         star.recycle();
 
-
+        songwheel.recycle();
 
 
     }
