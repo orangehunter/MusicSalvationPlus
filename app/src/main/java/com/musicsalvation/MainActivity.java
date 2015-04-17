@@ -31,7 +31,12 @@ public class MainActivity extends Activity{
     MapView mapview;
     GameView gameview;
     ScoreView scoreview;
+<<<<<<< HEAD
     ChgsongView  chgsongview;
+=======
+    DataView dataview;
+    PumenView pumenview;
+>>>>>>> origin/Ryo
     Video video;
     public static FilesAndData io;
 
@@ -74,6 +79,12 @@ public class MainActivity extends Activity{
                     break;
                 case 8:
                     goToChgsongView();
+                    break;
+                case 9:
+                    goToPumenView();
+                    break;
+                case 10:
+                    goToDataView();
                     break;
                 case 255:
                     Exit();
@@ -154,7 +165,23 @@ public class MainActivity extends Activity{
         setContentView(chgsongview);
         chgsongview.requestFocus();//取得焦點
         chgsongview.setFocusableInTouchMode(true);
-
+    protected void goToDataView() {
+        if(dataview==null)
+        {
+            dataview=new DataView(this);
+        }
+        setContentView(dataview);
+        dataview.requestFocus();
+        dataview.setFocusableInTouchMode(true);
+    }
+    protected void goToPumenView() {
+        if(pumenview==null)
+        {
+            pumenview=new PumenView(this);
+        }
+        setContentView(pumenview);
+        pumenview.requestFocus();
+        pumenview.setFocusableInTouchMode(true);
     }
     private void goToLastView() {
         // TODO 自動產生的方法 Stub
