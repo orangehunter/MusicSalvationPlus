@@ -494,6 +494,15 @@ if(dacon_flag) {
         star.recycle();
 
         songwheel.recycle();
+
+         dacon.recycle();
+        
+
+         sicon_1.recycle();
+         sicon_2.recycle();
+
+         sicon_1_btn.recycle();
+         sicon_2_btn.recycle();
     }
 
 
