@@ -24,13 +24,14 @@ import com.musicsalvation.Constant;
 
 @SuppressLint({ "ViewConstructor", "WrongCall", "ClickableViewAccessibility" })
 public class ChgsongView extends SurfaceView
-implements SurfaceHolder.Callback{
+        implements SurfaceHolder.Callback{
 
-	boolean deJump=true;
-	boolean hidden_flag;
-//---------------------------------------
+    boolean deJump=true;
+    boolean hidden_flag;
+    //---------------------------------------
     //特效
-Bitmap opc[] = new Bitmap [7];
+    songWheel songwheel;
+    Bitmap opc[] = new Bitmap [7];
     int spp =0 ;
     int sppp=0;
     Bitmap star;
@@ -92,44 +93,44 @@ Bitmap opc[] = new Bitmap [7];
 
 
     //--------------------------------------
-	int mainFlag=0;
+    int mainFlag=0;
 
-	boolean toEditView=false;
+    boolean toEditView=false;
 
-	int pointx;//觸控到螢幕的x座標
-	int pointy;//觸控到螢幕的y座標
-
-
-	//背景音樂宣告，更改為陣列====================================
-
-	MediaPlayer back_mp;
-
-	//背景音樂宣告------------------------------------
-
-	//音效宣告=======================================
-	SoundPool sp;
-	int btn_se[] = new int[2];
-	//音效宣告---------------------------------------
-
-	Paint paint;			//畫筆的參考
-	int i=0,j=10;
-	MainActivity activity;
-
-	public ChgsongView(MainActivity mainActivity) {
-		super(mainActivity);
-		this.activity = mainActivity;
-		this.getHolder().addCallback(this);//設定生命周期回調接口的實現者
+    int pointx;//觸控到螢幕的x座標
+    int pointy;//觸控到螢幕的y座標
 
 
-	}
+    //背景音樂宣告，更改為陣列====================================
 
-	public Bitmap LoadBitmap(int r){
-		return BitmapFactory.decodeResource(getResources(), r);
-	}
-	@Override
-	public void surfaceCreated(SurfaceHolder holder) {
-		paint = new Paint();//建立畫筆
-		paint.setAntiAlias(true);//開啟抗鋸齒
+    MediaPlayer back_mp;
+
+    //背景音樂宣告------------------------------------
+
+    //音效宣告=======================================
+    SoundPool sp;
+    int btn_se[] = new int[2];
+    //音效宣告---------------------------------------
+
+    Paint paint;			//畫筆的參考
+    int i=0,j=10;
+    MainActivity activity;
+
+    public ChgsongView(MainActivity mainActivity) {
+        super(mainActivity);
+        this.activity = mainActivity;
+        this.getHolder().addCallback(this);//設定生命周期回調接口的實現者
+
+
+    }
+
+    public Bitmap LoadBitmap(int r){
+        return BitmapFactory.decodeResource(getResources(), r);
+    }
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        paint = new Paint();//建立畫筆
+        paint.setAntiAlias(true);//開啟抗鋸齒
         if (activity.io.chosen_song!=null) {
             boolean has = false;
             for (int i = 0; i < activity.io.song_list.length(); i++) {
@@ -143,7 +144,7 @@ Bitmap opc[] = new Bitmap [7];
                 activity.io.chosen_song=null;
             }
         }
-
+        songwheel=new songWheel(activity);
         star= Graphic.bitSize(LoadBitmap(R.drawable.fv_star), 1280, 720);
 
         opc[0]= Graphic.bitSize(LoadBitmap( R.drawable.fv_background_1),1280, 720);
@@ -195,65 +196,65 @@ Bitmap opc[] = new Bitmap [7];
         cart_btn=new Bottom(activity,   play_0,  cart_0,628, 519);
 
         up_btn=new Bottom(activity,   play_0,  up_0,664, 160);
-       down_btn=new Bottom(activity,   play_0,  down_0,667, 665);
+        down_btn=new Bottom(activity,   play_0,  down_0,667, 665);
 
 
         pomeChg_1_btn.setBottomTo(true);
         pomeChg_2_btn.setBottomTo(false);
         pomeChg_3_btn.setBottomTo(false);
 
-		//載入音樂=============================================================
-		if(!hidden_flag){
-			back_mp=MediaPlayer.create(this.getContext(), R.raw.tell_your_world_piano);
+        //載入音樂=============================================================
+        if(!hidden_flag){
+            back_mp=MediaPlayer.create(this.getContext(), R.raw.tell_your_world_piano);
 
-		}else{
-			back_mp=MediaPlayer.create(this.getContext(), R.raw.tellpiano);
-		}
-		back_mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
-		back_mp.setLooping(true);
-		back_mp.start();
+        }else{
+            back_mp=MediaPlayer.create(this.getContext(), R.raw.tellpiano);
+        }
+        back_mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
+        back_mp.setLooping(true);
+        back_mp.start();
 
-		sp=new SoundPool(4, AudioManager.STREAM_MUSIC, 5);
-		btn_se[0] = sp.load(activity, R.raw.start, 1);
-		btn_se[1] = sp.load(activity, R.raw.title_touch, 1);
-		//載入音樂-------------------------------------------------------------
+        sp=new SoundPool(4, AudioManager.STREAM_MUSIC, 5);
+        btn_se[0] = sp.load(activity, R.raw.start, 1);
+        btn_se[1] = sp.load(activity, R.raw.title_touch, 1);
+        //載入音樂-------------------------------------------------------------
 
 
-		Constant.Flag=true;
-		new Thread(){
-			@SuppressLint("WrongCall")
-			public void run()
-			{
-				while(Constant.Flag){
-					try {
-						Thread.sleep(20);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					SurfaceHolder myholder=ChgsongView.this.getHolder();
-					Canvas canvas = myholder.lockCanvas();//取得畫布
-					onDraw(canvas);
-					if(canvas != null){
+        Constant.Flag=true;
+        new Thread(){
+            @SuppressLint("WrongCall")
+            public void run()
+            {
+                while(Constant.Flag){
+                    try {
+                        Thread.sleep(20);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    SurfaceHolder myholder=ChgsongView.this.getHolder();
+                    Canvas canvas = myholder.lockCanvas();//取得畫布
+                    onDraw(canvas);
+                    if(canvas != null){
                         try {
                             myholder.unlockCanvasAndPost(canvas);
                         }catch (Exception e){
 
                         }
                     }
-				}
+                }
 
-			}
-		}.start();
-	}
+            }
+        }.start();
+    }
 
 
-	@SuppressLint("DrawAllocation")
-	@Override
-	protected void onDraw(Canvas canvas) {//重新定義的繪制方法
-		if(canvas!=null){
-			super.onDraw(canvas);
-			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
-			canvas.drawColor(Color.GRAY);//界面設定為黑色
+    @SuppressLint("DrawAllocation")
+    @Override
+    protected void onDraw(Canvas canvas) {//重新定義的繪制方法
+        if(canvas!=null){
+            super.onDraw(canvas);
+            canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
+            canvas.drawColor(Color.GRAY);//界面設定為黑色
 
 
             Graphic.drawPic(canvas,  bg_0, 1280/2, 720/2, 0, 255, paint);//背景在此
@@ -295,129 +296,131 @@ Bitmap opc[] = new Bitmap [7];
             up_btn.drawBtm(canvas, paint);
             down_btn.drawBtm(canvas, paint);
 
-
+            songwheel.draw(canvas,paint);
 
 
 
         }
-	}
-	@Override
-	public boolean onTouchEvent(MotionEvent event){
-		pointx=(int) event.getX();
-		pointy=(int) event.getY();
-		if(mainFlag==0){
-			switch(event.getAction())
-			{
-			case MotionEvent.ACTION_DOWN://按下
-				if(deJump == true){
-                    if(add_btn.isIn(pointx,pointy)){
-                        activity.changeView(7);
+    }
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        pointx=(int) event.getX();
+        pointy=(int) event.getY();
+        if(mainFlag==0){
+            switch(event.getAction())
+            {
+                case MotionEvent.ACTION_DOWN://按下
+                    if(deJump == true){
+                        if(add_btn.isIn(pointx,pointy)){
+                            activity.changeView(7);
+                        }
+                        if( pomeChg_1_btn.isIn(pointx, pointy)){
+                            pomeChg_1_btn.setBottomTo(true);
+                            pomeChg_2_btn.setBottomTo(false);
+                            pomeChg_3_btn.setBottomTo(false);
+
+                        }
+
+                        if( pomeChg_2_btn.isIn(pointx, pointy)){
+                            pomeChg_2_btn.setBottomTo(true);
+                            pomeChg_1_btn.setBottomTo(false);
+                            pomeChg_3_btn.setBottomTo(false);
+                        }
+
+                        if( pomeChg_3_btn.isIn(pointx, pointy)){
+                            pomeChg_3_btn.setBottomTo(true);
+                            pomeChg_2_btn.setBottomTo(false);
+                            pomeChg_1_btn.setBottomTo(false);
+                        }
+
+                        if(  play_btn.isIn(pointx, pointy)){
+                            play_btn.setBottomTo(true);
+                        }
+                        if( shar_btn.isIn(pointx, pointy)){
+                            shar_btn.setBottomTo(true);
+                        }
+                        if( cart_btn.isIn(pointx, pointy)){
+                            cart_btn.setBottomTo(true);
+                        }
+
+                        if( up_btn.isIn(pointx, pointy)){
+                            up_btn.setBottomTo(true);
+                        }if( down_btn.isIn(pointx, pointy)){
+                            down_btn.setBottomTo(true);
+                        }
+
+
                     }
-                    if( pomeChg_1_btn.isIn(pointx, pointy)){
-                        pomeChg_1_btn.setBottomTo(true);
-                        pomeChg_2_btn.setBottomTo(false);
-                        pomeChg_3_btn.setBottomTo(false);
+                    deJump = false;
+                    break;
+                case MotionEvent.ACTION_UP://抬起
+                    if(deJump==false){//防止彈跳part2
+
+
+                        if(  play_btn.isIn(pointx, pointy)){
+                            play_btn.setBottomTo(false);
+                        }
+                        if( shar_btn.isIn(pointx, pointy)){
+                            shar_btn.setBottomTo(false);
+                        }
+                        if( cart_btn.isIn(pointx, pointy)){
+                            cart_btn.setBottomTo(false);
+                        }
+
+
+                        if( up_btn.isIn(pointx, pointy)){
+                            up_btn.setBottomTo(false);
+                            songwheel.change(-1);
+                        }if( down_btn.isIn(pointx, pointy)){
+                            down_btn.setBottomTo(false);
+                            songwheel.change(1);
+                        }
+
+
+
+
 
                     }
+                    deJump = true;
+                    break;
+            }
+        }
+        if(mainFlag==1){
+            switch(event.getAction())
+            {
+                //......................................................................................
+                case MotionEvent.ACTION_DOWN://按下
+                    if(deJump==true){//防止彈跳part1
 
-                    if( pomeChg_2_btn.isIn(pointx, pointy)){
-                        pomeChg_2_btn.setBottomTo(true);
-                        pomeChg_1_btn.setBottomTo(false);
-                        pomeChg_3_btn.setBottomTo(false);
                     }
+                    deJump=false;
+                    break;
+                //.....................................................................................
+                case MotionEvent.ACTION_UP://抬起
+                    if(deJump==false){//防止彈跳part2
 
-                    if( pomeChg_3_btn.isIn(pointx, pointy)){
-                        pomeChg_3_btn.setBottomTo(true);
-                        pomeChg_2_btn.setBottomTo(false);
-                        pomeChg_1_btn.setBottomTo(false);
+
                     }
-
-                    if(  play_btn.isIn(pointx, pointy)){
-                        play_btn.setBottomTo(true);
-                    }
-                    if( shar_btn.isIn(pointx, pointy)){
-                        shar_btn.setBottomTo(true);
-                    }
-                    if( cart_btn.isIn(pointx, pointy)){
-                        cart_btn.setBottomTo(true);
-                    }
-
-                    if( up_btn.isIn(pointx, pointy)){
-                        up_btn.setBottomTo(true);
-                    }if( down_btn.isIn(pointx, pointy)){
-                        down_btn.setBottomTo(true);
-                    }
+                    deJump=true;
+                    break;
+            }
+        }
+        return true;
+    }
 
 
-				}
-				deJump = false;
-				break;
-			case MotionEvent.ACTION_UP://抬起
-				if(deJump==false){//防止彈跳part2
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width,int height) {
 
+    }
 
-                    if(  play_btn.isIn(pointx, pointy)){
-                        play_btn.setBottomTo(false);
-                    }
-                    if( shar_btn.isIn(pointx, pointy)){
-                        shar_btn.setBottomTo(false);
-                    }
-                    if( cart_btn.isIn(pointx, pointy)){
-                        cart_btn.setBottomTo(false);
-                    }
+    public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
 
-
-                    if( up_btn.isIn(pointx, pointy)){
-                        up_btn.setBottomTo(false);
-                    }if( down_btn.isIn(pointx, pointy)){
-                        down_btn.setBottomTo(false);
-                    }
-
-
-
-
-
-				}
-				deJump = true;
-				break;
-			}
-		}
-		if(mainFlag==1){
-			switch(event.getAction())
-			{
-			//......................................................................................
-			case MotionEvent.ACTION_DOWN://按下
-				if(deJump==true){//防止彈跳part1
-
-				}
-				deJump=false;
-				break;
-				//.....................................................................................
-			case MotionEvent.ACTION_UP://抬起
-				if(deJump==false){//防止彈跳part2
-
-
-				}
-				deJump=true;
-				break;
-			}
-		}
-		return true;
-	}
-
-
-	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,int height) {
-
-	}
-
-	public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
-
-		back_mp.stop();
-		back_mp.release();
-		sp.release();
-		System.gc();
-		Constant.Flag=false;
+        back_mp.stop();
+        back_mp.release();
+        sp.release();
+        System.gc();
+        Constant.Flag=false;
 
         bg_0.recycle();
         bg_1.recycle();
@@ -450,7 +453,7 @@ Bitmap opc[] = new Bitmap [7];
 
         star.recycle();
 
-
+        songwheel.recycle();
 
 
     }
