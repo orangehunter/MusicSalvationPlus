@@ -312,9 +312,13 @@ public class GameView extends SurfaceView
         paint.setAntiAlias(true);//開啟抗鋸齒
 
         score =new Number(getResources());
-        if(activity.io.level<2){
-            bg=Graphic.LoadBitmap(getResources(), R.drawable.gamemap01, 1280, 720,false);
-        }else{
+        if(activity.io.level==0) {
+            bg = Graphic.LoadBitmap(getResources(), R.drawable.gamemap01, 1280, 720, false);
+        }
+        else if(activity.io.level == 1){
+            bg=Graphic.LoadBitmap(getResources(), R.drawable.stage02_bg, 1280, 720,false);
+            }
+        else{
             bg=Graphic.LoadBitmap(getResources(), R.drawable.stage03_bg, 1280, 720,false);
         }
 
@@ -571,20 +575,20 @@ public class GameView extends SurfaceView
                 String difficulty[]={"_easy","_normal","_hard"};
                 switch(activity.io.level){//關卡
                     case 0 :
-                        Log.v("Load Charts", "freely_tomorrow"+difficulty[activity.io.difficulty]);
-                        this.boss_show=158000;//TAG BOSS進場時間
-                        boss_kill=231000;
-                        json= FilesAndData.readGameChart("freely_tomorrow" + difficulty[activity.io.difficulty]);
+                        Log.v("Load Charts", "celluloid_yuyao"+difficulty[activity.io.difficulty]);
+                        this.boss_show=98000;//TAG BOSS進場時間
+                        boss_kill=128000;
+                        json= FilesAndData.readGameChart("celluloid_yuyao" + difficulty[activity.io.difficulty]);
                         break;
                     case 1 :
-                        Log.v("Load Charts", "spica"+difficulty[activity.io.difficulty]);
-                        this.boss_show=164000;
-                        boss_kill=230000;
+                        Log.v("Load Charts", "tipsydessert_yuyao"+difficulty[activity.io.difficulty]);
+                        this.boss_show=90000;
+                        boss_kill=120000;
                         //this.boss_show=5000;
                         //boss_kill=10000;
                         percent=50000;
                         en=90;
-                        json=activity.io.readGameChart("spica" + difficulty[activity.io.difficulty]);
+                        json=activity.io.readGameChart("tipsydessert_yuyao" + difficulty[activity.io.difficulty]);
                         break;
                     case 2 :
                         Log.v("Load Charts", "kokoronashi"+difficulty[activity.io.difficulty]);

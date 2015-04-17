@@ -405,7 +405,7 @@ implements SurfaceHolder.Callback{
 		sp_id[10]=sp.load(activity, R.raw.start, 1);
 
 		num=new Number(getResources());
-		num.setSize(30, 40);
+		num.setSize(25, 35);
 		rank=new Bitmap[7];
 		rank[6]=Graphic.LoadBitmap(getResources(), R.drawable.r_s, 45,60,true);
 		for(int i=0;i<=5;i++){
@@ -699,7 +699,7 @@ implements SurfaceHolder.Callback{
 				if(activity.io.hight_rank[activity.io.level][activity.io.difficulty]!=0){
 					Graphic.drawPic(canvas, rank[activity.io.hight_rank[activity.io.level][activity.io.difficulty]-1], right_board_x+68, 585, 0, 255, paint);
 				}
-				num.drawNumberLeftStart(right_board_x-10, 528, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Wite, canvas, paint);
+				num.drawNumberLeftStart(right_board_x-10, 535, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Wite, canvas, paint);
 				//追加條件:當Flag = 0 會顯示easy=================================================
 				if(activity.io.difficulty==0){
 					Graphic.drawPic(canvas, right_easy_ch, right_board_x-86, 655, 0, 255, paint);
