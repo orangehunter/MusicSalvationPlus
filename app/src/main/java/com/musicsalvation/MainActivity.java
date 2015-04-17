@@ -24,7 +24,7 @@ import com.musicsalvation.GameView.GameView;
 
 @SuppressLint({ "HandlerLeak", "NewApi" })
 public class MainActivity extends Activity{
-    int first_activity=8;//修改第一畫面
+    int first_activity=0;//修改第一畫面
     int nowView=0;
     MainView mainview;
     EditView editview;
@@ -33,7 +33,7 @@ public class MainActivity extends Activity{
     ScoreView scoreview;
     ChgsongView  chgsongview;
     DataView dataview;
-    PumenView pumenview;
+    ChartView chartview;
 
     Video video;
     public static FilesAndData io;
@@ -70,16 +70,16 @@ public class MainActivity extends Activity{
                     goToLastView();//結束
                     break;
                 case 6:
-                    goToEditView();
+                    goToEditView();//編輯介面
                     break;
                 case 7:
-                    chooseFile();
+                    chooseFile();//選檔案
                     break;
                 case 8:
-                    goToChgsongView();
+                    goToChgsongView();//選歌介面
                     break;
                 case 9:
-                    goToPumenView();
+                    goToChartView();
                     break;
                 case 10:
                     goToDataView();
@@ -165,14 +165,14 @@ public class MainActivity extends Activity{
         dataview.requestFocus();
         dataview.setFocusableInTouchMode(true);
     }
-    protected void goToPumenView() {
-        if(pumenview==null)
+    protected void goToChartView() {
+        if(chartview ==null)
         {
-            pumenview=new PumenView(this);
+            chartview =new ChartView(this);
         }
-        setContentView(pumenview);
-        pumenview.requestFocus();
-        pumenview.setFocusableInTouchMode(true);
+        setContentView(chartview);
+        chartview.requestFocus();
+        chartview.setFocusableInTouchMode(true);
     }
     private void goToLastView() {
         // TODO 自動產生的方法 Stub

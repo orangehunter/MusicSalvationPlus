@@ -35,7 +35,7 @@ implements SurfaceHolder.Callback{
 	Bitmap main_touchstart;
 
 	Bitmap left_xia;
-	Bitmap right_miku;
+	//Bitmap right_miku;
 	Bitmap staff;
 
 	Bottom storybtm;
@@ -111,7 +111,7 @@ implements SurfaceHolder.Callback{
 		main_touchstart=	Graphic.bitSize(LoadBitmap( R.drawable.main_touchstart ), 594, 85);
 
 		left_xia =          Graphic.bitSize(LoadBitmap( R.drawable.xia), 385, 717);
-		right_miku =        Graphic.bitSize(LoadBitmap( R.drawable.mikuv3_img2), 620, 717);
+		//right_miku =        Graphic.bitSize(LoadBitmap( R.drawable.mikuv3_img2), 620, 717);
 		storymode =  			Graphic.bitSize(LoadBitmap( R.drawable.mv_storymode), 314,85);
 		createmode  =  			Graphic.bitSize(LoadBitmap( R.drawable.mv_createmode), 314,85);
 
@@ -227,7 +227,7 @@ implements SurfaceHolder.Callback{
 				Graphic.drawPic(canvas, left_xia, mlx, mly, 0, 255, paint);//Left
 				mlx=Coordinate.AnalogSpeedMove(mlx, mlx1);
 
-				Graphic.drawPic(canvas, right_miku, mrx, mry, 0, 255, paint);//Right
+				//Graphic.drawPic(canvas, right_miku, mrx, mry, 0, 255, paint);//Right
 				mrx=Coordinate.AnalogSpeedMove(mrx, mrx1);
 
 				/*alpha2+=alpha;
@@ -325,7 +325,7 @@ implements SurfaceHolder.Callback{
 
 		main_title.recycle();
 		left_xia.recycle();
-		right_miku.recycle();
+		//right_miku.recycle();
 		main_touchstart.recycle();
 		storybtm.recycle();
 		creatbtm.recycle();
