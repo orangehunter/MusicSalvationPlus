@@ -46,7 +46,6 @@ implements SurfaceHolder.Callback{
 
 	int mainFlag=0;
 
-	boolean toEditView=false;
 
 	int pointx;//觸控到螢幕的x座標
 	int pointy;//觸控到螢幕的y座標
@@ -125,7 +124,7 @@ implements SurfaceHolder.Callback{
 				hidden_flag=true;
 			}
 		}
-		Log.v("mainView", ""+hidden_flag);
+		//Log.v("mainView", ""+hidden_flag);
 		if(hidden_flag){
 			staff =Graphic.bitSize(LoadBitmap(R.drawable.staff), 314, 85);
 			storybtm.move(640, 450);
@@ -276,7 +275,6 @@ implements SurfaceHolder.Callback{
 				if(deJump==true){//防止彈跳part1
 					if(storybtm.isIn(pointx, pointy)){
 						sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-						this.toEditView = true;
 					}
 					if(creatbtm.isIn(pointx, pointy)){
 						sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
@@ -294,24 +292,15 @@ implements SurfaceHolder.Callback{
 				//.....................................................................................
 			case MotionEvent.ACTION_UP://抬起
 				if(deJump==false){//防止彈跳part2
-					if(storybtm.isIn(pointx, pointy)){
-						//進入地圖畫面
-						if(this.toEditView){
+					if(storybtm.isIn(pointx, pointy)){//進入地圖畫面
 							activity.io.video_select=1;
 							activity.changeView(0);
-						}
 					}
 
 					if(creatbtm.isIn(pointx, pointy)){
-						if(this.toEditView){
                             //TODO 還沒有改進創遊模式
-							activity.changeView(6);
-						}else if(creatbtm.getBottom()){
-							creatbtm.setBottomTo(false);
-							activity.changeView(255);
-						}
+							activity.changeView(7);
 					}
-					this.toEditView = false;
 				}
 				deJump=true;
 				break;

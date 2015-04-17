@@ -5,7 +5,6 @@ package com.musicsalvation.EditView;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Log;
 import android.util.SparseArray;
 
 import com.musicsalvation.Charts;
@@ -15,8 +14,6 @@ import com.musicsalvation.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Iterator;
 
 public class chart {
     chartEditScreen ce;
@@ -35,7 +32,6 @@ public class chart {
 
 
     int last_chart=0;
-    int time_side_dis[]={30,300,600,900};
     static SparseArray<JSONObject> chart_key;
     public chart(MainActivity activity,chartEditScreen ce,int start_x,int start_y,int end_x,int end_y){
         BR=new Bitmap[2];
@@ -48,56 +44,67 @@ public class chart {
 
         BT=new Bitmap[2];
         BT[0]=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_trangle ,80,80,false);
-        BS[1]=Graphic.LoadBitmap(activity.getResources(),R.drawable.btn_long_green_0,80,80,false);
+        BT[1]=Graphic.LoadBitmap(activity.getResources(),R.drawable.btn_long_green_0,80,80,false);
 
         BX=new Bitmap[2];
         BX[0]=Graphic.LoadBitmap(activity.getResources(),R.drawable.bottom_x       ,80,80,false);
-        BS[1]=Graphic.LoadBitmap(activity.getResources(),R.drawable.btn_long_blue_0  ,80,80,false);
+        BX[1]=Graphic.LoadBitmap(activity.getResources(),R.drawable.btn_long_blue_0  ,80,80,false);
 
         this.start_x=start_x;
         this.start_y=start_y;
         this.end_x=end_x;
         this.end_y=end_y;
         this.ce=ce;
-        chart_key =new SparseArray<JSONObject>();
-        if (charts!=null) {
-            Iterator<String> iter = charts.chart.keys();
-            while (iter.hasNext()) {
-                String key = iter.next();
-                chart_key.put(STI(key), charts.chart.optJSONObject(key));
-            }
-        }
+        //charts_obj=new Charts();
+        //chart_key =charts_obj.readChartsKey();
 
     }
     int main_counter=0;
 
     JSONObject tmp;
     int key_time;
-    SparseArray<keyPoint>isInIndex;
+    public static SparseArray<keyPoint>isInIndex;
     SparseArray<keyPoint>isInIndex_tmp=new SparseArray<keyPoint>();
-    keyPoint isIn_point;
+    keyPoint isIn_point=null;
     SparseArray<Integer>finalDraw_key;
     SparseArray<String>finalDraw_volume;
 
     public void draw(int time_lv,Canvas canvas,Paint paint){
         int isInIndex_tmp_counter=0;
-        while (ce.time_current+ time_side_dis[time_lv]>chart_key.keyAt(last_chart)) {
-            if (last_chart<chart_key.size()-1) {
+        while (true){
+            if (last_chart<chart_key.size()) {
+                if ((int) (start_x+((end_x-start_x)/2)-(((ce.time_current/ce.accuracy)-chart_key.keyAt(last_chart))*ce.unit_lv[time_lv]))>end_x){
+                    break;
+                }
                 last_chart++;
             }else {
                 break;
             }
         }
-        main_counter=last_chart;
+        if (last_chart>1) {
+            main_counter = last_chart;
+        }else {
+            main_counter=0;
+        }
         finalDraw_key=new SparseArray<Integer>();
         finalDraw_volume=new SparseArray<String>();
         int finalDraw_counter=0;
 
-        do{
+        isInIndex_tmp.clear();
+        while (true){
+            if (main_counter>=chart_key.size()&&main_counter!=0){
+                main_counter=chart_key.size()-1;
+            }
+            if (main_counter<0){
+                break;
+            }
             tmp=chart_key.get(chart_key.keyAt(main_counter));
             key_time=chart_key.keyAt(main_counter);
             if (tmp!=null){
                 int point_x= (int) (start_x+((end_x-start_x)/2)-(((ce.time_current/ce.accuracy)-key_time)*ce.unit_lv[time_lv]));
+                if (point_x<start_x){
+                    break;
+                }
                 if (tmp.optInt("R",0)!=0){
                     keyPoint point=new keyPoint(key_time,"R",tmp.optInt("R"),point_x,ce.y1);
                     switch(tmp.optInt("R")){
@@ -121,7 +128,7 @@ public class chart {
                     isInIndex_tmp_counter++;
                 }
                 if (tmp.optInt("S",0)!=0){
-                    keyPoint point=new keyPoint(key_time,"S",tmp.optInt("S"),point_x,ce.y1);
+                    keyPoint point=new keyPoint(key_time,"S",tmp.optInt("S"),point_x,ce.y2);
                     switch(tmp.optInt("S")){
                         case 1:
                         case 2:
@@ -190,10 +197,10 @@ public class chart {
             main_counter--;
             if (main_counter<0)
                 break;
-        }while (ce.time_current-time_side_dis[time_lv]>chart_key.keyAt(main_counter));
+        }
 
         isInIndex=isInIndex_tmp;
-        isInIndex_tmp.clear();
+        //Log.e("index_tmp",""+isInIndex_tmp_counter+" "+isInIndex.size());
 
         /*if (finalDraw_key.size()!=&&finalDraw_volume.size()!=0){
             for (int a=finalDraw_counter;a>0;a--){
@@ -228,11 +235,11 @@ public class chart {
         try {
             if (chart_key.get(key)==null){
                 tmp=new JSONObject();
-                tmp.put(btn,volum);
+                tmp.put(btn, volum);
                 chart_key.put(key,tmp);
             }else{
                 tmp=chart_key.get(key);
-                tmp.put(btn,volum);
+                tmp.put(btn, volum);
                 chart_key.remove(key);
                 chart_key.put(key,tmp);
             }
@@ -287,7 +294,6 @@ public class chart {
                 double start_y = isInIndex.get(i).y;
                 double end_x = start_x + isInIndex.get(i).width;
                 double end_y = start_y + isInIndex.get(i).hight;
-
                 if (x > start_x && x < end_x && y > start_y && y < end_y) {
                     isIn_point = isInIndex.get(i);
                     return true;
@@ -298,10 +304,14 @@ public class chart {
             return false;
         }
     }
-
-    public int STI(String key){
-        return Integer.valueOf(key);
+    public void del(){
+        if (isIn_point!=null){
+            remove(isIn_point.key,isIn_point.btn);
+            isIn_point=null;
+        }
     }
+
+
     public void recycle(){
         for(Bitmap arr:BR){
             arr.recycle();
