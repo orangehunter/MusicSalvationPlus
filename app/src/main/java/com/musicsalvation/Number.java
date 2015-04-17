@@ -15,6 +15,8 @@ public class Number {
 	static final int Red=4;
 	public static final int Wite=5;
 	static final int Yellow=6;
+    static final int cv_blue=7;
+    static final int cv_red=8;
 
 	final int default_width=35;
 	final int default_height=50;
@@ -22,8 +24,8 @@ public class Number {
 	int height;
 	int dis=0;
 
-	Bitmap origin[]=new Bitmap[7];
-	Bitmap nums[][]=new Bitmap[7][10];
+	Bitmap origin[]=new Bitmap[9];
+	Bitmap nums[][]=new Bitmap[9][10];
 	public Number(Resources res){
 		origin[0]=LoadBitmap(res,R.drawable.num_blue);
 		origin[1]=LoadBitmap(res,R.drawable.num_cyan);
@@ -32,7 +34,10 @@ public class Number {
 		origin[4]=LoadBitmap(res,R.drawable.num_red);
 		origin[5]=LoadBitmap(res,R.drawable.num_white);
 		origin[6]=LoadBitmap(res,R.drawable.num_yellow);
-		for(int i=0;i<7;i++){
+        origin[7]=LoadBitmap(res,R.drawable.cv_bluenum);
+        origin[8]=LoadBitmap(res,R.drawable.cv_rednum);
+        ////////////////
+        for(int i=0;i<9;i++){
 			for(int k=0;k<10;k++){
 				nums[i][k]=Graphic.cutArea(origin[i], 0+k*default_width, 0, default_width, default_height);
 			}
