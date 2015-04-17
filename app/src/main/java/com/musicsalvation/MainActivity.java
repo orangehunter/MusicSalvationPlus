@@ -31,12 +31,10 @@ public class MainActivity extends Activity{
     MapView mapview;
     GameView gameview;
     ScoreView scoreview;
-<<<<<<< HEAD
     ChgsongView  chgsongview;
-=======
     DataView dataview;
     PumenView pumenview;
->>>>>>> origin/Ryo
+
     Video video;
     public static FilesAndData io;
 
@@ -157,14 +155,14 @@ public class MainActivity extends Activity{
 
     }
 
-    private void  goToChgsongView(){
-        if(chgsongview==null)
-        {
-            chgsongview=new ChgsongView(this);
+    private void  goToChgsongView() {
+        if (chgsongview == null) {
+            chgsongview = new ChgsongView(this);
         }
         setContentView(chgsongview);
         chgsongview.requestFocus();//取得焦點
         chgsongview.setFocusableInTouchMode(true);
+    }
     protected void goToDataView() {
         if(dataview==null)
         {
