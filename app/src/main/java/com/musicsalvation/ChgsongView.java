@@ -432,7 +432,7 @@ Bitmap opc[] = new Bitmap [7];
 		Constant.Flag=false;
 
         bg_0.recycle();
-
+        bg_1.recycle();
 
         titl.recycle();//標題
         sondata.recycle();//歌曲資訊
@@ -460,7 +460,7 @@ Bitmap opc[] = new Bitmap [7];
         up_0.recycle();
         down_0.recycle();
 
-
+        star.recycle();
 
 
 
