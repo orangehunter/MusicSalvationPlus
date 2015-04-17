@@ -88,6 +88,15 @@ Bitmap opc[] = new Bitmap [7];
 
     Bitmap sonbar;
 
+    String zo_ch;//作曲
+    String zo_si;//作詞
+    String zo_vocal;
+    String zo_cover;
+    String zo_carter;//作者
+    String zo_bpm;
+    String zo_score;
+    String zo_rank;
+
 
 
 
@@ -295,7 +304,15 @@ Bitmap opc[] = new Bitmap [7];
             up_btn.drawBtm(canvas, paint);
             down_btn.drawBtm(canvas, paint);
 
-
+            Graphic.drawText(canvas,zo_si,238,150,Color.BLACK,50,paint);
+            Graphic.drawText(canvas,zo_ch,238,200,Color.BLACK,50,paint);
+            Graphic.drawText(canvas,zo_vocal,238,250,Color.BLACK,50,paint);
+            Graphic.drawText(canvas,zo_cover,238,300,Color.BLACK,50,paint);
+            Graphic.drawText(canvas,zo_carter,238,350,Color.BLACK,50,paint);
+            Graphic.drawText(canvas,zo_bpm,238,405,Color.BLACK,50,paint);
+            Graphic.drawText(canvas,zo_score,238,460,Color.BLACK,50,paint);
+            //Graphic.drawText(canvas,"test測試2",238,510,Color.BLACK,50,paint);
+            Graphic.drawText(canvas,zo_rank,238,560 ,Color.BLACK,50,paint);
 
 
 
@@ -358,9 +375,13 @@ Bitmap opc[] = new Bitmap [7];
 
                     if(  play_btn.isIn(pointx, pointy)){
                         play_btn.setBottomTo(false);
+                        activity.io.video_select=2;
+                        activity.changeView(0);
+
                     }
                     if( shar_btn.isIn(pointx, pointy)){
                         shar_btn.setBottomTo(false);
+                        activity.shareTo( "FB",  "google.com.tw",  "FB",sondata);
                     }
                     if( cart_btn.isIn(pointx, pointy)){
                         cart_btn.setBottomTo(false);
