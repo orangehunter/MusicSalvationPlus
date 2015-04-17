@@ -235,8 +235,8 @@ implements SurfaceHolder.Callback{
             pumenbtn[3].drawBtm(canvas, paint);
             pumenbtn[4].drawBtm(canvas, paint);
 
-            num.drawNumberLeftStart(1105,170,activity.dl,Number.cv_blue,canvas,paint);
-            num.drawNumberLeftStart(1105,215,activity.like,Number.cv_red,canvas,paint);
+            num.drawNumberLeftStart(1105,170,activity.io.dl,Number.cv_blue,canvas,paint);
+            num.drawNumberLeftStart(1105,215,activity.io.like,Number.cv_red,canvas,paint);
 
 
 

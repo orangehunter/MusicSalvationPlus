@@ -366,14 +366,17 @@ public class ChgsongView extends SurfaceView
                 if (deJump == true) {
                     if (add_btn.isIn(pointx, pointy)) {
                         dacon_flag = !dacon_flag;
+                        sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
                     }
                     //
                     //TODO 做到一半
-                    if (sicon_1_btn.isIn(pointx, pointy)) {
+                    if (sicon_1_btn.isIn(pointx, pointy)&&dacon_flag) {
                         activity.changeView(10);
+                        sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
                     }
-                    if (sicon_2_btn.isIn(pointx, pointy)) {
+                    if (sicon_2_btn.isIn(pointx, pointy)&&dacon_flag) {
                         activity.changeView(7);
+                        sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
                     }
 
 
@@ -382,7 +385,11 @@ public class ChgsongView extends SurfaceView
                     pomeChg_1_btn.setBottomTo(true);
                     pomeChg_2_btn.setBottomTo(false);
                     pomeChg_3_btn.setBottomTo(false);
+<<<<<<< HEAD
                     activity.io.chart_id=1;
+=======
+                    sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+>>>>>>> origin/RRR
 
                 }
 
@@ -390,31 +397,44 @@ public class ChgsongView extends SurfaceView
                     pomeChg_2_btn.setBottomTo(true);
                     pomeChg_1_btn.setBottomTo(false);
                     pomeChg_3_btn.setBottomTo(false);
+<<<<<<< HEAD
                     activity.io.chart_id=2;
+=======
+                    sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+>>>>>>> origin/RRR
                 }
 
                 if (pomeChg_3_btn.isIn(pointx, pointy)) {
                     pomeChg_3_btn.setBottomTo(true);
                     pomeChg_2_btn.setBottomTo(false);
                     pomeChg_1_btn.setBottomTo(false);
+<<<<<<< HEAD
                     activity.io.chart_id=3;
+=======
+                    sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+>>>>>>> origin/RRR
                 }
 
                 if (play_btn.isIn(pointx, pointy)) {
                     play_btn.setBottomTo(true);
+                    sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
                 }
                 if (shar_btn.isIn(pointx, pointy)) {
                     shar_btn.setBottomTo(true);
+                    sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
                 }
                 if (cart_btn.isIn(pointx, pointy)) {
                     cart_btn.setBottomTo(true);
+                    sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
                 }
 
                 if (up_btn.isIn(pointx, pointy)) {
                     up_btn.setBottomTo(true);
+                    sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
                 }
                 if (down_btn.isIn(pointx, pointy)) {
                     down_btn.setBottomTo(true);
+                    sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
                 }
 
                 deJump = false;
@@ -509,6 +529,15 @@ public class ChgsongView extends SurfaceView
         star.recycle();
 
         songwheel.recycle();
+
+         dacon.recycle();
+        
+
+         sicon_1.recycle();
+         sicon_2.recycle();
+
+         sicon_1_btn.recycle();
+         sicon_2_btn.recycle();
     }
 
 

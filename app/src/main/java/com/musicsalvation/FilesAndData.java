@@ -66,6 +66,13 @@ public class FilesAndData {
     public static int animax_buffer;
     //存檔用參數-------------------------------------
 
+    //譜面庫用下載與讚數======================
+    public static int like;
+    public static int dl;
+    public static boolean likeFlag;
+    public static boolean dlFlag;
+    //譜面庫用下載與讚數-----------------------
+
     public static File getChartDir(){
         File root =  Environment.getExternalStorageDirectory();
         Log.v("getDir",""+root);

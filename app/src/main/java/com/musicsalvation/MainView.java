@@ -338,6 +338,9 @@ implements SurfaceHolder.Callback{
 		main_back2.recycle();
 		main_back3.recycle();
 		*/
+
+         mv_background.recycle();
+       mv_background_2.recycle();
 		storymode.recycle();
 		createmode.recycle();
 
