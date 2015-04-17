@@ -31,6 +31,8 @@ implements SurfaceHolder.Callback{
 	Bitmap pv_pumennum_2;
 	Bitmap pv_pumennum_3;
 
+    Bitmap pv_coverback;
+
     //按鈕宣告
 	Bottom dwbtn;
 	Bottom likebtn;
@@ -83,6 +85,7 @@ implements SurfaceHolder.Callback{
 		pv_pumennum_1=			Graphic.bitSize(LoadBitmap( R.drawable.pv_pumennum_1), btn_wsize, btn_hsize);
 		pv_pumennum_2 =          Graphic.bitSize(LoadBitmap( R.drawable.pv_pumennum_2), btn_wsize, btn_hsize);
 		pv_pumennum_3 =        Graphic.bitSize(LoadBitmap( R.drawable.pv_pumennum_3), btn_wsize, btn_hsize);
+        pv_coverback = Graphic.bitSize(LoadBitmap( R.drawable.cv_bg_starroad), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 
         likebtn = 	new Bottom(activity, pv_likebtn_1, pv_likebtn_0, 655, 620);
 		dwbtn = 	new Bottom(activity, pv_dwbtn_1,pv_dwbtn_0, 875, 620);
@@ -161,7 +164,8 @@ implements SurfaceHolder.Callback{
 			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
 			canvas.drawColor(Color.BLACK);//界面設定為黑色
 
-            Graphic.drawPic(canvas, pv_background, 1280/2, 720/2, 0, 255, paint);//背景
+            //Graphic.drawPic(canvas, pv_background, 1280/2, 720/2, 0, 255, paint);//背景
+            Graphic.drawPic(canvas, pv_coverback, 1280/2, 720/2, 0, 255, paint);//背景
 
             dwbtn.drawBtm(canvas,paint);
             likebtn.drawBtm(canvas, paint);
