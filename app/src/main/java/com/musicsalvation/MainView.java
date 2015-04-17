@@ -299,7 +299,7 @@ implements SurfaceHolder.Callback{
 
 					if(creatbtm.isIn(pointx, pointy)){
                             //TODO 還沒有改進創遊模式
-							activity.changeView(7);
+							activity.changeView(8);
 					}
 				}
 				deJump=true;

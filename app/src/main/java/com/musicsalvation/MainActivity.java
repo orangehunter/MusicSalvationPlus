@@ -248,6 +248,10 @@ public class MainActivity extends Activity{
         {
             switch(nowView)
             {
+                case 8:
+                    Constant.Flag=false;
+                    this.changeView(1);
+                    break;
                 case 2:
                 case 6:
                     Constant.Flag=false;
