@@ -106,28 +106,7 @@ Bitmap opc[] = new Bitmap [7];
 
 	int pointx;//觸控到螢幕的x座標
 	int pointy;//觸控到螢幕的y座標
-	int apa=10;
-	int a=0;
 
-	int mtx=640;
-	int mty=-200;
-	int mty1=360;
-	int mty2=200;
-
-	int mtoy=600;
-	int mtoa=0;
-	int mtoc=20;
-
-	int mlx=-220;
-	int mlx1=220-60;
-	int mly=700;
-
-	int mrx=1280+333;
-	int mrx1=1280-333+190;
-	int mry=700;
-
-	int alpha = 5;
-	int alpha2 = 0;
 
 	//背景音樂宣告，更改為陣列====================================
 
@@ -325,6 +304,14 @@ Bitmap opc[] = new Bitmap [7];
 			case MotionEvent.ACTION_DOWN://按下
 				if(deJump == true){
 
+                    if(add_btn.isIn(pointx,pointy)){
+                        activity.changeView(10);
+
+                    }
+                    if(set_btn.isIn(pointx,pointy)){
+
+
+                    }
                     if( pomeChg_1_btn.isIn(pointx, pointy)){
                         pomeChg_1_btn.setBottomTo(true);
                         pomeChg_2_btn.setBottomTo(false);
