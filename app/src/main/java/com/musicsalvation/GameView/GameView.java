@@ -317,7 +317,7 @@ public class GameView extends SurfaceView
         }
         else if(activity.io.level == 1){
             bg=Graphic.LoadBitmap(getResources(), R.drawable.stage02_bg, 1280, 720,false);
-            }
+        }
         else{
             bg=Graphic.LoadBitmap(getResources(), R.drawable.stage03_bg, 1280, 720,false);
         }
@@ -564,388 +564,386 @@ public class GameView extends SurfaceView
     @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
-        if(canvas!=null){
+        if (canvas != null) {
             // TAG 載入關卡設定及譜面檔===============================================
-            if(startFlag){
-                JSONObject json=null;
-                boss_Flag=false;
-                boss_attack_Flag=false;
-                ene_flag=false;
-                boss_x=boss_x_side;
-                String difficulty[]={"_easy","_normal","_hard"};
-                switch(activity.io.level){//關卡
-                    case 0 :
-                        Log.v("Load Charts", "celluloid_yuyao"+difficulty[activity.io.difficulty]);
-                        this.boss_show=98000;//TAG BOSS進場時間
-                        boss_kill=128000;
-                        json= FilesAndData.readGameChart("celluloid_yuyao" + difficulty[activity.io.difficulty]);
+            if (startFlag) {
+                JSONObject json = null;
+                boss_Flag = false;
+                boss_attack_Flag = false;
+                ene_flag = false;
+                boss_x = boss_x_side;
+                String difficulty[] = {"_easy", "_normal", "_hard"};
+                switch (activity.io.level) {//關卡
+                    case 0:
+                        Log.v("Load Charts", "celluloid_yuyao" + difficulty[activity.io.difficulty]);
+                        this.boss_show = 98000;//TAG BOSS進場時間
+                        boss_kill = 128000;
+                        json = FilesAndData.readGameChart("celluloid_yuyao" + difficulty[activity.io.difficulty]);
                         break;
-                    case 1 :
-                        Log.v("Load Charts", "tipsydessert_yuyao"+difficulty[activity.io.difficulty]);
-                        this.boss_show=90000;
-                        boss_kill=120000;
+                    case 1:
+                        Log.v("Load Charts", "tipsydessert_yuyao" + difficulty[activity.io.difficulty]);
+                        this.boss_show = 90000;
+                        boss_kill = 120000;
                         //this.boss_show=5000;
                         //boss_kill=10000;
-                        percent=50000;
-                        en=90;
-                        json=activity.io.readGameChart("tipsydessert_yuyao" + difficulty[activity.io.difficulty]);
+                        percent = 50000;
+                        en = 90;
+                        json = activity.io.readGameChart("tipsydessert_yuyao" + difficulty[activity.io.difficulty]);
                         break;
-                    case 2 :
-                        Log.v("Load Charts", "kokoronashi"+difficulty[activity.io.difficulty]);
-                        this.boss_show=222000;
-                        boss_kill=260000;
-                        json=activity.io.readGameChart("kokoronashi" + difficulty[activity.io.difficulty]);
+                    case 2:
+                        Log.v("Load Charts", "kokoronashi" + difficulty[activity.io.difficulty]);
+                        this.boss_show = 222000;
+                        boss_kill = 260000;
+                        json = activity.io.readGameChart("kokoronashi" + difficulty[activity.io.difficulty]);
                         break;
                 }
-                activity.io.virus=BtR.length()+BtS.length()+BtT.length()+BtX.length();
-                cs=new chartScan(activity,json,time_dis,"GameView");
+                activity.io.virus = BtR.length() + BtS.length() + BtT.length() + BtX.length();
+                cs = new chartScan(activity, json, time_dis, "GameView");
                 cs.Start();
-            }else{
-                Log.e("GameView","找不到譜面檔"+startFlag);
-                activity.changeView(2);
-            }
-
-            mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
-            mp.start();
-            startFlag=false;
-        }
-        //載入關卡設定及譜面檔---------------------------------------------------------------------------------------------------------------------------
-        //TAG 掃描=================================================================================
-        if(cs.R_scan_flag){
-            for(int i=0;i<chartObject;i++){
-                if(!cr_btm[i].getFlag()){
-                    cr_btm[i].start(mp.getCurrentPosition(), time_dis, (mp.getCurrentPosition()+time_dis)/100);
-                    cs.R_scan_flag=false;
-                    break;
+                if (json != null) {
+                    mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
+                    mp.start();
+                    startFlag = false;
+                } else {
+                    Log.e("GameView", "找不到譜面檔" + startFlag);
+                    activity.changeView(2);
                 }
             }
-        }
-        if(cs.S_scan_flag){
-            for(int i=0;i<chartObject;i++){
-                if(!cs_btm[i].getFlag()){
-                    cs_btm[i].start(mp.getCurrentPosition(), time_dis, (mp.getCurrentPosition()+time_dis)/100);
-                    cs.S_scan_flag=false;
-                    break;
-                }
-            }
-        }
-        if(cs.T_scan_flag){
-            for(int i=0;i<chartObject;i++){
-                if(!ct_btm[i].getFlag()){
-                    ct_btm[i].start(mp.getCurrentPosition(), time_dis, (mp.getCurrentPosition()+time_dis)/100);
-                    cs.T_scan_flag=false;
-                    break;
-                }
-            }
-        }
-        if(cs.X_scan_flag){
-            for(int i=0;i<chartObject;i++){
-                if(!cx_btm[i].getFlag()){
-                    cx_btm[i].start(mp.getCurrentPosition(), time_dis, (mp.getCurrentPosition()+time_dis)/100);
-                    cs.X_scan_flag=false;
-                    break;
-                }
-            }
-        }//掃描----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-        super.onDraw(canvas);
-        canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
-        canvas.drawColor(Color.BLACK);//界面設定為黑色
-        Graphic.drawPic(canvas, bg, 1280/2, 720/2, 0, 255, paint);//背景
-        Graphic.drawPic(canvas, track, 450, 390, 0, 255, paint);
-        Graphic.drawPic(canvas, track, 575, 390, 0, 255, paint);
-        Graphic.drawPic(canvas, track, 700, 390, 0, 255, paint);
-        Graphic.drawPic(canvas, track, 825, 390, 0, 255, paint);
-
-        //TAG 判定顯示======================================================
-        if(Hitcount > 0)
-        {
-            switch(Hitflag){  //偵測hitflag目前的狀態
-
-                case 0:
-
-                    break;
-
-                case 1:
-                    Graphic.drawPic(canvas, nice, 650, 140, 0, Hitcount, paint);
-                    break;
-                case 2:
-                    Graphic.drawPic(canvas, hit, 650, 140, 0, Hitcount, paint);
-                    break;
-                case 3:
-                    Graphic.drawPic(canvas, safe, 650, 140, 0, Hitcount, paint);
-                    break;
-                case 4:
-                    Graphic.drawPic(canvas, miss, 650, 140, 0, Hitcount, paint);
-                    break;
-            }
-            Hitcount-=15;
-        }else if(Hitcount <0){
-            Hitcount = 0;
-        }
-        //判定顯示--------------------------------------------------------
-
-
-        int now_time=mp.getCurrentPosition()+(activity.io.timing*10);
-        for(int i=0;i<chartObject;i++){
-            if(cr_btm[i].getFlag()){
-                if(cr_btm[i].drawChartBottom(now_time, canvas, paint)){
-                    scoreLess();
-                }
-            }
-            if(cs_btm[i].getFlag()){
-                if(cs_btm[i].drawChartBottom(now_time, canvas, paint)){
-                    scoreLess();
-                }
-            }
-            if(ct_btm[i].getFlag()){
-                ct_btm[i].drawChartBottom(now_time, canvas, paint);
-                if(ct_btm[i].drawChartBottom(now_time, canvas, paint)){
-                    scoreLess();
-                }
-            }
-            if(cx_btm[i].getFlag()){
-                if(cx_btm[i].drawChartBottom(now_time, canvas, paint)){
-                    scoreLess();
-                }
-            }
-        }
-
-        Graphic.drawPic(canvas, sight, 450, 600, 0, 255, paint);
-        Graphic.drawPic(canvas, sight, 575, 600, 0, 255, paint);
-        Graphic.drawPic(canvas, sight, 700, 600, 0, 255, paint);
-        Graphic.drawPic(canvas, sight, 825, 600, 0, 255, paint);
-        if(!boss_attack_Flag){
-            btn_circle.drawBtm(canvas, paint);
-            btn_square.drawBtm(canvas, paint);
-            btn_triangle.drawBtm(canvas, paint);
-            btn_xx.drawBtm(canvas, paint);
-        }else{
-            Graphic.drawPic(canvas, d_red, 100, 495, 315, 255, paint);
-            Graphic.drawPic(canvas,  d_yellow, 280, 625, 330, 255, paint);
-            Graphic.drawPic(canvas,  d_blue, 1180, 495, 45, 255, paint);
-            Graphic.drawPic(canvas,  d_green, 1000, 625, 30, 255, paint);
-        }
-        btn_pause.drawBtm(canvas, paint);
-
-        //PAUSE選單控制==========================================================
-        if(btn_pause.getBottom()){
-            Graphic.drawPic(canvas, pause_black, 640, 360, 0, 255, paint);
-            Graphic.drawPic(canvas, pause2, 90, 105, 0, 255, paint);
-            Graphic.drawPic(canvas, pause_back, 640, 315, 0, 255, paint);
-            btn_re_map.drawBtm(canvas, paint);
-            btn_re_play.drawBtm(canvas, paint);
-            btn_re_start.drawBtm(canvas, paint);
-        }
-        //PAUSE選單控制-----------------------------------------------------------
-
-
-        //combo============================================
-        Graphic.drawPic(canvas, hits, 290, 200, 0, 255, paint);
-        //combo--------------------------------------------
-
-
-
-        //TAG 特效光繪圖===========================================================================
-        for(int i=0;i<Effect_numbers;i++){
-            if(Effect_Cyan[i].getFlag()){
-                Effect_Cyan[i].drawEffect(Effect_speed, canvas, paint);
-            }
-            if(Effect_Red[i].getFlag()){
-                //Graphic.drawPic(canvas, lazer_red, 338, 550, 0, 255, paint);
-                Effect_Red[i].drawEffect(Effect_speed, canvas, paint);
-
-            }
-            if(Effect_Yellow[i].getFlag()){
-                //Graphic.drawPic(canvas, lazer_yellow, 432, 619, 0, 255, paint);
-                Effect_Yellow[i].drawEffect(Effect_speed, canvas, paint);
-            }
-            if(Effect_Green[i].getFlag()){
-                //Graphic.drawPic(canvas, lazer_green, 846, 622, 0, 255, paint);
-                Effect_Green[i].drawEffect(Effect_speed, canvas, paint);
-            }
-            if(Effect_Blue[i].getFlag()){
-                //Graphic.drawPic(canvas, lazer_blue, 937, 545, 0, 255, paint);
-                Effect_Blue[i].drawEffect(Effect_speed, canvas, paint);
-            }
-        }
-        //特效光繪圖----------------------------------------------------------------------------
-
-        Graphic.drawPic(canvas, titlebar, 641, 31, 0, 255, paint);
-        if(!ene_flag){
-            hp_x=Coordinate.AnalogSpeedMove(hp_x, 190+(int)hp*55);
-            hp_color=Color.GREEN;
-            if(hp_x!= 190+(int)hp*55){
-                if(hp_x<hp_x_last){
-                    hp_color=Color.argb(255, 132, 0, 20);
-                }else{
-                    hp_color=Color.argb(255, 181,230, 29);
-                }
-            }else {
-                hp_x_last=hp_x;
-                if(hp<hp_to_yellow&& hp>hp_to_red){
-                    hp_color=Color.YELLOW;
-                }
-                if(hp<=hp_to_red){
-                    hp_color=Color.RED;
-                }
-            }
-            Graphic.drawLine(canvas, hp_color, 190, 50, hp_x, 50, 16, paint);
-        }else{
-            en_x=Coordinate.AnalogSpeedMove(en_x, 190+(int)en*11);
-            Graphic.drawLine(canvas, en_color, 190, 50, en_x, 50, 16, paint);
-        }
-        //Graphic.drawPic(canvas, hpbar, 730, 50, 0, 255, paint);
-        //Graphic.drawPic(canvas, hpfont, 95, 50, 0, 255, paint);
-        //TAG HP檢查==========================================================
-        if(hp_x<=190+0*55){
-            activity.changeView(4);
-        }
-        //HP檢查----------------------------------------------------------
-        //能量條切換特效==========================================================================
-        if(!change_enebar.getFlag()){
-            if(ene_flag){
-                Graphic.drawPic(canvas, enebar[9], 640, 50, 0, 255, paint);
-            }else{
-                Graphic.drawPic(canvas, enebar[0], 640, 50, 0, 255, paint);
-            }
-        }
-        change_enebar.drawEffect(enebar_speed, canvas, paint);
-        //能量條切換特效--------------------------------------------------------------------------
-        // TAG BOSS 模式狀態=======================================================================
-        if(mp.getCurrentPosition()>boss_show){
-            if(!boss_del_flag){
-                Graphic.drawPic(canvas, boss, boss_x, boss_y, 0, 255, paint);
-            }
-            if(!ene_flag){
-                change_enebar.start();
-                ene_flag=true;
-            }
-            if(!boss_attack_Flag){
-                if(boss_Flag){
-                    if(boss_x!=boss_x_middle){
-                        boss_x=Coordinate.AnalogSpeedMove(boss_x, boss_x_middle);
-                    }else{
-                        boss_attack_Flag=true;
+            //載入關卡設定及譜面檔---------------------------------------------------------------------------------------------------------------------------
+            //TAG 掃描=================================================================================
+            if (cs.R_scan_flag) {
+                for (int i = 0; i < chartObject; i++) {
+                    if (!cr_btm[i].getFlag()) {
+                        cr_btm[i].start(mp.getCurrentPosition(), time_dis, (mp.getCurrentPosition() + time_dis) / 100);
+                        cs.R_scan_flag = false;
+                        break;
                     }
-                }else if(mp.getCurrentPosition()>boss_kill-boss_kill_delay){
-                    boss_Flag=true;
                 }
             }
-        }
-        // BOSS 模式狀態-------------------------------------------------------------------------------------------------------------------------
-
-        Graphic.drawPic(canvas, title, 132, 20, 0, 255, paint);
-        score.setSize(20, 30);
-        score.drawNumberRightStart(1250, 20, sc_score, Number.Wite, canvas, paint);
-
-
-        //TAG combo顯示============================================================
-        Graphic.drawPic(canvas, hits, 290, 200, 0, 255, paint);
-        score.setSize(50, 70);
-        score.drawNumberRightStart(230, 190, combo, Number.Cyan, canvas, paint);
-        //combo顯示-------------------------------------------------------------
-
-        //Graphic.drawPic(canvas, hpfont_red, 95, 50, 0, 255, paint);
-
-        //難易度
-        if(activity.io.difficulty == 0)
-        {
-            Graphic.drawPic(canvas, game_easy, 1180, 105, 0, 255, paint);
-        }else if(activity.io.difficulty == 1){
-            Graphic.drawPic(canvas, game_normal, 1180, 105, 0, 255, paint);
-        }else if(activity.io.difficulty == 2){
-            Graphic.drawPic(canvas, game_hard, 1180, 105, 0, 255, paint);
-        }
-
-        //TAG BOSS 前警告=========================================
-        if(mp.getCurrentPosition()>boss_show-warning_time&&mp.getCurrentPosition()<boss_show&&!warning_flag){
-            sp.play(warning_sound, activity.io.mp_Voiume, activity.io.mp_Voiume, 0, 0, 1);
-            warning_flag=true;
-        }
-        if(warning_flag){
-            if(warning_alpha<=10){
-                warning_alpha_flag=255;
+            if (cs.S_scan_flag) {
+                for (int i = 0; i < chartObject; i++) {
+                    if (!cs_btm[i].getFlag()) {
+                        cs_btm[i].start(mp.getCurrentPosition(), time_dis, (mp.getCurrentPosition() + time_dis) / 100);
+                        cs.S_scan_flag = false;
+                        break;
+                    }
+                }
             }
-            if(warning_alpha>240){
-                warning_alpha_flag=0;
+            if (cs.T_scan_flag) {
+                for (int i = 0; i < chartObject; i++) {
+                    if (!ct_btm[i].getFlag()) {
+                        ct_btm[i].start(mp.getCurrentPosition(), time_dis, (mp.getCurrentPosition() + time_dis) / 100);
+                        cs.T_scan_flag = false;
+                        break;
+                    }
+                }
             }
-            warning_alpha=Coordinate.AnalogSpeedMove(warning_alpha, warning_alpha_flag);
-            Graphic.drawPic(canvas, warning, 1280/2, 720/2, 0, warning_alpha, paint);
-            if(mp.getCurrentPosition()>boss_show&&warning_alpha<=10){
-                warning_flag=false;
-            }
-        }
-        //BOSS 前警告------------------------------------------------------------------------
+            if (cs.X_scan_flag) {
+                for (int i = 0; i < chartObject; i++) {
+                    if (!cx_btm[i].getFlag()) {
+                        cx_btm[i].start(mp.getCurrentPosition(), time_dis, (mp.getCurrentPosition() + time_dis) / 100);
+                        cs.X_scan_flag = false;
+                        break;
+                    }
+                }
+            }//掃描----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        //BOSS 攻擊============================================
-        if(boss_attack_Flag&&!attack_flag&&!attack_flag2){
-            attack_flag=true;
-            attack_flag2=true;
-            attack.start(mp.getCurrentPosition(), boss_kill_delay, 0);
-        }
-        if(attack_flag){
-            Graphic.drawPic(canvas, attack_pic_round, 1280/2, 495, (mp.getCurrentPosition()/10)%360, 255, paint);
-            Graphic.drawPic(canvas, attack_sight, 1280/2, 495, 0, 255, paint);
-            attack.drawChartBottom(mp.getCurrentPosition(), canvas, paint);
-            if(!attack.getFlag()){
+            super.onDraw(canvas);
+            canvas.clipRect(new Rect(0, 0, Constant.SCREEN_WIDTH, Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
+            canvas.drawColor(Color.BLACK);//界面設定為黑色
+            Graphic.drawPic(canvas, bg, 1280 / 2, 720 / 2, 0, 255, paint);//背景
+            Graphic.drawPic(canvas, track, 450, 390, 0, 255, paint);
+            Graphic.drawPic(canvas, track, 575, 390, 0, 255, paint);
+            Graphic.drawPic(canvas, track, 700, 390, 0, 255, paint);
+            Graphic.drawPic(canvas, track, 825, 390, 0, 255, paint);
+
+            //TAG 判定顯示======================================================
+            if (Hitcount > 0) {
+                switch (Hitflag) {  //偵測hitflag目前的狀態
+
+                    case 0:
+
+                        break;
+
+                    case 1:
+                        Graphic.drawPic(canvas, nice, 650, 140, 0, Hitcount, paint);
+                        break;
+                    case 2:
+                        Graphic.drawPic(canvas, hit, 650, 140, 0, Hitcount, paint);
+                        break;
+                    case 3:
+                        Graphic.drawPic(canvas, safe, 650, 140, 0, Hitcount, paint);
+                        break;
+                    case 4:
+                        Graphic.drawPic(canvas, miss, 650, 140, 0, Hitcount, paint);
+                        break;
+                }
+                Hitcount -= 15;
+            } else if (Hitcount < 0) {
+                Hitcount = 0;
+            }
+            //判定顯示--------------------------------------------------------
+
+
+            int now_time = mp.getCurrentPosition() + (activity.io.timing * 10);
+            for (int i = 0; i < chartObject; i++) {
+                if (cr_btm[i].getFlag()) {
+                    if (cr_btm[i].drawChartBottom(now_time, canvas, paint)) {
+                        scoreLess();
+                    }
+                }
+                if (cs_btm[i].getFlag()) {
+                    if (cs_btm[i].drawChartBottom(now_time, canvas, paint)) {
+                        scoreLess();
+                    }
+                }
+                if (ct_btm[i].getFlag()) {
+                    ct_btm[i].drawChartBottom(now_time, canvas, paint);
+                    if (ct_btm[i].drawChartBottom(now_time, canvas, paint)) {
+                        scoreLess();
+                    }
+                }
+                if (cx_btm[i].getFlag()) {
+                    if (cx_btm[i].drawChartBottom(now_time, canvas, paint)) {
+                        scoreLess();
+                    }
+                }
+            }
+
+            Graphic.drawPic(canvas, sight, 450, 600, 0, 255, paint);
+            Graphic.drawPic(canvas, sight, 575, 600, 0, 255, paint);
+            Graphic.drawPic(canvas, sight, 700, 600, 0, 255, paint);
+            Graphic.drawPic(canvas, sight, 825, 600, 0, 255, paint);
+            if (!boss_attack_Flag) {
+                btn_circle.drawBtm(canvas, paint);
+                btn_square.drawBtm(canvas, paint);
+                btn_triangle.drawBtm(canvas, paint);
+                btn_xx.drawBtm(canvas, paint);
+            } else {
+                Graphic.drawPic(canvas, d_red, 100, 495, 315, 255, paint);
+                Graphic.drawPic(canvas, d_yellow, 280, 625, 330, 255, paint);
+                Graphic.drawPic(canvas, d_blue, 1180, 495, 45, 255, paint);
+                Graphic.drawPic(canvas, d_green, 1000, 625, 30, 255, paint);
+            }
+            btn_pause.drawBtm(canvas, paint);
+
+            //PAUSE選單控制==========================================================
+            if (btn_pause.getBottom()) {
+                Graphic.drawPic(canvas, pause_black, 640, 360, 0, 255, paint);
+                Graphic.drawPic(canvas, pause2, 90, 105, 0, 255, paint);
+                Graphic.drawPic(canvas, pause_back, 640, 315, 0, 255, paint);
+                btn_re_map.drawBtm(canvas, paint);
+                btn_re_play.drawBtm(canvas, paint);
+                btn_re_start.drawBtm(canvas, paint);
+            }
+            //PAUSE選單控制-----------------------------------------------------------
+
+
+            //combo============================================
+            Graphic.drawPic(canvas, hits, 290, 200, 0, 255, paint);
+            //combo--------------------------------------------
+
+
+            //TAG 特效光繪圖===========================================================================
+            for (int i = 0; i < Effect_numbers; i++) {
+                if (Effect_Cyan[i].getFlag()) {
+                    Effect_Cyan[i].drawEffect(Effect_speed, canvas, paint);
+                }
+                if (Effect_Red[i].getFlag()) {
+                    //Graphic.drawPic(canvas, lazer_red, 338, 550, 0, 255, paint);
+                    Effect_Red[i].drawEffect(Effect_speed, canvas, paint);
+
+                }
+                if (Effect_Yellow[i].getFlag()) {
+                    //Graphic.drawPic(canvas, lazer_yellow, 432, 619, 0, 255, paint);
+                    Effect_Yellow[i].drawEffect(Effect_speed, canvas, paint);
+                }
+                if (Effect_Green[i].getFlag()) {
+                    //Graphic.drawPic(canvas, lazer_green, 846, 622, 0, 255, paint);
+                    Effect_Green[i].drawEffect(Effect_speed, canvas, paint);
+                }
+                if (Effect_Blue[i].getFlag()) {
+                    //Graphic.drawPic(canvas, lazer_blue, 937, 545, 0, 255, paint);
+                    Effect_Blue[i].drawEffect(Effect_speed, canvas, paint);
+                }
+            }
+            //特效光繪圖----------------------------------------------------------------------------
+
+            Graphic.drawPic(canvas, titlebar, 641, 31, 0, 255, paint);
+            if (!ene_flag) {
+                hp_x = Coordinate.AnalogSpeedMove(hp_x, 190 + (int) hp * 55);
+                hp_color = Color.GREEN;
+                if (hp_x != 190 + (int) hp * 55) {
+                    if (hp_x < hp_x_last) {
+                        hp_color = Color.argb(255, 132, 0, 20);
+                    } else {
+                        hp_color = Color.argb(255, 181, 230, 29);
+                    }
+                } else {
+                    hp_x_last = hp_x;
+                    if (hp < hp_to_yellow && hp > hp_to_red) {
+                        hp_color = Color.YELLOW;
+                    }
+                    if (hp <= hp_to_red) {
+                        hp_color = Color.RED;
+                    }
+                }
+                Graphic.drawLine(canvas, hp_color, 190, 50, hp_x, 50, 16, paint);
+            } else {
+                en_x = Coordinate.AnalogSpeedMove(en_x, 190 + (int) en * 11);
+                Graphic.drawLine(canvas, en_color, 190, 50, en_x, 50, 16, paint);
+            }
+            //Graphic.drawPic(canvas, hpbar, 730, 50, 0, 255, paint);
+            //Graphic.drawPic(canvas, hpfont, 95, 50, 0, 255, paint);
+            //TAG HP檢查==========================================================
+            if (hp_x <= 190 + 0 * 55) {
                 activity.changeView(4);
             }
-        }
-        if(beam_attack){
-            if(beam_flag){
-                beam.startByTime(mp.getCurrentPosition(), beam_time);
-                sp.play(beam_sound, activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-                beam_flag=false;
-            }else{
-                if(!beam.getFlag()){
-                    if(en_II>=80){
-                        activity.io.level_clear[activity.io.level][activity.io.difficulty]=true;
-                        activity.io.boss_delete=true;
-                        boss_del_flag=true;
-                        boss_del.startByTime(mp.getCurrentPosition(), boss_del_time);
-                        sp.play(boss_del_sound, activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-                    }else{
-                        boss_del_flag=false;
-                        activity.io.boss_delete=false;
-                    }
-                    beam_attack=false;
+            //HP檢查----------------------------------------------------------
+            //能量條切換特效==========================================================================
+            if (!change_enebar.getFlag()) {
+                if (ene_flag) {
+                    Graphic.drawPic(canvas, enebar[9], 640, 50, 0, 255, paint);
+                } else {
+                    Graphic.drawPic(canvas, enebar[0], 640, 50, 0, 255, paint);
                 }
             }
-            beam.drawAnimax(mp.getCurrentPosition(), canvas, paint);
-        }
-        if(boss_del_flag){
-            boss_del.drawAnimax(mp.getCurrentPosition(), canvas, paint);
-        }
-        //BOSS 攻擊----------------------------------------------------------------------------
-
-        btn_circle.setBottomTo(false);
-        btn_square.setBottomTo(false);
-        btn_triangle.setBottomTo(false);
-        btn_xx.setBottomTo(false);
-        for(int i=0;i<btn_pointer.size();i++){
-            int st=4;
-            try{
-                st=btn_pointer.valueAt(i);
-            }catch(Exception e){
-                Log.e("touch problem", ""+e);
+            change_enebar.drawEffect(enebar_speed, canvas, paint);
+            //能量條切換特效--------------------------------------------------------------------------
+            // TAG BOSS 模式狀態=======================================================================
+            if (mp.getCurrentPosition() > boss_show) {
+                if (!boss_del_flag) {
+                    Graphic.drawPic(canvas, boss, boss_x, boss_y, 0, 255, paint);
+                }
+                if (!ene_flag) {
+                    change_enebar.start();
+                    ene_flag = true;
+                }
+                if (!boss_attack_Flag) {
+                    if (boss_Flag) {
+                        if (boss_x != boss_x_middle) {
+                            boss_x = Coordinate.AnalogSpeedMove(boss_x, boss_x_middle);
+                        } else {
+                            boss_attack_Flag = true;
+                        }
+                    } else if (mp.getCurrentPosition() > boss_kill - boss_kill_delay) {
+                        boss_Flag = true;
+                    }
+                }
             }
-            switch(st){
-                case 0:
-                    btn_circle.setBottomTo(true);
-                    break;
-                case 1:
-                    btn_square.setBottomTo(true);
-                    break;
-                case 2:
-                    btn_triangle.setBottomTo(true);
-                    break;
-                case 3:
-                    btn_xx.setBottomTo(true);
-                    break;
-            }
-        }
+            // BOSS 模式狀態-------------------------------------------------------------------------------------------------------------------------
 
+            Graphic.drawPic(canvas, title, 132, 20, 0, 255, paint);
+            score.setSize(20, 30);
+            score.drawNumberRightStart(1250, 20, sc_score, Number.Wite, canvas, paint);
+
+
+            //TAG combo顯示============================================================
+            Graphic.drawPic(canvas, hits, 290, 200, 0, 255, paint);
+            score.setSize(50, 70);
+            score.drawNumberRightStart(230, 190, combo, Number.Cyan, canvas, paint);
+            //combo顯示-------------------------------------------------------------
+
+            //Graphic.drawPic(canvas, hpfont_red, 95, 50, 0, 255, paint);
+
+            //難易度
+            if (activity.io.difficulty == 0) {
+                Graphic.drawPic(canvas, game_easy, 1180, 105, 0, 255, paint);
+            } else if (activity.io.difficulty == 1) {
+                Graphic.drawPic(canvas, game_normal, 1180, 105, 0, 255, paint);
+            } else if (activity.io.difficulty == 2) {
+                Graphic.drawPic(canvas, game_hard, 1180, 105, 0, 255, paint);
+            }
+
+            //TAG BOSS 前警告=========================================
+            if (mp.getCurrentPosition() > boss_show - warning_time && mp.getCurrentPosition() < boss_show && !warning_flag) {
+                sp.play(warning_sound, activity.io.mp_Voiume, activity.io.mp_Voiume, 0, 0, 1);
+                warning_flag = true;
+            }
+            if (warning_flag) {
+                if (warning_alpha <= 10) {
+                    warning_alpha_flag = 255;
+                }
+                if (warning_alpha > 240) {
+                    warning_alpha_flag = 0;
+                }
+                warning_alpha = Coordinate.AnalogSpeedMove(warning_alpha, warning_alpha_flag);
+                Graphic.drawPic(canvas, warning, 1280 / 2, 720 / 2, 0, warning_alpha, paint);
+                if (mp.getCurrentPosition() > boss_show && warning_alpha <= 10) {
+                    warning_flag = false;
+                }
+            }
+            //BOSS 前警告------------------------------------------------------------------------
+
+            //BOSS 攻擊============================================
+            if (boss_attack_Flag && !attack_flag && !attack_flag2) {
+                attack_flag = true;
+                attack_flag2 = true;
+                attack.start(mp.getCurrentPosition(), boss_kill_delay, 0);
+            }
+            if (attack_flag) {
+                Graphic.drawPic(canvas, attack_pic_round, 1280 / 2, 495, (mp.getCurrentPosition() / 10) % 360, 255, paint);
+                Graphic.drawPic(canvas, attack_sight, 1280 / 2, 495, 0, 255, paint);
+                attack.drawChartBottom(mp.getCurrentPosition(), canvas, paint);
+                if (!attack.getFlag()) {
+                    activity.changeView(4);
+                }
+            }
+            if (beam_attack) {
+                if (beam_flag) {
+                    beam.startByTime(mp.getCurrentPosition(), beam_time);
+                    sp.play(beam_sound, activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+                    beam_flag = false;
+                } else {
+                    if (!beam.getFlag()) {
+                        if (en_II >= 80) {
+                            activity.io.level_clear[activity.io.level][activity.io.difficulty] = true;
+                            activity.io.boss_delete = true;
+                            boss_del_flag = true;
+                            boss_del.startByTime(mp.getCurrentPosition(), boss_del_time);
+                            sp.play(boss_del_sound, activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+                        } else {
+                            boss_del_flag = false;
+                            activity.io.boss_delete = false;
+                        }
+                        beam_attack = false;
+                    }
+                }
+                beam.drawAnimax(mp.getCurrentPosition(), canvas, paint);
+            }
+            if (boss_del_flag) {
+                boss_del.drawAnimax(mp.getCurrentPosition(), canvas, paint);
+            }
+            //BOSS 攻擊----------------------------------------------------------------------------
+
+            btn_circle.setBottomTo(false);
+            btn_square.setBottomTo(false);
+            btn_triangle.setBottomTo(false);
+            btn_xx.setBottomTo(false);
+            for (int i = 0; i < btn_pointer.size(); i++) {
+                int st = 4;
+                try {
+                    st = btn_pointer.valueAt(i);
+                } catch (Exception e) {
+                    Log.e("touch problem", "" + e);
+                }
+                switch (st) {
+                    case 0:
+                        btn_circle.setBottomTo(true);
+                        break;
+                    case 1:
+                        btn_square.setBottomTo(true);
+                        break;
+                    case 2:
+                        btn_triangle.setBottomTo(true);
+                        break;
+                    case 3:
+                        btn_xx.setBottomTo(true);
+                        break;
+                }
+            }
+
+        }
     }
     @Override
     public boolean onTouchEvent(MotionEvent event){
