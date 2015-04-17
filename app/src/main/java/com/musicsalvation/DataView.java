@@ -47,6 +47,7 @@ implements SurfaceHolder.Callback{
     Bitmap dv_windbtn;
 
 
+
     //按鈕宣告
 	Bottom newbtn;
 	Bottom heavybtn;
