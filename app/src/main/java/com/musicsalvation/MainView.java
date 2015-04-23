@@ -127,9 +127,11 @@ implements SurfaceHolder.Callback{
 
 		hidden_flag=false;
 		for(int i=0;i<3;i++){
-			if(activity.io.level_clear[2][i]){
-				hidden_flag=true;
-			}
+            try {
+                if (activity.io.level_clear[2][i]) {
+                    hidden_flag = true;
+                }
+            }catch (Exception e){}
 		}
 		//Log.v("mainView", ""+hidden_flag);
 		if(hidden_flag){

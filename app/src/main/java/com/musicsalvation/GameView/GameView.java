@@ -202,7 +202,7 @@ public class GameView extends SurfaceView
     int sc_hit;
     int sc_safe;
     int sc_miss;
-    int percent;
+    int percent;待機
     int sc_score;
 
     //TAG 控制判定顯示FLAG==============================

@@ -230,11 +230,11 @@ public class ChgsongView extends SurfaceView
         pomeChg_2_btn=new Bottom(activity,  pomeChg_2_1,  pomeChg_2_0,282, 653);
         pomeChg_3_btn=new Bottom(activity,  pomeChg_3_1,  pomeChg_3_0,375, 653);
         play_btn=new Bottom(activity,  play_0,  play_0,557, 408);
-        shar_btn=new Bottom(activity,  play_0,  shar_0,628, 294);
-        cart_btn=new Bottom(activity,   play_0,  cart_0,628, 519);
+        shar_btn=new Bottom(activity,  shar_0,  shar_0,628, 294);
+        cart_btn=new Bottom(activity,   cart_0,  cart_0,628, 519);
 
-        up_btn=new Bottom(activity,   play_0,  up_0,664, 160);
-        down_btn=new Bottom(activity,   play_0,  down_0,667, 665);
+        up_btn=new Bottom(activity,   up_0,  up_0,664, 160);
+        down_btn=new Bottom(activity,   down_0,  down_0,667, 665);
 
         sicon_1_btn=new Bottom(activity,   sicon_1, sicon_1,1025, 145);
         sicon_2_btn=new Bottom(activity,   sicon_2, sicon_2,1025, 235);
