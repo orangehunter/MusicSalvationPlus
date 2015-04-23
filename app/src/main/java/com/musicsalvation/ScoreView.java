@@ -137,7 +137,7 @@ implements SurfaceHolder.Callback{
 		new_score_flag=false;
 		new_rank_flag=false;
 		//初始化--------------------------------------------------------------------------------------------
-		bg=Graphic.bitSize(LoadBitmap( R.drawable.sv_background), Constant.DEFULT_WITH, Constant.DEFULT_HIGHT);
+		bg=Graphic.bitSize(LoadBitmap( R.drawable.sv_background), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		titlebar = Graphic.bitSize(LoadBitmap(R.drawable.title_bar), 1280, 90);
 		rightbar = Graphic.bitSize(LoadBitmap(R.drawable.right_bar), 625, 75);
 		leftbar  = Graphic.bitSize(LoadBitmap(R.drawable.left_bar), 620, 75);
@@ -145,7 +145,7 @@ implements SurfaceHolder.Callback{
 		clearbar = Graphic.bitSize(LoadBitmap(R.drawable.clear_bar), 620, 150);
 		line     = Graphic.bitSize(LoadBitmap(R.drawable.line), 625, 2);
 
-		title   = Graphic.bitSize(LoadBitmap(R.drawable.score_title_1+activity.level), 560, 65);
+		title   = Graphic.bitSize(LoadBitmap(R.drawable.score_title_1+activity.io.level), 560, 65);
 		totalvirus = Graphic.bitSize(LoadBitmap(R.drawable.totalvirus), 410, 60);
 		nice = Graphic.bitSize(LoadBitmap(R.drawable.sv_nice), 165, 60);
 		hit  = Graphic.bitSize(LoadBitmap(R.drawable.sv_hit), 125, 60);
@@ -201,28 +201,28 @@ implements SurfaceHolder.Callback{
 		again_btm = new Bottom(activity, again, again, 825, 670);
 		//判定是否過關==============================================================================
 		//條件修正
-		if(activity.percent > ((int)activity.virus*0.7)&& activity.boss_delete)  //如果打擊率超過70%並且擊殺BOSS
+		if(activity.io.percent > ((int)activity.io.virus*0.7)&& activity.io.boss_delete)  //如果打擊率超過70%並且擊殺BOSS
 		{
 			clear_flag=true;
-			if(activity.level==2){
+			if(activity.io.level==2){
 				activity.callAlartDialog("");
 			}
 			//FULL COMBO判定為S級
-			if(activity.combo == activity.virus){   
+			if(activity.io.combo == activity.io.virus){
 				sc_rank=7;
 			}
 			//打擊率超過90% 為A
-			else if(activity.percent > ((int)activity.virus*0.9))  
+			else if(activity.io.percent > ((int)activity.io.virus*0.9))
 			{
 				sc_rank=6;
 			}
 			//打擊率超過80% 低於90%為B
-			else if(activity.percent > ((int)activity.virus*0.8) && activity.percent < ((int)activity.virus*0.9))
+			else if(activity.io.percent > ((int)activity.io.virus*0.8) && activity.io.percent < ((int)activity.io.virus*0.9))
 			{
 				sc_rank=5;
 			}
 			//打擊率超過70% 低於80%為C
-			else if(activity.percent > ((int)activity.virus*0.7) && activity.percent < ((int)activity.virus*0.8)) //大於70% 小於80%
+			else if(activity.io.percent > ((int)activity.io.virus*0.7) && activity.io.percent < ((int)activity.io.virus*0.8)) //大於70% 小於80%
 			{
 				sc_rank=4;
 			}
@@ -231,12 +231,12 @@ implements SurfaceHolder.Callback{
 		{
 			clear_flag=false;
 			//打擊率超過60% 低於70%為D
-			if(activity.percent > ((int)activity.virus*0.6))
+			if(activity.io.percent > ((int)activity.io.virus*0.6))
 			{
 				sc_rank=3;
 			}
 			//打擊率超過50% 低於60%為E
-			else if(activity.percent > ((int)activity.virus*0.5) && activity.percent < ((int)activity.virus*0.6))
+			else if(activity.io.percent > ((int)activity.io.virus*0.5) && activity.io.percent < ((int)activity.io.virus*0.6))
 			{
 				sc_rank=2;
 			}
@@ -246,15 +246,15 @@ implements SurfaceHolder.Callback{
 				sc_rank=1;
 			}
 		}
-		if(activity.score>activity.hight_score[activity.level][activity.difficulty]){
+		if(activity.io.score>activity.io.hight_score[activity.io.level][activity.io.difficulty]){
 			new_score_flag=true;
-			activity.hight_score[activity.level][activity.difficulty]=activity.score;
-			activity.writeData();
+			activity.io.hight_score[activity.io.level][activity.io.difficulty]=activity.io.score;
+			activity.io.writeData();
 		}
-		if(sc_rank>activity.hight_rank[activity.level][activity.difficulty]){
+		if(sc_rank>activity.io.hight_rank[activity.io.level][activity.io.difficulty]){
 			new_rank_flag=true;
-			activity.hight_rank[activity.level][activity.difficulty]=this.sc_rank;
-			activity.writeData();
+			activity.io.hight_rank[activity.io.level][activity.io.difficulty]=this.sc_rank;
+			activity.io.writeData();
 		}
 
 		Constant.Flag=true;
@@ -309,12 +309,12 @@ implements SurfaceHolder.Callback{
 			Graphic.drawPic(canvas, title, 290, 40, 0, 255, paint);
 
 			//難易度
-			if(activity.difficulty == 0)
+			if(activity.io.difficulty == 0)
 			{
 			Graphic.drawPic(canvas, easy, 1150, 45, 0, 255, paint);
-			}else if(activity.difficulty == 1){
+			}else if(activity.io.difficulty == 1){
 			Graphic.drawPic(canvas, normal, 1150, 45, 0, 255, paint);
-			}else if(activity.difficulty == 2){
+			}else if(activity.io.difficulty == 2){
 			Graphic.drawPic(canvas, hard, 1150, 45, 0, 255, paint);
 			}
 
@@ -328,7 +328,7 @@ implements SurfaceHolder.Callback{
 			Graphic.drawPic(canvas, miss, 120, 520, 0, 255, paint);
 			Graphic.drawPic(canvas, max_combo, 845, 300, 0, 255, paint);
 			//Graphic.drawPic(canvas, quest_stage, 880, 390, 0, 255, paint);
-			if(activity.boss_delete){
+			if(activity.io.boss_delete){
 			Graphic.drawPic(canvas, bossclear, 900, 390, 0, 255, paint);
 			}
 			Graphic.drawPic(canvas, score, 120, 610, 0, 255, paint);
@@ -343,27 +343,27 @@ implements SurfaceHolder.Callback{
 
 			//數字====================================================================================
 
-			if(sc_nice != activity.nice){
-				sc_nice=Coordinate.AnalogSpeedMove(sc_nice, activity.nice);
+			if(sc_nice != activity.io.nice){
+				sc_nice=Coordinate.AnalogSpeedMove(sc_nice, activity.io.nice);
 			}
-			if(sc_hit != activity.hit){
-				sc_hit=Coordinate.AnalogSpeedMove(sc_hit, activity.hit);
+			if(sc_hit != activity.io.hit){
+				sc_hit=Coordinate.AnalogSpeedMove(sc_hit, activity.io.hit);
 			}
-			if(sc_safe != activity.safe){
-				sc_safe=Coordinate.AnalogSpeedMove(sc_safe, activity.safe);
+			if(sc_safe != activity.io.safe){
+				sc_safe=Coordinate.AnalogSpeedMove(sc_safe, activity.io.safe);
 			}
-			if(sc_miss != activity.miss){
-				sc_miss=Coordinate.AnalogSpeedMove(sc_miss, activity.miss);
+			if(sc_miss != activity.io.miss){
+				sc_miss=Coordinate.AnalogSpeedMove(sc_miss, activity.io.miss);
 			}
-			if(sc_score != activity.score){
-				sc_score=Coordinate.AnalogSpeedMove(sc_score, activity.score);
+			if(sc_score != activity.io.score){
+				sc_score=Coordinate.AnalogSpeedMove(sc_score, activity.io.score);
 			}
-			if(sc_combo != activity.combo){
-				sc_combo=Coordinate.AnalogSpeedMove(sc_combo, activity.combo);
+			if(sc_combo != activity.io.combo){
+				sc_combo=Coordinate.AnalogSpeedMove(sc_combo, activity.io.combo);
 			}
 
 			num.setSize(35, 60);
-			num.drawNumberRightStart(630, 180, activity.virus, Number.Gray, canvas, paint);
+			num.drawNumberRightStart(630, 180, activity.io.virus, Number.Gray, canvas, paint);
 			num.drawNumberRightStart(630, 270, sc_nice, Number.Yellow, canvas, paint);
 			num.drawNumberRightStart(630, 360, sc_hit, Number.Cyan, canvas, paint);
 			num.drawNumberRightStart(630, 440, sc_safe, Number.Green, canvas, paint);
@@ -373,10 +373,10 @@ implements SurfaceHolder.Callback{
 			num.setSize(30, 55);
 
 			num.drawNumberRightStart(620, 610, sc_score, Number.Wite, canvas, paint);
-			num.drawNumberRightStart(620, 675, activity.hight_score[activity.level][activity.difficulty], Number.Wite, canvas, paint);
+			num.drawNumberRightStart(620, 675, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Wite, canvas, paint);
 			//數字------------------------------------------------------------------------------------
 
-			if(sc_score == activity.score){
+			if(sc_score == activity.io.score){
 				if(clear_flag){
 					Graphic.drawPic(canvas, clear, 950, 165, 0, 255, paint);
 				}else{
@@ -424,22 +424,26 @@ implements SurfaceHolder.Callback{
 		case MotionEvent.ACTION_DOWN://按下
 			if(deJump == true){
 				if(touch_flag==0){
-					sc_nice = activity.nice;
-					sc_hit = activity.hit;
-					sc_safe = activity.safe;
-					sc_miss = activity.miss;
-					sc_score = activity.score;
-					sc_combo = activity.combo;
+					sc_nice = activity.io.nice;
+					sc_hit = activity.io.hit;
+					sc_safe = activity.io.safe;
+					sc_miss = activity.io.miss;
+					sc_score = activity.io.score;
+					sc_combo = activity.io.combo;
 					touch_flag=1;
 				}/*if(touch_flag==1){
 					activity.changeView(2);
 				}*/
 				if(exit_btm.isIn(pointx, pointy)){
-					activity.changeView(2);
-					sp.play(btn_se, activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+                    if (activity.io.level!=3) {
+                        activity.changeView(2);
+                    }else {
+                        activity.changeView(8);
+                    }
+					sp.play(btn_se, activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 				}
 				if(again_btm.isIn(pointx, pointy)){
-					sp.play(btn_se, activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+					sp.play(btn_se, activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 					activity.changeView(3);
 					
 				}

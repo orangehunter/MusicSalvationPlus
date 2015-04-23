@@ -219,11 +219,11 @@ implements SurfaceHolder.Callback{
 	}
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-		set_speed=activity.speed+5;
-		set_timing=activity.timing+5;
+		set_speed=activity.io.speed+5;
+		set_timing=activity.io.timing+5;
 		paint = new Paint();//建立畫筆
 		paint.setAntiAlias(true);//開啟抗鋸齒
-		wmap =Graphic.bitSize(LoadBitmap( R.drawable.wmap), Constant.DEFULT_WITH, Constant.DEFULT_HIGHT);
+		wmap =Graphic.bitSize(LoadBitmap( R.drawable.wmap), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		left_back=Graphic.bitSize(LoadBitmap( R.drawable.menubackground), 846, 871);
 		left_exit = Graphic.bitSize(LoadBitmap( R.drawable.left_exit1), 134, 75);
 		left_exit2 = Graphic.bitSize(LoadBitmap( R.drawable.left_exit2), 134, 75);
@@ -343,15 +343,15 @@ implements SurfaceHolder.Callback{
 		st_02_flag=false;
 		st_03_flag=false;
 		for(int j=0;j<3;j++){
-			if(activity.level_clear[0][j]){
+			if(activity.io.level_clear[0][j]){
 				st_02_flag=true;
 			}
-			if(activity.level_clear[1][j]){
+			if(activity.io.level_clear[1][j]){
 				st_03_flag=true;
 			}
 		}
 
-		switch (activity.sp_num) {
+		switch (activity.io.sp_num) {
 		case 0:
 			sebtm1.setBottomTo(true);
 			break;
@@ -370,9 +370,9 @@ implements SurfaceHolder.Callback{
 		}
 
 		mp_Volume_bar=new MySeekBar(activity, volBar, volbtn, -300, 259);
-		mp_Volume_bar.setSeekBarFloat((int)(activity.mp_Voiume*100));
+		mp_Volume_bar.setSeekBarFloat((int)(activity.io.mp_Voiume*100));
 		sp_Volume_bar=new MySeekBar(activity, volBar, volbtn, -300, 167);
-		sp_Volume_bar.setSeekBarFloat((int)(activity.sp_Voiume*100));
+		sp_Volume_bar.setSeekBarFloat((int)(activity.io.sp_Voiume*100));
 
 		start = new Bottom(activity, right_start, right_start, 1161, 655);
 
@@ -386,7 +386,7 @@ implements SurfaceHolder.Callback{
 
 
 		mp = MediaPlayer.create(this.getContext(), R.raw.map_bgm);
-		mp.setVolume(activity.mp_Voiume, activity.mp_Voiume);
+		mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
 		mp.setLooping(true);
 		mp.start();
 
@@ -405,11 +405,11 @@ implements SurfaceHolder.Callback{
 		sp_id[10]=sp.load(activity, R.raw.start, 1);
 
 		num=new Number(getResources());
-		num.setSize(30, 40);
+		num.setSize(25, 35);
 		rank=new Bitmap[7];
-		rank[6]=Graphic.LoadBitmap(getResources(), R.drawable.r_s, 45,60);
+		rank[6]=Graphic.LoadBitmap(getResources(), R.drawable.r_s, 45,60,true);
 		for(int i=0;i<=5;i++){
-			rank[i]=Graphic.LoadBitmap(getResources(), R.drawable.r_f-i, 45, 60);
+			rank[i]=Graphic.LoadBitmap(getResources(), R.drawable.r_f-i, 45, 60,true);
 		}
 
 		Constant.Flag=true;
@@ -636,14 +636,14 @@ implements SurfaceHolder.Callback{
 					model.drawBtm(canvas, paint,right_board_x-86, 667);
 
 					//追加條件:當Flag = 0 會顯示easy=================================================
-					if(activity.difficulty==0){
+					if(activity.io.difficulty==0){
 
 						Graphic.drawPic(canvas, right_easy_ch, right_board_x-86, 655, 0, 255, paint);
 						//追加條件Flag = 0 會顯示easy-----------------------------------------------
-					}else if(activity.difficulty==1){
+					}else if(activity.io.difficulty==1){
 
 						Graphic.drawPic(canvas, right_normal_ch, right_board_x-86, 667, 0, 255, paint);	
-					}else if(activity.difficulty==2){
+					}else if(activity.io.difficulty==2){
 
 						Graphic.drawPic(canvas, right_hard_ch, right_board_x-86, 667, 0, 255, paint);	
 					}
@@ -653,7 +653,7 @@ implements SurfaceHolder.Callback{
 				right_board_x=Coordinate.AnalogSpeedMove(right_board_x, 1062);
 				Graphic.drawPic(canvas, right_board, right_board_x, 355, 0, 255, paint);
 				Graphic.drawPic(canvas, right_stage01, right_board_x+11, 37, 0, 255, paint);
-				if(activity.level_clear[activity.level][activity.difficulty]){
+				if(activity.io.level_clear[activity.io.level][activity.io.difficulty]){
 
 				Graphic.drawPic(canvas, right_boss01, right_board_x+2, 179, 0, 255, paint);
 				}else{
@@ -668,7 +668,7 @@ implements SurfaceHolder.Callback{
 				right_board_x=Coordinate.AnalogSpeedMove(right_board_x, 1062);
 				Graphic.drawPic(canvas, right_board, right_board_x, 355, 0, 255, paint);
 				Graphic.drawPic(canvas, right_stage2, right_board_x+11, 37, 0, 255, paint);
-				if(activity.level_clear[activity.level][activity.difficulty]){
+				if(activity.io.level_clear[activity.io.level][activity.io.difficulty]){
 					Graphic.drawPic(canvas, right_boss01, right_board_x+2, 179, 0, 255, paint);
 					}else{
 						Graphic.drawPic(canvas, right_boss01_gray, right_board_x+2, 179, 0, 255, paint);
@@ -682,7 +682,7 @@ implements SurfaceHolder.Callback{
 				right_board_x=Coordinate.AnalogSpeedMove(right_board_x, 1062);
 				Graphic.drawPic(canvas, right_board, right_board_x, 355, 0, 255, paint);
 				Graphic.drawPic(canvas, right_stage3, right_board_x+11, 37, 0, 255, paint);
-				if(activity.level_clear[activity.level][activity.difficulty]){
+				if(activity.io.level_clear[activity.io.level][activity.io.difficulty]){
 					Graphic.drawPic(canvas, right_boss01, right_board_x+2, 179, 0, 255, paint);
 					}else{
 						Graphic.drawPic(canvas, right_boss01_gray, right_board_x+2, 179, 0, 255, paint);
@@ -696,19 +696,19 @@ implements SurfaceHolder.Callback{
 
 			//當stageFlag不等於0，就會顯示難易度與選擇難易度
 			if(stageFlag !=0){
-				if(activity.hight_rank[activity.level][activity.difficulty]!=0){
-					Graphic.drawPic(canvas, rank[activity.hight_rank[activity.level][activity.difficulty]-1], right_board_x+68, 585, 0, 255, paint);
+				if(activity.io.hight_rank[activity.io.level][activity.io.difficulty]!=0){
+					Graphic.drawPic(canvas, rank[activity.io.hight_rank[activity.io.level][activity.io.difficulty]-1], right_board_x+68, 585, 0, 255, paint);
 				}
-				num.drawNumberLeftStart(right_board_x-10, 528, activity.hight_score[activity.level][activity.difficulty], Number.Wite, canvas, paint);
+				num.drawNumberLeftStart(right_board_x-10, 535, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Wite, canvas, paint);
 				//追加條件:當Flag = 0 會顯示easy=================================================
-				if(activity.difficulty==0){
+				if(activity.io.difficulty==0){
 					Graphic.drawPic(canvas, right_easy_ch, right_board_x-86, 655, 0, 255, paint);
 					//追加條件Flag = 0 會顯示easy-----------------------------------------------
 
-				}else if(activity.difficulty==1){
+				}else if(activity.io.difficulty==1){
 					Graphic.drawPic(canvas, right_normal_ch, right_board_x-86, 655, 0, 255, paint);
 
-				}else if(activity.difficulty==2){
+				}else if(activity.io.difficulty==2){
 					Graphic.drawPic(canvas, right_hard_ch, right_board_x-86, 655, 0, 255, paint);
 
 				}
@@ -728,15 +728,15 @@ implements SurfaceHolder.Callback{
 					Graphic.drawPic(canvas, right_chmodel, 741, 588, 0, 255, paint);
 
 					//追加透明度變化，目前選擇的難度為亮，其餘難度為暗=======================================
-					if(activity.difficulty==0){
+					if(activity.io.difficulty==0){
 						easy.drawBtm(canvas, paint, 255);
 						normal.drawBtm(canvas, paint,150);
 						hard.drawBtm(canvas, paint, 150);
-					}else if(activity.difficulty == 1){
+					}else if(activity.io.difficulty == 1){
 						easy.drawBtm(canvas, paint, 150);
 						normal.drawBtm(canvas, paint,255);
 						hard.drawBtm(canvas, paint, 150);
-					}else if(activity.difficulty == 2){
+					}else if(activity.io.difficulty == 2){
 						easy.drawBtm(canvas, paint, 150);
 						normal.drawBtm(canvas, paint,150);
 						hard.drawBtm(canvas, paint, 255);
@@ -761,16 +761,16 @@ implements SurfaceHolder.Callback{
 				//左半部選單按鈕事件====================================
 				if(menubtm.isIn(pointx, pointy)){
 					if(menuFlag == 0){
-						sp.play(sp_id[5], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+						sp.play(sp_id[5], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 						menuFlag = 1;
 					}
 					else if(menuFlag == 1){
-						sp.play(sp_id[6], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+						sp.play(sp_id[6], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 						left_btm1.setBottomTo(false);
-						left_btm2.setBottomTo(false);
-						left_btm3.setBottomTo(false);
-						left_btm4.setBottomTo(false);
-						left_btm5.setBottomTo(false);
+                        left_btm2.setBottomTo(false);
+                        left_btm3.setBottomTo(false);
+                        left_btm4.setBottomTo(false);
+                        left_btm5.setBottomTo(false);
 						menuFlag = 0;
 					}
 				}
@@ -779,7 +779,7 @@ implements SurfaceHolder.Callback{
 				{
 					if(left_btm1.isIn(pointx, pointy)){
 						if(!left_btm1.getBottom()){
-							sp.play(sp_id[7], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+							sp.play(sp_id[7], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 							left_btm1.setBottomTo(true);
 							left_btm2.setBottomTo(false);
 							left_btm3.setBottomTo(false);
@@ -794,7 +794,7 @@ implements SurfaceHolder.Callback{
 					else if(left_btm2.isIn(pointx, pointy))
 					{
 						if(!left_btm2.getBottom()){
-							sp.play(sp_id[7], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+							sp.play(sp_id[7], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 							left_btm1.setBottomTo(false);
 							left_btm2.setBottomTo(true);
 							left_btm3.setBottomTo(false);
@@ -808,7 +808,7 @@ implements SurfaceHolder.Callback{
 					}
 					else if(left_btm3.isIn(pointx, pointy)){
 						if(!left_btm3.getBottom()){
-							sp.play(sp_id[7], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+							sp.play(sp_id[7], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 							left_btm1.setBottomTo(false);
 							left_btm2.setBottomTo(false);
 							left_btm3.setBottomTo(true);
@@ -823,7 +823,7 @@ implements SurfaceHolder.Callback{
 					}
 					else if(left_btm4.isIn(pointx, pointy)){
 						if(!left_btm4.getBottom()){
-							sp.play(sp_id[7], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+							sp.play(sp_id[7], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 							left_btm1.setBottomTo(false);
 							left_btm2.setBottomTo(false);
 							left_btm3.setBottomTo(false);
@@ -853,14 +853,14 @@ implements SurfaceHolder.Callback{
 								sebtm3.setBottomTo(false);
 								sebtm4.setBottomTo(false);
 								sebtm5.setBottomTo(false);
-								sp.play(sp_id[0], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
-								activity.sp_num=0;
-								activity.writeData();
+								sp.play(sp_id[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+								activity.io.sp_num=0;
+								activity.io.writeData();
 							}
 							else if(sebtm1.getBottom()){
 								sebtm1.setBottomTo(false);
-								activity.sp_num=-1;
-								activity.writeData();
+								activity.io.sp_num=-1;
+								activity.io.writeData();
 							}
 						}
 						else if(sebtm2.isIn(pointx, pointy)){
@@ -870,14 +870,14 @@ implements SurfaceHolder.Callback{
 								sebtm3.setBottomTo(false);
 								sebtm4.setBottomTo(false);
 								sebtm5.setBottomTo(false);
-								sp.play(sp_id[1], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
-								activity.sp_num=1;
-								activity.writeData();
+								sp.play(sp_id[1], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+								activity.io.sp_num=1;
+								activity.io.writeData();
 							}
 							else if(sebtm2.getBottom()){
 								sebtm2.setBottomTo(false);
-								activity.sp_num=-1;
-								activity.writeData();
+								activity.io.sp_num=-1;
+								activity.io.writeData();
 							}
 						}
 						else if(sebtm3.isIn(pointx, pointy)){
@@ -887,14 +887,14 @@ implements SurfaceHolder.Callback{
 								sebtm3.setBottomTo(true);
 								sebtm4.setBottomTo(false);
 								sebtm5.setBottomTo(false);
-								sp.play(sp_id[2], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
-								activity.sp_num=2;
-								activity.writeData();
+								sp.play(sp_id[2], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+								activity.io.sp_num=2;
+								activity.io.writeData();
 							}
 							else if(sebtm3.getBottom()){
 								sebtm3.setBottomTo(false);
-								activity.sp_num=-1;
-								activity.writeData();
+								activity.io.sp_num=-1;
+								activity.io.writeData();
 							}
 						}
 						else if(sebtm4.isIn(pointx, pointy)){
@@ -904,14 +904,14 @@ implements SurfaceHolder.Callback{
 								sebtm3.setBottomTo(false);
 								sebtm4.setBottomTo(true);
 								sebtm5.setBottomTo(false);
-								sp.play(sp_id[3], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
-								activity.sp_num=3;
-								activity.writeData();
+								sp.play(sp_id[3], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+								activity.io.sp_num=3;
+								activity.io.writeData();
 							}
 							else if(sebtm4.getBottom()){
 								sebtm4.setBottomTo(false);
-								activity.sp_num=-1;
-								activity.writeData();
+								activity.io.sp_num=-1;
+								activity.io.writeData();
 							}
 						}
 						else if(sebtm5.isIn(pointx, pointy)){
@@ -921,14 +921,14 @@ implements SurfaceHolder.Callback{
 								sebtm3.setBottomTo(false);
 								sebtm4.setBottomTo(false);
 								sebtm5.setBottomTo(true);
-								sp.play(sp_id[4], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
-								activity.sp_num=4;
-								activity.writeData();
+								sp.play(sp_id[4], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+								activity.io.sp_num=4;
+								activity.io.writeData();
 							}
 							else if(sebtm5.getBottom()){
 								sebtm5.setBottomTo(false);
-								activity.sp_num=-1;
-								activity.writeData();
+								activity.io.sp_num=-1;
+								activity.io.writeData();
 							}
 						}
 					}
@@ -944,25 +944,25 @@ implements SurfaceHolder.Callback{
 					{
 						if(speed_left_arrow.isIn(pointx, pointy)){
 							if(set_speed > 6){
-								sp.play(sp_id[8], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+								sp.play(sp_id[8], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 								set_speed--;
 							}
 						}
 						if(speed_right_arrow.isIn(pointx, pointy)){
 							if(set_speed < 10){
-								sp.play(sp_id[8], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+								sp.play(sp_id[8], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 								set_speed++;
 							}
 						}
 						if(timing_left_arrow.isIn(pointx, pointy)){
 							if(set_timing > 0){
-								sp.play(sp_id[8], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+								sp.play(sp_id[8], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 								set_timing--;
 							}
 						}
 						if(timing_right_arrow.isIn(pointx, pointy)){
 							if(set_timing < 15){
-								sp.play(sp_id[8], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+								sp.play(sp_id[8], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 								set_timing++;
 							}
 						}
@@ -975,10 +975,10 @@ implements SurfaceHolder.Callback{
 				//右半部關卡按鈕事件開始====================================================
 				if(stbtn01.isIn(pointx, pointy)){
 					if(!stbtn01.getBottom()){
-						sp.play(sp_id[10],activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+						sp.play(sp_id[10],activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 						stageFlag = 1;
-						activity.level=0;//設定gameview 關卡參數
-						activity.difficulty=0;//gameview難度參數
+						activity.io.level=0;//設定gameview 關卡參數
+						activity.io.difficulty=0;//gameview難度參數
 						stbtn01.setBottomTo(true);
 						stbtn02.setBottomTo(false);
 						stbtn03.setBottomTo(false);
@@ -995,10 +995,10 @@ implements SurfaceHolder.Callback{
 				//第二關==================================================
 				if(stbtn02.isIn(pointx, pointy)&&st_02_flag){
 					if(!stbtn02.getBottom()){
-						sp.play(sp_id[10], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+						sp.play(sp_id[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 						stageFlag = 2;
-						activity.level=1;//設定gameview 關卡參數
-						activity.difficulty=0;//gameview難度參數
+						activity.io.level=1;//設定gameview 關卡參數
+						activity.io.difficulty=0;//gameview難度參數
 						stbtn02.setBottomTo(true);
 						stbtn01.setBottomTo(false);
 						stbtn03.setBottomTo(false);
@@ -1014,10 +1014,10 @@ implements SurfaceHolder.Callback{
 				//第三關==================================================
 				if(stbtn03.isIn(pointx, pointy)&&st_03_flag){
 					if(!stbtn03.getBottom()){
-						sp.play(sp_id[10], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+						sp.play(sp_id[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 						stageFlag = 3;
-						activity.level=2;//設定gameview 關卡參數
-						activity.difficulty=0;//gameview難度參數
+						activity.io.level=2;//設定gameview 關卡參數
+						activity.io.difficulty=0;//gameview難度參數
 						stbtn03.setBottomTo(true);
 						stbtn01.setBottomTo(false);
 						stbtn02.setBottomTo(false);
@@ -1033,8 +1033,8 @@ implements SurfaceHolder.Callback{
 
 				if(stageFlag!=0){
 					if(start.isIn(pointx, pointy)){
-						sp.play(sp_id[10], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
-						activity.video_select=2;
+						sp.play(sp_id[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+						activity.io.video_select=2;
 						activity.changeView(0);
 					}
 
@@ -1045,23 +1045,23 @@ implements SurfaceHolder.Callback{
 							model.setBottomTo(false);
 						}else{
 							model.setBottomTo(true);
-							sp.play(sp_id[9], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+							sp.play(sp_id[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 						}
 					}
 					if(model.getBottom()){
 						if(easy.isIn(pointx, pointy)){
-							sp.play(sp_id[9], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
-							activity.difficulty=0;//gameview難度參數
+							sp.play(sp_id[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+							activity.io.difficulty=0;//gameview難度參數
 							model.setBottomTo(false);
 						}
 						if(normal.isIn(pointx, pointy)){
-							sp.play(sp_id[9], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
-							activity.difficulty=1;//gameview難度參數
+							sp.play(sp_id[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+							activity.io.difficulty=1;//gameview難度參數
 							model.setBottomTo(false);
 						}
 						if(hard.isIn(pointx, pointy)){
-							sp.play(sp_id[9], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
-							activity.difficulty=2;//gameview難度參數
+							sp.play(sp_id[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+							activity.io.difficulty=2;//gameview難度參數
 							model.setBottomTo(false);
 						}
 					}
@@ -1101,15 +1101,15 @@ implements SurfaceHolder.Callback{
 				if(mp_Volume_bar.isOn){
 					int temp=(int)mp_Volume_bar.getSeekBarValue();
 					mp_Volume_bar.setSeekBarFloat((temp-(temp%10)));
-					activity.mp_Voiume=(float) ((temp-(temp%10))/100.0);
-					activity.writeData();
+					activity.io.mp_Voiume=(float) ((temp-(temp%10))/100.0);
+					activity.io.writeData();
 					mp_Volume_bar.isOn=false;
 				}
 				if(sp_Volume_bar.isOn){
 					int temp=(int)sp_Volume_bar.getSeekBarValue();
 					sp_Volume_bar.setSeekBarFloat((temp-(temp%10)));
-					activity.sp_Voiume=(float) ((temp-(temp%10))/100.0);
-					activity.writeData();
+					activity.io.sp_Voiume=(float) ((temp-(temp%10))/100.0);
+					activity.io.writeData();
 					sp_Volume_bar.isOn=false;
 				}
 			}
@@ -1125,8 +1125,8 @@ implements SurfaceHolder.Callback{
 	}
 
 	public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
-		activity.speed=set_speed-5;
-		activity.timing=set_timing-5;
+		activity.io.speed=set_speed-5;
+		activity.io.timing=set_timing-5;
 		wmap.recycle();
 		left_back.recycle();
 		left_exit.recycle();    //<<箭頭-淺色  離開MENU用

@@ -11,7 +11,7 @@ public class Video extends SurfaceView {
 	MainActivity activity;
 	MediaPlayer mp;
 	SurfaceHolder sh;
-	int video[]={	R.raw.llc,
+	int video[]={	R.raw.exl,
 			R.raw.story,
 			R.raw.access,
 			R.raw.staff_csu};
@@ -38,7 +38,7 @@ public class Video extends SurfaceView {
 			@Override
 			public void surfaceCreated(SurfaceHolder arg0) {
 
-				mp=MediaPlayer.create(activity, video[activity.video_select]);
+				mp=MediaPlayer.create(activity, video[activity.io.video_select]);
 				mp.setOnCompletionListener(new OnCompletionListener() {
 					@Override
 					public void onCompletion(MediaPlayer mp) {
@@ -58,7 +58,7 @@ public class Video extends SurfaceView {
 		});
 	}
 	public void changeView(){
-			activity.changeView(view[activity.video_select]);
+			activity.changeView(view[activity.io.video_select]);
 	}
 	@Override
 	public boolean onTouchEvent(MotionEvent event){

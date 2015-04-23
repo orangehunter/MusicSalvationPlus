@@ -50,13 +50,13 @@ public class bigAnimax {
 	}
 	public void resetBit(){
 		for(int i=0;i<animaxLength;i++){
-			if(i>activity.animax_buffer){
+			if(i>activity.io.animax_buffer){
 				if(bit[i]!=null){
 					bit[i].recycle();
 				}
 			}else{
 				if(bit[i]==null){
-					bit[i]= Graphic.LoadBitmap(activity.getResources(), r + i, pic_width, pic_hight, 2);
+					bit[i]= Graphic.LoadBitmap(activity.getResources(), r + i, pic_width, pic_hight, 2,false);
 				}
 			}
 		}
@@ -68,22 +68,22 @@ public class bigAnimax {
 			public void run() {
 			
 				count++;
-				int buffer=count+activity.animax_buffer;
+				int buffer=count+activity.io.animax_buffer;
 				if(buffer<animaxLength){
 					try{
 						if(bit[count-1]!=null){
 						bit[count-1].recycle();
 						}
 						if(bit[buffer]==null){
-						bit[buffer]=Graphic.LoadBitmap(activity.getResources(), r+buffer, pic_width, pic_hight,2);
+						bit[buffer]=Graphic.LoadBitmap(activity.getResources(), r+buffer, pic_width, pic_hight,2,false);
 						Log.v("LoadAnimax", ""+buffer);
 						}
 						
 					}catch(OutOfMemoryError e){
 						animax_flag=false;
 						Log.e("bigAnimax","Not enough Memory");
-						activity.animax_buffer--;
-						activity.writeData();
+						activity.io.animax_buffer--;
+						activity.io.writeData();
 						setBuffer();
 					}
 				}
@@ -96,13 +96,13 @@ public class bigAnimax {
 			line=null;
 		}
 		setRunable();
-		line=new Thread[activity.animax_buffer];
-		for(int i=0;i<activity.animax_buffer;i++){
+		line=new Thread[activity.io.animax_buffer];
+		for(int i=0;i<activity.io.animax_buffer;i++){
 			line[i]=new Thread(run);
 		}
 	}
 	public void startBuffer(){
-		for(int i=0;i<activity.animax_buffer;i++){
+		for(int i=0;i<activity.io.animax_buffer;i++){
 			if(!line[i].isAlive()){
 				line[i].run();
 				break;

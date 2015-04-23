@@ -25,29 +25,32 @@ implements SurfaceHolder.Callback{
 	boolean deJump=true;
 	boolean hidden_flag;
 
-	Bitmap main_back;
+	/*Bitmap main_back;
 	Bitmap main_back2;
-	Bitmap main_back3;
-	Bitmap start;
-	Bitmap exit;
-	Bitmap main_left;
-	Bitmap main_right;
+	Bitmap main_back3;*/
+
+    //特效
+    int spp=0;
+    //特效
+    Bitmap mv_background;
+    Bitmap mv_background_2;
+	Bitmap storymode;
+	Bitmap createmode;
 	Bitmap main_title;
 	Bitmap main_touchstart;
 
 	Bitmap left_xia;
-	Bitmap right_miku;
+	//Bitmap right_miku;
 	Bitmap staff;
 
-	Bottom startbtm;
-	Bottom exitbtm;
+	Bottom storybtm;
+	Bottom creatbtm;
 	Bottom staffList;
 
 
 
 	int mainFlag=0;
 
-	boolean toEditView=false;
 
 	int pointx;//觸控到螢幕的x座標
 	int pointy;//觸控到螢幕的y座標
@@ -104,41 +107,51 @@ implements SurfaceHolder.Callback{
 	public void surfaceCreated(SurfaceHolder holder) {
 		paint = new Paint();//建立畫筆
 		paint.setAntiAlias(true);//開啟抗鋸齒
-		main_back=			Graphic.bitSize(LoadBitmap( R.drawable.main_back3), Constant.DEFULT_WITH, Constant.DEFULT_HIGHT);
-		main_back2=			Graphic.bitSize(LoadBitmap( R.drawable.main_back2), Constant.DEFULT_WITH, Constant.DEFULT_HIGHT);
-		main_back3=			Graphic.bitSize(LoadBitmap( R.drawable.tellyouworld), Constant.DEFULT_WITH, Constant.DEFULT_HIGHT);
+		/*main_back=			Graphic.bitSize(LoadBitmap( R.drawable.main_back3), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		main_back2=			Graphic.bitSize(LoadBitmap( R.drawable.main_back2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		main_back3=			Graphic.bitSize(LoadBitmap( R.drawable.tellyouworld), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		*/
+
+        mv_background = Graphic.bitSize(LoadBitmap( R.drawable.mv_background), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+        mv_background_2= Graphic.bitSize(LoadBitmap( R.drawable.mv_background_2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		main_title=			Graphic.bitSize(LoadBitmap( R.drawable.main_title ),730 ,269 );
 		main_touchstart=	Graphic.bitSize(LoadBitmap( R.drawable.main_touchstart ), 594, 85);
-		main_left=			Graphic.bitSize(LoadBitmap( R.drawable.main_left ),(440/2), (583/2));
-		main_right=			Graphic.bitSize(LoadBitmap( R.drawable.main_right), (666/2), (644/2));
-		left_xia =          Graphic.bitSize(LoadBitmap( R.drawable.xia), 385, 717);
-		right_miku =        Graphic.bitSize(LoadBitmap( R.drawable.mikuv3_img2), 620, 717);
-		start =  			Graphic.bitSize(LoadBitmap( R.drawable.start), 314,85);
-		exit  =  			Graphic.bitSize(LoadBitmap( R.drawable.exit), 314,85);
 
-		startbtm = 	new Bottom(activity, start,start, 640, 518);
-		exitbtm = 	new Bottom(activity, exit, exit, 640, 643);
+		left_xia =          Graphic.bitSize(LoadBitmap( R.drawable.xia), 385, 717);
+		//right_miku =        Graphic.bitSize(LoadBitmap( R.drawable.mikuv3_img2), 620, 717);
+		storymode =  			Graphic.bitSize(LoadBitmap( R.drawable.mv_storymode), 314,85);
+		createmode  =  			Graphic.bitSize(LoadBitmap( R.drawable.mv_createmode), 314,85);
+
+		storybtm = 	new Bottom(activity, storymode,storymode, 640, 518);
+		creatbtm = 	new Bottom(activity, createmode, createmode, 640, 643);
+
 		hidden_flag=false;
 		for(int i=0;i<3;i++){
-			if(activity.level_clear[2][i]){
-				hidden_flag=true;
-			}
+            try {
+                if (activity.io.level_clear[2][i]) {
+                    hidden_flag = true;
+                }
+            }catch (Exception e){}
 		}
-		Log.v("mainView", ""+hidden_flag);
+		//Log.v("mainView", ""+hidden_flag);
 		if(hidden_flag){
 			staff =Graphic.bitSize(LoadBitmap(R.drawable.staff), 314, 85);
-			startbtm.move(640, 450);
-			exitbtm.move(640, 550);
+			storybtm.move(640, 450);
+			creatbtm.move(640, 550);
 			staffList=	new Bottom(activity,staff,staff,640,650);
 		}
 
 		//載入音樂=============================================================
 		if(!hidden_flag){
-			back_mp=MediaPlayer.create(this.getContext(), R.raw.tell_your_world_piano);
+
+			back_mp=MediaPlayer.create(this.getContext(), R.raw.club_thump);
+
+			back_mp=MediaPlayer.create(this.getContext(), R.raw.summersounds_instrumental);
+
 		}else{
-			back_mp=MediaPlayer.create(this.getContext(), R.raw.tellpiano);
+			back_mp=MediaPlayer.create(this.getContext(), R.raw.summersounds_instrumental);
 		}
-		back_mp.setVolume(activity.mp_Voiume, activity.mp_Voiume);
+		back_mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
 		back_mp.setLooping(true);
 		back_mp.start();
 
@@ -163,8 +176,12 @@ implements SurfaceHolder.Callback{
 					Canvas canvas = myholder.lockCanvas();//取得畫布
 					onDraw(canvas);
 					if(canvas != null){
-						myholder.unlockCanvasAndPost(canvas);
-					}
+                        try {
+                            myholder.unlockCanvasAndPost(canvas);
+                        }catch (Exception e){
+
+                        }
+                    }
 				}
 
 			}
@@ -184,7 +201,16 @@ implements SurfaceHolder.Callback{
 				back_mp.prepareAsync();
 				back_mp.start();
 			}
-			if(!hidden_flag){
+
+            Graphic.drawPic(canvas, mv_background, 1280/2, 720/2, 0, 255, paint);//背景
+
+            spp=spp+20;
+
+            if (spp>=255){
+                spp=0;
+            }
+            Graphic.drawPic(canvas, mv_background_2, 1280/2, 720/2, 0, 150-spp, paint);//背景
+			/*if(!hidden_flag){
 				if(apa<= 10){
 					a =7;
 				} 
@@ -196,7 +222,7 @@ implements SurfaceHolder.Callback{
 				Graphic.drawPic(canvas, main_back2, 1280/2, 720/2, 0, apa, paint);
 			}else{
 				Graphic.drawPic(canvas, main_back3, 1280/2, 720/2, 0, 255, paint);//背景
-			}
+			}*/
 
 			if(mainFlag==0){
 				if(i<250)
@@ -221,7 +247,7 @@ implements SurfaceHolder.Callback{
 				Graphic.drawPic(canvas, left_xia, mlx, mly, 0, 255, paint);//Left
 				mlx=Coordinate.AnalogSpeedMove(mlx, mlx1);
 
-				Graphic.drawPic(canvas, right_miku, mrx, mry, 0, 255, paint);//Right
+				//Graphic.drawPic(canvas, right_miku, mrx, mry, 0, 255, paint);//Right
 				mrx=Coordinate.AnalogSpeedMove(mrx, mrx1);
 
 				/*alpha2+=alpha;
@@ -231,8 +257,8 @@ implements SurfaceHolder.Callback{
 				if(alpha2 <100){
 					alpha = 10;
 				}*/
-				startbtm.drawBtm(canvas, paint);
-				exitbtm.drawBtm(canvas, paint);
+				storybtm.drawBtm(canvas, paint);
+				creatbtm.drawBtm(canvas, paint);
 				if(hidden_flag){
 					staffList.drawBtm(canvas, paint);
 				}
@@ -248,7 +274,7 @@ implements SurfaceHolder.Callback{
 			{
 			case MotionEvent.ACTION_DOWN://按下
 				if(deJump == true){
-					sp.play(btn_se[1], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
+					sp.play(btn_se[1], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 					mainFlag=1;
 				}
 				deJump = false;
@@ -267,17 +293,16 @@ implements SurfaceHolder.Callback{
 			//......................................................................................
 			case MotionEvent.ACTION_DOWN://按下
 				if(deJump==true){//防止彈跳part1
-					if(startbtm.isIn(pointx, pointy)){
-						sp.play(btn_se[0], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
-						this.toEditView = true;
+					if(storybtm.isIn(pointx, pointy)){
+						sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 					}
-					if(exitbtm.isIn(pointx, pointy)){
-						sp.play(btn_se[0], activity.sp_Voiume, activity.sp_Voiume, 0, 0, 1);
-						exitbtm.setBottomTo(true);
+					if(creatbtm.isIn(pointx, pointy)){
+						sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+						creatbtm.setBottomTo(true);
 					}
 					if(hidden_flag){
 						if(staffList.isIn(pointx, pointy)){
-							activity.video_select=3;
+							activity.io.video_select=3;
 							activity.changeView(0);
 						}
 					}
@@ -287,23 +312,15 @@ implements SurfaceHolder.Callback{
 				//.....................................................................................
 			case MotionEvent.ACTION_UP://抬起
 				if(deJump==false){//防止彈跳part2
-					if(startbtm.isIn(pointx, pointy)){
-						//進入地圖畫面
-						if(this.toEditView){
-							activity.video_select=1;
+					if(storybtm.isIn(pointx, pointy)){//進入地圖畫面
+							activity.io.video_select=1;
 							activity.changeView(0);
-						}
 					}
 
-					if(exitbtm.isIn(pointx, pointy)){
-						if(this.toEditView){
-							activity.changeView(6);
-						}else if(exitbtm.getBottom()){
-							exitbtm.setBottomTo(false);
-							activity.changeView(255);
-						}
+					if(creatbtm.isIn(pointx, pointy)){
+                            //TODO 還沒有改進創遊模式
+							activity.changeView(8);
 					}
-					this.toEditView = false;
 				}
 				deJump=true;
 				break;
@@ -319,19 +336,22 @@ implements SurfaceHolder.Callback{
 	}
 
 	public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
-		main_back.recycle();
+		/*main_back.recycle();
 		main_back2.recycle();
 		main_back3.recycle();
-		start.recycle();
-		exit.recycle();
-		main_left.recycle();
-		main_right.recycle();
+		*/
+
+         mv_background.recycle();
+       mv_background_2.recycle();
+		storymode.recycle();
+		createmode.recycle();
+
 		main_title.recycle();
 		left_xia.recycle();
-		right_miku.recycle();
+		//right_miku.recycle();
 		main_touchstart.recycle();
-		startbtm.recycle();
-		exitbtm.recycle();
+		storybtm.recycle();
+		creatbtm.recycle();
 		if(hidden_flag){
 			staff.recycle();
 			staffList.recycle();
