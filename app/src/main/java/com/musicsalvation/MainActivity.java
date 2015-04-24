@@ -36,12 +36,11 @@ public class MainActivity extends Activity{
     GameView gameview;
     ScoreView scoreview;
     ChgsongView chgsongview;
-    DataView dataview;
-    ChartView chartview;
-
-
-
+    ChartListView chartListView;
+    ChartDetailView chartview;
     Video video;
+
+    final int MAIN=1,MAP=2,GAME=3,SCORE=4,EDIT=6,CHOOSE_FILE=7,CHANGE_SONG=8,CHART=9,DATA=10;
     public static FilesAndData io;
 
 
@@ -71,9 +70,6 @@ public class MainActivity extends Activity{
                     break;
                 case 4:
                     goToScoreView();//得分
-                    break;
-                case 5:
-                    goToLastView();//結束
                     break;
                 case 6:
                     goToEditView();//編輯介面
@@ -165,27 +161,22 @@ public class MainActivity extends Activity{
         chgsongview.setFocusableInTouchMode(true);
     }
     protected void goToDataView() {
-        if(dataview==null)
+        if(chartListView ==null)
         {
-            dataview=new DataView(this);
+            chartListView =new ChartListView(this);
         }
-        setContentView(dataview);
-        dataview.requestFocus();
-        dataview.setFocusableInTouchMode(true);
+        setContentView(chartListView);
+        chartListView.requestFocus();
+        chartListView.setFocusableInTouchMode(true);
     }
     protected void goToChartView() {
         if(chartview ==null)
         {
-            chartview =new ChartView(this);
+            chartview =new ChartDetailView(this);
         }
         setContentView(chartview);
         chartview.requestFocus();
         chartview.setFocusableInTouchMode(true);
-    }
-
-    private void goToLastView() {
-        // TODO 自動產生的方法 Stub
-
     }
     private void Exit() {
         this.io.writeData();
