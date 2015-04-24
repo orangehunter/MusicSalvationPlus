@@ -172,7 +172,6 @@ public class ChgsongView extends SurfaceView
                 if (activity.io.uri_list==null){
                     activity.io.uri_list=new JSONArray();
                 }
-                activity.io.uri_list=new JSONArray();
                 activity.io.uri_list.put(activity.io.chosen_song);
                 activity.io.chosen_song=null;
 
@@ -368,8 +367,6 @@ public class ChgsongView extends SurfaceView
                         dacon_flag = !dacon_flag;
                         sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
                     }
-                    //
-                    //TODO 做到一半
                     if (sicon_1_btn.isIn(pointx, pointy)&&dacon_flag) {
                         activity.changeView(10);
                         sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);

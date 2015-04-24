@@ -202,7 +202,7 @@ public class GameView extends SurfaceView
     int sc_hit;
     int sc_safe;
     int sc_miss;
-    int percent;待機
+    int percent;//待機
     int sc_score;
 
     //TAG 控制判定顯示FLAG==============================
@@ -251,34 +251,6 @@ public class GameView extends SurfaceView
         this.activity = mainActivity;
         this.getHolder().addCallback(this);//設定生命周期回調接口的實現者
     }
-
-
-    /*public Bitmap LoadBitmap(int r,int scale){
-        try{
-         InputStream inputStream = getResources().openRawResource(r);
-            return BitmapFactory.decodeStream(inputStream, null, getBitmapOptions(scale));
-        }catch(OutOfMemoryError e){
-            return null;
-        }
-        //return BitmapFactory.decodeResource(getResources(), r);
-    }
-    public Bitmap LoadBitmap(int r){
-        try{
-         InputStream inputStream = getResources().openRawResource(r);
-            return BitmapFactory.decodeStream(inputStream, null, getBitmapOptions(1));
-        }catch(OutOfMemoryError e){
-            return null;
-        }
-        //return BitmapFactory.decodeResource(getResources(), r);
-    }
-    public BitmapFactory.Options getBitmapOptions(int scale){
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inPreferredConfig=Bitmap.Config.ARGB_4444;
-        options.inPurgeable = true;
-        options.inInputShareable = true;
-        options.inSampleSize = scale;
-        return options;
-    }*/
     public void Reset(){
         combo=0;
         maxcombo = 0;
