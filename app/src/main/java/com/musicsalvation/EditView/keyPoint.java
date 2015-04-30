@@ -21,7 +21,7 @@ public class keyPoint {
     public void setPic(double width,double hight){
         this.width=width;
         this.hight=hight;
-        this.x= Coordinate.DeCoordinateX(mid_x)-width/2;
-        this.y= Coordinate.DeCoordinateY(mid_y)-hight/2;
+        this.x= Coordinate.CoordinateX(mid_x)-width/2;
+        this.y= Coordinate.CoordinateY(mid_y)-hight/2;
     }
 }

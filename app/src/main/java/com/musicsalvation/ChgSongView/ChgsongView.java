@@ -368,10 +368,12 @@ public class ChgsongView extends SurfaceView
                         sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
                     }
                     if (sicon_1_btn.isIn(pointx, pointy)&&dacon_flag) {
+                        dacon_flag = !dacon_flag;
                         activity.changeView(10);
                         sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
                     }
                     if (sicon_2_btn.isIn(pointx, pointy)&&dacon_flag) {
+                        dacon_flag = !dacon_flag;
                         activity.changeView(7);
                         sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
                     }

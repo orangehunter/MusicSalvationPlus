@@ -5,9 +5,11 @@ package com.musicsalvation.EditView;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 import android.util.SparseArray;
 
 import com.musicsalvation.Charts;
+import com.musicsalvation.Coordinate;
 import com.musicsalvation.Graphic;
 import com.musicsalvation.MainActivity;
 import com.musicsalvation.R;
@@ -70,7 +72,7 @@ public class chart {
     SparseArray<String>finalDraw_volume;
 
     public void draw(int time_lv,Canvas canvas,Paint paint){
-        int isInIndex_tmp_counter=0;
+
         while (true){
             if (last_chart<chart_key.size()) {
                 if ((int) (start_x+((end_x-start_x)/2)-(((ce.time_current/ce.accuracy)-chart_key.keyAt(last_chart))*ce.unit_lv[time_lv]))>end_x){
@@ -89,7 +91,7 @@ public class chart {
         finalDraw_key=new SparseArray<Integer>();
         finalDraw_volume=new SparseArray<String>();
         int finalDraw_counter=0;
-
+        int isInIndex_tmp_counter=0;
         isInIndex_tmp.clear();
         while (true){
             if (main_counter>=chart_key.size()&&main_counter!=0){

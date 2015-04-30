@@ -574,7 +574,7 @@ public class MainActivity extends Activity{
         Constant.setFlag(true);
         changeView(nowView);
         DisplayMetrics dm=new DisplayMetrics();
-        if(Build.VERSION.SDK_INT>18){
+        if(Build.VERSION.SDK_INT>=19){
             getWindow().getDecorView().setSystemUiVisibility(
                     this.getWindow().getDecorView().SYSTEM_UI_FLAG_LAYOUT_STABLE
                             | this.getWindow().getDecorView().SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
