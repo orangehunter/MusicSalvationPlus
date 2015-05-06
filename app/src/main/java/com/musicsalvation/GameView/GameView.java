@@ -425,8 +425,8 @@ public class GameView extends SurfaceView
         attack_sight=Graphic.LoadBitmap(getResources(), R.drawable.boss_sihgt_gray, 288, 284,true);
         attack=new gameChartBottom(-200, 495, 900, activity, attack_pic, attack_pic, 1280/2);
 
-        beam=new bigAnimax(activity, beam_num, 900, 450, R.drawable.beam_00);
-        beam.setPosition(1280/2, 720/2);
+        beam=new bigAnimax(activity, beam_num, 1000, 400, R.drawable.beam_00);
+        beam.setPosition(640, 400);
         beam_sound=sp.load(getContext(), R.raw.beam_cut, 1);
 
 
