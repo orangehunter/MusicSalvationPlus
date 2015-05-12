@@ -295,6 +295,8 @@ public class MainActivity extends Activity{
 
             }
             return true;
+        }else{
+            Toast.makeText(this, "key_test : keycode=" + keyCode + "  keyevent=" + e, Toast.LENGTH_SHORT);
         }
 		/*if(keyCode==e.KEYCODE_HOME){
 			 System.exit(0);
