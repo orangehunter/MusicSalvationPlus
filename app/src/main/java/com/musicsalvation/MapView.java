@@ -932,10 +932,10 @@ implements SurfaceHolder.Callback{
 						}
 					}
 					if(mp_Volume_bar.isOn(pointx, pointy)){
-						mp_Volume_bar.isOn=true;
+						mp_Volume_bar.isOn_flag =true;
 					}
 					if(sp_Volume_bar.isOn(pointx, pointy)){
-						sp_Volume_bar.isOn=true;
+						sp_Volume_bar.isOn_flag =true;
 					}
 
 					//速度與判定按鈕事件====================================================
@@ -1073,10 +1073,10 @@ implements SurfaceHolder.Callback{
 			deJump = false;
 			break;
 		case MotionEvent.ACTION_MOVE:
-			if(mp_Volume_bar.isOn){
+			if(mp_Volume_bar.isOn_flag){
 				mp_Volume_bar.setSeekBarX(pointx);
 			}
-			if(sp_Volume_bar.isOn){
+			if(sp_Volume_bar.isOn_flag){
 				sp_Volume_bar.setSeekBarX(pointx);
 			}
 			break;
@@ -1097,19 +1097,19 @@ implements SurfaceHolder.Callback{
 				else if(left_btm5.isIn(pointx, pointy)){
 
 				}*/
-				if(mp_Volume_bar.isOn){
+				if(mp_Volume_bar.isOn_flag){
 					int temp=(int)mp_Volume_bar.getSeekBarValue();
 					mp_Volume_bar.setSeekBarFloat((temp-(temp%10)));
 					activity.io.mp_Voiume=(float) ((temp-(temp%10))/100.0);
 					activity.io.writeData();
-					mp_Volume_bar.isOn=false;
+					mp_Volume_bar.isOn_flag =false;
 				}
-				if(sp_Volume_bar.isOn){
+				if(sp_Volume_bar.isOn_flag){
 					int temp=(int)sp_Volume_bar.getSeekBarValue();
 					sp_Volume_bar.setSeekBarFloat((temp-(temp%10)));
 					activity.io.sp_Voiume=(float) ((temp-(temp%10))/100.0);
 					activity.io.writeData();
-					sp_Volume_bar.isOn=false;
+					sp_Volume_bar.isOn_flag =false;
 				}
 			}
 			deJump  = true;

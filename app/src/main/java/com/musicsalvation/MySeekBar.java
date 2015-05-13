@@ -3,7 +3,6 @@ package com.musicsalvation;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Log;
 
 public class MySeekBar {
 	MainActivity activity;
@@ -22,7 +21,7 @@ public class MySeekBar {
 
 	float bar_btn_dis;
 
-	Boolean isOn;
+	Boolean isOn_flag;
 
 	Bitmap Bar;//搜尋條
 	Bitmap Btm;//按鈕
@@ -31,7 +30,7 @@ public class MySeekBar {
 		this.activity=activity;
 		this.Bar=Bar;
 		this.Btm=Btm;
-		this.isOn=false;
+		this.isOn_flag =false;
 
 		this.bar_width=this.Bar.getWidth();
 		this.bar_height=this.Bar.getHeight();
@@ -46,6 +45,12 @@ public class MySeekBar {
 		this.btmY=Coordinate.CoordinateY(y)-(this.btm_height/2);
 
 	}
+	public Boolean getFlag(){
+		return isOn_flag;
+	}
+	public void setFlag(Boolean flag){
+		isOn_flag=flag;
+	}
 	public void Move(int x,int y){
 		//Log.v("SeekBar", "X:"+x+"Y:"+y);
 		this.barX=Coordinate.CoordinateX(x)-(this.bar_width/2);
@@ -53,6 +58,11 @@ public class MySeekBar {
 
 		this.btmX=barX+bar_btn_dis;
 		this.btmY=Coordinate.CoordinateY(y)-(this.btm_height/2);
+	}
+	public void drawSeekBar(Canvas canvas,int alpha,Paint paint){
+		paint.setAlpha(alpha);
+		drawSeekBar(canvas,paint);
+		paint.reset();
 	}
 	public void drawSeekBar(Canvas canvas,Paint paint){
 		canvas.drawBitmap(Bar, barX, barY, paint);

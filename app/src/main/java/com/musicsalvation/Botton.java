@@ -15,7 +15,7 @@ public class Botton {
 	int key;
 	public Botton(MainActivity activity, Bitmap onBitmap, Bitmap offBitmap, int x, int y){
 		this.activity=activity;
-		//this.isOn=activity.backgroundsoundFlag;
+		//this.isOn_flag=activity.backgroundsoundFlag;
 		this.onBitmap=onBitmap;
 		this.offBitmap=offBitmap;
 		this.center_x=x;
