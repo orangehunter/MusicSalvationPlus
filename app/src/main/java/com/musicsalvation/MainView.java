@@ -40,9 +40,9 @@ implements SurfaceHolder.Callback{
 	//Bitmap right_miku;
 	Bitmap staff;
 
-	Bottom storybtm;
-	Bottom creatbtm;
-	Bottom staffList;
+	Botton storybtm;
+	Botton creatbtm;
+	Botton staffList;
 
 
 
@@ -119,8 +119,8 @@ implements SurfaceHolder.Callback{
 		storymode =  			Graphic.bitSize(LoadBitmap( R.drawable.mv_storymode), 314,85);
 		createmode  =  			Graphic.bitSize(LoadBitmap( R.drawable.mv_createmode), 314,85);
 
-		storybtm = 	new Bottom(activity, storymode,storymode, 640, 518);
-		creatbtm = 	new Bottom(activity, createmode, createmode, 640, 643);
+		storybtm = 	new Botton(activity, storymode,storymode, 640, 518);
+		creatbtm = 	new Botton(activity, createmode, createmode, 640, 643);
 
 		hidden_flag=false;
 		for(int i=0;i<3;i++){
@@ -135,7 +135,7 @@ implements SurfaceHolder.Callback{
 			staff =Graphic.bitSize(LoadBitmap(R.drawable.staff), 314, 85);
 			storybtm.move(640, 450);
 			creatbtm.move(640, 550);
-			staffList=	new Bottom(activity,staff,staff,640,650);
+			staffList=	new Botton(activity,staff,staff,640,650);
 		}
 
 		//載入音樂=============================================================

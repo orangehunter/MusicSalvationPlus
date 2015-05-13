@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 
 @SuppressLint({ "ViewConstructor", "WrongCall", "ClickableViewAccessibility" })
 public class MapView extends SurfaceView
@@ -105,39 +104,39 @@ implements SurfaceHolder.Callback{
 	Bitmap model_ch;
 
 
-	Bottom menubtm; //MENU按鈕
-	Bottom left_btm1;
-	Bottom left_btm2;
-	Bottom left_btm3;
-	Bottom left_btm4;
-	Bottom left_btm5;
-	Bottom speed_left_arrow;
-	Bottom speed_right_arrow;
-	Bottom timing_left_arrow;
-	Bottom timing_right_arrow;
+	Botton menubtm; //MENU按鈕
+	Botton left_btm1;
+	Botton left_btm2;
+	Botton left_btm3;
+	Botton left_btm4;
+	Botton left_btm5;
+	Botton speed_left_arrow;
+	Botton speed_right_arrow;
+	Botton timing_left_arrow;
+	Botton timing_right_arrow;
 	MySeekBar mp_Volume_bar;
 	MySeekBar sp_Volume_bar;
 
 
-	Bottom sebtm1;
-	Bottom sebtm2;
-	Bottom sebtm3;
-	Bottom sebtm4;
-	Bottom sebtm5;
+	Botton sebtm1;
+	Botton sebtm2;
+	Botton sebtm3;
+	Botton sebtm4;
+	Botton sebtm5;
 
-	Bottom stbtn01;
+	Botton stbtn01;
 	boolean st_02_flag;
-	Bottom stbtn02;  //第二關按鈕
+	Botton stbtn02;  //第二關按鈕
 	boolean st_03_flag;
-	Bottom stbtn03;  //第三關按鈕
-	Bottom easy;
-	Bottom normal;
-	Bottom hard;
-	Bottom model;
-	Bottom start;
+	Botton stbtn03;  //第三關按鈕
+	Botton easy;
+	Botton normal;
+	Botton hard;
+	Botton model;
+	Botton start;
 
 	//箭頭按鈕宣告================================================
-	Bottom arrow;
+	Botton arrow;
 	//箭頭按鈕宣告------------------------------------------------
 
 
@@ -317,28 +316,28 @@ implements SurfaceHolder.Callback{
 		timing_num[15] = Graphic.bitSize(LoadBitmap(R.drawable.num_10),48 ,48 );
 		//速度與判定----------------------------------------------------------------------
 
-		menubtm = new Bottom(activity, left_exitback, left_exitback, 110, 35);
-		left_btm1= new Bottom(activity, btnvol2, btnvol, 114, 166);
-		left_btm2= new Bottom(activity, song_vol2, song_vol, 114, 257);
-		left_btm3= new Bottom(activity, chbtmse2, chbtmse, 136, 355);
-		left_btm4= new Bottom(activity, timing2, timing, 134, 451);
-		left_btm5= new Bottom(activity, remain2, remain, 114, 542);
+		menubtm = new Botton(activity, left_exitback, left_exitback, 110, 35);
+		left_btm1= new Botton(activity, btnvol2, btnvol, 114, 166);
+		left_btm2= new Botton(activity, song_vol2, song_vol, 114, 257);
+		left_btm3= new Botton(activity, chbtmse2, chbtmse, 136, 355);
+		left_btm4= new Botton(activity, timing2, timing, 134, 451);
+		left_btm5= new Botton(activity, remain2, remain, 114, 542);
 
 		//速度與判定按鈕===========================================================
-		speed_right_arrow = new Bottom(activity , timing_r_arrow,timing_r_arrow, 435 ,545);
-		speed_left_arrow = new Bottom(activity , timing_l_arrow,timing_l_arrow, 322 ,545);
-		timing_left_arrow = new Bottom(activity, timing_l_arrow , timing_l_arrow ,322 , 660);
-		timing_right_arrow = new Bottom(activity, timing_r_arrow , timing_r_arrow ,435 , 660);
+		speed_right_arrow = new Botton(activity , timing_r_arrow,timing_r_arrow, 435 ,545);
+		speed_left_arrow = new Botton(activity , timing_l_arrow,timing_l_arrow, 322 ,545);
+		timing_left_arrow = new Botton(activity, timing_l_arrow , timing_l_arrow ,322 , 660);
+		timing_right_arrow = new Botton(activity, timing_r_arrow , timing_r_arrow ,435 , 660);
 		//速度與判定按鈕------------------------------------------------------------
 
-		sebtm1 = new Bottom(activity, se01, se01l, 390, 390);
-		sebtm2 = new Bottom(activity, se02, se02l, 393, 451);
-		sebtm3 = new Bottom(activity, se03, se03l, 393, 511);
-		sebtm4 = new Bottom(activity, se04, se04l, 393, 569);
-		sebtm5 = new Bottom(activity, se05, se05l, 393, 628);
-		stbtn01 = new Bottom(activity, stage01btn , stage01btn0 , 644, 609);
-		stbtn02 = new Bottom(activity, stage01btn , stage01btn0 , 815, 165);
-		stbtn03 = new Bottom(activity, stage01btn , stage01btn0 , 430, 335);
+		sebtm1 = new Botton(activity, se01, se01l, 390, 390);
+		sebtm2 = new Botton(activity, se02, se02l, 393, 451);
+		sebtm3 = new Botton(activity, se03, se03l, 393, 511);
+		sebtm4 = new Botton(activity, se04, se04l, 393, 569);
+		sebtm5 = new Botton(activity, se05, se05l, 393, 628);
+		stbtn01 = new Botton(activity, stage01btn , stage01btn0 , 644, 609);
+		stbtn02 = new Botton(activity, stage01btn , stage01btn0 , 815, 165);
+		stbtn03 = new Botton(activity, stage01btn , stage01btn0 , 430, 335);
 
 		st_02_flag=false;
 		st_03_flag=false;
@@ -374,15 +373,15 @@ implements SurfaceHolder.Callback{
 		sp_Volume_bar=new MySeekBar(activity, volBar, volbtn, -300, 167);
 		sp_Volume_bar.setSeekBarFloat((int)(activity.io.sp_Voiume*100));
 
-		start = new Bottom(activity, right_start, right_start, 1161, 655);
+		start = new Botton(activity, right_start, right_start, 1161, 655);
 
 		//目前使用的難度
 		//TODO (功能待補)
-		model = new Bottom(activity, model_ch, model_ch, 969, 655);
+		model = new Botton(activity, model_ch, model_ch, 969, 655);
 		//選擇難度使用的選擇按鈕
-		easy  = new Bottom(activity, right_easy_ch, right_easy, 741, 514);
-		normal  = new Bottom(activity, right_normal_ch, right_normal, 741, 588);
-		hard  = new Bottom(activity, right_hard_ch, right_hard, 741, 662);
+		easy  = new Botton(activity, right_easy_ch, right_easy, 741, 514);
+		normal  = new Botton(activity, right_normal_ch, right_normal, 741, 588);
+		hard  = new Botton(activity, right_hard_ch, right_hard, 741, 662);
 
 
 		mp = MediaPlayer.create(this.getContext(), R.raw.map_bgm);

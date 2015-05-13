@@ -6,32 +6,27 @@ import android.graphics.Paint;
 
 
 
-public class Bottom {
+public class Botton {
 	MainActivity activity;
-	float x;//圖片的中央x座標
-	float y;//圖片的中央y座標
-	float width;//虛擬按鈕的寬
-	float height;//虛擬按鈕的高
+	int center_x,center_y;
 	Bitmap onBitmap;//按下狀態的圖片
 	Bitmap offBitmap;//未按下狀態的圖片
 	boolean isOn=false;//按下狀態為true
 	int key;
-	public Bottom(MainActivity activity,Bitmap onBitmap,Bitmap offBitmap,int x,int y){
+	public Botton(MainActivity activity, Bitmap onBitmap, Bitmap offBitmap, int x, int y){
 		this.activity=activity;
 		//this.isOn=activity.backgroundsoundFlag;
 		this.onBitmap=onBitmap;
 		this.offBitmap=offBitmap;
-		this.width=offBitmap.getWidth();
-		this.height=offBitmap.getHeight();
-		this.x=Coordinate.CoordinateX(x)-(this.width/2);
-		this.y=Coordinate.CoordinateY(y)-(this.height/2);
+		this.center_x=x;
+		this.center_y=y;
 	}
 
 	public void drawBtm(Canvas canvas,Paint paint){//繪製按鈕
 		if(isOn)
-			canvas.drawBitmap(onBitmap, x, y, paint);
+			Graphic.drawPic(canvas,onBitmap,center_x,center_y,0,255,paint);
 		else
-			canvas.drawBitmap(offBitmap, x, y,paint);
+			Graphic.drawPic(canvas, offBitmap, center_x, center_y, 0, 255, paint);
 	}
 	public void drawBtm(Canvas canvas,Paint paint,int alpha){//繪製按鈕
 		paint.setAlpha(alpha);
@@ -62,8 +57,8 @@ public class Bottom {
 		this.isOn=i;
 	}
 	public void move(int x,int y){
-		this.x=Coordinate.CoordinateX(x)-(this.width/2);
-		this.y=Coordinate.CoordinateY(y)-(this.height/2);
+		this.center_x=x;
+		this.center_y=y;
 	}
 	public void setKey(int key){
 		this.key=key;
@@ -72,14 +67,22 @@ public class Bottom {
 		return key;
 	}
 	public Boolean isIn(float pointx,float pointy){//判斷觸控位置
+		double width,height,x,y;
+		if(isOn) {
+			width = onBitmap.getWidth();
+			height = onBitmap.getHeight();
+		}else {
+			width = offBitmap.getWidth();
+			height = offBitmap.getHeight();
+		}
+		x=Coordinate.CoordinateX(center_x)-(width/2);
+		y=Coordinate.CoordinateY(center_y)-(height/2);
 		if(pointx>=x&&pointx<=x+width&&      	pointy>=y&&pointy<=y+height)
 			return true;
 		return false;
 	}
     public Boolean isIn(double pointx,double pointy){//判斷觸控位置
-        if(pointx>=x&&pointx<=x+width&&      	pointy>=y&&pointy<=y+height)
-            return true;
-        return false;
+        return isIn((float)pointx,(float)pointy);
     }
 	public void recycle(){
 		onBitmap.recycle();//按下狀態的圖片

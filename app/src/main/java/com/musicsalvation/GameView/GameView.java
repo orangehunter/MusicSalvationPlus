@@ -1,7 +1,6 @@
 package com.musicsalvation.GameView;
 //
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
@@ -104,16 +103,16 @@ public class GameView extends SurfaceView
             Effect_Blue		=new smallAnimax[Effect_numbers];
     //特效光宣告----------------------------------
 
-    Bottom btn_circle;
-    Bottom btn_square;
-    Bottom btn_xx;
-    Bottom btn_triangle;
+    Botton btn_circle;
+    Botton btn_square;
+    Botton btn_xx;
+    Botton btn_triangle;
 
     //宣告PAUSE、返回遊戲、從頭開始、返回關卡地圖按鈕==================================================
-    Bottom btn_pause;
-    Bottom btn_re_play;
-    Bottom btn_re_start;
-    Bottom btn_re_map;
+    Botton btn_pause;
+    Botton btn_re_play;
+    Botton btn_re_start;
+    Botton btn_re_map;
     //宣告PAUSE、返回遊戲、從頭開始、返回關卡地圖按鈕--------------------------------------------------
 
     //過關等級================================================
@@ -456,10 +455,10 @@ public class GameView extends SurfaceView
 
 
 
-        btn_circle = new Bottom(activity, grey_circle, circle, 100, 495);
-        btn_square = new Bottom(activity, grey_square, square, 280, 625);
-        btn_triangle = new Bottom(activity, grey_triangle, triangle, 1000, 625);
-        btn_xx = new Bottom(activity, grey_xx, xx, 1180, 495);
+        btn_circle = new Botton(activity, grey_circle, circle, 100, 495);
+        btn_square = new Botton(activity, grey_square, square, 280, 625);
+        btn_triangle = new Botton(activity, grey_triangle, triangle, 1000, 625);
+        btn_xx = new Botton(activity, grey_xx, xx, 1180, 495);
 
         //浮游砲===========================================================
 		/*
@@ -472,10 +471,10 @@ public class GameView extends SurfaceView
         //浮游砲-----------------------------------------------------------
 
         //PAUSE按鈕=======================================================
-        btn_pause = new Bottom(activity, pause2, pause , 90, 105);
-        btn_re_map = new Bottom(activity, re_map, re_map, 640 , 410);
-        btn_re_play = new Bottom(activity, re_play, re_play,640 , 315);
-        btn_re_start = new Bottom(activity, re_start , re_start,640 ,225);
+        btn_pause = new Botton(activity, pause2, pause , 90, 105);
+        btn_re_map = new Botton(activity, re_map, re_map, 640 , 410);
+        btn_re_play = new Botton(activity, re_play, re_play,640 , 315);
+        btn_re_start = new Botton(activity, re_start , re_start,640 ,225);
         //PAUSE按鈕---------------------------------------------------------
 
         chart_r=Graphic.LoadBitmap(getResources(), R.drawable.virus_red, 80, 80,true);

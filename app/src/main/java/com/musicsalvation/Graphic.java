@@ -148,7 +148,11 @@ public class Graphic {
 		paint.reset();
 	}
     public static void drawRect(Canvas canvas,int color,int start_x,int start_y,int end_x,int end_y,Paint paint){
+        drawRect(canvas,color,start_x,start_y,end_x,end_y,255,paint);
+    }
+    public static void drawRect(Canvas canvas,int color,int start_x,int start_y,int end_x,int end_y,int alpha,Paint paint){
         paint.setColor(color);
+        paint.setAlpha(alpha);
         canvas.drawRect(Coordinate.CoordinateX(start_x), Coordinate.CoordinateY(start_y), Coordinate.CoordinateX(end_x),Coordinate.CoordinateY( end_y), paint);
         paint.reset();
     }

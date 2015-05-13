@@ -34,9 +34,9 @@ implements SurfaceHolder.Callback{
     Bitmap pv_coverback;
 
     //按鈕宣告
-	Bottom dwbtn;
-	Bottom likebtn;
-	Bottom sharebtn;
+	Botton dwbtn;
+	Botton likebtn;
+	Botton sharebtn;
 
     Number num;
 
@@ -92,9 +92,9 @@ implements SurfaceHolder.Callback{
 		pv_pumennum_3 =        Graphic.bitSize(LoadBitmap( R.drawable.pv_pumennum_3), btn_wsize, btn_hsize);
         pv_coverback = Graphic.bitSize(LoadBitmap( R.drawable.cv_bg_starroad), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 
-        likebtn = 	new Bottom(activity, pv_likebtn_1, pv_likebtn_0, 655, 620);
-		dwbtn = 	new Bottom(activity, pv_dwbtn_1,pv_dwbtn_0, 875, 620);
-        sharebtn = 	new Bottom(activity, pv_sharebtn, pv_sharebtn, 1095, 620);
+        likebtn = 	new Botton(activity, pv_likebtn_1, pv_likebtn_0, 655, 620);
+		dwbtn = 	new Botton(activity, pv_dwbtn_1,pv_dwbtn_0, 875, 620);
+        sharebtn = 	new Botton(activity, pv_sharebtn, pv_sharebtn, 1095, 620);
 
         num=new Number(getResources());
         num.setSize(27, 35);
