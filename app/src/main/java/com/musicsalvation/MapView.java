@@ -20,6 +20,21 @@ import android.view.SurfaceView;
 public class MapView extends SurfaceView
 implements SurfaceHolder.Callback{
 
+    //======新介面圖片宣告===============
+    Bitmap map_back;
+    Bitmap map_frame;
+    Bitmap map_set_btn;
+    Bitmap map_stage01;
+    Bitmap map_stage02;
+    Bitmap map_stage03;
+
+    Bitmap map_easy_btn_f;
+    Bitmap map_easy_btn_t;
+    Bitmap map_normal_btn_f;
+    Bitmap map_normal_btn_t;
+    Bitmap map_hard_btn_f;
+    Bitmap map_hard_btn_t;
+    //--------------------新介面圖片宣告-----------------------
 	Bitmap wmap;
 	Bitmap left_back;
 	Bitmap left_exit;    //<<箭頭-淺色  離開MENU用
