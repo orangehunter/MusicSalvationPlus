@@ -22,6 +22,9 @@ implements SurfaceHolder.Callback{
 
     //======新介面圖片宣告===============
     Bitmap map_back;
+    Bitmap map_stage01_back;
+    Bitmap map_stage02_back;
+    Bitmap map_stage03_back;
     Bitmap map_frame;
     Bitmap map_set_btn;
     Bitmap map_stage01;
@@ -34,6 +37,14 @@ implements SurfaceHolder.Callback{
     Bitmap map_normal_btn_t;
     Bitmap map_hard_btn_f;
     Bitmap map_hard_btn_t;
+    Bitmap map_start_btn;
+    Bitmap map_startbar;
+
+    Botton easy_btn;
+    Botton normal_btn;
+    Botton hard_btn;
+    Botton setting_btn;
+    Botton start_btn;
     //--------------------新介面圖片宣告-----------------------
 	Bitmap wmap;
 	Bitmap left_back;
@@ -237,6 +248,35 @@ implements SurfaceHolder.Callback{
 		set_timing=activity.io.timing+5;
 		paint = new Paint();//建立畫筆
 		paint.setAntiAlias(true);//開啟抗鋸齒
+
+        //===============新介面圖片載入=======================
+
+        map_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+        map_frame = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+        map_stage01_back = Graphic.bitSize(LoadBitmap( R.drawable.mapviewe_stage01_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+        map_stage02_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage02_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+        map_stage03_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage03_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+
+        map_stage01 = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage1_font), 234, 63);
+        map_stage02 = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage2_font), 234, 63);
+        map_stage03 = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage3_font), 234, 63);
+
+        map_start_btn = Graphic.bitSize(LoadBitmap( R.drawable.mapview_start_btn), 240, 170);
+        map_startbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_startbar), 342, 342);
+
+        map_set_btn = Graphic.bitSize(LoadBitmap( R.drawable.mapview_set_btn), 95, 146);
+        map_easy_btn_f = Graphic.bitSize(LoadBitmap( R.drawable.mapview_easy_btn_f), 393, 104);
+        map_easy_btn_t = Graphic.bitSize(LoadBitmap( R.drawable.mapview_easy_btn_t), 393, 104);
+        map_normal_btn_f = Graphic.bitSize(LoadBitmap( R.drawable.mapview_normal_btn_f), 393, 104);
+        map_normal_btn_t = Graphic.bitSize(LoadBitmap( R.drawable.mapview_normal_btn_t), 393, 104);
+        map_hard_btn_f = Graphic.bitSize(LoadBitmap( R.drawable.mapview_hard_btn_f), 393, 104);
+        map_hard_btn_t = Graphic.bitSize(LoadBitmap( R.drawable.mapview_hard_btn_t), 393, 104);
+
+        setting_btn = new Botton(activity, map_set_btn, map_set_btn, 47, 170);
+
+
+
+        //---------------新介面圖片載入----------------------
 		wmap =Graphic.bitSize(LoadBitmap( R.drawable.wmap), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		left_back=Graphic.bitSize(LoadBitmap( R.drawable.menubackground), 846, 871);
 		left_exit = Graphic.bitSize(LoadBitmap( R.drawable.left_exit1), 134, 75);
@@ -388,15 +428,16 @@ implements SurfaceHolder.Callback{
 		sp_Volume_bar=new MySeekBar(activity, volBar, volbtn, -300, 167);
 		sp_Volume_bar.setSeekBarFloat((int)(activity.io.sp_Voiume*100));
 
-		start = new Botton(activity, right_start, right_start, 1161, 655);
+		start = new Botton(activity, map_start_btn, map_start_btn, 640, 635);
 
 		//目前使用的難度
 		//TODO (功能待補)
 		model = new Botton(activity, model_ch, model_ch, 969, 655);
 		//選擇難度使用的選擇按鈕
-		easy  = new Botton(activity, right_easy_ch, right_easy, 741, 514);
-		normal  = new Botton(activity, right_normal_ch, right_normal, 741, 588);
-		hard  = new Botton(activity, right_hard_ch, right_hard, 741, 662);
+        // TODO 0513已修改成新版本
+		easy  = new Botton(activity, map_easy_btn_t, map_easy_btn_f, 450, 50);
+		normal  = new Botton(activity, map_normal_btn_t, map_normal_btn_f, 770, 50);
+		hard  = new Botton(activity, map_hard_btn_t, map_hard_btn_f, 1090, 50);
 
 
 		mp = MediaPlayer.create(this.getContext(), R.raw.map_bgm);
