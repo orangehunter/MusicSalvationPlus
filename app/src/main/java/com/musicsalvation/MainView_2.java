@@ -28,7 +28,7 @@ implements SurfaceHolder.Callback{
     int spp=0;
 
 
-	int mbx=1000000;//白棒飛行速度
+	int mbx=1000000;//白棒飛行速度 "yo"
 	int BBB_S=300;
 	int BBB_S_B=255;
 
