@@ -799,6 +799,13 @@ implements SurfaceHolder.Callback{
 				//num.drawNumberLeftStart(right_board_x-10, 535, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Wite, canvas, paint);
 				//追加條件:當Flag = 0 會顯示easy=================================================
 				Graphic.drawPic(canvas, map_frame, 640, 360, 0, 255, paint);
+                if(stageFlag == 1) {
+                    Graphic.drawPic(canvas, map_stage01, 127, 53, 0, 255, paint);
+                }else if(stageFlag == 2){
+                    Graphic.drawPic(canvas, map_stage02, 127, 53, 0, 255, paint);
+                }else if(stageFlag == 3){
+                    Graphic.drawPic(canvas, map_stage03, 127, 53, 0, 255, paint);
+                }
 				setting_btn.drawBtm(canvas, paint);
                 easy.drawBtm(canvas, paint);
                 normal.drawBtm(canvas, paint);
@@ -1162,7 +1169,7 @@ implements SurfaceHolder.Callback{
                     //新介面用關卡選擇========================
                     if(stageselect.isIn(pointx,pointy)){
                             stageFlag++;
-                            activity.io.level=stageFlag;
+                            activity.io.level=stageFlag-1;
                             activity.io.difficulty=0;
                             if(stageFlag >3 || stageFlag ==0){
                                 stageFlag = 1;
@@ -1396,7 +1403,7 @@ implements SurfaceHolder.Callback{
 		model.recycle();
 		start.recycle();
 
-		setting.recycle();
+//		setting.recycle();
 
 		//箭頭按鈕宣告================================================
 		// arrow.recycle();
