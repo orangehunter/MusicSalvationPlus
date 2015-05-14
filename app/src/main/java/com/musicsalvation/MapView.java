@@ -451,6 +451,8 @@ implements SurfaceHolder.Callback{
 		normal  = new Botton(activity, map_normal_btn_t, map_normal_btn_f, 770, 50);
 		hard  = new Botton(activity, map_hard_btn_t, map_hard_btn_f, 1090, 50);
 
+        activity.io.difficulty = 0;
+
 
 		mp = MediaPlayer.create(this.getContext(), R.raw.map_bgm);
 		mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
@@ -522,11 +524,6 @@ implements SurfaceHolder.Callback{
             //新介面==================================================
             Graphic.drawPic(canvas, map_back, 640, 360, 0, 255, paint);
             stageselect.drawBtm(canvas,paint);
-
-
-
-
-
 
 
             //新介面------------------------------------------------
@@ -806,12 +803,18 @@ implements SurfaceHolder.Callback{
                 }else if(stageFlag == 3){
                     Graphic.drawPic(canvas, map_stage03, 127, 53, 0, 255, paint);
                 }
+                rot-= 0.5;
+                if(rot == -360){
+                    rot = 0;
+                }
 				setting_btn.drawBtm(canvas, paint);
                 easy.drawBtm(canvas, paint);
                 normal.drawBtm(canvas, paint);
                 hard.drawBtm(canvas, paint);
                 start.drawBtm(canvas,paint);
-                Graphic.drawPic(canvas, map_startbar, 639, 670, 0, 255, paint);
+                Graphic.drawPic(canvas, map_startbar, 639, 670, rot, 255, paint);
+
+
 
 
                 if(activity.io.difficulty==0){
@@ -883,8 +886,8 @@ implements SurfaceHolder.Callback{
 		case MotionEvent.ACTION_DOWN://按下
 			if(deJump == true)
 			{
-				//setting.Action_Dowm(pointx,pointy);
-				/*if (setting.getMainFlag()){
+				/*setting.Action_Dowm(pointx,pointy);
+				if (setting.getMainFlag()){
 					break;
 				}*/
 				if(setting_btn.isIn(pointx,pointy))
@@ -1170,7 +1173,7 @@ implements SurfaceHolder.Callback{
                     if(stageselect.isIn(pointx,pointy)){
                             stageFlag++;
                             activity.io.level=stageFlag-1;
-                            activity.io.difficulty=0;
+
                             if(stageFlag >3 || stageFlag ==0){
                                 stageFlag = 1;
                         }
@@ -1218,6 +1221,10 @@ implements SurfaceHolder.Callback{
 			deJump = false;
 			break;
 		case MotionEvent.ACTION_MOVE:
+            /*setting.Action_Move(pointx,pointy);
+            if (setting.getMainFlag()){
+                break;
+            }*/
 			if(mp_Volume_bar.isOn_flag){
 				mp_Volume_bar.setSeekBarX(pointx);
 			}
@@ -1228,6 +1235,10 @@ implements SurfaceHolder.Callback{
 			//---------------------------------------
 		case MotionEvent.ACTION_UP:
 			if(deJump == false){
+                /*setting.Action_Up(pointx,pointy);
+                if (setting.getMainFlag()){
+                    break;
+                }*/
 				/*if(left_btm1.isIn(pointx, pointy)){
 				}
 				else if(left_btm2.isIn(pointx, pointy)){
@@ -1403,7 +1414,7 @@ implements SurfaceHolder.Callback{
 		model.recycle();
 		start.recycle();
 
-//		setting.recycle();
+		//setting.recycle();
 
 		//箭頭按鈕宣告================================================
 		// arrow.recycle();
