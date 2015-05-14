@@ -30,7 +30,7 @@ public class Setting {
     int sp_id[];
     int main_alpha=0;
 
-
+    int btn_alpha=0;
 
     public Setting(MainActivity activity){
         this.activity=activity;
@@ -81,18 +81,18 @@ public class Setting {
             if (main_alpha-100>0) {
                 Graphic.drawRect(canvas, Color.BLACK, 0, 0, 1280, 720, main_alpha - 100, paint);
             }
-            Graphic.drawPic(canvas, back, 1280 / 2, 720 / 2, 0, main_alpha, paint);
-            if(main_alpha > 200) {
-                music_volum.drawSeekBar(canvas, main_alpha, paint);
-                button_volum.drawSeekBar(canvas, main_alpha, paint);
-            }else{
-                music_volum.drawSeekBar(canvas, 0, paint);
-                button_volum.drawSeekBar(canvas, 0, paint);
-            }
-            for (Botton arr:sound_btn){
-                arr.drawBtm(canvas,paint,main_alpha);
-            }
-            exit.drawBtm(canvas,paint,main_alpha);
+            Graphic.drawPic(canvas,back,1280/2,720/2,0,main_alpha,paint);
+
+            music_volum.drawSeekBar(canvas,main_alpha,paint);
+            button_volum.drawSeekBar(canvas,main_alpha,paint);
+
+                for (Botton arr : sound_btn) {
+                    arr.drawBtm(canvas, paint, main_alpha);
+                }
+                exit.drawBtm(canvas, paint, main_alpha);
+
+
+
 
         }
     }
