@@ -22,14 +22,14 @@ implements SurfaceHolder.Callback{
 
     //======新介面圖片宣告===============
     Bitmap map_back;
-    Bitmap map_stage01_back;
-    Bitmap map_stage02_back;
-    Bitmap map_stage03_back;
     Bitmap map_frame;
     Bitmap map_set_btn;
     Bitmap map_stage01;
     Bitmap map_stage02;
     Bitmap map_stage03;
+    Bitmap map_stage01_back;
+    Bitmap map_stage02_back;
+    Bitmap map_stage03_back;
 
     Bitmap map_easy_btn_f;
     Bitmap map_easy_btn_t;
@@ -37,6 +37,7 @@ implements SurfaceHolder.Callback{
     Bitmap map_normal_btn_t;
     Bitmap map_hard_btn_f;
     Bitmap map_hard_btn_t;
+
     Bitmap map_start_btn;
     Bitmap map_startbar;
 
@@ -51,6 +52,7 @@ implements SurfaceHolder.Callback{
     int now_stageflag = 1;
 
     Botton stageselect;
+
     //--------------------新介面圖片宣告-----------------------
 	Bitmap wmap;
 	Bitmap left_back;
@@ -255,6 +257,7 @@ implements SurfaceHolder.Callback{
 		paint = new Paint();//建立畫筆
 		paint.setAntiAlias(true);//開啟抗鋸齒
 
+
         //===============新介面圖片載入=======================
 
         map_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
@@ -283,6 +286,7 @@ implements SurfaceHolder.Callback{
 
 
         //---------------新介面圖片載入----------------------
+
 		wmap =Graphic.bitSize(LoadBitmap( R.drawable.wmap), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		left_back=Graphic.bitSize(LoadBitmap( R.drawable.menubackground), 846, 871);
 		left_exit = Graphic.bitSize(LoadBitmap( R.drawable.left_exit1), 134, 75);
@@ -434,16 +438,15 @@ implements SurfaceHolder.Callback{
 		sp_Volume_bar=new MySeekBar(activity, volBar, volbtn, -300, 167);
 		sp_Volume_bar.setSeekBarFloat((int)(activity.io.sp_Voiume*100));
 
-		start = new Botton(activity, map_start_btn, map_start_btn, 640, 635);
+		start = new Botton(activity, right_start, right_start, 1161, 655);
 
 		//目前使用的難度
 		//TODO (功能待補)
 		model = new Botton(activity, model_ch, model_ch, 969, 655);
 		//選擇難度使用的選擇按鈕
-        // TODO 0513已修改成新版本
-		easy  = new Botton(activity, map_easy_btn_t, map_easy_btn_f, 450, 50);
-		normal  = new Botton(activity, map_normal_btn_t, map_normal_btn_f, 770, 50);
-		hard  = new Botton(activity, map_hard_btn_t, map_hard_btn_f, 1090, 50);
+		easy  = new Botton(activity, right_easy_ch, right_easy, 741, 514);
+		normal  = new Botton(activity, right_normal_ch, right_normal, 741, 588);
+		hard  = new Botton(activity, right_hard_ch, right_hard, 741, 662);
 
 
 		mp = MediaPlayer.create(this.getContext(), R.raw.map_bgm);
