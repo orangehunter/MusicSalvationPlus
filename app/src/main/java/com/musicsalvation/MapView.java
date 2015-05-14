@@ -1164,7 +1164,7 @@ implements SurfaceHolder.Callback{
 				}*/
 				//第三關--------------------------------------------------------
 
-				if(stageFlag!=0 && !setting.main_flag){
+				if(!setting.main_flag){
 
                     //新介面用關卡選擇========================
                     if(stageselect.isIn(pointx,pointy)){
@@ -1236,9 +1236,10 @@ implements SurfaceHolder.Callback{
                 /*if (setting.getMainFlag()){
                     break;
                 }*/
-                if(setting_btn.isIn(pointx,pointy))
-                {
-                    setting.start();
+                if(setting.main_alpha==0) {
+                    if (setting_btn.isIn(pointx, pointy)) {
+                        setting.start();
+                    }
                 }
 				/*if(left_btm1.isIn(pointx, pointy)){
 				}
