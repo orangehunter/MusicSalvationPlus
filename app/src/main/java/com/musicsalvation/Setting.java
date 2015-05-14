@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.util.Log;
 
 /**
  * Created by user on 2015/5/13.
@@ -51,7 +52,7 @@ public class Setting {
         ext=Graphic.LoadBitmap(activity.getResources(),R.drawable.st_exit_btn,140,130,true);
         exit=new Botton(activity,ext,ext,75,180);
 
-
+        st_sp = new SoundPool(1, AudioManager.STREAM_MUSIC, 5);
         sp_id=new int[8];
         sp_id[0]=st_sp.load(activity, R.raw.tambourine, 1);
         sp_id[1]=st_sp.load(activity, R.raw.drum_cymbal, 1);
@@ -65,12 +66,14 @@ public class Setting {
     public void start(){
         st_sp.play(sp_id[5],activity.io.sp_Voiume,activity.io.sp_Voiume,0,0,1);
         main_flag=true;
+
     }
     public void Draw(Canvas canvas,Paint paint){
         if (main_flag){
-            Coordinate.AnalogSpeedMove(main_alpha,255);
+            main_alpha = Coordinate.AnalogSpeedMove(main_alpha,255);
+
         }else {
-            Coordinate.AnalogSpeedMove(main_alpha,0);
+            main_alpha = Coordinate.AnalogSpeedMove(main_alpha,0);
         }
         if (main_alpha>0){
             if (main_alpha-100>0) {
@@ -82,6 +85,8 @@ public class Setting {
             for (Botton arr:sound_btn){
                 arr.drawBtm(canvas,paint,main_alpha);
             }
+            exit.drawBtm(canvas,paint,main_alpha);
+
         }
     }
     public void Action_Dowm(double pointX,double pointY){

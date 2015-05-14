@@ -177,7 +177,8 @@ implements SurfaceHolder.Callback{
 
 	MediaPlayer mp;
 	SoundPool sp;
-	int sp_id[];
+    //TODO 盧柏仰改
+	int sp_id_s[];
 
 	int pointx;//觸控到螢幕的x座標
 	int pointy;//觸控到螢幕的y座標
@@ -284,6 +285,7 @@ implements SurfaceHolder.Callback{
 
         map_stageselect = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stageselect), 1020, 415);
 
+        setting = new Setting(activity);
         setting_btn = new Botton(activity, map_set_btn, map_set_btn, 47, 170);
         stageselect = new Botton(activity, map_stageselect, map_stageselect, 640, 360);
 
@@ -441,6 +443,7 @@ implements SurfaceHolder.Callback{
 		sp_Volume_bar=new MySeekBar(activity, volBar, volbtn, -300, 167);
 		sp_Volume_bar.setSeekBarFloat((int)(activity.io.sp_Voiume*100));
 
+
 		start = new Botton(activity, map_start_btn, map_start_btn, 1280/2, 635);
 
 		//目前使用的難度
@@ -460,20 +463,20 @@ implements SurfaceHolder.Callback{
 		mp.start();
 
 		sp=new SoundPool(4, AudioManager.STREAM_MUSIC, 5);
-		sp_id=new int[11];
-		sp_id[0]=sp.load(activity, R.raw.tambourine, 1);
-		sp_id[1]=sp.load(activity, R.raw.drum_cymbal, 1);
-		sp_id[2]=sp.load(activity, R.raw.drum_snare, 1);
-		sp_id[3]=sp.load(activity, R.raw.fall, 1);
-		sp_id[4]=sp.load(activity, R.raw.voice_dog, 1);
-		sp_id[5]=sp.load(activity, R.raw.left_menu_on, 1);
-		sp_id[6]=sp.load(activity, R.raw.left_menu_off, 1);
-		sp_id[7]=sp.load(activity, R.raw.leftm_btn, 1);
-		sp_id[8]=sp.load(activity, R.raw.left_num, 1);
-		sp_id[9]=sp.load(activity, R.raw.stagebtn, 1);
-		sp_id[10]=sp.load(activity, R.raw.start, 1);
+		sp_id_s=new int[11];
+        sp_id_s[0]=sp.load(activity, R.raw.tambourine, 1);
+        sp_id_s[1]=sp.load(activity, R.raw.drum_cymbal, 1);
+        sp_id_s[2]=sp.load(activity, R.raw.drum_snare, 1);
+        sp_id_s[3]=sp.load(activity, R.raw.fall, 1);
+        sp_id_s[4]=sp.load(activity, R.raw.voice_dog, 1);
+        sp_id_s[5]=sp.load(activity, R.raw.left_menu_on, 1);
+        sp_id_s[6]=sp.load(activity, R.raw.left_menu_off, 1);
+        sp_id_s[7]=sp.load(activity, R.raw.leftm_btn, 1);
+        sp_id_s[8]=sp.load(activity, R.raw.left_num, 1);
+        sp_id_s[9]=sp.load(activity, R.raw.stagebtn, 1);
+        sp_id_s[10]=sp.load(activity, R.raw.start, 1);
 
-		//setting = new Setting(activity);
+
 
 		num=new Number(getResources());
 		num.setSize(25, 35);
@@ -828,15 +831,6 @@ implements SurfaceHolder.Callback{
                     Graphic.drawPic(canvas, map_hard_btn_t, 1090, 50, 0, 255, paint);
                 }
 
-				if(setting_btn.getBottom()){
-
-				}
-
-
-
-
-
-
 
 				//箭頭顯示=========================================================================
 				/*if(!model.getBottom()){
@@ -870,10 +864,13 @@ implements SurfaceHolder.Callback{
 					//追加透明度變化，目前選擇的難度為亮，其餘難度為暗----------------------------------------
 				}*/
 			}
-
+            setting.Draw(canvas, paint);
 			//canvas.drawText(String.valueOf(menuFlag), Coordinate.CoordinateX(360), Coordinate.CoordinateY(360), paint);
 
-			//setting.Draw(canvas,paint);
+
+
+
+
 		}
 	}
 
@@ -886,14 +883,17 @@ implements SurfaceHolder.Callback{
 		case MotionEvent.ACTION_DOWN://按下
 			if(deJump == true)
 			{
-				/*setting.Action_Dowm(pointx,pointy);
-				if (setting.getMainFlag()){
-					break;
-				}*/
+                setting.Action_Dowm(pointx,pointy);
+                if (setting.getMainFlag()) {
+                    break;
+                }
+
 				if(setting_btn.isIn(pointx,pointy))
 				{
-					//setting.start();
+					setting.start();
 				}
+
+
 				//左半部選單按鈕事件====================================
 				/*if(menubtm.isIn(pointx, pointy)){
 					if(menuFlag == 0){
@@ -1180,7 +1180,7 @@ implements SurfaceHolder.Callback{
                     }
                     //新介面用關卡選擇----------------------------
 					if(start.isIn(pointx, pointy)){
-						sp.play(sp_id[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+						sp.play(sp_id_s[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 						activity.io.video_select=2;
 						activity.changeView(0);
 					}
@@ -1197,17 +1197,17 @@ implements SurfaceHolder.Callback{
 					}*/
 
 						if(easy.isIn(pointx, pointy)){
-							sp.play(sp_id[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+							sp.play(sp_id_s[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 							activity.io.difficulty=0;//gameview難度參數
 							//model.setBottomTo(false);
 						}
 						if(normal.isIn(pointx, pointy)){
-							sp.play(sp_id[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+							sp.play(sp_id_s[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 							activity.io.difficulty=1;//gameview難度參數
 							//model.setBottomTo(false);
 						}
 						if(hard.isIn(pointx, pointy)){
-							sp.play(sp_id[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+							sp.play(sp_id_s[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 							activity.io.difficulty=2;//gameview難度參數
 							//model.setBottomTo(false);
 						}
@@ -1221,8 +1221,8 @@ implements SurfaceHolder.Callback{
 			deJump = false;
 			break;
 		case MotionEvent.ACTION_MOVE:
-            /*setting.Action_Move(pointx,pointy);
-            if (setting.getMainFlag()){
+            setting.Action_Move(pointx,pointy);
+            /*if (setting.getMainFlag()){
                 break;
             }*/
 			if(mp_Volume_bar.isOn_flag){
@@ -1235,8 +1235,8 @@ implements SurfaceHolder.Callback{
 			//---------------------------------------
 		case MotionEvent.ACTION_UP:
 			if(deJump == false){
-                /*setting.Action_Up(pointx,pointy);
-                if (setting.getMainFlag()){
+                setting.Action_Up(pointx,pointy);
+                /*if (setting.getMainFlag()){
                     break;
                 }*/
 				/*if(left_btm1.isIn(pointx, pointy)){
@@ -1414,7 +1414,7 @@ implements SurfaceHolder.Callback{
 		model.recycle();
 		start.recycle();
 
-		//setting.recycle();
+		setting.recycle();
 
 		//箭頭按鈕宣告================================================
 		// arrow.recycle();
