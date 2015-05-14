@@ -16,18 +16,43 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 @SuppressLint({ "ViewConstructor", "WrongCall", "ClickableViewAccessibility" })
-public class MainView extends SurfaceView
+public class MainView_2 extends SurfaceView
 implements SurfaceHolder.Callback{
 
 	boolean deJump=true;
 	boolean hidden_flag;
 
-	/*Bitmap main_back;
-	Bitmap main_back2;
-	Bitmap main_back3;*/
+
 
     //特效
     int spp=0;
+
+
+	int mbx=1000000;//白棒飛行速度
+	int BBB_S=300;
+	int BBB_S_B=255;
+
+	int bar_m=1900;
+
+	int x =0;
+
+	int val_y=0;
+	int val_y_s=1;
+    Bitmap wrmax[] = new Bitmap[5];
+	Bitmap wrmaxg[] = new Bitmap[5];
+    Bitmap main2_fs_sp[] =new Bitmap[10];
+
+	Bitmap big_bg ;
+	Bitmap ms_cl[] = new Bitmap[4];
+	Bitmap w_bar ;
+	Bitmap B_bar ;
+	Bitmap BBB;
+	Bitmap ww_bar ;
+	Bitmap val ;
+
+
+    int wr_sp=0;
+
     //特效
     Bitmap mv_background;
     Bitmap mv_background_2;
@@ -37,7 +62,7 @@ implements SurfaceHolder.Callback{
 	Bitmap main_touchstart;
 
 	Bitmap left_xia;
-	//Bitmap right_miku;
+
 	Bitmap staff;
 
 	Botton storybtm;
@@ -51,28 +76,21 @@ implements SurfaceHolder.Callback{
 
 	int pointx;//觸控到螢幕的x座標
 	int pointy;//觸控到螢幕的y座標
-	int apa=10;
-	int a=0;
+
 
 	int mtx=640;
 	int mty=-200;
 	int mty1=360;
-	int mty2=200;
 
-	int mtoy=600;
 	int mtoa=0;
 	int mtoc=20;
 
-	int mlx=-220;
-	int mlx1=220-60;
-	int mly=700;
 
-	int mrx=1280+333;
-	int mrx1=1280-333+190;
-	int mry=700;
 
-	int alpha = 5;
-	int alpha2 = 0;
+	int point[]=new int[9];
+	int tmp_alpha[]=new  int[9];
+	double ta=0;
+	int target=0;
 
 	//背景音樂宣告，更改為陣列====================================
 
@@ -89,7 +107,7 @@ implements SurfaceHolder.Callback{
 	int i=0,j=10;
 	MainActivity activity;
 
-	public MainView(MainActivity mainActivity) {
+	public MainView_2(MainActivity mainActivity) {
 		super(mainActivity);
 		this.activity = mainActivity;
 		this.getHolder().addCallback(this);//設定生命周期回調接口的實現者
@@ -104,10 +122,7 @@ implements SurfaceHolder.Callback{
 	public void surfaceCreated(SurfaceHolder holder) {
 		paint = new Paint();//建立畫筆
 		paint.setAntiAlias(true);//開啟抗鋸齒
-		/*main_back=			Graphic.bitSize(LoadBitmap( R.drawable.main_back3), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		main_back2=			Graphic.bitSize(LoadBitmap( R.drawable.main_back2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		main_back3=			Graphic.bitSize(LoadBitmap( R.drawable.tellyouworld), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		*/
+
 
         mv_background = Graphic.bitSize(LoadBitmap( R.drawable.mv_background), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         mv_background_2= Graphic.bitSize(LoadBitmap( R.drawable.mv_background_2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
@@ -115,12 +130,63 @@ implements SurfaceHolder.Callback{
 		main_touchstart=	Graphic.bitSize(LoadBitmap( R.drawable.main_touchstart ), 594, 85);
 
 		left_xia =          Graphic.bitSize(LoadBitmap( R.drawable.xia), 385, 717);
-		//right_miku =        Graphic.bitSize(LoadBitmap( R.drawable.mikuv3_img2), 620, 717);
-		storymode =  			Graphic.bitSize(LoadBitmap( R.drawable.mv_storymode), 314,85);
-		createmode  =  			Graphic.bitSize(LoadBitmap( R.drawable.mv_createmode), 314,85);
+
+		storymode =  			Graphic.bitSize(LoadBitmap( R.drawable.gio), 314,85);
+		createmode  =  			Graphic.bitSize(LoadBitmap( R.drawable.tron), 314,85);
+
+        wrmax[0] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_0), 1280,720);
+        wrmax[1] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_1), 1280,720);
+        wrmax[2] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_2), 1280,720);
+        wrmax[3] = Graphic.bitSize(LoadBitmap(R.drawable.main2_wr_3), 1280, 720);
+        wrmax[4] = Graphic.bitSize(LoadBitmap(R.drawable.main2_wr_4), 1280, 720);
+
+		wrmaxg[0] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_0g), 1280,720);
+		wrmaxg[1] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_1g), 1280,720);
+		wrmaxg[2] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_2g), 1280,720);
+		wrmaxg[3] = Graphic.bitSize(LoadBitmap(R.drawable.main2_wr_3g), 1280, 720);
+		wrmaxg[4] = Graphic.bitSize(LoadBitmap(R.drawable.main2_wr_4g), 1280, 720);
+
+
+		main2_fs_sp[0]= Graphic.bitSize(LoadBitmap(R.drawable.touch_0), 50, 50);
+		main2_fs_sp[1]= Graphic.bitSize(LoadBitmap(R.drawable.touch_0), 50, 50);
+		main2_fs_sp[2]= Graphic.bitSize(LoadBitmap(R.drawable.touch_1), 50, 50);
+		main2_fs_sp[3]= Graphic.bitSize(LoadBitmap(R.drawable.touch_2), 50, 50);
+		main2_fs_sp[4]= Graphic.bitSize(LoadBitmap(R.drawable.touch_3), 50, 50);
+
+		main2_fs_sp[5]= Graphic.bitSize(LoadBitmap(R.drawable.touch_4), 50, 50);
+		main2_fs_sp[6]= Graphic.bitSize(LoadBitmap(R.drawable.touch_5), 50, 50);
+		main2_fs_sp[7]= Graphic.bitSize(LoadBitmap(R.drawable.touch_0), 50, 50);
+		main2_fs_sp[8]= Graphic.bitSize(LoadBitmap(R.drawable.touch_0), 50, 50);
+
+
+
+		big_bg= Graphic.bitSize(LoadBitmap(R.drawable.black_bg), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+
+		ww_bar= Graphic.bitSize(LoadBitmap(R.drawable.tati_gg), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+
+
+
+		val= Graphic.bitSize(LoadBitmap(R.drawable.val), 400,288);
+
+		w_bar= Graphic.bitSize(LoadBitmap( R.drawable.w_bar), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		BBB=Graphic.bitSize(LoadBitmap( R.drawable.fv_star_s), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		B_bar=Graphic.bitSize(LoadBitmap( R.drawable.tati_g), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		ms_cl[0] = Graphic.bitSize(LoadBitmap( R.drawable.ms_b1), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+	    ms_cl[1] = Graphic.bitSize(LoadBitmap( R.drawable.ms_b2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		ms_cl[2] = Graphic.bitSize(LoadBitmap( R.drawable.ms_b3), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		ms_cl[3] = Graphic.bitSize(LoadBitmap( R.drawable.ms_b4), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+
+
+
+		for(int i=0;i<9;i++){
+			point[i]=(1280/5)+((1280/5*4-1280/5)/9*(i+1));
+		}
 
 		storybtm = 	new Botton(activity, storymode,storymode, 640, 518);
 		creatbtm = 	new Botton(activity, createmode, createmode, 640, 643);
+
+
+
 
 		hidden_flag=false;
 		for(int i=0;i<3;i++){
@@ -130,7 +196,7 @@ implements SurfaceHolder.Callback{
                 }
             }catch (Exception e){}
 		}
-		//Log.v("mainView", ""+hidden_flag);
+
 		if(hidden_flag){
 			staff =Graphic.bitSize(LoadBitmap(R.drawable.staff), 314, 85);
 			storybtm.move(640, 450);
@@ -169,7 +235,7 @@ implements SurfaceHolder.Callback{
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					SurfaceHolder myholder=MainView.this.getHolder();
+					SurfaceHolder myholder=MainView_2.this.getHolder();
 					Canvas canvas = myholder.lockCanvas();//取得畫布
 					onDraw(canvas);
 					if(canvas != null){
@@ -189,78 +255,166 @@ implements SurfaceHolder.Callback{
 	@SuppressLint("DrawAllocation")
 	@Override
 	protected void onDraw(Canvas canvas) {//重新定義的繪制方法
-		if(canvas!=null){
+		if(canvas!=null) {
 			super.onDraw(canvas);
-			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
-			canvas.drawColor(Color.BLACK);//界面設定為黑色
+			canvas.clipRect(new Rect(0, 0, Constant.SCREEN_WIDTH, Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
+			canvas.drawColor(Color.WHITE);//界面設定為黑色
 
-			if(!back_mp.isPlaying()){
+			if (!back_mp.isPlaying()) {
 				back_mp.prepareAsync();
 				back_mp.start();
 			}
-
-            Graphic.drawPic(canvas, mv_background, 1280/2, 720/2, 0, 255, paint);//背景
-
-            spp=spp+20;
-
-            if (spp>=255){
-                spp=0;
-            }
-            Graphic.drawPic(canvas, mv_background_2, 1280/2, 720/2, 0, 150-spp, paint);//背景
-			/*if(!hidden_flag){
-				if(apa<= 10){
-					a =7;
+			if(mbx<657) {
+				if (mainFlag == 0) {
+					Graphic.drawPic(canvas, mv_background, 1280 / 2, 720 / 2, 0, 200, paint);//背景
 				}
-				if(apa >240){
-					a = -7;
+				if (mainFlag == 1) {
+					Graphic.drawPic(canvas, mv_background, 1280 / 2, 720 / 2, 0, 215, paint);//背景
 				}
-				apa+= a;
-				Graphic.drawPic(canvas, main_back, 1280/2, 720/2, 0, 255, paint);//背景
-				Graphic.drawPic(canvas, main_back2, 1280/2, 720/2, 0, apa, paint);
-			}else{
-				Graphic.drawPic(canvas, main_back3, 1280/2, 720/2, 0, 255, paint);//背景
-			}*/
 
-			if(mainFlag==0){
-				if(i<250)
-					i+=j;//透明度參數
-				Graphic.drawPic(canvas, main_title, mtx, mty, 0, i, paint);//Title
-				mty=Coordinate.AnalogSpeedMove(mty, mty1);
-				if(mty==mty1){
-					mtoa+=mtoc;
-					Graphic.drawPic(canvas, main_touchstart, 1280/2, mtoy, 0, mtoa, paint);
-					if(mtoa>235)
-						mtoc=-7;
-					if(mtoa<20)
-						mtoc=7;
+			}
+
+			spp = spp + 40;
+
+			if (spp >= 255) {
+				spp = 0;
+
+			}
+
+			ta += 0.8;
+
+
+			mbx = Coordinate.AnalogSpeedMove(mbx, 640);
+			if (ta >= 1) {
+				ta = 0;
+				target++;
+				target = target % 9;
+
+				x = x + 1;
+
+				if (x >= 4) {
+					x = 0;
+
+				}
+
+				mtoa += mtoc;
+
+				wr_sp = wr_sp + 1;
+
+				if (wr_sp >= 4) {
+					wr_sp = 0;
+				}
+
+			}
+			if (bar_m<=641) {
+				int now, last, next;
+				now = target;
+				if (now - 1 == -1) {
+					last = 7;
+				} else {
+					last = now - 1;
+				}
+				next = (now + 1) % 8;
+				for (int i = 0; i < 9; i++) {
+					if (i == last || i == next) {
+						tmp_alpha[i] = 256 / 2;
+					} else if (i == now) {
+						tmp_alpha[i] = 255;
+					} else {
+						tmp_alpha[i] =80;
+					}
+				}
+			}
+			Graphic.drawPic(canvas, B_bar, 1280 / 2, 720 / 2, 0, 255, paint);
+
+
+
+
+			if (mainFlag == 0) {
+				if (i < 250)
+					i += j;//透明度參數
+
+
+				for (int i = 0; i < 9; i++) {
+
+					Graphic.drawPic(canvas, main2_fs_sp[i], point[i], 585, 0, tmp_alpha[i], paint);
+				}
+
+				if (bar_m>=641) {
+					Graphic.drawPic(canvas, wrmax[2], mtx, mty, 0, mtoa, paint);//Title
+				} else {
+
+					Graphic.drawPic(canvas, wrmax[wr_sp], mtx, mty, 0, mtoa, paint);//Title
+				}
+
+
+				mty = Coordinate.AnalogSpeedMove(mty, mty1);
+				if (mty == mty1) {
+
+
+
+
+					if (mtoa > 255)
+						mtoc = -15;
+					if (mtoa < 135)
+						mtoc = 15;
 				}
 
 				paint.reset();
 			}
-			if(mainFlag==1){
-				Graphic.drawPic(canvas, main_title, mtx, mty, 0, 255, paint);//Title
-				mty=Coordinate.AnalogSpeedMove(mty, mty2);
+			if (mainFlag == 1) {
 
-				Graphic.drawPic(canvas, left_xia, mlx, mly, 0, 255, paint);//Left
-				mlx=Coordinate.AnalogSpeedMove(mlx, mlx1);
 
-				//Graphic.drawPic(canvas, right_miku, mrx, mry, 0, 255, paint);//Right
-				mrx=Coordinate.AnalogSpeedMove(mrx, mrx1);
-
-				/*alpha2+=alpha;
-				if(alpha2 > 250){
-					alpha = -10;
+				Graphic.drawPic(canvas, wrmaxg[4], mtx, mty, 0, i, paint);//Titlev
+				Graphic.drawPic(canvas, val, 1050, 580+val_y, 0, 255, paint);//620-580
+				val_y+=val_y_s;
+				if(val_y>35){
+					val_y_s=-4;
 				}
-				if(alpha2 <100){
-					alpha = 10;
-				}*/
+
+
+				if(val_y<2){
+					val_y_s=12;
+				}
+
+
 				storybtm.drawBtm(canvas, paint);
 				creatbtm.drawBtm(canvas, paint);
-				if(hidden_flag){
+				if (hidden_flag) {
 					staffList.drawBtm(canvas, paint);
 				}
 			}
+
+			if (mbx >= 730) {
+
+
+				Graphic.drawPic(canvas, big_bg, 1280 / 2, 720 / 2, 0, 255, paint);//black bg
+
+				Graphic.drawPic(canvas, w_bar, mbx, 360, 0, BBB_S_B, paint);//b
+				if (mbx<730+50){
+					BBB_S_B=Coordinate.AnalogSpeedMove(BBB_S_B, 0);
+				}
+				Graphic.drawPic(canvas, ms_cl[x], 640, 360, 0, BBB_S_B, paint);//Title_cl
+			}
+
+
+
+			if (mbx < 730 && mbx > 655) {
+				Graphic.drawPic(canvas, BBB, 1280 / 2, 720 / 2, 0, 255, paint);
+			}
+			if (mbx < 657) {
+
+				Graphic.drawPic(canvas, BBB, 1280 / 2, 720 / 2, 0, BBB_S, paint);
+				BBB_S = Coordinate.AnalogSpeedMove(BBB_S, 0);
+			}
+			if (mbx <= 640) {
+				bar_m = Coordinate.AnalogSpeedMove(bar_m, 640);
+				Graphic.drawPic(canvas, ww_bar, bar_m, 720 / 2, 0, 255, paint);
+
+			}
+
 		}
+
 	}
 	@Override
 	public boolean onTouchEvent(MotionEvent event){
@@ -333,20 +487,39 @@ implements SurfaceHolder.Callback{
 	}
 
 	public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
-		/*main_back.recycle();
-		main_back2.recycle();
-		main_back3.recycle();
-		*/
+
 
          mv_background.recycle();
        mv_background_2.recycle();
+
+		main_title.recycle();
+		main_touchstart.recycle();
 		storymode.recycle();
 		createmode.recycle();
 
 		main_title.recycle();
 		left_xia.recycle();
-		//right_miku.recycle();
-		main_touchstart.recycle();
+
+		for(int i=0;i<5;i++){
+			wrmax[i].recycle();
+		}
+		for(int i=0;i<5;i++){
+			wrmaxg[i].recycle();
+		}
+		for(int i=0;i<9;i++){
+			main2_fs_sp[i].recycle();
+		}
+		big_bg.recycle();
+		ww_bar.recycle();
+
+		val.recycle();
+		w_bar.recycle();
+		BBB.recycle();
+		B_bar.recycle();
+		for(int i=0;i<4;i++){
+			ms_cl[i].recycle();
+		}
+
 		storybtm.recycle();
 		creatbtm.recycle();
 		if(hidden_flag){

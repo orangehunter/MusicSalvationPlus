@@ -471,6 +471,8 @@ implements SurfaceHolder.Callback{
 		sp_id[9]=sp.load(activity, R.raw.stagebtn, 1);
 		sp_id[10]=sp.load(activity, R.raw.start, 1);
 
+		setting = new Setting(activity);
+
 		num=new Number(getResources());
 		num.setSize(25, 35);
 		rank=new Bitmap[7];
@@ -520,6 +522,7 @@ implements SurfaceHolder.Callback{
             //新介面==================================================
             Graphic.drawPic(canvas, map_back, 640, 360, 0, 255, paint);
             stageselect.drawBtm(canvas,paint);
+
 
 
 
@@ -795,9 +798,12 @@ implements SurfaceHolder.Callback{
 				}*/
 				//num.drawNumberLeftStart(right_board_x-10, 535, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Wite, canvas, paint);
 				//追加條件:當Flag = 0 會顯示easy=================================================
+				Graphic.drawPic(canvas, map_frame, 640, 360, 0, 255, paint);
+				setting_btn.drawBtm(canvas, paint);
                 easy.drawBtm(canvas, paint);
                 normal.drawBtm(canvas, paint);
                 hard.drawBtm(canvas, paint);
+
 
                 if(activity.io.difficulty==0){
                     Graphic.drawPic(canvas, map_easy_btn_t, 450, 50, 0, 255, paint);
@@ -810,9 +816,13 @@ implements SurfaceHolder.Callback{
                     Graphic.drawPic(canvas, map_hard_btn_t, 1090, 50, 0, 255, paint);
                 }
 
-                Graphic.drawPic(canvas, map_frame, 640, 360, 0, 255, paint);
+				if(setting_btn.getBottom()){
 
-                setting_btn.drawBtm(canvas,paint);
+				}
+
+
+
+
 
 
 
@@ -851,7 +861,7 @@ implements SurfaceHolder.Callback{
 
 			//canvas.drawText(String.valueOf(menuFlag), Coordinate.CoordinateX(360), Coordinate.CoordinateY(360), paint);
 
-
+			setting.Draw(canvas,paint);
 		}
 	}
 
@@ -864,8 +874,16 @@ implements SurfaceHolder.Callback{
 		case MotionEvent.ACTION_DOWN://按下
 			if(deJump == true)
 			{
+				setting.Action_Dowm(pointx,pointy);
+				if (setting.getMainFlag()){
+					break;
+				}
+				if(setting_btn.isIn(pointx,pointy))
+				{
+					setting.start();
+				}
 				//左半部選單按鈕事件====================================
-				if(menubtm.isIn(pointx, pointy)){
+				/*if(menubtm.isIn(pointx, pointy)){
 					if(menuFlag == 0){
 						sp.play(sp_id[5], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 						menuFlag = 1;
@@ -879,7 +897,7 @@ implements SurfaceHolder.Callback{
                         left_btm5.setBottomTo(false);
 						menuFlag = 0;
 					}
-				}
+				}*/
 				//------------------------------
 				if(menuFlag == 1)
 				{
@@ -1377,6 +1395,8 @@ implements SurfaceHolder.Callback{
 		hard.recycle();
 		model.recycle();
 		start.recycle();
+
+		setting.recycle();
 
 		//箭頭按鈕宣告================================================
 		// arrow.recycle();

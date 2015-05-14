@@ -29,7 +29,7 @@ public class MainActivity extends Activity{
     int first_activity=0;//修改第一畫面
     int nowView=0;
 
-
+    MainView_2 mainview_2;//柏仰開發中
     MainView mainview;
     EditView editview;
     MapView mapview;
@@ -86,6 +86,9 @@ public class MainActivity extends Activity{
                 case 10:
                     goToDataView();
                     break;
+                case 11:
+                    goToMainView_2();
+                    break;
 
 
                 case 255:
@@ -123,6 +126,15 @@ public class MainActivity extends Activity{
         mainview.requestFocus();//取得焦點
         mainview.setFocusableInTouchMode(true);//設為可觸控
     }
+    private void goToMainView_2() {//柏仰開發中
+        if(mainview_2==null)
+        {
+            mainview_2=new MainView_2(this);
+        }
+        setContentView(mainview_2);
+        mainview_2.requestFocus();//取得焦點
+        mainview_2.setFocusableInTouchMode(true);//設為可觸控
+    }//柏仰開發中
     private void goToMapView() {
         if(mapview==null)
         {
