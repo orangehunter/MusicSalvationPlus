@@ -108,6 +108,7 @@ public class Setting {
             if (music_volum.isOn((float) pointX, (float) pointY)){
                 st_sp.play(sp_id[5],activity.io.mp_Voiume,activity.io.mp_Voiume,0,0,1);
                 music_volum.setFlag(true);
+
             }
             if (button_volum.isOn((float) pointX, (float) pointY)){
                 st_sp.play(sp_id[activity.io.sp_num],activity.io.sp_Voiume,activity.io.sp_Voiume,0,0,1);
@@ -119,6 +120,7 @@ public class Setting {
         if (main_flag){
             if (music_volum.getFlag()){
                 music_volum.setSeekBarX((float)pointX);
+
             }
             if (button_volum.getFlag()){
                 button_volum.setSeekBarX((float)pointX);
@@ -138,6 +140,7 @@ public class Setting {
                 activity.io.writeData();
                 st_sp.play(sp_id[6], activity.io.mp_Voiume, activity.io.mp_Voiume, 0, 0, 1);
                 music_volum.setFlag(false);
+
             }
             if (button_volum.getFlag()){
                 int temp=(int)button_volum.getSeekBarValue();
