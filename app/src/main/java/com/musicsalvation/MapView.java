@@ -285,7 +285,7 @@ implements SurfaceHolder.Callback{
         map_stageselect = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stageselect), 1020, 415);
 
         setting_btn = new Botton(activity, map_set_btn, map_set_btn, 47, 170);
-        stageselect = new Botton(activity, map_back, map_back, 640, 360);
+        stageselect = new Botton(activity, map_stageselect, map_stageselect, 640, 360);
 
 
         //---------------新介面圖片載入----------------------
@@ -441,7 +441,7 @@ implements SurfaceHolder.Callback{
 		sp_Volume_bar=new MySeekBar(activity, volBar, volbtn, -300, 167);
 		sp_Volume_bar.setSeekBarFloat((int)(activity.io.sp_Voiume*100));
 
-		start = new Botton(activity, right_start, right_start, 1161, 655);
+		start = new Botton(activity, map_start_btn, map_start_btn, 1280/2, 635);
 
 		//目前使用的難度
 		//TODO (功能待補)
@@ -449,7 +449,7 @@ implements SurfaceHolder.Callback{
 		//選擇難度使用的選擇按鈕
 		easy  = new Botton(activity, map_easy_btn_t, map_easy_btn_f, 450, 50);
 		normal  = new Botton(activity, map_normal_btn_t, map_normal_btn_f, 770, 50);
-		hard  = new Botton(activity, map_hard_btn_t, map_hard_btn_t, 990, 50);
+		hard  = new Botton(activity, map_hard_btn_t, map_hard_btn_f, 1090, 50);
 
 
 		mp = MediaPlayer.create(this.getContext(), R.raw.map_bgm);
@@ -471,7 +471,7 @@ implements SurfaceHolder.Callback{
 		sp_id[9]=sp.load(activity, R.raw.stagebtn, 1);
 		sp_id[10]=sp.load(activity, R.raw.start, 1);
 
-		setting = new Setting(activity);
+		//setting = new Setting(activity);
 
 		num=new Number(getResources());
 		num.setSize(25, 35);
@@ -803,6 +803,8 @@ implements SurfaceHolder.Callback{
                 easy.drawBtm(canvas, paint);
                 normal.drawBtm(canvas, paint);
                 hard.drawBtm(canvas, paint);
+                start.drawBtm(canvas,paint);
+                Graphic.drawPic(canvas, map_startbar, 639, 670, 0, 255, paint);
 
 
                 if(activity.io.difficulty==0){
@@ -861,7 +863,7 @@ implements SurfaceHolder.Callback{
 
 			//canvas.drawText(String.valueOf(menuFlag), Coordinate.CoordinateX(360), Coordinate.CoordinateY(360), paint);
 
-			setting.Draw(canvas,paint);
+			//setting.Draw(canvas,paint);
 		}
 	}
 
@@ -874,13 +876,13 @@ implements SurfaceHolder.Callback{
 		case MotionEvent.ACTION_DOWN://按下
 			if(deJump == true)
 			{
-				setting.Action_Dowm(pointx,pointy);
-				if (setting.getMainFlag()){
+				//setting.Action_Dowm(pointx,pointy);
+				/*if (setting.getMainFlag()){
 					break;
-				}
+				}*/
 				if(setting_btn.isIn(pointx,pointy))
 				{
-					setting.start();
+					//setting.start();
 				}
 				//左半部選單按鈕事件====================================
 				/*if(menubtm.isIn(pointx, pointy)){
@@ -899,7 +901,7 @@ implements SurfaceHolder.Callback{
 					}
 				}*/
 				//------------------------------
-				if(menuFlag == 1)
+				/*if(menuFlag == 1)
 				{
 					if(left_btm1.isIn(pointx, pointy)){
 						if(!left_btm1.getBottom()){
@@ -1093,7 +1095,7 @@ implements SurfaceHolder.Callback{
 					}
 					//速度與判定按鈕事件-----------------------------------------------------
 
-				}
+				}*/
 				//左半部選單按鈕事件至此=====================================================
 
 				//右半部關卡按鈕事件開始====================================================
@@ -1159,13 +1161,11 @@ implements SurfaceHolder.Callback{
 
                     //新介面用關卡選擇========================
                     if(stageselect.isIn(pointx,pointy)){
-                        if(stageFlag > 3){
-                            stageFlag = 1;
-                        }
-                        else{
                             stageFlag++;
                             activity.io.level=stageFlag;
                             activity.io.difficulty=0;
+                            if(stageFlag >3 || stageFlag ==0){
+                                stageFlag = 1;
                         }
                     }
                     //新介面用關卡選擇----------------------------
