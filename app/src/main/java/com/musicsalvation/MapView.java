@@ -40,6 +40,7 @@ implements SurfaceHolder.Callback{
 
     Bitmap map_start_btn;
     Bitmap map_startbar;
+    Bitmap map_stageselect;
 
     Botton easy_btn;
     Botton normal_btn;
@@ -281,6 +282,8 @@ implements SurfaceHolder.Callback{
         map_hard_btn_f = Graphic.bitSize(LoadBitmap( R.drawable.mapview_hard_btn_f), 393, 104);
         map_hard_btn_t = Graphic.bitSize(LoadBitmap( R.drawable.mapview_hard_btn_t), 393, 104);
 
+        map_stageselect = Graphic.bitSize(LoadBitmap( R.drawable.mapview_hard_btn_t), 1020, 415);
+
         setting_btn = new Botton(activity, map_set_btn, map_set_btn, 47, 170);
         stageselect = new Botton(activity, map_back, map_back, 640, 360);
 
@@ -518,9 +521,7 @@ implements SurfaceHolder.Callback{
             Graphic.drawPic(canvas, map_back, 640, 360, 0, 255, paint);
             stageselect.drawBtm(canvas,paint);
 
-            Graphic.drawPic(canvas, map_frame, 640, 360, 0, 255, paint);
 
-            setting_btn.drawBtm(canvas,paint);
 
 
 
@@ -808,6 +809,10 @@ implements SurfaceHolder.Callback{
 
                     Graphic.drawPic(canvas, map_hard_btn_t, 1090, 50, 0, 255, paint);
                 }
+
+                Graphic.drawPic(canvas, map_frame, 640, 360, 0, 255, paint);
+
+                setting_btn.drawBtm(canvas,paint);
 
 
 
