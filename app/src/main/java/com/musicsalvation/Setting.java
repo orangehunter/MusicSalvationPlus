@@ -30,7 +30,7 @@ public class Setting {
     int sp_id[];
     int main_alpha=0;
 
-    int btn_alpha=0;
+ 
 
     public Setting(MainActivity activity){
         this.activity=activity;
