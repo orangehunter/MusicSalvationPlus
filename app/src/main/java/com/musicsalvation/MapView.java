@@ -261,7 +261,7 @@ implements SurfaceHolder.Callback{
 
         //===============新介面圖片載入=======================
 
-        map_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+        map_back = Graphic.bitSize(LoadBitmap(R.drawable.mapview_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         map_frame = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         map_stage01_back = Graphic.bitSize(LoadBitmap( R.drawable.mapviewe_stage01_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         map_stage02_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage02_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
