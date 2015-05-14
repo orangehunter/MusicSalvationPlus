@@ -445,11 +445,11 @@ implements SurfaceHolder.Callback{
 
 		//目前使用的難度
 		//TODO (功能待補)
-		model = new Botton(activity, model_ch, model_ch, 969, 655);
+		//model = new Botton(activity, model_ch, model_ch, 969, 655);
 		//選擇難度使用的選擇按鈕
-		easy  = new Botton(activity, right_easy_ch, right_easy, 741, 514);
-		normal  = new Botton(activity, right_normal_ch, right_normal, 741, 588);
-		hard  = new Botton(activity, right_hard_ch, right_hard, 741, 662);
+		easy  = new Botton(activity, map_easy_btn_t, map_easy_btn_f, 450, 50);
+		normal  = new Botton(activity, map_normal_btn_t, map_normal_btn_f, 770, 50);
+		hard  = new Botton(activity, map_hard_btn_t, map_hard_btn_t, 990, 50);
 
 
 		mp = MediaPlayer.create(this.getContext(), R.raw.map_bgm);
