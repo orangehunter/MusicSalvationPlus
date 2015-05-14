@@ -445,7 +445,7 @@ implements SurfaceHolder.Callback{
 
 		//目前使用的難度
 		//TODO (功能待補)
-		//model = new Botton(activity, model_ch, model_ch, 969, 655);
+		model = new Botton(activity, model_ch, model_ch, 969, 655);
 		//選擇難度使用的選擇按鈕
 		easy  = new Botton(activity, map_easy_btn_t, map_easy_btn_f, 450, 50);
 		normal  = new Botton(activity, map_normal_btn_t, map_normal_btn_f, 770, 50);
