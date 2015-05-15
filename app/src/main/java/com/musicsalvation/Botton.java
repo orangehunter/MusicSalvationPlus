@@ -30,7 +30,10 @@ public class Botton {
 	}
 	public void drawBtm(Canvas canvas,Paint paint,int alpha){//繪製按鈕
 		paint.setAlpha(alpha);
-		drawBtm(canvas,paint);
+        if(isOn)
+            Graphic.drawPic(canvas,onBitmap,center_x,center_y,0,alpha,paint);
+        else
+            Graphic.drawPic(canvas, offBitmap, center_x, center_y, 0, alpha, paint);
 		paint.reset();
 	} 
 	public void drawBtm(Canvas canvas,Paint paint,int x,int y){//繪製按鈕
