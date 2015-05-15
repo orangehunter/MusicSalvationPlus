@@ -451,7 +451,7 @@ implements SurfaceHolder.Callback{
 
 		//目前使用的難度
 		//TODO (功能待補)
-		model = new Botton(activity, model_ch, model_ch, 969, 655);
+		//model = new Botton(activity, model_ch, model_ch, 969, 655);
 		//選擇難度使用的選擇按鈕
 		easy  = new Botton(activity, map_easy_btn_t, map_easy_btn_f, 450, 50);
 		normal  = new Botton(activity, map_normal_btn_t, map_normal_btn_f, 770, 50);
@@ -1178,10 +1178,11 @@ implements SurfaceHolder.Callback{
                     //新介面用關卡選擇========================
                     if(stageselect.isIn(pointx,pointy)){
                             stageFlag++;
-                            activity.io.level=stageFlag-1;
                         if(stageFlag >3 || stageFlag ==0){
                             stageFlag = 1;
                         }
+                            activity.io.level=stageFlag-1;
+
                         if (mp!=null){
                             mp.stop();
                             mp.release();
@@ -1322,7 +1323,7 @@ implements SurfaceHolder.Callback{
 
 		activity.io.speed=set_speed-5;
 		activity.io.timing=set_timing-5;
-		wmap.recycle();
+/*		wmap.recycle();
 		left_back.recycle();
 		left_exit.recycle();    //<<箭頭-淺色  離開MENU用
 		left_exit2.recycle();   //<<箭頭-深色
@@ -1434,6 +1435,7 @@ implements SurfaceHolder.Callback{
 		normal.recycle();
 		hard.recycle();
 		model.recycle();
+		*/
 		start.recycle();
 
 		setting.recycle();
@@ -1449,6 +1451,7 @@ implements SurfaceHolder.Callback{
 		Constant.Flag=false;
 		sp.release();
 		mp.stop();
+        mp.release();
 
 	}
 

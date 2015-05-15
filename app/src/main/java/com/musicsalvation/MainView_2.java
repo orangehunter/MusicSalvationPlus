@@ -426,7 +426,8 @@ implements SurfaceHolder.Callback{
 			case MotionEvent.ACTION_DOWN://按下
 				if(deJump == true){
 					sp.play(btn_se[1], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-					mainFlag=1;
+                    mainFlag=1;
+
 				}
 				deJump = false;
 				break;
@@ -438,7 +439,7 @@ implements SurfaceHolder.Callback{
 				break;
 			}
 		}
-		if(mainFlag==1){
+		else if(mainFlag==1){
 			switch(event.getAction())
 			{
 			//......................................................................................
