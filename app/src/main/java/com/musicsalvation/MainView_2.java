@@ -420,26 +420,53 @@ implements SurfaceHolder.Callback{
 	public boolean onTouchEvent(MotionEvent event){
 		pointx=(int) event.getX();
 		pointy=(int) event.getY();
-		if(mainFlag==0){
-			switch(event.getAction())
-			{
-			case MotionEvent.ACTION_DOWN://按下
-				if(deJump == true){
-					sp.play(btn_se[1], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-                    mainFlag=1;
+        //if(mainFlag==0){
+            switch(event.getAction())
+            {
+                case MotionEvent.ACTION_DOWN://按下
+                    if(deJump == true){
+                        if(mainFlag==0) {
+                            sp.play(btn_se[1], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+                            mainFlag = 1;
+                            break;
+                        }else if(mainFlag==1){
+                            if(storybtm.isIn(pointx, pointy)){
+                                sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+                            }
+                            if(creatbtm.isIn(pointx, pointy)){
+                                sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+                                creatbtm.setBottomTo(true);
+                            }
+                            if(hidden_flag){
+                                if(staffList.isIn(pointx, pointy)){
+                                    activity.io.video_select=3;
+                                    activity.changeView(0);
+                                }
+                            }
+                        }
+                    }
+                    deJump = false;
+                    break;
+                case MotionEvent.ACTION_UP://抬起
+                    if(deJump==false){//防止彈跳part2
 
-				}
-				deJump = false;
-				break;
-			case MotionEvent.ACTION_UP://抬起
-				if(deJump==false){//防止彈跳part2
+                        if(mainFlag==1){
+                            if(storybtm.isIn(pointx, pointy)){//進入地圖畫面
+                                activity.io.video_select=1;
+                                activity.changeView(0);
+                            }
 
-				}
-				deJump = true;
-				break;
-			}
-		}
-		else if(mainFlag==1){
+                            if(creatbtm.isIn(pointx, pointy)){
+                                //TODO 還沒有改進創遊模式
+                                activity.changeView(8);
+                            }
+                        }
+                    }
+                    deJump = true;
+                    break;
+            }
+        //}
+		/*if(mainFlag==1){
 			switch(event.getAction())
 			{
 			//......................................................................................
@@ -477,7 +504,8 @@ implements SurfaceHolder.Callback{
 				deJump=true;
 				break;
 			}
-		}
+		}*/
+
 		return true;
 	}
 
