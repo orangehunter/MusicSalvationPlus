@@ -229,6 +229,8 @@ implements SurfaceHolder.Callback{
 	int set_speed = 6;
 	int set_timing = 5;
 
+    int song[] = new int[3];
+
 	int stagecount = 0;
 
 
@@ -292,7 +294,7 @@ implements SurfaceHolder.Callback{
 
         //---------------新介面圖片載入----------------------
 
-		wmap =Graphic.bitSize(LoadBitmap( R.drawable.wmap), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		/*wmap =Graphic.bitSize(LoadBitmap( R.drawable.wmap), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		left_back=Graphic.bitSize(LoadBitmap( R.drawable.menubackground), 846, 871);
 		left_exit = Graphic.bitSize(LoadBitmap( R.drawable.left_exit1), 134, 75);
 		left_exit2 = Graphic.bitSize(LoadBitmap( R.drawable.left_exit2), 134, 75);
@@ -408,7 +410,7 @@ implements SurfaceHolder.Callback{
 		stbtn01 = new Botton(activity, stage01btn , stage01btn0 , 644, 609);
 		stbtn02 = new Botton(activity, stage01btn , stage01btn0 , 815, 165);
 		stbtn03 = new Botton(activity, stage01btn , stage01btn0 , 430, 335);
-
+*/
 		st_02_flag=false;
 		st_03_flag=false;
 		for(int j=0;j<3;j++){
@@ -457,7 +459,11 @@ implements SurfaceHolder.Callback{
         activity.io.difficulty = 0;
 
 
-		mp = MediaPlayer.create(this.getContext(), R.raw.map_bgm);
+        song[0] = R.raw.celluloid_yuyao_cut;
+        song[1] = R.raw.tipsydessert_yuyao_cut;
+        song[2] = R.raw.kokoronashi_cut;
+		mp = MediaPlayer.create(this.getContext(),song[stageFlag-1]);
+
 		mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
 		mp.setLooping(true);
 		mp.start();
@@ -520,8 +526,8 @@ implements SurfaceHolder.Callback{
 
 
 			if(!mp.isPlaying()){
-				mp.prepareAsync();
-				mp.start();
+                mp.prepareAsync();
+                mp.start();
 			}
 
             //新介面==================================================
@@ -1170,7 +1176,16 @@ implements SurfaceHolder.Callback{
                     if(stageselect.isIn(pointx,pointy)){
                             stageFlag++;
                             activity.io.level=stageFlag-1;
+                        if (mp!=null){
+                            mp.stop();
+                            mp.release();
+                            mp=null;
+                            mp = MediaPlayer.create(this.getContext(),song[activity.io.level]);
+                            mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
+                            mp.setLooping(true);
+                            mp.start();
 
+                        }
                             if(stageFlag >3 || stageFlag ==0){
                                 stageFlag = 1;
                         }
@@ -1429,6 +1444,7 @@ implements SurfaceHolder.Callback{
 		Constant.Flag=false;
 		sp.release();
 		mp.stop();
+        mp.release();
 	}
 
 
