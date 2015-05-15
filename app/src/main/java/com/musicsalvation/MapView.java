@@ -423,7 +423,7 @@ implements SurfaceHolder.Callback{
 			}
 		}
 
-		switch (activity.io.sp_num) {
+	/*	switch (activity.io.sp_num) {
 		case 0:
 			sebtm1.setBottomTo(true);
 			break;
@@ -439,13 +439,13 @@ implements SurfaceHolder.Callback{
 		case 4:
 			sebtm5.setBottomTo(true);
 			break;
-		}
-
+		}*/
+/*
 		mp_Volume_bar=new MySeekBar(activity, volBar, volbtn, -300, 259);
 		mp_Volume_bar.setSeekBarFloat((int)(activity.io.mp_Voiume*100));
 		sp_Volume_bar=new MySeekBar(activity, volBar, volbtn, -300, 167);
 		sp_Volume_bar.setSeekBarFloat((int)(activity.io.sp_Voiume*100));
-
+*/
 
 		start = new Botton(activity, map_start_btn, map_start_btn, 1280/2, 635);
 
@@ -463,7 +463,8 @@ implements SurfaceHolder.Callback{
         song[0] = R.raw.celluloid_yuyao_cut;
         song[1] = R.raw.tipsydessert_yuyao_cut;
         song[2] = R.raw.kokoronashi_cut;
-		mp = MediaPlayer.create(this.getContext(),song[stageFlag-1]);
+
+		mp = MediaPlayer.create(this.getContext(),song[activity.io.level]);
 
 		mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
 		mp.setLooping(true);
@@ -1445,7 +1446,7 @@ implements SurfaceHolder.Callback{
 		Constant.Flag=false;
 		sp.release();
 		mp.stop();
-        mp.release();
+
 	}
 
 
