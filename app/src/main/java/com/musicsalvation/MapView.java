@@ -266,7 +266,7 @@ implements SurfaceHolder.Callback{
 
         map_back = Graphic.bitSize(LoadBitmap(R.drawable.mapview_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         map_frame = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-        map_stage01_back = Graphic.bitSize(LoadBitmap( R.drawable.mapviewe_stage01_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+        map_stage01_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage01_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         map_stage02_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage02_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         map_stage03_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage03_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 
@@ -294,7 +294,8 @@ implements SurfaceHolder.Callback{
 
         //---------------新介面圖片載入----------------------
 
-		/*wmap =Graphic.bitSize(LoadBitmap( R.drawable.wmap), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		/*
+		wmap =Graphic.bitSize(LoadBitmap( R.drawable.wmap), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		left_back=Graphic.bitSize(LoadBitmap( R.drawable.menubackground), 846, 871);
 		left_exit = Graphic.bitSize(LoadBitmap( R.drawable.left_exit1), 134, 75);
 		left_exit2 = Graphic.bitSize(LoadBitmap( R.drawable.left_exit2), 134, 75);
