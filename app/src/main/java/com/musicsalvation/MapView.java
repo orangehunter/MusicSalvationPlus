@@ -527,10 +527,11 @@ implements SurfaceHolder.Callback{
 
 
 
-			if(!mp.isPlaying()){
+
+			/*if(!mp.isPlaying() && !stageselect.getBottom()){
                 mp.prepareAsync();
                 mp.start();
-			}
+			}*/
 
             //新介面==================================================
             Graphic.drawPic(canvas, map_back, 640, 360, 0, 255, paint);
@@ -1178,6 +1179,9 @@ implements SurfaceHolder.Callback{
                     if(stageselect.isIn(pointx,pointy)){
                             stageFlag++;
                             activity.io.level=stageFlag-1;
+                        if(stageFlag >3 || stageFlag ==0){
+                            stageFlag = 1;
+                        }
                         if (mp!=null){
                             mp.stop();
                             mp.release();
@@ -1185,12 +1189,11 @@ implements SurfaceHolder.Callback{
                             mp = MediaPlayer.create(this.getContext(),song[activity.io.level]);
                             mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
                             mp.setLooping(true);
+
                             mp.start();
 
                         }
-                            if(stageFlag >3 || stageFlag ==0){
-                                stageFlag = 1;
-                        }
+
                     }
                     //新介面用關卡選擇----------------------------
 					if(start.isIn(pointx, pointy)){
@@ -1272,7 +1275,7 @@ implements SurfaceHolder.Callback{
 				else if(left_btm5.isIn(pointx, pointy)){
 
 				}*/
-				if(mp_Volume_bar.isOn_flag){
+				/*if(mp_Volume_bar.isOn_flag){
 					int temp=(int)mp_Volume_bar.getSeekBarValue();
 					mp_Volume_bar.setSeekBarFloat((temp-(temp%10)));
 					activity.io.mp_Voiume=(float) ((temp-(temp%10))/100.0);
@@ -1285,7 +1288,7 @@ implements SurfaceHolder.Callback{
 					activity.io.sp_Voiume=(float) ((temp-(temp%10))/100.0);
 					activity.io.writeData();
 					sp_Volume_bar.isOn_flag =false;
-				}
+				}*/
 			}
 			deJump  = true;
 			break;
