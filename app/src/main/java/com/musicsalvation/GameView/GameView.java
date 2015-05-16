@@ -576,6 +576,7 @@ public class GameView extends SurfaceView
                     mp=MediaPlayer.create(activity,Uri.parse(activity.io.uri_list.optString(activity.io.chosen_int)));
                 }else {
                     mp = MediaPlayer.create(this.getContext(), song[activity.io.level]);
+
                 }
                 mp.setOnCompletionListener(new OnCompletionListener() {
                     @Override
