@@ -983,9 +983,9 @@ implements SurfaceHolder.Callback{
                 Graphic.drawPic(canvas, map_set_btn2_back, set_btn2_mx, 121, rot, setalpha, paint);
                 Graphic.drawPic(canvas, map_set_btn2, set_btn2_mx, 121, rot, start_alpha, paint);
                 Graphic.drawPic(canvas, map_quest_back, set_btn_mx+1, 621, 0, start_alpha, paint);
-                easy.drawBtm(canvas, paint);
-                normal.drawBtm(canvas, paint);
-                hard.drawBtm(canvas, paint);
+                easy.drawBtm(canvas, paint,setalpha);
+                normal.drawBtm(canvas, paint,setalpha);
+                hard.drawBtm(canvas, paint,setalpha);
                 Graphic.drawPic(canvas, map_start_btn_back, 640, 635, 0, setalpha, paint);
                 start.drawBtm(canvas,paint,start_alpha);
                 Graphic.drawPic(canvas, map_startbar, 640, 669, rot, setalpha, paint);
@@ -1024,14 +1024,15 @@ implements SurfaceHolder.Callback{
 
 
                 if(activity.io.difficulty==0){
-                    Graphic.drawPic(canvas, map_easy_btn_t, 450, 50, 0, 255, paint);
+                    
+                    Graphic.drawPic(canvas, map_easy_btn_t, 450, 50, 0, start_alpha, paint);
                     //追加條件Flag = 0 會顯示easy-----------------------------------------------
                 }else if(activity.io.difficulty==1){
 
-                    Graphic.drawPic(canvas, map_normal_btn_t, 770, 50, 0, 255, paint);
+                    Graphic.drawPic(canvas, map_normal_btn_t, 770, 50, 0, start_alpha, paint);
                 }else if(activity.io.difficulty==2){
 
-                    Graphic.drawPic(canvas, map_hard_btn_t, 1090, 50, 0, 255, paint);
+                    Graphic.drawPic(canvas, map_hard_btn_t, 1090, 50, 0, start_alpha, paint);
                 }
 
 
