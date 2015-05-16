@@ -196,7 +196,7 @@ implements SurfaceHolder.Callback{
 	int ma=5;
 	int x = 0;
 	int alpha = 10;
-	int x2=0;
+	int x2=100;
 	int alpha2 = 10;
 
 	//FLAG宣告區域
@@ -249,6 +249,7 @@ implements SurfaceHolder.Callback{
     int set_btn_mx = -47;
     int set_btn_mx2 = 47;
     int set_btn2_mx = -55,set_btn2_mx2 = 39;
+    //int start_btn_my = 805 , getStart_btn_my2 = 635;
 
 
     int song[] = new int[3];
@@ -827,8 +828,14 @@ implements SurfaceHolder.Callback{
 				//追加條件:當Flag = 0 會顯示easy=================================================
 
             //新介面==================================================
+            x2+=alpha2;
+            if(x2 >= 250){
+                alpha2 = -10;
+            }
+            if(x2 < 140){
+                alpha2 = 10;
+            }
             Graphic.drawPic(canvas, map_back, 640, 360, 0, 255, paint);
-
 
             //切換關卡時的動作============================================
 
@@ -945,8 +952,9 @@ implements SurfaceHolder.Callback{
                 easy.drawBtm(canvas, paint);
                 normal.drawBtm(canvas, paint);
                 hard.drawBtm(canvas, paint);
-                start.drawBtm(canvas,paint);
-                Graphic.drawPic(canvas, map_startbar, 639, 670, 0, setalpha, paint);
+                Graphic.drawPic(canvas, map_start_btn_back, 640, 635, 0, setalpha, paint);
+                start.drawBtm(canvas,paint,setalpha);
+                Graphic.drawPic(canvas, map_startbar, 640, 669, 0, setalpha, paint);
 
 
 
