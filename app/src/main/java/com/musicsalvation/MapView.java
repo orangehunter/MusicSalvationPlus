@@ -334,7 +334,7 @@ implements SurfaceHolder.Callback{
 
 
         setting = new Setting(activity);
-        setting_btn = new Botton(activity, map_set_btn, map_set_btn, set_btn_mx, 173);
+        setting_btn = new Botton(activity, map_set_btn, map_set_btn, set_btn_mx, 155);
         //tageselect = new Botton(activity, map_stageselect, map_stageselect, 640, 360);
 
 
@@ -948,7 +948,7 @@ implements SurfaceHolder.Callback{
                     rot = 0;
                 }
 				setting_btn.drawBtm(canvas, paint,set_btn_mx,173);
-                Graphic.drawPic(canvas, map_set_btn2, set_btn2_mx, 138, rot, setalpha, paint);
+                Graphic.drawPic(canvas, map_set_btn2, set_btn2_mx, 121, rot, setalpha, paint);
                 easy.drawBtm(canvas, paint);
                 normal.drawBtm(canvas, paint);
                 hard.drawBtm(canvas, paint);
