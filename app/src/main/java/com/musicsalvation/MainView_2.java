@@ -37,7 +37,15 @@ implements SurfaceHolder.Callback{
 	int x =0;
 
 	int val_y=0;
+	int val_x=2000;
+
+	int hand_y=0;
+	int hand_x=-1000;
+	int hand_y_s=1;
 	int val_y_s=1;
+	int sonbar_sp=0;
+	int sonbar_x=-2000;
+	Bitmap sonbar[] = new Bitmap[11];
     Bitmap wrmax[] = new Bitmap[5];
 	Bitmap wrmaxg[] = new Bitmap[5];
     Bitmap main2_fs_sp[] =new Bitmap[10];
@@ -50,11 +58,16 @@ implements SurfaceHolder.Callback{
 	Bitmap ww_bar ;
 	Bitmap val ;
 
+	Bitmap hand;
+
+	Bitmap stor_s;
+	Bitmap tro_s;
 
     int wr_sp=0;
 
     //特效
     Bitmap mv_background;
+
     Bitmap mv_background_2;
 	Bitmap storymode;
 	Bitmap createmode;
@@ -131,8 +144,8 @@ implements SurfaceHolder.Callback{
 
 		left_xia =          Graphic.bitSize(LoadBitmap( R.drawable.xia), 385, 717);
 
-		storymode =  			Graphic.bitSize(LoadBitmap( R.drawable.gio), 314,85);
-		createmode  =  			Graphic.bitSize(LoadBitmap( R.drawable.tron), 314,85);
+		storymode =  			Graphic.bitSize(LoadBitmap( R.drawable.mv_storymode), 314,85);
+		createmode  =  			Graphic.bitSize(LoadBitmap( R.drawable.mv_createmode), 314,85);
 
         wrmax[0] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_0), 1280,720);
         wrmax[1] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_1), 1280,720);
@@ -158,13 +171,27 @@ implements SurfaceHolder.Callback{
 		main2_fs_sp[7]= Graphic.bitSize(LoadBitmap(R.drawable.touch_0), 50, 50);
 		main2_fs_sp[8]= Graphic.bitSize(LoadBitmap(R.drawable.touch_0), 50, 50);
 
+		sonbar[0]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_0), 396+36,165+15);
+		sonbar[1]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_1), 396+36,165+15);
+		sonbar[2]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_2), 396+36,165+15);
+		sonbar[3]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_3), 396+36,165+15);
+		sonbar[4]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_4), 396+36,165+15);
+		sonbar[5]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_5), 396+36,165+15);
 
+		sonbar[6]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_6), 396+36,165+15);
+		sonbar[7]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_7), 396+36,165+15);
+		sonbar[8]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_8), 396+36,165+15);
+		sonbar[9]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_9), 396+36,165+15);
+		sonbar[10]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_10), 396+36,165+15);
+
+		stor_s=Graphic.bitSize(LoadBitmap(R.drawable.gio_s), 314,85);
+		tro_s=Graphic.bitSize(LoadBitmap(R.drawable.tron_s), 314,85);
 
 		big_bg= Graphic.bitSize(LoadBitmap(R.drawable.black_bg), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 
 		ww_bar= Graphic.bitSize(LoadBitmap(R.drawable.tati_gg), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 
-
+		hand=Graphic.bitSize(LoadBitmap(R.drawable.hand), 450,333);
 
 		val= Graphic.bitSize(LoadBitmap(R.drawable.val), 400,288);
 
@@ -265,12 +292,8 @@ implements SurfaceHolder.Callback{
 				back_mp.start();
 			}
 			if(mbx<657) {
-				if (mainFlag == 0) {
-					Graphic.drawPic(canvas, mv_background, 1280 / 2, 720 / 2, 0, 200, paint);//背景
-				}
-				if (mainFlag == 1) {
-					Graphic.drawPic(canvas, mv_background, 1280 / 2, 720 / 2, 0, 215, paint);//背景
-				}
+
+					Graphic.drawPic(canvas, mv_background, 1280 / 2, 720 / 2, 0, 255, paint);//背景
 
 			}
 
@@ -362,24 +385,83 @@ implements SurfaceHolder.Callback{
 
 				paint.reset();
 			}
-			if (mainFlag == 1) {
+			if (mainFlag == 1) {  //TOUCH之後//TOUCH之後//TOUCH之後//TOUCH之後//TOUCH之後//TOUCH之後//TOUCH之後
+
+				sonbar_sp++;
+				if(sonbar_sp>10){
+					sonbar_sp=0;
+				}
+				sonbar_x=Coordinate.AnalogSpeedMove(sonbar_x, 245);
 
 
-				Graphic.drawPic(canvas, wrmaxg[4], mtx, mty, 0, i, paint);//Titlev
-				Graphic.drawPic(canvas, val, 1050, 580+val_y, 0, 255, paint);//620-580
+				if(sonbar_x == 245) {
+					Graphic.drawPic(canvas, BBB, 1280 / 2, 720 / 2, 0, BBB_S, paint);
+					if(BBB_S==0) {
+						BBB_S = Coordinate.AnalogSpeedMove(BBB_S, 255);
+					}else if(BBB_S==255){
+						BBB_S = Coordinate.AnalogSpeedMove(BBB_S, 1);
+					}
+
+					Graphic.drawPic(canvas, sonbar[sonbar_sp], 775+247, sonbar_x-25, 0, 200, paint);
+					Graphic.drawPic(canvas, sonbar[sonbar_sp], 775+247, sonbar_x-50, 0, 200, paint);
+					Graphic.drawPic(canvas, sonbar[sonbar_sp], 775, sonbar_x-50, 0, 200, paint);
+					Graphic.drawPic(canvas, sonbar[sonbar_sp], 775, sonbar_x-25, 0, 200, paint);
+					/*
+					Graphic.drawPic(canvas, sonbar[0], 775, sonbar_x+10, 0, 200, paint);
+					Graphic.drawPic(canvas, sonbar[0], 775+247, sonbar_x+10, 0, 200, paint);
+					*/
+					Graphic.drawPic(canvas, sonbar[0], 775, sonbar_x-10, 0, 200, paint);
+					Graphic.drawPic(canvas, sonbar[0], 775+247, sonbar_x-10, 0, 200, paint);
+
+					Graphic.drawPic(canvas, sonbar[0], 775, sonbar_x+25, 0, 200, paint);
+					Graphic.drawPic(canvas, sonbar[0], 775+247, sonbar_x+25, 0, 200, paint);
+
+
+				}else{
+
+					Graphic.drawPic(canvas, sonbar[0], 775, sonbar_x+25, 0, 200, paint);
+					Graphic.drawPic(canvas, sonbar[0], 775+247, sonbar_x+25, 0, 200, paint);
+
+
+				}
+
 				val_y+=val_y_s;
+				hand_y+=hand_y_s;
+
+				if(hand_y>30){
+					hand_y_s=-4;
+				}
+				if(hand_y<-3){
+					hand_y_s=12;
+				}
+
 				if(val_y>35){
 					val_y_s=-4;
 				}
-
-
 				if(val_y<2){
 					val_y_s=12;
 				}
+				val_x = Coordinate.AnalogSpeedMove(val_x, 1050);
+				hand_x = Coordinate.AnalogSpeedMove(hand_x, 250);
+
+				Graphic.drawPic(canvas, wrmaxg[4], mtx, mty, 0, i, paint);//Titlev
+				Graphic.drawPic(canvas, val, val_x, 580 + val_y, 0, 255, paint);//620-580
+				Graphic.drawPic(canvas, hand, hand_x, 135 + hand_y, 0, 255, paint);
+
+
+
 
 
 				storybtm.drawBtm(canvas, paint);
 				creatbtm.drawBtm(canvas, paint);
+				Graphic.drawPic(canvas, stor_s, 640, 518, 0, mtoa, paint);
+				Graphic.drawPic(canvas, tro_s, 640, 643, 0, mtoa+20, paint);
+
+				if (mtoa > 150)
+					mtoc = -15;
+				if (mtoa < 45)
+					mtoc = 15;
+
 				if (hidden_flag) {
 					staffList.drawBtm(canvas, paint);
 				}
@@ -417,7 +499,7 @@ implements SurfaceHolder.Callback{
 
 	}
 	@Override
-	public boolean onTouchEvent(MotionEvent event){
+	public boolean onTouchEvent(MotionEvent   event){
 		pointx=(int) event.getX();
 		pointy=(int) event.getY();
         //if(mainFlag==0){
@@ -516,8 +598,11 @@ implements SurfaceHolder.Callback{
 	}
 
 	public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
+		hand.recycle();
 
 
+		stor_s.recycle();
+		tro_s.recycle();
          mv_background.recycle();
        mv_background_2.recycle();
 
@@ -548,7 +633,9 @@ implements SurfaceHolder.Callback{
 		for(int i=0;i<4;i++){
 			ms_cl[i].recycle();
 		}
-
+		for(int i=0;i<11;i++) {
+			sonbar[i].recycle();
+		}
 		storybtm.recycle();
 		creatbtm.recycle();
 		if(hidden_flag){
