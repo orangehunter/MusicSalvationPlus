@@ -22,7 +22,7 @@ implements SurfaceHolder.Callback{
 
     //======新介面圖片宣告===============
     Bitmap map_back;
-    Bitmap map_frame;
+    //Bitmap map_frame;
 
     Bitmap map_frame_upbar;
     Bitmap map_frame_leftbar;
@@ -237,13 +237,14 @@ implements SurfaceHolder.Callback{
 	int set_speed = 6;
 	int set_timing = 5;
     int setalpha = 0;
+    int start_alpha;
 
     int upbar_my = -67;
     int upbar_my2 = 67;
     int rightbar_mx = 1325;
     int rightbar_mx2 = 1235;
-    int leftbar_mx = -51;
-    int leftbar_mx2 = 51;
+    int leftbar_mx = -50;
+    int leftbar_mx2 = 50;
     int underbar_my = 767;
     int underbar_my2 = 673;
     int set_btn_mx = -47;
@@ -262,6 +263,7 @@ implements SurfaceHolder.Callback{
     int upY = 0;
     int stageselect = 0;
     int stage_standby_Flag = 0;
+
 
 
 	//RANK===============================
@@ -301,10 +303,11 @@ implements SurfaceHolder.Callback{
         underbar_my = 767;
         set_btn_mx = -47;
         set_btn2_mx = -55;
+        start_alpha = setalpha;
 
 
         map_back = Graphic.bitSize(LoadBitmap(R.drawable.mapview_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-        map_frame = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+        //map_frame = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         map_stage01_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage01_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         map_stage02_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage02_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         map_stage03_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage03_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
@@ -334,7 +337,7 @@ implements SurfaceHolder.Callback{
 
 
         setting = new Setting(activity);
-        setting_btn = new Botton(activity, map_set_btn, map_set_btn, set_btn_mx, 155);
+        setting_btn = new Botton(activity, map_set_btn, map_set_btn, set_btn_mx, 160);
         //tageselect = new Botton(activity, map_stageselect, map_stageselect, 640, 360);
 
 
@@ -832,7 +835,7 @@ implements SurfaceHolder.Callback{
             if(x2 >= 250){
                 alpha2 = -10;
             }
-            if(x2 < 140){
+            if(x2 < 120){
                 alpha2 = 10;
             }
             Graphic.drawPic(canvas, map_back, 640, 360, 0, 255, paint);
@@ -841,7 +844,9 @@ implements SurfaceHolder.Callback{
 
             if(stage_standby_Flag !=0) {
                 if (set_baralpha) {
+
                     setalpha -= 40;
+                    start_alpha = setalpha;
                     if (setalpha < 0) {
 
                         setalpha = 0;
@@ -892,6 +897,7 @@ implements SurfaceHolder.Callback{
                     setalpha += 40;
                     if (setalpha >= 255) {
                         setalpha = 255;
+                        start_alpha = x2;
                     }
                 }
             }
@@ -917,6 +923,7 @@ implements SurfaceHolder.Callback{
 
             if(stage_standby_Flag == 0)
             {
+                start_alpha = setalpha;
                 underbar_my = Coordinate.AnalogSpeedMove(underbar_my,underbar_my2);
                 leftbar_mx = Coordinate.AnalogSpeedMove(leftbar_mx,leftbar_mx2);
                 rightbar_mx = Coordinate.AnalogSpeedMove(rightbar_mx,rightbar_mx2);
@@ -926,6 +933,7 @@ implements SurfaceHolder.Callback{
 
                 if(underbar_my == underbar_my2 && leftbar_mx == leftbar_mx2 && rightbar_mx == rightbar_mx2 && upbar_my == upbar_my2){
                     stage_standby_Flag = 1;
+
                 }
 
             }
@@ -947,13 +955,13 @@ implements SurfaceHolder.Callback{
                 if(rot == 360){
                     rot = 0;
                 }
-				setting_btn.drawBtm(canvas, paint,set_btn_mx,173);
+				setting_btn.drawBtm(canvas, paint,set_btn_mx,160);
                 Graphic.drawPic(canvas, map_set_btn2, set_btn2_mx, 121, rot, setalpha, paint);
                 easy.drawBtm(canvas, paint);
                 normal.drawBtm(canvas, paint);
                 hard.drawBtm(canvas, paint);
                 Graphic.drawPic(canvas, map_start_btn_back, 640, 635, 0, setalpha, paint);
-                start.drawBtm(canvas,paint,setalpha);
+                start.drawBtm(canvas,paint,start_alpha);
                 Graphic.drawPic(canvas, map_startbar, 640, 669, 0, setalpha, paint);
 
 
@@ -1540,7 +1548,7 @@ implements SurfaceHolder.Callback{
         map_stage01.recycle();
         map_back.recycle();
         map_set_btn.recycle();
-        map_frame.recycle();
+        //map_frame.recycle();
         map_easy_btn_t.recycle();
         map_hard_btn_f.recycle();
         map_hard_btn_t.recycle();
