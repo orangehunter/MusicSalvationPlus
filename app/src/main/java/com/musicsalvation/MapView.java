@@ -835,7 +835,7 @@ implements SurfaceHolder.Callback{
             if(x2 >= 250){
                 alpha2 = -10;
             }
-            if(x2 < 120){
+            if(x2 < 50){
                 alpha2 = 10;
             }
             Graphic.drawPic(canvas, map_back, 640, 360, 0, 255, paint);
@@ -844,7 +844,6 @@ implements SurfaceHolder.Callback{
 
             if(stage_standby_Flag !=0) {
                 if (set_baralpha) {
-
                     setalpha -= 40;
                     start_alpha = setalpha;
                     if (setalpha < 0) {
@@ -1033,12 +1032,6 @@ implements SurfaceHolder.Callback{
                 if(setting.main_flag) {
                     setting.Action_Dowm(pointx, pointy);
                 }
-
-
-
-
-
-
 
 				//左半部選單按鈕事件====================================
 				/*if(menubtm.isIn(pointx, pointy)){
