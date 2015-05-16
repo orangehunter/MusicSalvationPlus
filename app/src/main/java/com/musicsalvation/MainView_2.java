@@ -191,9 +191,9 @@ implements SurfaceHolder.Callback{
 
 		ww_bar= Graphic.bitSize(LoadBitmap(R.drawable.tati_gg), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 
-		hand=Graphic.bitSize(LoadBitmap(R.drawable.hand), 450,333);
+		hand=Graphic.bitSize(LoadBitmap(R.drawable.hand), 450-45,333-33);
 
-		val= Graphic.bitSize(LoadBitmap(R.drawable.val), 400,288);
+		val= Graphic.bitSize(LoadBitmap(R.drawable.val), 400-40,288-28);
 
 		w_bar= Graphic.bitSize(LoadBitmap( R.drawable.w_bar), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		BBB=Graphic.bitSize(LoadBitmap( R.drawable.fv_star_s), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
@@ -348,9 +348,11 @@ implements SurfaceHolder.Callback{
 					}
 				}
 			}
+			/*
 			Graphic.drawPic(canvas, B_bar, 1280 / 2, 720 / 2, 0, 255, paint);
 
 
+*/
 
 
 			if (mainFlag == 0) {
@@ -387,40 +389,54 @@ implements SurfaceHolder.Callback{
 			}
 			if (mainFlag == 1) {  //TOUCH之後//TOUCH之後//TOUCH之後//TOUCH之後//TOUCH之後//TOUCH之後//TOUCH之後
 
+				bar_m = Coordinate.AnalogSpeedMove(bar_m, -2400);
+
 				sonbar_sp++;
 				if(sonbar_sp>10){
 					sonbar_sp=0;
 				}
-				sonbar_x=Coordinate.AnalogSpeedMove(sonbar_x, 245);
+				sonbar_x=Coordinate.AnalogSpeedMove(sonbar_x, 395);
 
 
-				if(sonbar_x == 245) {
-					Graphic.drawPic(canvas, BBB, 1280 / 2, 720 / 2, 0, BBB_S, paint);
+				if(sonbar_x == 395) {
+
 					if(BBB_S==0) {
 						BBB_S = Coordinate.AnalogSpeedMove(BBB_S, 255);
 					}else if(BBB_S==255){
 						BBB_S = Coordinate.AnalogSpeedMove(BBB_S, 1);
 					}
 
-					Graphic.drawPic(canvas, sonbar[sonbar_sp], 775+247, sonbar_x-25, 0, 200, paint);
-					Graphic.drawPic(canvas, sonbar[sonbar_sp], 775+247, sonbar_x-50, 0, 200, paint);
-					Graphic.drawPic(canvas, sonbar[sonbar_sp], 775, sonbar_x-50, 0, 200, paint);
-					Graphic.drawPic(canvas, sonbar[sonbar_sp], 775, sonbar_x-25, 0, 200, paint);
+					Graphic.drawPic(canvas, sonbar[sonbar_sp], 775+247+27, sonbar_x-25, 0, 100, paint);
+					Graphic.drawPic(canvas, sonbar[sonbar_sp], 775+247+27, sonbar_x-50, 0, 100, paint);
+
+					Graphic.drawPic(canvas, sonbar[sonbar_sp], 775-247+27, sonbar_x-25, 0, 100, paint);
+					Graphic.drawPic(canvas, sonbar[sonbar_sp], 775-247+25, sonbar_x-50, 0, 100, paint);
+
+					Graphic.drawPic(canvas, sonbar[sonbar_sp], 775-247-247+27, sonbar_x-25, 0, 100, paint);
+					Graphic.drawPic(canvas, sonbar[sonbar_sp], 775-247-247+27, sonbar_x-50, 0, 100, paint);
+
+					Graphic.drawPic(canvas, sonbar[sonbar_sp], 775+27, sonbar_x-50, 0, 100, paint);
+					Graphic.drawPic(canvas, sonbar[sonbar_sp], 775+27, sonbar_x-25, 0, 100, paint);
+
 					/*
 					Graphic.drawPic(canvas, sonbar[0], 775, sonbar_x+10, 0, 200, paint);
 					Graphic.drawPic(canvas, sonbar[0], 775+247, sonbar_x+10, 0, 200, paint);
 					*/
-					Graphic.drawPic(canvas, sonbar[0], 775, sonbar_x-10, 0, 200, paint);
+					/*
+					Graphic.drawPic(c
+					anvas, sonbar[0], 775, sonbar_x-10, 0, 200, paint);
 					Graphic.drawPic(canvas, sonbar[0], 775+247, sonbar_x-10, 0, 200, paint);
 
 					Graphic.drawPic(canvas, sonbar[0], 775, sonbar_x+25, 0, 200, paint);
 					Graphic.drawPic(canvas, sonbar[0], 775+247, sonbar_x+25, 0, 200, paint);
-
+*/
 
 				}else{
 
-					Graphic.drawPic(canvas, sonbar[0], 775, sonbar_x+25, 0, 200, paint);
-					Graphic.drawPic(canvas, sonbar[0], 775+247, sonbar_x+25, 0, 200, paint);
+					Graphic.drawPic(canvas, sonbar[0], 775+247+27, sonbar_x, 0, 100, paint);
+					Graphic.drawPic(canvas, sonbar[0], 775-247+27, sonbar_x, 0, 100, paint);
+					Graphic.drawPic(canvas, sonbar[0], 775-247-247+27, sonbar_x, 0, 200, paint);
+					Graphic.drawPic(canvas, sonbar[0], 775+27, sonbar_x, 0, 100, paint);
 
 
 				}
@@ -444,9 +460,9 @@ implements SurfaceHolder.Callback{
 				val_x = Coordinate.AnalogSpeedMove(val_x, 1050);
 				hand_x = Coordinate.AnalogSpeedMove(hand_x, 250);
 
-				Graphic.drawPic(canvas, wrmaxg[4], mtx, mty, 0, i, paint);//Titlev
-				Graphic.drawPic(canvas, val, val_x, 580 + val_y, 0, 255, paint);//620-580
-				Graphic.drawPic(canvas, hand, hand_x, 135 + hand_y, 0, 255, paint);
+				Graphic.drawPic(canvas, wrmaxg[4], 660,  sonbar_x-25, 0, i, paint);//Titlev
+				Graphic.drawPic(canvas, val, val_x, 600 + val_y, 0, 255, paint);//620-580
+				Graphic.drawPic(canvas, hand, hand_x, 120 + hand_y, 0, 255, paint);
 
 
 
@@ -454,8 +470,10 @@ implements SurfaceHolder.Callback{
 
 				storybtm.drawBtm(canvas, paint);
 				creatbtm.drawBtm(canvas, paint);
+				/*
 				Graphic.drawPic(canvas, stor_s, 640, 518, 0, mtoa, paint);
 				Graphic.drawPic(canvas, tro_s, 640, 643, 0, mtoa+20, paint);
+				*/
 
 				if (mtoa > 150)
 					mtoc = -15;
@@ -489,7 +507,8 @@ implements SurfaceHolder.Callback{
 				Graphic.drawPic(canvas, BBB, 1280 / 2, 720 / 2, 0, BBB_S, paint);
 				BBB_S = Coordinate.AnalogSpeedMove(BBB_S, 0);
 			}
-			if (mbx <= 640) {
+			if (mbx <= 640  ) {
+
 				bar_m = Coordinate.AnalogSpeedMove(bar_m, 640);
 				Graphic.drawPic(canvas, ww_bar, bar_m, 720 / 2, 0, 255, paint);
 
