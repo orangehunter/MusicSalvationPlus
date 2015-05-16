@@ -287,6 +287,7 @@ implements SurfaceHolder.Callback{
 
         //===============新介面圖片載入=======================
 
+        stage_standby_Flag=0;
         map_back = Graphic.bitSize(LoadBitmap(R.drawable.mapview_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         map_frame = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         map_stage01_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage01_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
@@ -906,8 +907,6 @@ implements SurfaceHolder.Callback{
              {
                  stage_standby_Flag = 1;
              }
-
-
             }
             Graphic.drawPic(canvas, map_frame_underbar, 640, underbar_my, 0, 255, paint);
             Graphic.drawPic(canvas, map_frame_leftbar, leftbar_mx, 510, 0, 255, paint);
