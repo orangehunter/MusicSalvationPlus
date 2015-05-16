@@ -258,7 +258,7 @@ implements SurfaceHolder.Callback{
     int set_btn_mx2 = 47;
     int set_btn2_mx = -55,set_btn2_mx2 = 39;
     int sc_rank_bar_my = 790 , sc_rank_bar_my2 = 648;
-    int hand_mx = 915,hand_mx2 = 1155,hand_count=3,hand_alpha = 0;
+    int hand_mx = 915,hand_mx2 = 1155,hand_count=3,hand_alpha = 0,hand_recount = 0;
     //int start_btn_my = 805 , getStart_btn_my2 = 635;
 
 
@@ -318,6 +318,7 @@ implements SurfaceHolder.Callback{
         hand_mx = 915;
         hand_alpha = 0;
         start_alpha = setalpha;
+        hand_recount = 0;
 
 
 
@@ -1006,10 +1007,10 @@ implements SurfaceHolder.Callback{
                     }
                 }
             if(hand_count <= 0){
-                int count=0;
-                count++;
-                if(count >=1800){
-                    count = 0;
+
+                hand_recount++;
+                if(hand_recount >=1800){
+                    hand_recount = 0;
                     hand_count = 3;
                 }
             }
