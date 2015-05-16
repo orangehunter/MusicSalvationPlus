@@ -163,8 +163,8 @@ implements SurfaceHolder.Callback{
 		normal = Graphic.bitSize(LoadBitmap(R.drawable.normalv2psd), 205, 80);
 		hard = Graphic.bitSize(LoadBitmap(R.drawable.hardv2), 205, 80);
 
-		y = Graphic.bitSize(LoadBitmap(R.drawable.y), 30, 50);
-		n = Graphic.bitSize(LoadBitmap(R.drawable.n), 30, 50);
+		//y = Graphic.bitSize(LoadBitmap(R.drawable.y), 30, 50);
+		//n = Graphic.bitSize(LoadBitmap(R.drawable.n), 30, 50);
 
 		/*num_grey = Graphic.bitSize(LoadBitmap(R.drawable.num_gray), 350, 50);
 		num_red = Graphic.bitSize(LoadBitmap(R.drawable.num_red), 350, 50);

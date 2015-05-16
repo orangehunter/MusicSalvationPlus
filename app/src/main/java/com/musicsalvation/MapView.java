@@ -23,7 +23,16 @@ implements SurfaceHolder.Callback{
     //======新介面圖片宣告===============
     Bitmap map_back;
     Bitmap map_frame;
+
+    Bitmap map_frame_upbar;
+    Bitmap map_frame_leftbar;
+    Bitmap map_frame_rightbar;
+    Bitmap map_frame_underbar;
+
+
     Bitmap map_set_btn;
+    Bitmap map_set_btn2; //會轉的小齒輪
+
     Bitmap map_stage01;
     Bitmap map_stage02;
     Bitmap map_stage03;
@@ -40,19 +49,18 @@ implements SurfaceHolder.Callback{
 
     Bitmap map_start_btn;
     Bitmap map_startbar;
-    Bitmap map_stageselect;
+    Bitmap map_start_btn_back;
 
-    Botton easy_btn;
-    Botton normal_btn;
-    Botton hard_btn;
+
     Botton setting_btn;
-    Botton start_btn;
+
+    //Botton stageselect;
 
     Setting setting;
 
-    int now_stageflag = 1;
+    Boolean set_baralpha = false;
 
-    Botton stageselect;
+
 
     //--------------------新介面圖片宣告-----------------------
 	Bitmap wmap;
@@ -167,7 +175,7 @@ implements SurfaceHolder.Callback{
 	Botton easy;
 	Botton normal;
 	Botton hard;
-	Botton model;
+
 	Botton start;
 
 	//箭頭按鈕宣告================================================
@@ -188,7 +196,7 @@ implements SurfaceHolder.Callback{
 	int ma=5;
 	int x = 0;
 	int alpha = 10;
-	int x2=0;
+	int x2=100;
 	int alpha2 = 10;
 
 	//FLAG宣告區域
@@ -228,10 +236,32 @@ implements SurfaceHolder.Callback{
 
 	int set_speed = 6;
 	int set_timing = 5;
+    int setalpha = 0;
+
+    int upbar_my = -67;
+    int upbar_my2 = 67;
+    int rightbar_mx = 1325;
+    int rightbar_mx2 = 1235;
+    int leftbar_mx = -51;
+    int leftbar_mx2 = 51;
+    int underbar_my = 767;
+    int underbar_my2 = 673;
+    int set_btn_mx = -47;
+    int set_btn_mx2 = 47;
+    int set_btn2_mx = -55,set_btn2_mx2 = 39;
+    //int start_btn_my = 805 , getStart_btn_my2 = 635;
+
 
     int song[] = new int[3];
 
 	int stagecount = 0;
+
+    int downX = 0;
+    int downY = 0;
+    int upX = 0;
+    int upY = 0;
+    int stageselect = 0;
+    int stage_standby_Flag = 0;
 
 
 	//RANK===============================
@@ -264,6 +294,15 @@ implements SurfaceHolder.Callback{
 
         //===============新介面圖片載入=======================
 
+        stage_standby_Flag=0;
+        upbar_my = -67;
+        rightbar_mx = 1325;
+        leftbar_mx = -53;
+        underbar_my = 767;
+        set_btn_mx = -47;
+        set_btn2_mx = -55;
+
+
         map_back = Graphic.bitSize(LoadBitmap(R.drawable.mapview_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         map_frame = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         map_stage01_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage01_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
@@ -274,10 +313,12 @@ implements SurfaceHolder.Callback{
         map_stage02 = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage2_font), 234, 63);
         map_stage03 = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage3_font), 234, 63);
 
-        map_start_btn = Graphic.bitSize(LoadBitmap( R.drawable.mapview_start_btn), 240, 170);
+        map_start_btn = Graphic.bitSize(LoadBitmap( R.drawable.mapview_start_btn), 241, 171);
         map_startbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_startbar), 342, 342);
+        map_start_btn_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_start2_btn), 241, 171);
 
         map_set_btn = Graphic.bitSize(LoadBitmap( R.drawable.mapview_set_btn), 95, 146);
+        map_set_btn2 = Graphic.bitSize(LoadBitmap( R.drawable.map_set_btn2), 59, 59);
         map_easy_btn_f = Graphic.bitSize(LoadBitmap( R.drawable.mapview_easy_btn_f), 393, 104);
         map_easy_btn_t = Graphic.bitSize(LoadBitmap( R.drawable.mapview_easy_btn_t), 393, 104);
         map_normal_btn_f = Graphic.bitSize(LoadBitmap( R.drawable.mapview_normal_btn_f), 393, 104);
@@ -285,11 +326,16 @@ implements SurfaceHolder.Callback{
         map_hard_btn_f = Graphic.bitSize(LoadBitmap( R.drawable.mapview_hard_btn_f), 393, 104);
         map_hard_btn_t = Graphic.bitSize(LoadBitmap( R.drawable.mapview_hard_btn_t), 393, 104);
 
-        map_stageselect = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stageselect), 1020, 415);
+        map_frame_leftbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_leftbar), 102, 605);
+        map_frame_rightbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_rightbar), 90, 720);
+        map_frame_underbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_underbar), 1280, 94);
+        map_frame_upbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_upbar), 1280, 134);
+
+
 
         setting = new Setting(activity);
-        setting_btn = new Botton(activity, map_set_btn, map_set_btn, 47, 170);
-        stageselect = new Botton(activity, map_stageselect, map_stageselect, 640, 360);
+        setting_btn = new Botton(activity, map_set_btn, map_set_btn, set_btn_mx, 173);
+        //tageselect = new Botton(activity, map_stageselect, map_stageselect, 640, 360);
 
 
         //---------------新介面圖片載入----------------------
@@ -457,8 +503,8 @@ implements SurfaceHolder.Callback{
 		normal  = new Botton(activity, map_normal_btn_t, map_normal_btn_f, 770, 50);
 		hard  = new Botton(activity, map_hard_btn_t, map_hard_btn_f, 1090, 50);
 
-        activity.io.difficulty = 0;
-
+        set_baralpha = false;
+        setalpha = 0;
 
         song[0] = R.raw.celluloid_yuyao_cut;
         song[1] = R.raw.tipsydessert_yuyao_cut;
@@ -533,9 +579,11 @@ implements SurfaceHolder.Callback{
                 mp.start();
 			}*/
 
-            //新介面==================================================
-            Graphic.drawPic(canvas, map_back, 640, 360, 0, 255, paint);
-            stageselect.drawBtm(canvas,paint);
+
+            //切換關卡時的動作--------------------------------------------------
+
+
+            //stageselect.drawBtm(canvas,paint);
 
 
             //新介面------------------------------------------------
@@ -709,38 +757,9 @@ implements SurfaceHolder.Callback{
 
 
 			//右半部關卡選單控制==========================================
-			switch(stageFlag){
+			/*switch(stageFlag){
 			case 0:
-                /*
-				if(right_board_x!=1680){
-					right_board_x=Coordinate.AnalogSpeedMove(right_board_x, 1680);
-					Graphic.drawPic(canvas, right_board, right_board_x, 355, 0, 255, paint);
-					//箭頭顯示==================================================
-					if(!model.getBottom()){
 
-						Graphic.drawPic(canvas, right_arrow_left, right_board_x-86, 665, 0, 255,  paint);
-						Graphic.drawPic(canvas, right_arrow_left2, right_board_x-86, 665, 0, x2,  paint);
-					}else if(model.getBottom()){
-						Graphic.drawPic(canvas, right_arrow_right, right_board_x-86, 665, 0, 255,  paint);
-						Graphic.drawPic(canvas, right_arrow_right2, right_board_x-86, 665, 0, x2,  paint);
-					}
-					//箭頭顯示----------------------------------------------------
-					start.drawBtm(canvas, paint,right_board_x+101, 645);
-					//model.drawBtm(canvas, paint,right_board_x-86, 667);
-
-					//追加條件:當Flag = 0 會顯示easy=================================================
-					if(activity.io.difficulty==0){
-
-						Graphic.drawPic(canvas, right_easy_ch, right_board_x-86, 655, 0, 255, paint);
-						//追加條件Flag = 0 會顯示easy-----------------------------------------------
-					}else if(activity.io.difficulty==1){
-
-						Graphic.drawPic(canvas, right_normal_ch, right_board_x-86, 667, 0, 255, paint);	
-					}else if(activity.io.difficulty==2){
-
-						Graphic.drawPic(canvas, right_hard_ch, right_board_x-86, 667, 0, 255, paint);	
-					}
-				}*/
 
 				break;
 			case 1:
@@ -759,12 +778,12 @@ implements SurfaceHolder.Callback{
 				model.drawBtm(canvas, paint,right_board_x-86, 667);
 				*/
 
-                Graphic.drawPic(canvas,map_stage01 , 120, 58, 0, 255, paint);
-                Graphic.drawPic(canvas,map_stage01_back , 1280/2, 720/2, 0, 255, paint);
+               // Graphic.drawPic(canvas,map_stage01 , 120, 58, 0, setalpha, paint);
+               // Graphic.drawPic(canvas,map_stage01_back , 1280/2, 720/2, 0, setalpha, paint);
 
 
-				break;
-			case 2:
+				//break;
+			//case 2:
                 /*
 				right_board_x=Coordinate.AnalogSpeedMove(right_board_x, 1062);
 				Graphic.drawPic(canvas, right_board, right_board_x, 355, 0, 255, paint);
@@ -778,10 +797,10 @@ implements SurfaceHolder.Callback{
 				start.drawBtm(canvas, paint,right_board_x+101, 655,x2);
 				model.drawBtm(canvas, paint,right_board_x-86, 667);
 				*/
-                Graphic.drawPic(canvas,map_stage02 , 120, 58, 0, 255, paint);
-                Graphic.drawPic(canvas,map_stage02_back , 1280/2, 720/2, 0, 255, paint);
-				break;
-			case 3:
+                //Graphic.drawPic(canvas,map_stage02 , 120, 58, 0, setalpha, paint);
+               // Graphic.drawPic(canvas,map_stage02_back , 1280/2, 720/2, 0, setalpha, paint);
+				//break;
+			//case 3:
                 /*
 				right_board_x=Coordinate.AnalogSpeedMove(right_board_x, 1062);
 				Graphic.drawPic(canvas, right_board, right_board_x, 355, 0, 255, paint);
@@ -795,36 +814,147 @@ implements SurfaceHolder.Callback{
 				start.drawBtm(canvas, paint,right_board_x+101, 655,x2);
 				model.drawBtm(canvas, paint,right_board_x-86, 667);
 				*/
-                Graphic.drawPic(canvas,map_stage03 , 120, 58, 0, 255, paint);
-                Graphic.drawPic(canvas,map_stage03_back , 1280/2, 720/2, 0, 255, paint);
-				break;
-			}
+                //Graphic.drawPic(canvas,map_stage03 , 120, 58, 0, setalpha, paint);
+                //Graphic.drawPic(canvas,map_stage03_back , 1280/2, 720/2, 0, setalpha, paint);
+				//break;
+			//}
 
 			//當stageFlag不等於0，就會顯示難易度與選擇難易度
-			if(stageFlag !=0){
+
 				/*if(activity.io.hight_rank[activity.io.level][activity.io.difficulty]!=0){
 					Graphic.drawPic(canvas, rank[activity.io.hight_rank[activity.io.level][activity.io.difficulty]-1], right_board_x+68, 585, 0, 255, paint);
 				}*/
 				//num.drawNumberLeftStart(right_board_x-10, 535, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Wite, canvas, paint);
 				//追加條件:當Flag = 0 會顯示easy=================================================
-				Graphic.drawPic(canvas, map_frame, 640, 360, 0, 255, paint);
-                if(stageFlag == 1) {
-                    Graphic.drawPic(canvas, map_stage01, 127, 53, 0, 255, paint);
-                }else if(stageFlag == 2){
-                    Graphic.drawPic(canvas, map_stage02, 127, 53, 0, 255, paint);
-                }else if(stageFlag == 3){
-                    Graphic.drawPic(canvas, map_stage03, 127, 53, 0, 255, paint);
+
+            //新介面==================================================
+            x2+=alpha2;
+            if(x2 >= 250){
+                alpha2 = -10;
+            }
+            if(x2 < 140){
+                alpha2 = 10;
+            }
+            Graphic.drawPic(canvas, map_back, 640, 360, 0, 255, paint);
+
+            //切換關卡時的動作============================================
+
+            if(stage_standby_Flag !=0) {
+                if (set_baralpha) {
+                    setalpha -= 40;
+                    if (setalpha < 0) {
+
+                        setalpha = 0;
+                        set_baralpha = false;
+
+                        if (stageselect == 1) {
+                            stageselect = 0;
+                            stageFlag++;
+                            if (stageFlag > 3 || stageFlag == 0) {
+                                stageFlag = 1;
+                            }
+                            activity.io.level = stageFlag - 1;
+
+                            if (mp != null) {
+
+                                mp.stop();
+                                mp.release();
+                                mp = null;
+                                mp = MediaPlayer.create(this.getContext(), song[activity.io.level]);
+                                mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
+                                mp.setLooping(true);
+                                mp.start();
+
+                            }
+
+                        } else if (stageselect == -1) {
+                            stageselect = 0;
+                            stageFlag--;
+                            if (stageFlag == 0) {
+                                stageFlag = 3;
+                            }
+                            activity.io.level = stageFlag - 1;
+
+                            if (mp != null) {
+
+                                mp.stop();
+                                mp.release();
+                                mp = null;
+                                mp = MediaPlayer.create(this.getContext(), song[activity.io.level]);
+                                mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
+                                mp.setLooping(true);
+                                mp.start();
+
+                            }
+                        }
+                    }
+                } else if (!set_baralpha) {
+                    setalpha += 40;
+                    if (setalpha >= 255) {
+                        setalpha = 255;
+                    }
                 }
-                rot-= 0.5;
-                if(rot == -360){
+            }
+            //切換關卡時的動作-------------------------------------
+            switch(stageFlag){
+                case 0:
+                    break;
+                case 1:
+
+                    Graphic.drawPic(canvas,map_stage01_back , 1280/2, 720/2, 0, setalpha, paint);
+                    break;
+                case 2:
+
+                    Graphic.drawPic(canvas,map_stage02_back , 1280/2, 720/2, 0, setalpha, paint);
+                    break;
+                case 3:
+
+                    Graphic.drawPic(canvas,map_stage03_back , 1280/2, 720/2, 0, setalpha, paint);
+                    break;
+            }
+
+
+
+            if(stage_standby_Flag == 0)
+            {
+                underbar_my = Coordinate.AnalogSpeedMove(underbar_my,underbar_my2);
+                leftbar_mx = Coordinate.AnalogSpeedMove(leftbar_mx,leftbar_mx2);
+                rightbar_mx = Coordinate.AnalogSpeedMove(rightbar_mx,rightbar_mx2);
+                upbar_my = Coordinate.AnalogSpeedMove(upbar_my,upbar_my2);
+                set_btn2_mx = Coordinate.AnalogSpeedMove(set_btn2_mx,set_btn2_mx2);
+                set_btn_mx = Coordinate.AnalogSpeedMove(set_btn_mx,set_btn_mx2);
+
+                if(underbar_my == underbar_my2 && leftbar_mx == leftbar_mx2 && rightbar_mx == rightbar_mx2 && upbar_my == upbar_my2){
+                    stage_standby_Flag = 1;
+                }
+
+            }
+
+            Graphic.drawPic(canvas, map_frame_underbar, 640, underbar_my, 0, 255, paint);
+            Graphic.drawPic(canvas, map_frame_leftbar, leftbar_mx, 340, 0, 255, paint);
+            Graphic.drawPic(canvas, map_frame_rightbar, rightbar_mx, 360, 0, 255, paint);
+            Graphic.drawPic(canvas, map_frame_upbar, 640, upbar_my, 0, 255, paint);
+
+
+                if(stageFlag == 1) {
+                    Graphic.drawPic(canvas, map_stage01, 120, 43, 0, setalpha, paint);
+                }else if(stageFlag == 2){
+                    Graphic.drawPic(canvas, map_stage02, 120, 43, 0, setalpha, paint);
+                }else if(stageFlag == 3){
+                    Graphic.drawPic(canvas, map_stage03, 120, 43, 0, setalpha, paint);
+                }
+                rot+= 3;
+                if(rot == 360){
                     rot = 0;
                 }
-				setting_btn.drawBtm(canvas, paint);
+				setting_btn.drawBtm(canvas, paint,set_btn_mx,173);
+                Graphic.drawPic(canvas, map_set_btn2, set_btn2_mx, 138, rot, setalpha, paint);
                 easy.drawBtm(canvas, paint);
                 normal.drawBtm(canvas, paint);
                 hard.drawBtm(canvas, paint);
-                start.drawBtm(canvas,paint);
-                Graphic.drawPic(canvas, map_startbar, 639, 670, rot, 255, paint);
+                Graphic.drawPic(canvas, map_start_btn_back, 640, 635, 0, setalpha, paint);
+                start.drawBtm(canvas,paint,setalpha);
+                Graphic.drawPic(canvas, map_startbar, 640, 669, 0, setalpha, paint);
 
 
 
@@ -872,7 +1002,7 @@ implements SurfaceHolder.Callback{
 
 					//追加透明度變化，目前選擇的難度為亮，其餘難度為暗----------------------------------------
 				}*/
-			}
+
             setting.Draw(canvas, paint);
 			//canvas.drawText(String.valueOf(menuFlag), Coordinate.CoordinateX(360), Coordinate.CoordinateY(360), paint);
 
@@ -892,10 +1022,12 @@ implements SurfaceHolder.Callback{
 		case MotionEvent.ACTION_DOWN://按下
 			if(deJump == true)
 			{
-                setting.Action_Dowm(pointx,pointy);
-                /*if (setting.getMainFlag()) {
-                    break;
-                }*/
+                if(setting.main_flag) {
+                    setting.Action_Dowm(pointx, pointy);
+                }
+
+
+
 
 
 
@@ -1173,10 +1305,14 @@ implements SurfaceHolder.Callback{
 				}*/
 				//第三關--------------------------------------------------------
 
-				if(!setting.main_flag){
+				if(!setting.main_flag) {
+
+                    downX = pointx;
+                    downY = pointy;
 
                     //新介面用關卡選擇========================
-                    if(stageselect.isIn(pointx,pointy)){
+
+                        /*
                             stageFlag++;
                         if(stageFlag >3 || stageFlag ==0){
                             stageFlag = 1;
@@ -1184,18 +1320,19 @@ implements SurfaceHolder.Callback{
                             activity.io.level=stageFlag-1;
 
                         if (mp!=null){
+
                             mp.stop();
                             mp.release();
                             mp=null;
                             mp = MediaPlayer.create(this.getContext(),song[activity.io.level]);
                             mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
                             mp.setLooping(true);
-
                             mp.start();
 
-                        }
+                        }*/
 
-                    }
+
+
                     //新介面用關卡選擇----------------------------
 					if(start.isIn(pointx, pointy)){
 						sp.play(sp_id_s[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
@@ -1239,10 +1376,55 @@ implements SurfaceHolder.Callback{
 			deJump = false;
 			break;
 		case MotionEvent.ACTION_MOVE:
-            setting.Action_Move(pointx,pointy);
-            if (setting.getMainFlag()){
-                break;
+            if(setting.main_flag) {
+                setting.Action_Move(pointx, pointy);
+                if (setting.getMainFlag()) {
+                    break;
+                }
             }
+            /*if(!setting.main_flag){
+                upX = pointx;
+                upY = pointy;
+                float move_x = upX - downX;
+                if(move_x > 100){
+                    stageFlag++;
+                    if(stageFlag >3 || stageFlag ==0){
+                        stageFlag = 1;
+                    }
+                    activity.io.level=stageFlag-1;
+
+                    if (mp!=null){
+
+                        mp.stop();
+                        mp.release();
+                        mp=null;
+                        mp = MediaPlayer.create(this.getContext(),song[activity.io.level]);
+                        mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
+                        mp.setLooping(true);
+                        mp.start();
+
+                    }
+                }else if(move_x < -100){
+                    stageFlag-- ;
+                    if(stageFlag ==0){
+                        stageFlag = 3;
+                    }
+                    activity.io.level=stageFlag-1;
+
+                    if (mp!=null){
+
+                        mp.stop();
+                        mp.release();
+                        mp=null;
+                        mp = MediaPlayer.create(this.getContext(),song[activity.io.level]);
+                        mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
+                        mp.setLooping(true);
+                        mp.start();
+
+                    }
+                }
+            }*/
+
 			/*if(mp_Volume_bar.isOn_flag){
 				mp_Volume_bar.setSeekBarX(pointx);
 			}
@@ -1253,15 +1435,66 @@ implements SurfaceHolder.Callback{
 			//---------------------------------------
 		case MotionEvent.ACTION_UP:
 			if(deJump == false){
-                setting.Action_Up(pointx,pointy);
+                if(setting.main_flag) {
+                    setting.Action_Up(pointx, pointy);
+                }
                 /*if (setting.getMainFlag()){
                     break;
                 }*/
-                if(setting.main_alpha==0) {
-                    if (setting_btn.isIn(pointx, pointy)) {
-                        setting.start();
+                if(!setting.main_flag) {
+                    upX = pointx;
+                    upY = pointy;
+                    float move_x = upX - downX;
+                    if(move_x > 100){
+                        set_baralpha = true;
+                        stageselect = 1;
+                        /*stageFlag++;
+                        if(stageFlag >3 || stageFlag ==0){
+                            stageFlag = 1;
+                        }
+                        activity.io.level=stageFlag-1;
+
+                        if (mp!=null){
+
+                            mp.stop();
+                            mp.release();
+                            mp=null;
+                            mp = MediaPlayer.create(this.getContext(),song[activity.io.level]);
+                            mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
+                            mp.setLooping(true);
+                            mp.start();
+
+                        }*/
+                    }else if(move_x < -100){
+                        set_baralpha = true;
+                        stageselect = -1;
+                        /*stageFlag-- ;
+                        if(stageFlag ==0){
+                            stageFlag = 3;
+                        }
+                        activity.io.level=stageFlag-1;
+
+                        if (mp!=null){
+
+                            mp.stop();
+                            mp.release();
+                            mp=null;
+                            mp = MediaPlayer.create(this.getContext(),song[activity.io.level]);
+                            mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
+                            mp.setLooping(true);
+                            mp.start();
+
+                        }*/
                     }
+
+                    if (setting.main_alpha == 0) {
+                        if (setting_btn.isIn(pointx, pointy)) {
+                            setting.start();
+                        }
+                    }
+
                 }
+
 				/*if(left_btm1.isIn(pointx, pointy)){
 				}
 				else if(left_btm2.isIn(pointx, pointy)){
@@ -1301,8 +1534,8 @@ implements SurfaceHolder.Callback{
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,int height) {
 
 	}
-
 	public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
+        stage_standby_Flag = 0;
         map_easy_btn_f.recycle();
         map_stage01.recycle();
         map_back.recycle();
@@ -1320,6 +1553,14 @@ implements SurfaceHolder.Callback{
         map_stage03_back.recycle();
         map_start_btn.recycle();
         map_startbar.recycle();
+        map_frame_upbar.recycle();
+        map_frame_underbar.recycle();
+        map_frame_leftbar.recycle();
+        map_frame_rightbar.recycle();
+
+        map_start_btn_back.recycle();
+        map_set_btn2.recycle();
+
 
 		activity.io.speed=set_speed-5;
 		activity.io.timing=set_timing-5;

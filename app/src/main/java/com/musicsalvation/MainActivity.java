@@ -49,6 +49,7 @@ public class MainActivity extends Activity{
         Message msg = myHandler.obtainMessage(what);
         myHandler.sendMessage(msg);
         nowView=what;
+
     }
 
     Handler myHandler = new Handler(){//處理各個SurfaceView傳送的訊息
