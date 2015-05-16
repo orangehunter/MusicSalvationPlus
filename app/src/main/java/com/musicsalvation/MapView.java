@@ -51,8 +51,13 @@ implements SurfaceHolder.Callback{
     Bitmap map_startbar;
     Bitmap map_start_btn_back;
 
+    Bitmap map_hand;
+    Bitmap map_quest_btn;
+    Bitmap map_quest_back;
+    Bitmap map_sc_rank_bar;
 
     Botton setting_btn;
+    Botton quest_btn;
 
     //Botton stageselect;
 
@@ -178,6 +183,7 @@ implements SurfaceHolder.Callback{
 
 	Botton start;
 
+
 	//箭頭按鈕宣告================================================
 	Botton arrow;
 	//箭頭按鈕宣告------------------------------------------------
@@ -250,6 +256,7 @@ implements SurfaceHolder.Callback{
     int set_btn_mx = -47;
     int set_btn_mx2 = 47;
     int set_btn2_mx = -55,set_btn2_mx2 = 39;
+    int sc_rank_bar_my = 790 , sc_rank_bar_my2 = 648;
     //int start_btn_my = 805 , getStart_btn_my2 = 635;
 
 
@@ -334,10 +341,16 @@ implements SurfaceHolder.Callback{
         map_frame_underbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_underbar), 1280, 94);
         map_frame_upbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_upbar), 1280, 134);
 
+        map_hand = Graphic.bitSize(LoadBitmap( R.drawable.mapview_hand), 63, 76);
+        map_quest_btn = Graphic.bitSize(LoadBitmap( R.drawable.mapview_quest_btn), 105, 198);
+        map_quest_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_quest_back), 105, 198);
+        map_sc_rank_bar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_sc_rank_bar), 1163, 140);
+
 
 
         setting = new Setting(activity);
         setting_btn = new Botton(activity, map_set_btn, map_set_btn, set_btn_mx, 160);
+        quest_btn = new Botton(activity,map_quest_btn,map_quest_back,set_btn_mx-1,621);
         //tageselect = new Botton(activity, map_stageselect, map_stageselect, 640, 360);
 
 
@@ -905,15 +918,12 @@ implements SurfaceHolder.Callback{
                 case 0:
                     break;
                 case 1:
-
                     Graphic.drawPic(canvas,map_stage01_back , 1280/2, 720/2, 0, setalpha, paint);
                     break;
                 case 2:
-
                     Graphic.drawPic(canvas,map_stage02_back , 1280/2, 720/2, 0, setalpha, paint);
                     break;
                 case 3:
-
                     Graphic.drawPic(canvas,map_stage03_back , 1280/2, 720/2, 0, setalpha, paint);
                     break;
             }
@@ -929,6 +939,7 @@ implements SurfaceHolder.Callback{
                 upbar_my = Coordinate.AnalogSpeedMove(upbar_my,upbar_my2);
                 set_btn2_mx = Coordinate.AnalogSpeedMove(set_btn2_mx,set_btn2_mx2);
                 set_btn_mx = Coordinate.AnalogSpeedMove(set_btn_mx,set_btn_mx2);
+                sc_rank_bar_my = Coordinate.AnalogSpeedMove(sc_rank_bar_my,sc_rank_bar_my2);
 
                 if(underbar_my == underbar_my2 && leftbar_mx == leftbar_mx2 && rightbar_mx == rightbar_mx2 && upbar_my == upbar_my2){
                     stage_standby_Flag = 1;
@@ -937,6 +948,7 @@ implements SurfaceHolder.Callback{
 
             }
 
+            Graphic.drawPic(canvas, map_sc_rank_bar, 641, sc_rank_bar_my, 0, setalpha, paint);
             Graphic.drawPic(canvas, map_frame_underbar, 640, underbar_my, 0, 255, paint);
             Graphic.drawPic(canvas, map_frame_leftbar, leftbar_mx, 340, 0, 255, paint);
             Graphic.drawPic(canvas, map_frame_rightbar, rightbar_mx, 360, 0, 255, paint);
@@ -955,7 +967,9 @@ implements SurfaceHolder.Callback{
                     rot = 0;
                 }
 				setting_btn.drawBtm(canvas, paint,set_btn_mx,160);
+                quest_btn.drawBtm(canvas,paint,set_btn_mx+1,621);
                 Graphic.drawPic(canvas, map_set_btn2, set_btn2_mx, 121, rot, setalpha, paint);
+                Graphic.drawPic(canvas, map_quest_back, 52, 621, 0, start_alpha, paint);
                 easy.drawBtm(canvas, paint);
                 normal.drawBtm(canvas, paint);
                 hard.drawBtm(canvas, paint);
@@ -1541,7 +1555,6 @@ implements SurfaceHolder.Callback{
         map_stage01.recycle();
         map_back.recycle();
         map_set_btn.recycle();
-        //map_frame.recycle();
         map_easy_btn_t.recycle();
         map_hard_btn_f.recycle();
         map_hard_btn_t.recycle();
@@ -1561,6 +1574,13 @@ implements SurfaceHolder.Callback{
 
         map_start_btn_back.recycle();
         map_set_btn2.recycle();
+
+        map_hand.recycle();
+        map_sc_rank_bar.recycle();
+        map_quest_back.recycle();
+        map_quest_btn.recycle();
+
+        quest_btn.recycle();
 
 
 		activity.io.speed=set_speed-5;
@@ -1679,8 +1699,8 @@ implements SurfaceHolder.Callback{
 		model.recycle();
 		*/
 		start.recycle();
-
 		setting.recycle();
+        setting_btn.recycle();
 
 		//箭頭按鈕宣告================================================
 		// arrow.recycle();
@@ -1694,6 +1714,7 @@ implements SurfaceHolder.Callback{
 		sp.release();
 		mp.stop();
         mp.release();
+
 
 	}
 
