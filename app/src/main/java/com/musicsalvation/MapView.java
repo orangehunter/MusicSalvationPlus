@@ -32,6 +32,7 @@ implements SurfaceHolder.Callback{
 
     Bitmap map_set_btn;
     Bitmap map_set_btn2; //會轉的小齒輪
+    Bitmap map_set_btn2_back;
 
     Bitmap map_stage01;
     Bitmap map_stage02;
@@ -55,6 +56,7 @@ implements SurfaceHolder.Callback{
     Bitmap map_quest_btn;
     Bitmap map_quest_back;
     Bitmap map_sc_rank_bar;
+
 
     Botton setting_btn;
     Botton quest_btn;
@@ -338,6 +340,7 @@ implements SurfaceHolder.Callback{
 
         map_set_btn = Graphic.bitSize(LoadBitmap( R.drawable.mapview_set_btn), 95, 146);
         map_set_btn2 = Graphic.bitSize(LoadBitmap( R.drawable.map_set_btn2), 59, 59);
+        map_set_btn2_back = Graphic.bitSize(LoadBitmap( R.drawable.map_set_btn2_back), 59, 59);
         map_easy_btn_f = Graphic.bitSize(LoadBitmap( R.drawable.mapview_easy_btn_f), 393, 104);
         map_easy_btn_t = Graphic.bitSize(LoadBitmap( R.drawable.mapview_easy_btn_t), 393, 104);
         map_normal_btn_f = Graphic.bitSize(LoadBitmap( R.drawable.mapview_normal_btn_f), 393, 104);
@@ -977,7 +980,8 @@ implements SurfaceHolder.Callback{
                 }
 				setting_btn.drawBtm(canvas, paint,set_btn_mx,160);
                 quest_btn.drawBtm(canvas,paint,set_btn_mx+1,621);
-                Graphic.drawPic(canvas, map_set_btn2, set_btn2_mx, 121, rot, setalpha, paint);
+                Graphic.drawPic(canvas, map_set_btn2_back, set_btn2_mx, 121, rot, setalpha, paint);
+                Graphic.drawPic(canvas, map_set_btn2, set_btn2_mx, 121, rot, start_alpha, paint);
                 Graphic.drawPic(canvas, map_quest_back, set_btn_mx+1, 621, 0, start_alpha, paint);
                 easy.drawBtm(canvas, paint);
                 normal.drawBtm(canvas, paint);
@@ -1615,6 +1619,7 @@ implements SurfaceHolder.Callback{
 
         map_start_btn_back.recycle();
         map_set_btn2.recycle();
+        map_set_btn2_back.recycle();
 
         map_hand.recycle();
         map_sc_rank_bar.recycle();
