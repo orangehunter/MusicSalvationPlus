@@ -63,7 +63,8 @@ implements SurfaceHolder.Callback{
 
     Setting setting;
 
-    Boolean set_baralpha = false;
+    Boolean set_baralpha_Flag = false;
+
 
 
 
@@ -257,6 +258,7 @@ implements SurfaceHolder.Callback{
     int set_btn_mx2 = 47;
     int set_btn2_mx = -55,set_btn2_mx2 = 39;
     int sc_rank_bar_my = 790 , sc_rank_bar_my2 = 648;
+    int hand_mx = 915,hand_mx2 = 1155,hand_count=3,hand_alpha = 0;
     //int start_btn_my = 805 , getStart_btn_my2 = 635;
 
 
@@ -304,13 +306,19 @@ implements SurfaceHolder.Callback{
         //===============新介面圖片載入=======================
 
         stage_standby_Flag=0;
+        hand_count = 3;
+        set_baralpha_Flag = false;
         upbar_my = -67;
         rightbar_mx = 1325;
         leftbar_mx = -53;
         underbar_my = 767;
         set_btn_mx = -47;
         set_btn2_mx = -55;
+        sc_rank_bar_my = 790;
+        hand_mx = 915;
+        hand_alpha = 0;
         start_alpha = setalpha;
+
 
 
         map_back = Graphic.bitSize(LoadBitmap(R.drawable.mapview_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
@@ -350,7 +358,7 @@ implements SurfaceHolder.Callback{
 
         setting = new Setting(activity);
         setting_btn = new Botton(activity, map_set_btn, map_set_btn, set_btn_mx, 160);
-        quest_btn = new Botton(activity,map_quest_btn,map_quest_back,set_btn_mx-1,621);
+        quest_btn = new Botton(activity,map_quest_back,map_quest_btn,set_btn_mx-1,621);
         //tageselect = new Botton(activity, map_stageselect, map_stageselect, 640, 360);
 
 
@@ -519,7 +527,7 @@ implements SurfaceHolder.Callback{
 		normal  = new Botton(activity, map_normal_btn_t, map_normal_btn_f, 770, 50);
 		hard  = new Botton(activity, map_hard_btn_t, map_hard_btn_f, 1090, 50);
 
-        set_baralpha = false;
+        set_baralpha_Flag = false;
         setalpha = 0;
 
         song[0] = R.raw.celluloid_yuyao_cut;
@@ -856,13 +864,13 @@ implements SurfaceHolder.Callback{
             //切換關卡時的動作============================================
 
             if(stage_standby_Flag !=0) {
-                if (set_baralpha) {
+                if (set_baralpha_Flag) {
                     setalpha -= 40;
                     start_alpha = setalpha;
                     if (setalpha < 0) {
 
                         setalpha = 0;
-                        set_baralpha = false;
+                        set_baralpha_Flag = false;
 
                         if (stageselect == 1) {
                             stageselect = 0;
@@ -905,7 +913,7 @@ implements SurfaceHolder.Callback{
                             }
                         }
                     }
-                } else if (!set_baralpha) {
+                } else if (!set_baralpha_Flag) {
                     setalpha += 40;
                     if (setalpha >= 255) {
                         setalpha = 255;
@@ -969,13 +977,43 @@ implements SurfaceHolder.Callback{
 				setting_btn.drawBtm(canvas, paint,set_btn_mx,160);
                 quest_btn.drawBtm(canvas,paint,set_btn_mx+1,621);
                 Graphic.drawPic(canvas, map_set_btn2, set_btn2_mx, 121, rot, setalpha, paint);
-                Graphic.drawPic(canvas, map_quest_back, 52, 621, 0, start_alpha, paint);
+                Graphic.drawPic(canvas, map_quest_back, set_btn_mx+1, 621, 0, start_alpha, paint);
                 easy.drawBtm(canvas, paint);
                 normal.drawBtm(canvas, paint);
                 hard.drawBtm(canvas, paint);
                 Graphic.drawPic(canvas, map_start_btn_back, 640, 635, 0, setalpha, paint);
                 start.drawBtm(canvas,paint,start_alpha);
-                Graphic.drawPic(canvas, map_startbar, 640, 669, 0, setalpha, paint);
+                Graphic.drawPic(canvas, map_startbar, 640, 669, rot, setalpha, paint);
+
+            //控制觸控手勢提示==========================================================
+                if(stage_standby_Flag !=0 && hand_count > 0){
+
+                    Graphic.drawPic(canvas, map_hand, hand_mx, 570, 0, hand_alpha, paint);
+                    if(hand_mx != hand_mx2){
+                        hand_alpha+=40;
+                    }
+                    if(hand_alpha > 255){
+                        hand_alpha = 255;
+                        hand_mx = Coordinate.AnalogSpeedMove(hand_mx,hand_mx2);
+                    }
+                    if(hand_mx == hand_mx2){
+                        hand_alpha-=40;
+                        if(hand_alpha < 0) {
+                            hand_alpha = 0;
+                            hand_count--;
+                            hand_mx = 915;
+                        }
+                    }
+                }
+            if(hand_count <= 0){
+                int count=0;
+                count++;
+                if(count >=1800){
+                    count = 0;
+                    hand_count = 3;
+                }
+            }
+            //控制觸控手勢提示-----------------------------------------------------------------
 
 
 
@@ -1450,6 +1488,8 @@ implements SurfaceHolder.Callback{
 			//---------------------------------------
 		case MotionEvent.ACTION_UP:
 			if(deJump == false){
+
+
                 if(setting.main_flag) {
                     setting.Action_Up(pointx, pointy);
                 }
@@ -1461,7 +1501,7 @@ implements SurfaceHolder.Callback{
                     upY = pointy;
                     float move_x = upX - downX;
                     if(move_x > 100){
-                        set_baralpha = true;
+                        set_baralpha_Flag = true;
                         stageselect = 1;
                         /*stageFlag++;
                         if(stageFlag >3 || stageFlag ==0){
@@ -1481,7 +1521,7 @@ implements SurfaceHolder.Callback{
 
                         }*/
                     }else if(move_x < -100){
-                        set_baralpha = true;
+                        set_baralpha_Flag = true;
                         stageselect = -1;
                         /*stageFlag-- ;
                         if(stageFlag ==0){
