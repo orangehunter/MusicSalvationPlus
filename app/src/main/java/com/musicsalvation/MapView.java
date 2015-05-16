@@ -31,6 +31,8 @@ implements SurfaceHolder.Callback{
 
 
     Bitmap map_set_btn;
+    Bitmap map_set_btn2; //會轉的小齒輪
+
     Bitmap map_stage01;
     Bitmap map_stage02;
     Bitmap map_stage03;
@@ -47,6 +49,7 @@ implements SurfaceHolder.Callback{
 
     Bitmap map_start_btn;
     Bitmap map_startbar;
+    Bitmap map_start_btn_back;
 
 
     Botton setting_btn;
@@ -239,10 +242,13 @@ implements SurfaceHolder.Callback{
     int upbar_my2 = 67;
     int rightbar_mx = 1325;
     int rightbar_mx2 = 1235;
-    int leftbar_mx = -53;
-    int leftbar_mx2 = 52;
+    int leftbar_mx = -51;
+    int leftbar_mx2 = 51;
     int underbar_my = 767;
     int underbar_my2 = 673;
+    int set_btn_mx = -47;
+    int set_btn_mx2 = 47;
+    int set_btn2_mx = -55,set_btn2_mx2 = 39;
 
 
     int song[] = new int[3];
@@ -288,6 +294,14 @@ implements SurfaceHolder.Callback{
         //===============新介面圖片載入=======================
 
         stage_standby_Flag=0;
+        upbar_my = -67;
+        rightbar_mx = 1325;
+        leftbar_mx = -53;
+        underbar_my = 767;
+        set_btn_mx = -47;
+        set_btn2_mx = -55;
+
+
         map_back = Graphic.bitSize(LoadBitmap(R.drawable.mapview_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         map_frame = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         map_stage01_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage01_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
@@ -298,10 +312,12 @@ implements SurfaceHolder.Callback{
         map_stage02 = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage2_font), 234, 63);
         map_stage03 = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage3_font), 234, 63);
 
-        map_start_btn = Graphic.bitSize(LoadBitmap( R.drawable.mapview_start_btn), 240, 170);
+        map_start_btn = Graphic.bitSize(LoadBitmap( R.drawable.mapview_start_btn), 241, 171);
         map_startbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_startbar), 342, 342);
+        map_start_btn_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_start2_btn), 241, 171);
 
         map_set_btn = Graphic.bitSize(LoadBitmap( R.drawable.mapview_set_btn), 95, 146);
+        map_set_btn2 = Graphic.bitSize(LoadBitmap( R.drawable.map_set_btn2), 59, 59);
         map_easy_btn_f = Graphic.bitSize(LoadBitmap( R.drawable.mapview_easy_btn_f), 393, 104);
         map_easy_btn_t = Graphic.bitSize(LoadBitmap( R.drawable.mapview_easy_btn_t), 393, 104);
         map_normal_btn_f = Graphic.bitSize(LoadBitmap( R.drawable.mapview_normal_btn_f), 393, 104);
@@ -309,7 +325,7 @@ implements SurfaceHolder.Callback{
         map_hard_btn_f = Graphic.bitSize(LoadBitmap( R.drawable.mapview_hard_btn_f), 393, 104);
         map_hard_btn_t = Graphic.bitSize(LoadBitmap( R.drawable.mapview_hard_btn_t), 393, 104);
 
-        map_frame_leftbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_leftbar), 105, 619);
+        map_frame_leftbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_leftbar), 102, 605);
         map_frame_rightbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_rightbar), 90, 720);
         map_frame_underbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_underbar), 1280, 94);
         map_frame_upbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_upbar), 1280, 134);
@@ -317,7 +333,7 @@ implements SurfaceHolder.Callback{
 
 
         setting = new Setting(activity);
-        setting_btn = new Botton(activity, map_set_btn, map_set_btn, 47, 170);
+        setting_btn = new Botton(activity, map_set_btn, map_set_btn, set_btn_mx, 173);
         //tageselect = new Botton(activity, map_stageselect, map_stageselect, 640, 360);
 
 
@@ -894,43 +910,43 @@ implements SurfaceHolder.Callback{
 
             if(stage_standby_Flag == 0)
             {
-             if(underbar_my > underbar_my2)
-             underbar_my--;
-             if(leftbar_mx < leftbar_mx2)
-             leftbar_mx++;
-             if(rightbar_mx > rightbar_mx2)
-             rightbar_mx--;
-             if(upbar_my < upbar_my2)
-             upbar_my++;
+                underbar_my = Coordinate.AnalogSpeedMove(underbar_my,underbar_my2);
+                leftbar_mx = Coordinate.AnalogSpeedMove(leftbar_mx,leftbar_mx2);
+                rightbar_mx = Coordinate.AnalogSpeedMove(rightbar_mx,rightbar_mx2);
+                upbar_my = Coordinate.AnalogSpeedMove(upbar_my,upbar_my2);
+                set_btn2_mx = Coordinate.AnalogSpeedMove(set_btn2_mx,set_btn2_mx2);
+                set_btn_mx = Coordinate.AnalogSpeedMove(set_btn_mx,set_btn_mx2);
 
-             if(underbar_my == underbar_my2 && leftbar_mx == leftbar_mx2 && rightbar_mx == rightbar_mx2 && upbar_my == underbar_my2)
-             {
-                 stage_standby_Flag = 1;
-             }
+                if(underbar_my == underbar_my2 && leftbar_mx == leftbar_mx2 && rightbar_mx == rightbar_mx2 && upbar_my == upbar_my2){
+                    stage_standby_Flag = 1;
+                }
+
             }
+
             Graphic.drawPic(canvas, map_frame_underbar, 640, underbar_my, 0, 255, paint);
-            Graphic.drawPic(canvas, map_frame_leftbar, leftbar_mx, 510, 0, 255, paint);
+            Graphic.drawPic(canvas, map_frame_leftbar, leftbar_mx, 340, 0, 255, paint);
             Graphic.drawPic(canvas, map_frame_rightbar, rightbar_mx, 360, 0, 255, paint);
             Graphic.drawPic(canvas, map_frame_upbar, 640, upbar_my, 0, 255, paint);
 
 
                 if(stageFlag == 1) {
-                    Graphic.drawPic(canvas, map_stage01, 127, 53, 0, setalpha, paint);
+                    Graphic.drawPic(canvas, map_stage01, 120, 43, 0, setalpha, paint);
                 }else if(stageFlag == 2){
-                    Graphic.drawPic(canvas, map_stage02, 127, 53, 0, setalpha, paint);
+                    Graphic.drawPic(canvas, map_stage02, 120, 43, 0, setalpha, paint);
                 }else if(stageFlag == 3){
-                    Graphic.drawPic(canvas, map_stage03, 127, 53, 0, setalpha, paint);
+                    Graphic.drawPic(canvas, map_stage03, 120, 43, 0, setalpha, paint);
                 }
-                rot+= 5;
+                rot+= 3;
                 if(rot == 360){
                     rot = 0;
                 }
-				setting_btn.drawBtm(canvas, paint);
+				setting_btn.drawBtm(canvas, paint,set_btn_mx,173);
+                Graphic.drawPic(canvas, map_set_btn2, set_btn2_mx, 138, rot, setalpha, paint);
                 easy.drawBtm(canvas, paint);
                 normal.drawBtm(canvas, paint);
                 hard.drawBtm(canvas, paint);
                 start.drawBtm(canvas,paint);
-                Graphic.drawPic(canvas, map_startbar, 639, 670, rot, 255, paint);
+                Graphic.drawPic(canvas, map_startbar, 639, 670, 0, setalpha, paint);
 
 
 
@@ -1511,6 +1527,7 @@ implements SurfaceHolder.Callback{
 
 	}
 	public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
+        stage_standby_Flag = 0;
         map_easy_btn_f.recycle();
         map_stage01.recycle();
         map_back.recycle();
@@ -1532,6 +1549,10 @@ implements SurfaceHolder.Callback{
         map_frame_underbar.recycle();
         map_frame_leftbar.recycle();
         map_frame_rightbar.recycle();
+
+        map_start_btn_back.recycle();
+        map_set_btn2.recycle();
+
 
 		activity.io.speed=set_speed-5;
 		activity.io.timing=set_timing-5;
