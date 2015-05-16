@@ -23,6 +23,13 @@ implements SurfaceHolder.Callback{
     //======新介面圖片宣告===============
     Bitmap map_back;
     Bitmap map_frame;
+
+    Bitmap map_frame_upbar;
+    Bitmap map_frame_leftbar;
+    Bitmap map_frame_rightbar;
+    Bitmap map_frame_underbar;
+
+
     Bitmap map_set_btn;
     Bitmap map_stage01;
     Bitmap map_stage02;
@@ -40,7 +47,7 @@ implements SurfaceHolder.Callback{
 
     Bitmap map_start_btn;
     Bitmap map_startbar;
-    Bitmap map_stageselect;
+
 
     Botton setting_btn;
 
@@ -226,7 +233,17 @@ implements SurfaceHolder.Callback{
 
 	int set_speed = 6;
 	int set_timing = 5;
-    int setalpha = 255;
+    int setalpha = 0;
+
+    int upbar_my = -67;
+    int upbar_my2 = 67;
+    int rightbar_mx = 1325;
+    int rightbar_mx2 = 1235;
+    int leftbar_mx = -53;
+    int leftbar_mx2 = 52;
+    int underbar_my = 767;
+    int underbar_my2 = 673;
+
 
     int song[] = new int[3];
 
@@ -237,6 +254,7 @@ implements SurfaceHolder.Callback{
     int upX = 0;
     int upY = 0;
     int stageselect = 0;
+    int stage_standby_Flag = 0;
 
 
 	//RANK===============================
@@ -290,7 +308,12 @@ implements SurfaceHolder.Callback{
         map_hard_btn_f = Graphic.bitSize(LoadBitmap( R.drawable.mapview_hard_btn_f), 393, 104);
         map_hard_btn_t = Graphic.bitSize(LoadBitmap( R.drawable.mapview_hard_btn_t), 393, 104);
 
-        map_stageselect = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stageselect), 1020, 415);
+        map_frame_leftbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_leftbar), 105, 619);
+        map_frame_rightbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_rightbar), 90, 720);
+        map_frame_underbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_underbar), 1280, 94);
+        map_frame_upbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_upbar), 1280, 134);
+
+
 
         setting = new Setting(activity);
         setting_btn = new Botton(activity, map_set_btn, map_set_btn, 47, 170);
@@ -463,7 +486,7 @@ implements SurfaceHolder.Callback{
 		hard  = new Botton(activity, map_hard_btn_t, map_hard_btn_f, 1090, 50);
 
         set_baralpha = false;
-        setalpha = 255;
+        setalpha = 0;
 
         song[0] = R.raw.celluloid_yuyao_cut;
         song[1] = R.raw.tipsydessert_yuyao_cut;
@@ -789,60 +812,63 @@ implements SurfaceHolder.Callback{
             //新介面==================================================
             Graphic.drawPic(canvas, map_back, 640, 360, 0, 255, paint);
 
+
             //切換關卡時的動作============================================
-            if(set_baralpha){
-                setalpha-=40;
-                if(setalpha < 0) {
 
-                    setalpha = 0;
-                    set_baralpha = false;
+            if(stage_standby_Flag !=0) {
+                if (set_baralpha) {
+                    setalpha -= 40;
+                    if (setalpha < 0) {
 
-                    if (stageselect == 1) {
-                        stageselect = 0;
-                        stageFlag++;
-                        if (stageFlag > 3 || stageFlag == 0) {
-                            stageFlag = 1;
-                        }
-                        activity.io.level = stageFlag - 1;
+                        setalpha = 0;
+                        set_baralpha = false;
 
-                        if (mp != null) {
+                        if (stageselect == 1) {
+                            stageselect = 0;
+                            stageFlag++;
+                            if (stageFlag > 3 || stageFlag == 0) {
+                                stageFlag = 1;
+                            }
+                            activity.io.level = stageFlag - 1;
 
-                            mp.stop();
-                            mp.release();
-                            mp = null;
-                            mp = MediaPlayer.create(this.getContext(), song[activity.io.level]);
-                            mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
-                            mp.setLooping(true);
-                            mp.start();
+                            if (mp != null) {
 
-                        }
+                                mp.stop();
+                                mp.release();
+                                mp = null;
+                                mp = MediaPlayer.create(this.getContext(), song[activity.io.level]);
+                                mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
+                                mp.setLooping(true);
+                                mp.start();
 
-                    }else if(stageselect == -1){
-                        stageselect = 0;
-                        stageFlag-- ;
-                        if(stageFlag ==0){
-                            stageFlag = 3;
-                        }
-                        activity.io.level=stageFlag-1;
+                            }
 
-                        if (mp!=null){
+                        } else if (stageselect == -1) {
+                            stageselect = 0;
+                            stageFlag--;
+                            if (stageFlag == 0) {
+                                stageFlag = 3;
+                            }
+                            activity.io.level = stageFlag - 1;
 
-                            mp.stop();
-                            mp.release();
-                            mp=null;
-                            mp = MediaPlayer.create(this.getContext(),song[activity.io.level]);
-                            mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
-                            mp.setLooping(true);
-                            mp.start();
+                            if (mp != null) {
 
+                                mp.stop();
+                                mp.release();
+                                mp = null;
+                                mp = MediaPlayer.create(this.getContext(), song[activity.io.level]);
+                                mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
+                                mp.setLooping(true);
+                                mp.start();
+
+                            }
                         }
                     }
-                }
-            }
-            else if(!set_baralpha){
-                setalpha +=40;
-                if (setalpha >= 255) {
-                    setalpha = 255;
+                } else if (!set_baralpha) {
+                    setalpha += 40;
+                    if (setalpha >= 255) {
+                        setalpha = 255;
+                    }
                 }
             }
             //切換關卡時的動作-------------------------------------
@@ -864,7 +890,31 @@ implements SurfaceHolder.Callback{
             }
 
 
-				Graphic.drawPic(canvas, map_frame, 640, 360, 0, 255, paint);
+
+            if(stage_standby_Flag == 0)
+            {
+             if(underbar_my > underbar_my2)
+             underbar_my--;
+             if(leftbar_mx < leftbar_mx2)
+             leftbar_mx++;
+             if(rightbar_mx > rightbar_mx2)
+             rightbar_mx--;
+             if(upbar_my < upbar_my2)
+             upbar_my++;
+
+             if(underbar_my == underbar_my2 && leftbar_mx == leftbar_mx2 && rightbar_mx == rightbar_mx2 && upbar_my == underbar_my2)
+             {
+                 stage_standby_Flag = 1;
+             }
+
+
+            }
+            Graphic.drawPic(canvas, map_frame_underbar, 640, underbar_my, 0, 255, paint);
+            Graphic.drawPic(canvas, map_frame_leftbar, leftbar_mx, 510, 0, 255, paint);
+            Graphic.drawPic(canvas, map_frame_rightbar, rightbar_mx, 360, 0, 255, paint);
+            Graphic.drawPic(canvas, map_frame_upbar, 640, upbar_my, 0, 255, paint);
+
+
                 if(stageFlag == 1) {
                     Graphic.drawPic(canvas, map_stage01, 127, 53, 0, setalpha, paint);
                 }else if(stageFlag == 2){
@@ -1479,6 +1529,10 @@ implements SurfaceHolder.Callback{
         map_stage03_back.recycle();
         map_start_btn.recycle();
         map_startbar.recycle();
+        map_frame_upbar.recycle();
+        map_frame_underbar.recycle();
+        map_frame_leftbar.recycle();
+        map_frame_rightbar.recycle();
 
 		activity.io.speed=set_speed-5;
 		activity.io.timing=set_timing-5;
