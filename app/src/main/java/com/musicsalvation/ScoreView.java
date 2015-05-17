@@ -494,8 +494,8 @@ implements SurfaceHolder.Callback{
 		normal.recycle();
 		hard.recycle();
 
-		y.recycle();
-		n.recycle();
+		//y.recycle();
+		//n.recycle();
 		/*num_grey.recycle();
 		num_white.recycle();
 		num_red.recycle();
