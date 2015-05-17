@@ -608,7 +608,7 @@ implements SurfaceHolder.Callback{
 
 
 		num=new Number(getResources());
-		num.setSize(36, 51);
+		num.setSize(25, 50);
 		rank=new Bitmap[7];
 		rank[6]=Graphic.LoadBitmap(getResources(), R.drawable.r_s, 54,72,true);
 		for(int i=0;i<=5;i++){
@@ -1028,7 +1028,7 @@ implements SurfaceHolder.Callback{
             if(activity.io.hight_rank[activity.io.level][activity.io.difficulty]!=0){
                 Graphic.drawPic(canvas, rank[activity.io.hight_rank[activity.io.level][activity.io.difficulty]-1], 1160, 650, 0, setalpha, paint);
             }
-                num.drawNumberRightStart(450, 650, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Blue, canvas, paint);
+                num.drawNumberRightStart(430, 650, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Blue, canvas, paint);
 				setting_btn.drawBtm(canvas, paint,set_btn_mx,160);
                 quest_btn.drawBtm(canvas,paint,set_btn_mx+1,621);
                 Graphic.drawPic(canvas, map_set_btn2_back, set_btn2_mx, 121, rot, setalpha, paint);
@@ -1091,21 +1091,31 @@ implements SurfaceHolder.Callback{
             Graphic.drawPic(canvas, map_checK_bar, checkbar_mx, 395, 0, 255, paint);
             Graphic.drawPic(canvas, map_check_dark, checkbar_light_mx, 383, 0, 255, paint);
             Graphic.drawPic(canvas, map_check_light, checkbar_light_mx, 383, 0, start_alpha, paint);
-            Log.e("checkFlag"+check_Flag,"");
+
             if(check_Flag){
-                checkbar_mx = Coordinate.AnalogSpeedMove(checkbar_mx,checkbar_mx2);
-                checkbar_light_mx = Coordinate.AnalogSpeedMove(checkbar_light_mx,checkbar_light_mx2);
+                if(checkbar_mx > checkbar_mx2){
+                    double mx = (checkbar_mx-checkbar_mx2)/10;
+                    checkbar_mx-=mx;
+
+                }if(checkbar_light_mx > checkbar_light_mx2){
+                    double mx = (checkbar_mx-checkbar_mx2)/10;
+                    checkbar_mx-=mx;
+                }
+                //checkbar_mx = Coordinate.AnalogSpeedMove(checkbar_mx,checkbar_mx2);
+                //checkbar_light_mx = Coordinate.AnalogSpeedMove(checkbar_light_mx,checkbar_light_mx2);
                 if(checkbar_mx == checkbar_mx2 && checkbar_light_mx == checkbar_light_mx2){
                     check_alpha = 255;
+
+                    Graphic.drawPic(canvas, map_ok_btn2, 640, 647, 0, 255, paint);
+
+                    Graphic.drawPic(canvas, map_check_font, 675, 244, 0, check_alpha, paint);
                     return_btn.drawBtm(canvas,paint);
-                    Graphic.drawPic(canvas, map_ok_btn2, 671, 244, 0, start_alpha, paint);
                     check_ok_btn.drawBtm(canvas,paint,start_alpha);
-                    Graphic.drawPic(canvas, map_check_font, 671, 244, 0, check_alpha, paint);
                     switch(stageFlag){
                         case 0:
                             break;
                         case 1:
-                            Graphic.drawPic(canvas,map_s01data , 238, 419, 0, check_alpha, paint);
+                            Graphic.drawPic(canvas,map_s01data , 267, 419, 0, check_alpha, paint);
                             if(activity.io.level_clear[activity.io.level][activity.io.difficulty]){
 
                                 Graphic.drawPic(canvas, map_virusdata, 887, 424, 0, 255, paint);
@@ -1114,7 +1124,7 @@ implements SurfaceHolder.Callback{
                             }
                             break;
                         case 2:
-                            Graphic.drawPic(canvas,map_s02data , 238, 419, 0, check_alpha, paint);
+                            Graphic.drawPic(canvas,map_s02data , 267, 419, 0, check_alpha, paint);
                             if(activity.io.level_clear[activity.io.level][activity.io.difficulty]){
 
                                 Graphic.drawPic(canvas, map_virusdata, 887, 424, 0, 255, paint);
@@ -1123,7 +1133,7 @@ implements SurfaceHolder.Callback{
                             }
                             break;
                         case 3:
-                            Graphic.drawPic(canvas,map_s03data , 238, 419, 0, check_alpha, paint);
+                            Graphic.drawPic(canvas,map_s03data , 267, 419, 0, check_alpha, paint);
                             if(activity.io.level_clear[activity.io.level][activity.io.difficulty]){
 
                                 Graphic.drawPic(canvas, map_virusdata, 887, 424, 0, 255, paint);
@@ -1133,20 +1143,26 @@ implements SurfaceHolder.Callback{
                             break;
                     }
                     if(activity.io.difficulty==0){
-                        Graphic.drawPic(canvas, map_check_easy, 269, 535, 0, check_alpha, paint);
+                        Graphic.drawPic(canvas, map_check_easy, 289, 535, 0, check_alpha, paint);
                         //追加條件Flag = 0 會顯示easy-----------------------------------------------
                     }else if(activity.io.difficulty==1){
-                        Graphic.drawPic(canvas, map_check_nornmal, 269, 535, 0, check_alpha, paint);
+                        Graphic.drawPic(canvas, map_check_nornmal, 289, 535, 0, check_alpha, paint);
                     }else if(activity.io.difficulty==2){
-                        Graphic.drawPic(canvas, map_check_hard, 269, 535, 0, check_alpha, paint);
+                        Graphic.drawPic(canvas, map_check_hard, 289, 535, 0, check_alpha, paint);
                     }
                 }
             }else{
                 check_alpha = 0;
-                if(checkbar_mx < checkbar_mx2 && checkbar_light_mx < checkbar_light_mx2) {
-                    checkbar_mx = Coordinate.AnalogSpeedMove(checkbar_mx2, 1859);
-                    checkbar_light_mx = Coordinate.AnalogSpeedMove(checkbar_light_mx2, 1271);
+
+                if(checkbar_mx < checkbar_mx2){
+                    double mx = (checkbar_mx-checkbar_mx2)/10;
+                    checkbar_mx+=mx;
+
+                }if(checkbar_light_mx < checkbar_light_mx2){
+                    double mx = (checkbar_mx-checkbar_mx2)/10;
+                    checkbar_mx+=mx;
                 }
+
 
             }
 
@@ -1515,8 +1531,7 @@ implements SurfaceHolder.Callback{
                         if(check_ok_btn.isIn(pointx,pointy)){
                             sp.play(sp_id_s[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
                             check_Flag = false;
-                            checkbar_light_mx = 1271;
-                            checkbar_mx = 1859;
+
                             activity.io.video_select=2;
                             activity.changeView(0);
                         }
