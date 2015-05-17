@@ -1601,6 +1601,7 @@ implements SurfaceHolder.Callback{
 	}
 	public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
         stage_standby_Flag = 0;
+
         map_easy_btn_f.recycle();
         map_stage01.recycle();
         map_back.recycle();
@@ -1752,7 +1753,9 @@ implements SurfaceHolder.Callback{
 		start.recycle();
 		setting.recycle();
         setting_btn.recycle();
-
+        easy.recycle();
+        normal.recycle();
+        hard.recycle();
 		//箭頭按鈕宣告================================================
 		// arrow.recycle();
 		//箭頭按鈕宣告--------------------------------------------------------------------------------
