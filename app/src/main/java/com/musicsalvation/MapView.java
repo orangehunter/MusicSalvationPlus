@@ -283,7 +283,7 @@ implements SurfaceHolder.Callback{
     int sc_rank_bar_my = 790 , sc_rank_bar_my2 = 648;
     int hand_mx = 915,hand_mx2 = 1155,hand_count=3,hand_alpha = 0,hand_recount = 0;
 
-    int checkbar_mx = 1859,checkbar_mx2 = 640;
+    int checkbar_mx = 1860,checkbar_mx2 = 640;
     int checkbar_light_mx = 1271,checkbar_light_mx2 = 52;
     boolean check_Flag;
     //int start_btn_my = 805 , getStart_btn_my2 = 635;
@@ -346,7 +346,7 @@ implements SurfaceHolder.Callback{
         hand_alpha = 0;
         start_alpha = setalpha;
         hand_recount = 0;
-        checkbar_mx = 1859;
+        checkbar_mx = 1860;
         checkbar_light_mx = 1271;
         check_Flag = false;
 
@@ -1028,7 +1028,7 @@ implements SurfaceHolder.Callback{
             if(activity.io.hight_rank[activity.io.level][activity.io.difficulty]!=0){
                 Graphic.drawPic(canvas, rank[activity.io.hight_rank[activity.io.level][activity.io.difficulty]-1], 1160, 650, 0, setalpha, paint);
             }
-                num.drawNumberRightStart(390, 650, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Blue, canvas, paint);
+                num.drawNumberRightStart(450, 650, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Blue, canvas, paint);
 				setting_btn.drawBtm(canvas, paint,set_btn_mx,160);
                 quest_btn.drawBtm(canvas,paint,set_btn_mx+1,621);
                 Graphic.drawPic(canvas, map_set_btn2_back, set_btn2_mx, 121, rot, setalpha, paint);
@@ -1089,9 +1089,9 @@ implements SurfaceHolder.Callback{
                 }
             //最終確認欄============================================================
             Graphic.drawPic(canvas, map_checK_bar, checkbar_mx, 395, 0, 255, paint);
-            Graphic.drawPic(canvas, map_check_dark, checkbar_light_mx, 383, 0, start_alpha, paint);
+            Graphic.drawPic(canvas, map_check_dark, checkbar_light_mx, 383, 0, 255, paint);
             Graphic.drawPic(canvas, map_check_light, checkbar_light_mx, 383, 0, start_alpha, paint);
-
+            Log.e("checkFlag"+check_Flag,"");
             if(check_Flag){
                 checkbar_mx = Coordinate.AnalogSpeedMove(checkbar_mx,checkbar_mx2);
                 checkbar_light_mx = Coordinate.AnalogSpeedMove(checkbar_light_mx,checkbar_light_mx2);
@@ -1143,8 +1143,10 @@ implements SurfaceHolder.Callback{
                 }
             }else{
                 check_alpha = 0;
-                checkbar_mx = Coordinate.AnalogSpeedMove(checkbar_mx2,checkbar_mx);
-                checkbar_light_mx = Coordinate.AnalogSpeedMove(checkbar_light_mx2,checkbar_light_mx);
+                if(checkbar_mx < checkbar_mx2 && checkbar_light_mx < checkbar_light_mx2) {
+                    checkbar_mx = Coordinate.AnalogSpeedMove(checkbar_mx2, 1859);
+                    checkbar_light_mx = Coordinate.AnalogSpeedMove(checkbar_light_mx2, 1271);
+                }
 
             }
 
@@ -1509,14 +1511,6 @@ implements SurfaceHolder.Callback{
 
 
                     //新介面用關卡選擇----------------------------
-                    if(!check_Flag) {
-                        if (start.isIn(pointx, pointy)) {
-                            sp.play(sp_id_s[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-                            check_Flag = true;
-
-                        }
-                    }
-
                     if(check_Flag){
                         if(check_ok_btn.isIn(pointx,pointy)){
                             sp.play(sp_id_s[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
@@ -1527,11 +1521,18 @@ implements SurfaceHolder.Callback{
                             activity.changeView(0);
                         }
                         if(return_btn.isIn(pointx,pointy)){
-                        check_Flag = false;
-                        checkbar_light_mx = 1271;
-                        checkbar_mx = 1859;
+                            check_Flag = false;
                         }
                     }
+                    if(!check_Flag) {
+                        if (start.isIn(pointx, pointy)) {
+                            sp.play(sp_id_s[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+                            check_Flag = true;
+
+                        }
+                    }
+
+
 
 					//難易度調整按鈕事件
 					/*if(model.isIn(pointx, pointy)){
