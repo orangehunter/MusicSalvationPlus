@@ -49,8 +49,8 @@ implements SurfaceHolder.Callback{
 	Bitmap normal;
 	Bitmap hard;
 
-	Bitmap y;
-	Bitmap n;
+	//Bitmap y;
+	//Bitmap n;
 	/*Bitmap num_grey;
 	Bitmap num_white;
 	Bitmap num_red;

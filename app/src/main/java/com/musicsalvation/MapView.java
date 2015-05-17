@@ -561,11 +561,11 @@ implements SurfaceHolder.Callback{
 
 
 		num=new Number(getResources());
-		num.setSize(25, 35);
+		num.setSize(36, 51);
 		rank=new Bitmap[7];
-		rank[6]=Graphic.LoadBitmap(getResources(), R.drawable.r_s, 45,60,true);
+		rank[6]=Graphic.LoadBitmap(getResources(), R.drawable.r_s, 54,72,true);
 		for(int i=0;i<=5;i++){
-			rank[i]=Graphic.LoadBitmap(getResources(), R.drawable.r_f-i, 45, 60,true);
+			rank[i]=Graphic.LoadBitmap(getResources(), R.drawable.r_f-i, 54, 72,true);
 		}
 
 		Constant.Flag=true;
@@ -851,8 +851,8 @@ implements SurfaceHolder.Callback{
 
 				/*if(activity.io.hight_rank[activity.io.level][activity.io.difficulty]!=0){
 					Graphic.drawPic(canvas, rank[activity.io.hight_rank[activity.io.level][activity.io.difficulty]-1], right_board_x+68, 585, 0, 255, paint);
-				}*/
-				//num.drawNumberLeftStart(right_board_x-10, 535, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Wite, canvas, paint);
+				}
+				num.drawNumberLeftStart(right_board_x-10, 535, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Wite, canvas, paint);*/
 				//追加條件:當Flag = 0 會顯示easy=================================================
 
             //新介面==================================================
@@ -978,6 +978,10 @@ implements SurfaceHolder.Callback{
                 if(rot == 360){
                     rot = 0;
                 }
+            if(activity.io.hight_rank[activity.io.level][activity.io.difficulty]!=0){
+                Graphic.drawPic(canvas, rank[activity.io.hight_rank[activity.io.level][activity.io.difficulty]-1], 1160, 650, 0, setalpha, paint);
+            }
+                num.drawNumberLeftStart(390, 655, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Blue, canvas, paint);
 				setting_btn.drawBtm(canvas, paint,set_btn_mx,160);
                 quest_btn.drawBtm(canvas,paint,set_btn_mx+1,621);
                 Graphic.drawPic(canvas, map_set_btn2_back, set_btn2_mx, 121, rot, setalpha, paint);
