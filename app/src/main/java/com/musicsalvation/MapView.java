@@ -1024,7 +1024,7 @@ implements SurfaceHolder.Callback{
 
 
                 if(activity.io.difficulty==0){
-                    
+
                     Graphic.drawPic(canvas, map_easy_btn_t, 450, 50, 0, start_alpha, paint);
                     //追加條件Flag = 0 會顯示easy-----------------------------------------------
                 }else if(activity.io.difficulty==1){
