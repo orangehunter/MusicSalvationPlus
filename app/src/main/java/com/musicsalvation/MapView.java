@@ -58,9 +58,28 @@ implements SurfaceHolder.Callback{
     Bitmap map_sc_rank_bar;
 
 
+
     Botton setting_btn;
     Botton quest_btn;
 
+    //最終確認欄位元件
+    Bitmap map_checK_bar;
+    Bitmap map_check_font;
+    Bitmap map_check_return;
+    Bitmap map_check_light;
+    Bitmap map_check_dark;
+    Bitmap map_s01data;
+    Bitmap map_s02data;
+    Bitmap map_s03data;
+    Bitmap map_virusdata_grey;
+    Bitmap map_virusdata;
+    Bitmap map_check_easy;
+    Bitmap map_check_nornmal;
+    Bitmap map_check_hard;
+    Bitmap map_ok_btn;
+    Bitmap map_ok_btn2;
+    Botton return_btn;
+    Botton check_ok_btn;
     //Botton stageselect;
 
     Setting setting;
@@ -248,6 +267,8 @@ implements SurfaceHolder.Callback{
     int setalpha = 0;
     int start_alpha;
 
+    int check_alpha = 0;
+
     int upbar_my = -67;
     int upbar_my2 = 67;
     int rightbar_mx = 1325;
@@ -261,6 +282,10 @@ implements SurfaceHolder.Callback{
     int set_btn2_mx = -55,set_btn2_mx2 = 39;
     int sc_rank_bar_my = 790 , sc_rank_bar_my2 = 648;
     int hand_mx = 915,hand_mx2 = 1155,hand_count=3,hand_alpha = 0,hand_recount = 0;
+
+    int checkbar_mx = 1859,checkbar_mx2 = 640;
+    int checkbar_light_mx = 1271,checkbar_light_mx2 = 52;
+    boolean check_Flag;
     //int start_btn_my = 805 , getStart_btn_my2 = 635;
 
 
@@ -321,6 +346,9 @@ implements SurfaceHolder.Callback{
         hand_alpha = 0;
         start_alpha = setalpha;
         hand_recount = 0;
+        checkbar_mx = 1859;
+        checkbar_light_mx = 1271;
+        check_Flag = false;
 
 
 
@@ -364,6 +392,25 @@ implements SurfaceHolder.Callback{
         setting_btn = new Botton(activity, map_set_btn, map_set_btn, set_btn_mx, 160);
         quest_btn = new Botton(activity,map_quest_back,map_quest_btn,set_btn_mx-1,621);
         //tageselect = new Botton(activity, map_stageselect, map_stageselect, 640, 360);
+
+        map_checK_bar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_checkbar), 1280, 412);
+        map_check_font = Graphic.bitSize(LoadBitmap( R.drawable.mapview_finallcheck_font), 1246, 107);
+        map_check_return = Graphic.bitSize(LoadBitmap( R.drawable.mapview_check_return_btn), 140, 131);
+        map_check_light = Graphic.bitSize(LoadBitmap( R.drawable.mapview_checkbar_light), 77, 174);
+        map_check_dark = Graphic.bitSize(LoadBitmap( R.drawable.mapview_checkbar_dark), 77, 174);
+        map_s01data = Graphic.bitSize(LoadBitmap( R.drawable.mapview_s01data), 415, 287);
+        map_s02data = Graphic.bitSize(LoadBitmap( R.drawable.mapview_s02data), 415, 287);;
+        map_s03data = Graphic.bitSize(LoadBitmap( R.drawable.mapview_s03data), 415, 287);;
+        map_virusdata_grey = Graphic.bitSize(LoadBitmap( R.drawable.map_bvirus_live), 596, 292);
+        map_virusdata = Graphic.bitSize(LoadBitmap( R.drawable.map_bvirus_live), 596, 292);
+        map_check_easy = Graphic.bitSize(LoadBitmap( R.drawable.mapview_fn_easy), 137, 50);
+        map_check_nornmal = Graphic.bitSize(LoadBitmap( R.drawable.mapview_fn_normal), 137, 50);
+        map_check_hard = Graphic.bitSize(LoadBitmap( R.drawable.mapview_fn_hard), 137, 50);
+        map_ok_btn = Graphic.bitSize(LoadBitmap( R.drawable.mapview_ok_btn), 241, 147);
+        map_ok_btn2 = Graphic.bitSize(LoadBitmap( R.drawable.mapview_ok_btn2), 241, 147);
+
+        return_btn = new Botton(activity, map_check_return, map_check_return, 1210, 275);
+        check_ok_btn = new Botton(activity, map_ok_btn, map_ok_btn, 640, 647);
 
 
         //---------------新介面圖片載入----------------------
@@ -981,7 +1028,7 @@ implements SurfaceHolder.Callback{
             if(activity.io.hight_rank[activity.io.level][activity.io.difficulty]!=0){
                 Graphic.drawPic(canvas, rank[activity.io.hight_rank[activity.io.level][activity.io.difficulty]-1], 1160, 650, 0, setalpha, paint);
             }
-                num.drawNumberLeftStart(390, 655, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Blue, canvas, paint);
+                num.drawNumberRightStart(390, 650, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Blue, canvas, paint);
 				setting_btn.drawBtm(canvas, paint,set_btn_mx,160);
                 quest_btn.drawBtm(canvas,paint,set_btn_mx+1,621);
                 Graphic.drawPic(canvas, map_set_btn2_back, set_btn2_mx, 121, rot, setalpha, paint);
@@ -990,9 +1037,11 @@ implements SurfaceHolder.Callback{
                 easy.drawBtm(canvas, paint,setalpha);
                 normal.drawBtm(canvas, paint,setalpha);
                 hard.drawBtm(canvas, paint,setalpha);
-                Graphic.drawPic(canvas, map_start_btn_back, 640, 635, 0, setalpha, paint);
-                start.drawBtm(canvas,paint,start_alpha);
-                Graphic.drawPic(canvas, map_startbar, 640, 669, rot, setalpha, paint);
+                if(!check_Flag) {
+                    Graphic.drawPic(canvas, map_start_btn_back, 640, 635, 0, setalpha, paint);
+                    start.drawBtm(canvas, paint, start_alpha);
+                    Graphic.drawPic(canvas, map_startbar, 640, 669, rot, setalpha, paint);
+                }
 
             //控制觸控手勢提示==========================================================
                 if(stage_standby_Flag !=0 && hand_count > 0){
@@ -1038,6 +1087,69 @@ implements SurfaceHolder.Callback{
 
                     Graphic.drawPic(canvas, map_hard_btn_t, 1090, 50, 0, start_alpha, paint);
                 }
+            //最終確認欄============================================================
+            Graphic.drawPic(canvas, map_checK_bar, checkbar_mx, 395, 0, 255, paint);
+            Graphic.drawPic(canvas, map_check_dark, checkbar_light_mx, 383, 0, start_alpha, paint);
+            Graphic.drawPic(canvas, map_check_light, checkbar_light_mx, 383, 0, start_alpha, paint);
+
+            if(check_Flag){
+                checkbar_mx = Coordinate.AnalogSpeedMove(checkbar_mx,checkbar_mx2);
+                checkbar_light_mx = Coordinate.AnalogSpeedMove(checkbar_light_mx,checkbar_light_mx2);
+                if(checkbar_mx == checkbar_mx2 && checkbar_light_mx == checkbar_light_mx2){
+                    check_alpha = 255;
+                    return_btn.drawBtm(canvas,paint);
+                    Graphic.drawPic(canvas, map_ok_btn2, 671, 244, 0, start_alpha, paint);
+                    check_ok_btn.drawBtm(canvas,paint,start_alpha);
+                    Graphic.drawPic(canvas, map_check_font, 671, 244, 0, check_alpha, paint);
+                    switch(stageFlag){
+                        case 0:
+                            break;
+                        case 1:
+                            Graphic.drawPic(canvas,map_s01data , 238, 419, 0, check_alpha, paint);
+                            if(activity.io.level_clear[activity.io.level][activity.io.difficulty]){
+
+                                Graphic.drawPic(canvas, map_virusdata, 887, 424, 0, 255, paint);
+                            }else{
+                                Graphic.drawPic(canvas, map_virusdata_grey, 887,424, 0, 255, paint);
+                            }
+                            break;
+                        case 2:
+                            Graphic.drawPic(canvas,map_s02data , 238, 419, 0, check_alpha, paint);
+                            if(activity.io.level_clear[activity.io.level][activity.io.difficulty]){
+
+                                Graphic.drawPic(canvas, map_virusdata, 887, 424, 0, 255, paint);
+                            }else{
+                                Graphic.drawPic(canvas, map_virusdata_grey, 887,424, 0, 255, paint);
+                            }
+                            break;
+                        case 3:
+                            Graphic.drawPic(canvas,map_s03data , 238, 419, 0, check_alpha, paint);
+                            if(activity.io.level_clear[activity.io.level][activity.io.difficulty]){
+
+                                Graphic.drawPic(canvas, map_virusdata, 887, 424, 0, 255, paint);
+                            }else{
+                                Graphic.drawPic(canvas, map_virusdata_grey, 887,424, 0, 255, paint);
+                            }
+                            break;
+                    }
+                    if(activity.io.difficulty==0){
+                        Graphic.drawPic(canvas, map_check_easy, 269, 535, 0, check_alpha, paint);
+                        //追加條件Flag = 0 會顯示easy-----------------------------------------------
+                    }else if(activity.io.difficulty==1){
+                        Graphic.drawPic(canvas, map_check_nornmal, 269, 535, 0, check_alpha, paint);
+                    }else if(activity.io.difficulty==2){
+                        Graphic.drawPic(canvas, map_check_hard, 269, 535, 0, check_alpha, paint);
+                    }
+                }
+            }else{
+                check_alpha = 0;
+                checkbar_mx = Coordinate.AnalogSpeedMove(checkbar_mx2,checkbar_mx);
+                checkbar_light_mx = Coordinate.AnalogSpeedMove(checkbar_light_mx2,checkbar_light_mx);
+
+            }
+
+
+            //最終確認欄-------------------------------------------------------
 
 
 				//箭頭顯示=========================================================================
@@ -1397,11 +1509,29 @@ implements SurfaceHolder.Callback{
 
 
                     //新介面用關卡選擇----------------------------
-					if(start.isIn(pointx, pointy)){
-						sp.play(sp_id_s[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-						activity.io.video_select=2;
-						activity.changeView(0);
-					}
+                    if(!check_Flag) {
+                        if (start.isIn(pointx, pointy)) {
+                            sp.play(sp_id_s[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+                            check_Flag = true;
+
+                        }
+                    }
+
+                    if(check_Flag){
+                        if(check_ok_btn.isIn(pointx,pointy)){
+                            sp.play(sp_id_s[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+                            check_Flag = false;
+                            checkbar_light_mx = 1271;
+                            checkbar_mx = 1859;
+                            activity.io.video_select=2;
+                            activity.changeView(0);
+                        }
+                        if(return_btn.isIn(pointx,pointy)){
+                        check_Flag = false;
+                        checkbar_light_mx = 1271;
+                        checkbar_mx = 1859;
+                        }
+                    }
 
 					//難易度調整按鈕事件
 					/*if(model.isIn(pointx, pointy)){
@@ -1513,43 +1643,11 @@ implements SurfaceHolder.Callback{
                     if(move_x > 100){
                         set_baralpha_Flag = true;
                         stageselect = 1;
-                        /*stageFlag++;
-                        if(stageFlag >3 || stageFlag ==0){
-                            stageFlag = 1;
-                        }
-                        activity.io.level=stageFlag-1;
 
-                        if (mp!=null){
-
-                            mp.stop();
-                            mp.release();
-                            mp=null;
-                            mp = MediaPlayer.create(this.getContext(),song[activity.io.level]);
-                            mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
-                            mp.setLooping(true);
-                            mp.start();
-
-                        }*/
                     }else if(move_x < -100){
                         set_baralpha_Flag = true;
                         stageselect = -1;
-                        /*stageFlag-- ;
-                        if(stageFlag ==0){
-                            stageFlag = 3;
-                        }
-                        activity.io.level=stageFlag-1;
 
-                        if (mp!=null){
-
-                            mp.stop();
-                            mp.release();
-                            mp=null;
-                            mp = MediaPlayer.create(this.getContext(),song[activity.io.level]);
-                            mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
-                            mp.setLooping(true);
-                            mp.start();
-
-                        }*/
                     }
 
                     if (setting.main_alpha == 0) {
@@ -1557,7 +1655,6 @@ implements SurfaceHolder.Callback{
                             setting.start();
                         }
                     }
-
                 }
 
 				/*if(left_btm1.isIn(pointx, pointy)){
@@ -1633,6 +1730,25 @@ implements SurfaceHolder.Callback{
         map_quest_btn.recycle();
 
         quest_btn.recycle();
+
+        map_checK_bar.recycle();
+        map_check_font.recycle();
+         map_check_return.recycle();
+         map_check_light.recycle();
+        map_check_dark.recycle();
+         map_s01data.recycle();
+         map_s02data.recycle();
+         map_s03data.recycle();
+         map_virusdata_grey.recycle();
+         map_virusdata.recycle();
+         map_check_easy.recycle();
+        map_check_nornmal.recycle();
+        map_check_hard.recycle();
+         return_btn.recycle();
+         check_ok_btn.recycle();
+        map_ok_btn.recycle();
+        map_ok_btn2.recycle();
+
 
 
 		activity.io.speed=set_speed-5;

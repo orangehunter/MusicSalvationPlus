@@ -561,7 +561,7 @@ public class GameView extends SurfaceView
                     case 2:
                         Log.v("Load Charts", "kokoronashi" + difficulty[activity.io.difficulty]);
                         this.boss_show = 222000;
-                        boss_kill = 260000;
+                        boss_kill = 264000;
                         json = activity.io.readGameChart("kokoronashi" + difficulty[activity.io.difficulty]);
                         break;
                     case 3:
