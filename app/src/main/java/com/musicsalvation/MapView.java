@@ -284,7 +284,7 @@ implements SurfaceHolder.Callback{
     int hand_mx = 915,hand_mx2 = 1155,hand_count=3,hand_alpha = 0,hand_recount = 0;
 
     int checkbar_mx = 1860,checkbar_mx2 = 640;
-    int checkbar_light_mx = 1271,checkbar_light_mx2 = 52;
+    int checkbar_light_mx = 1270,checkbar_light_mx2 = 52;
     boolean check_Flag;
     //int start_btn_my = 805 , getStart_btn_my2 = 635;
 
@@ -347,7 +347,7 @@ implements SurfaceHolder.Callback{
         start_alpha = setalpha;
         hand_recount = 0;
         checkbar_mx = 1860;
-        checkbar_light_mx = 1271;
+        checkbar_light_mx = 1270;
         check_Flag = false;
 
 
@@ -608,7 +608,7 @@ implements SurfaceHolder.Callback{
 
 
 		num=new Number(getResources());
-		num.setSize(25, 50);
+		num.setSize(28, 50);
 		rank=new Bitmap[7];
 		rank[6]=Graphic.LoadBitmap(getResources(), R.drawable.r_s, 54,72,true);
 		for(int i=0;i<=5;i++){
@@ -1094,12 +1094,20 @@ implements SurfaceHolder.Callback{
 
             if(check_Flag){
                 if(checkbar_mx > checkbar_mx2){
-                    double mx = (checkbar_mx-checkbar_mx2)/10;
-                    checkbar_mx-=mx;
+                   int x = checkbar_mx - checkbar_mx2;
+                    if(x > 150) {
+                        checkbar_mx -= 150;
+                    }else{
+                        checkbar_mx = checkbar_mx2;
+                    }
 
                 }if(checkbar_light_mx > checkbar_light_mx2){
-                    double mx = (checkbar_mx-checkbar_mx2)/10;
-                    checkbar_mx-=mx;
+                    int x = checkbar_mx - checkbar_mx2;
+                    if(x>150){
+                        checkbar_light_mx -=150;
+                    }else{
+                        checkbar_light_mx = checkbar_light_mx2;
+                    }
                 }
                 //checkbar_mx = Coordinate.AnalogSpeedMove(checkbar_mx,checkbar_mx2);
                 //checkbar_light_mx = Coordinate.AnalogSpeedMove(checkbar_light_mx,checkbar_light_mx2);
@@ -1154,13 +1162,21 @@ implements SurfaceHolder.Callback{
             }else{
                 check_alpha = 0;
 
-                if(checkbar_mx < checkbar_mx2){
-                    double mx = (checkbar_mx-checkbar_mx2)/10;
-                    checkbar_mx+=mx;
+                if(checkbar_mx <= 1860){
+                    int x = 1860 - checkbar_mx ;
+                    if(x > 150) {
+                        checkbar_mx += 150;
+                    }else{
+                        checkbar_mx = 1860;
+                    }
 
-                }if(checkbar_light_mx < checkbar_light_mx2){
-                    double mx = (checkbar_mx-checkbar_mx2)/10;
-                    checkbar_mx+=mx;
+                }if(checkbar_light_mx <= 1270){
+                    int x = 1860 -checkbar_mx ;
+                    if(x>150){
+                        checkbar_light_mx +=150;
+                    }else{
+                        checkbar_light_mx = 1270;
+                    }
                 }
 
 

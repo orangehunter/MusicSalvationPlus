@@ -544,18 +544,18 @@ public class GameView extends SurfaceView
                 switch (activity.io.level) {//關卡
                     case 0:
                         Log.v("Load Charts", "celluloid_yuyao" + difficulty[activity.io.difficulty]);
-                        this.boss_show = 98000;//TAG BOSS進場時間
-                        boss_kill = 128000;
+                        this.boss_show = 120000;//TAG BOSS進場時間
+                        boss_kill = 154000;
                         json = FilesAndData.readGameChart("celluloid_yuyao" + difficulty[activity.io.difficulty]);
                         break;
                     case 1:
                         Log.v("Load Charts", "tipsydessert_yuyao" + difficulty[activity.io.difficulty]);
                         this.boss_show = 90000;
-                        boss_kill = 120000;
+                        boss_kill = 129800;
                         //this.boss_show=5000;
                         //boss_kill=10000;
-                        percent = 50000;
-                        en = 90;
+                        //percent = 50000;
+                        //en = 90;
                         json = activity.io.readGameChart("tipsydessert_yuyao" + difficulty[activity.io.difficulty]);
                         break;
                     case 2:
