@@ -1514,7 +1514,7 @@ implements SurfaceHolder.Callback{
 				}*/
 				//第三關--------------------------------------------------------
 
-				if(!setting.main_flag && !check_Flag) {
+				if(!setting.main_flag) {
 
                     downX = pointx;
                     downY = pointy;
