@@ -401,7 +401,7 @@ implements SurfaceHolder.Callback{
         map_s01data = Graphic.bitSize(LoadBitmap( R.drawable.mapview_s01data), 415, 287);
         map_s02data = Graphic.bitSize(LoadBitmap( R.drawable.mapview_s02data), 415, 287);;
         map_s03data = Graphic.bitSize(LoadBitmap( R.drawable.mapview_s03data), 415, 287);;
-        map_virusdata_grey = Graphic.bitSize(LoadBitmap( R.drawable.map_bvirus_live), 596, 292);
+        map_virusdata_grey = Graphic.bitSize(LoadBitmap( R.drawable.map_bvirus_dead), 596, 292);
         map_virusdata = Graphic.bitSize(LoadBitmap( R.drawable.map_bvirus_live), 596, 292);
         map_check_easy = Graphic.bitSize(LoadBitmap( R.drawable.mapview_fn_easy), 137, 50);
         map_check_nornmal = Graphic.bitSize(LoadBitmap( R.drawable.mapview_fn_normal), 137, 50);
