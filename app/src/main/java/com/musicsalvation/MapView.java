@@ -1514,7 +1514,7 @@ implements SurfaceHolder.Callback{
 				}*/
 				//第三關--------------------------------------------------------
 
-				if(!setting.main_flag) {
+				if(!setting.main_flag && !check_Flag) {
 
                     downX = pointx;
                     downY = pointy;
@@ -1575,6 +1575,7 @@ implements SurfaceHolder.Callback{
 							sp.play(sp_id[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 						}
 					}*/
+
 
 						if(easy.isIn(pointx, pointy)){
 							sp.play(sp_id_s[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
