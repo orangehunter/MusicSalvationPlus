@@ -137,30 +137,42 @@ implements SurfaceHolder.Callback{
 		paint.setAntiAlias(true);//開啟抗鋸齒
 
 
-        mv_background = Graphic.bitSize(LoadBitmap( R.drawable.mv_background), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-        mv_background_2= Graphic.bitSize(LoadBitmap( R.drawable.mv_background_2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		main_title=			Graphic.bitSize(LoadBitmap( R.drawable.main_title ),730 ,269 );
-		main_touchstart=	Graphic.bitSize(LoadBitmap( R.drawable.main_touchstart ), 594, 85);
+        mv_background = Graphic.LoadBitmap(activity.getResources(),R.drawable.mv_background,1280,720,false); //Graphic.bitSize(LoadBitmap( R.drawable.mv_background), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+        mv_background_2= Graphic.LoadBitmap(activity.getResources(), R.drawable.mv_background_2, 1280, 720, false);//Graphic.bitSize(LoadBitmap( R.drawable.mv_background_2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		main_title=			Graphic.LoadBitmap(activity.getResources(), R.drawable.main_title, 730, 269, false);//Graphic.bitSize(LoadBitmap(R.drawable.main_title), 730, 269);
+		main_touchstart=	Graphic.LoadBitmap(activity.getResources(), R.drawable.main_touchstart, 594, 85, false);//Graphic.bitSize(LoadBitmap( R.drawable.main_touchstart ), 594, 85);
 
-		left_xia =          Graphic.bitSize(LoadBitmap( R.drawable.xia), 385, 717);
+		left_xia =          Graphic.LoadBitmap(activity.getResources(), R.drawable.xia, 385, 717, false);//Graphic.bitSize(LoadBitmap( R.drawable.xia), 385, 717);
 
-		storymode =  			Graphic.bitSize(LoadBitmap( R.drawable.mv_storymode), 314,85);
-		createmode  =  			Graphic.bitSize(LoadBitmap( R.drawable.mv_createmode), 314,85);
+		storymode =  			Graphic.LoadBitmap(activity.getResources(), R.drawable.mv_storymode, 314, 85, false);//Graphic.bitSize(LoadBitmap( R.drawable.mv_storymode), 314,85);
+		createmode  =  			Graphic.LoadBitmap(activity.getResources(), R.drawable.mv_createmode, 314, 85, false);//Graphic.bitSize(LoadBitmap( R.drawable.mv_createmode), 314,85);
 
-        wrmax[0] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_0), 1280,720);
-        wrmax[1] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_1), 1280,720);
+		for(int i=0;i<5;i++) {
+			wrmax[i] = Graphic.LoadBitmap(activity.getResources(), R.drawable.main2_wr_0+(i*2), 1280, 720, false);//Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_0), 1280,720);
+		}
+		/*	wrmax[1] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_1), 1280,720);
         wrmax[2] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_2), 1280,720);
         wrmax[3] = Graphic.bitSize(LoadBitmap(R.drawable.main2_wr_3), 1280, 720);
-        wrmax[4] = Graphic.bitSize(LoadBitmap(R.drawable.main2_wr_4), 1280, 720);
+        wrmax[4] = Graphic.bitSize(LoadBitmap(R.drawable.main2_wr_4), 1280, 720);*/
 
-		wrmaxg[0] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_0g), 1280,720);
+		for(int i=0;i<5;i++) {
+			wrmaxg[i] = Graphic.LoadBitmap(activity.getResources(), R.drawable.main2_wr_0g+(i*2), 1280, 720, false);//Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_0), 1280,720);
+		}
+		/*wrmaxg[0] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr), 1280,720);
 		wrmaxg[1] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_1g), 1280,720);
 		wrmaxg[2] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_2g), 1280,720);
 		wrmaxg[3] = Graphic.bitSize(LoadBitmap(R.drawable.main2_wr_3g), 1280, 720);
-		wrmaxg[4] = Graphic.bitSize(LoadBitmap(R.drawable.main2_wr_4g), 1280, 720);
+		wrmaxg[4] = Graphic.bitSize(LoadBitmap(R.drawable.main2_wr_4g), 1280, 720);*/
 
+		for(int i=0;i<9;i++){
+			if(i==0||i==1||i==7||i==8){
+				main2_fs_sp[i] = Graphic.LoadBitmap(activity.getResources(), R.drawable.touch_0 , 50, 50, false);
+			}else {
+				main2_fs_sp[i] = Graphic.LoadBitmap(activity.getResources(), R.drawable.aonbar_0 + (i-1), 50, 50, false);
+			}
+		}
 
-		main2_fs_sp[0]= Graphic.bitSize(LoadBitmap(R.drawable.touch_0), 50, 50);
+		/*main2_fs_sp[0]= Graphic.bitSize(LoadBitmap(R.drawable.touch_0), 50, 50);
 		main2_fs_sp[1]= Graphic.bitSize(LoadBitmap(R.drawable.touch_0), 50, 50);
 		main2_fs_sp[2]= Graphic.bitSize(LoadBitmap(R.drawable.touch_1), 50, 50);
 		main2_fs_sp[3]= Graphic.bitSize(LoadBitmap(R.drawable.touch_2), 50, 50);
@@ -169,9 +181,13 @@ implements SurfaceHolder.Callback{
 		main2_fs_sp[5]= Graphic.bitSize(LoadBitmap(R.drawable.touch_4), 50, 50);
 		main2_fs_sp[6]= Graphic.bitSize(LoadBitmap(R.drawable.touch_5), 50, 50);
 		main2_fs_sp[7]= Graphic.bitSize(LoadBitmap(R.drawable.touch_0), 50, 50);
-		main2_fs_sp[8]= Graphic.bitSize(LoadBitmap(R.drawable.touch_0), 50, 50);
+		main2_fs_sp[8]= Graphic.bitSize(LoadBitmap(R.drawable.touch_0), 50, 50);*/
 
-		sonbar[0]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_0), 396+36,165+15);
+		for(int i=0;i<11;i++){
+			sonbar[i]=Graphic.LoadBitmap(activity.getResources(),R.drawable.aonbar_0+i, 396+36,165+15,false);
+		}
+
+		/*sonbar[0]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_0), 396+36,165+15);
 		sonbar[1]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_1), 396+36,165+15);
 		sonbar[2]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_2), 396+36,165+15);
 		sonbar[3]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_3), 396+36,165+15);
@@ -182,26 +198,26 @@ implements SurfaceHolder.Callback{
 		sonbar[7]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_7), 396+36,165+15);
 		sonbar[8]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_8), 396+36,165+15);
 		sonbar[9]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_9), 396+36,165+15);
-		sonbar[10]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_10), 396+36,165+15);
+		sonbar[10]=Graphic.bitSize(LoadBitmap(R.drawable.aonbar_10), 396+36,165+15);*/
 
 		stor_s=Graphic.bitSize(LoadBitmap(R.drawable.gio_s), 314,85);
-		tro_s=Graphic.bitSize(LoadBitmap(R.drawable.tron_s), 314,85);
+		tro_s=Graphic.bitSize(LoadBitmap(R.drawable.tron_s), 314, 85);
 
-		big_bg= Graphic.bitSize(LoadBitmap(R.drawable.black_bg), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		big_bg= Graphic.LoadBitmap(activity.getResources(), R.drawable.black_bg, 1280, 720, false);//Graphic.bitSize(LoadBitmap(R.drawable.black_bg), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 
-		ww_bar= Graphic.bitSize(LoadBitmap(R.drawable.tati_gg), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		ww_bar=Graphic.LoadBitmap(activity.getResources(), R.drawable.tati_gg, 1280, 720, false);// Graphic.bitSize(LoadBitmap(R.drawable.tati_gg), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 
-		hand=Graphic.bitSize(LoadBitmap(R.drawable.hand), 450-45,333-33);
+		hand=Graphic.LoadBitmap(activity.getResources(), R.drawable.hand, 450-45,333-33, false);//Graphic.bitSize(LoadBitmap(R.drawable.hand), 450 - 45, 333 - 33);
 
-		val= Graphic.bitSize(LoadBitmap(R.drawable.val), 400-40,288-28);
+		val= Graphic.LoadBitmap(activity.getResources(), R.drawable.val, 400 - 40, 288 - 28, false);//Graphic.bitSize(LoadBitmap(R.drawable.val), 400 - 40, 288 - 28);
 
-		w_bar= Graphic.bitSize(LoadBitmap( R.drawable.w_bar), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		BBB=Graphic.bitSize(LoadBitmap( R.drawable.fv_star_s), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		B_bar=Graphic.bitSize(LoadBitmap( R.drawable.tati_g), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		ms_cl[0] = Graphic.bitSize(LoadBitmap( R.drawable.ms_b1), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-	    ms_cl[1] = Graphic.bitSize(LoadBitmap( R.drawable.ms_b2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		ms_cl[2] = Graphic.bitSize(LoadBitmap( R.drawable.ms_b3), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		ms_cl[3] = Graphic.bitSize(LoadBitmap( R.drawable.ms_b4), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		w_bar= Graphic.LoadBitmap(activity.getResources(), R.drawable.w_bar, 1280, 720, false);//Graphic.bitSize(LoadBitmap( R.drawable.w_bar), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		BBB=Graphic.LoadBitmap(activity.getResources(),R.drawable.fv_star_s,1280,720,false);//Graphic.bitSize(LoadBitmap( R.drawable.fv_star_s), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		B_bar=Graphic.LoadBitmap(activity.getResources(),R.drawable.tati_g,1280,720,false);//Graphic.bitSize(LoadBitmap( R.drawable.tati_g), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		ms_cl[0] = Graphic.LoadBitmap(activity.getResources(),R.drawable.ms_b1,1280,720,false);//Graphic.bitSize(LoadBitmap( R.drawable.ms_b1), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+	    ms_cl[1] = Graphic.LoadBitmap(activity.getResources(),R.drawable.ms_b2,1280,720,false);//Graphic.bitSize(LoadBitmap( R.drawable.ms_b2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		ms_cl[2] = Graphic.LoadBitmap(activity.getResources(),R.drawable.ms_b3,1280,720,false);//Graphic.bitSize(LoadBitmap( R.drawable.ms_b3), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		ms_cl[3] =Graphic.LoadBitmap(activity.getResources(),R.drawable.ms_b4,1280,720,false); //Graphic.bitSize(LoadBitmap( R.drawable.ms_b4), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 
 
 
