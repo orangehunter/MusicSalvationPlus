@@ -288,9 +288,12 @@ public class MainActivity extends Activity{
                     this.changeView(1);
                     break;
                 case 2:
-                case 6:
                     Constant.Flag=false;
                     this.changeView(1);
+                    break;
+                case 6:
+                    Constant.Flag=false;
+                    this.changeView(8);
                     break;
                 case 3:
                     Constant.Flag=false;
