@@ -307,8 +307,10 @@ implements SurfaceHolder.Callback{
                                 activity.changeView(8);
                             }
                         }else if(mainFlag == 4){
-                            activity.io.video_select=3;
-                            activity.changeView(0);
+                            if(staffList.isIn(pointx, pointy)) {
+                                activity.io.video_select = 3;
+                                activity.changeView(0);
+                            }
                         }
                     }
                     deJump=true;
