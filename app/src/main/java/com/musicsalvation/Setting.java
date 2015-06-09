@@ -39,9 +39,9 @@ public class Setting {
         bar=Graphic.LoadBitmap(activity.getResources(),R.drawable.st_volbar,490,90,false);
         btn=Graphic.LoadBitmap(activity.getResources(),R.drawable.st_volbtn,46,97,false);
         music_volum=new MySeekBar(activity,bar,btn,730,175);
-        music_volum.setSeekBarFloat(activity.io.mp_Voiume);
+        music_volum.setSeekBarFloat(activity.io.mp_Voiume*100);
         button_volum=new MySeekBar(activity,bar,btn,730,300);
-        button_volum.setSeekBarFloat(activity.io.sp_Voiume);
+        button_volum.setSeekBarFloat(activity.io.sp_Voiume*100);
 
         btn_on=new Bitmap[5];
         btn_off=new Bitmap[5];
@@ -51,6 +51,8 @@ public class Setting {
             btn_off[i]=Graphic.LoadBitmap(activity.getResources(),R.drawable.st_f_se01+i,84,84,true);
             sound_btn[i]=new Botton(activity,btn_on[i],btn_off[i],525+(110*i),420);
         }
+        sound_btn[activity.io.sp_num].setBottomTo(true);
+
         ext=Graphic.LoadBitmap(activity.getResources(),R.drawable.st_exit_btn,140,130,true);
         exit=new Botton(activity,ext,ext,75,180);
 

@@ -402,7 +402,7 @@ implements SurfaceHolder.Callback{
         map_s02data = Graphic.bitSize(LoadBitmap( R.drawable.mapview_s02data), 415, 287);;
         map_s03data = Graphic.bitSize(LoadBitmap( R.drawable.mapview_s03data), 415, 287);;
         map_virusdata_grey = Graphic.bitSize(LoadBitmap( R.drawable.map_bvirus_live), 596, 292);
-        map_virusdata = Graphic.bitSize(LoadBitmap( R.drawable.map_bvirus_live), 596, 292);
+        map_virusdata = Graphic.bitSize(LoadBitmap( R.drawable.map_bvirus_dead), 596, 292);
         map_check_easy = Graphic.bitSize(LoadBitmap( R.drawable.mapview_fn_easy), 137, 50);
         map_check_nornmal = Graphic.bitSize(LoadBitmap( R.drawable.mapview_fn_normal), 137, 50);
         map_check_hard = Graphic.bitSize(LoadBitmap( R.drawable.mapview_fn_hard), 137, 50);
@@ -1516,8 +1516,7 @@ implements SurfaceHolder.Callback{
 
 				if(!setting.main_flag) {
 
-                    downX = pointx;
-                    downY = pointy;
+
 
                     //新介面用關卡選擇========================
 
@@ -1561,6 +1560,8 @@ implements SurfaceHolder.Callback{
                             check_Flag = true;
 
                         }
+                        downX = pointx;
+                        downY = pointy;
                     }
 
 
@@ -1670,17 +1671,20 @@ implements SurfaceHolder.Callback{
                     break;
                 }*/
                 if(!setting.main_flag) {
-                    upX = pointx;
-                    upY = pointy;
-                    float move_x = upX - downX;
-                    if(move_x > 100){
-                        set_baralpha_Flag = true;
-                        stageselect = 1;
+                    if(!check_Flag) {
+                        upX = pointx;
+                        upY = pointy;
 
-                    }else if(move_x < -100){
-                        set_baralpha_Flag = true;
-                        stageselect = -1;
+                        float move_x = upX - downX;
+                        if (move_x > 100) {
+                            set_baralpha_Flag = true;
+                            stageselect = 1;
 
+                        } else if (move_x < -100) {
+                            set_baralpha_Flag = true;
+                            stageselect = -1;
+
+                        }
                     }
 
                     if (setting.main_alpha == 0) {

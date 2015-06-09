@@ -15,7 +15,7 @@ public class Video extends SurfaceView {
 			R.raw.story,
 			R.raw.access,
 			R.raw.staff_csu};
-	int view[]={	11,
+	int view[]={	1,
 			2,
 			3,
 			1};
