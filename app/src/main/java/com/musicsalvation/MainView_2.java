@@ -2,12 +2,14 @@ package com.musicsalvation;
 //
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
@@ -27,7 +29,7 @@ implements SurfaceHolder.Callback{
     //特效
     int spp=0;
 
-
+private Typeface mface;//測試
 	int mbx=1000000;//白棒飛行速度 "yo"
 	int really_mbx=0;
 
@@ -305,6 +307,8 @@ implements SurfaceHolder.Callback{
 			canvas.clipRect(new Rect(0, 0, Constant.SCREEN_WIDTH, Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
 			canvas.drawColor(Color.WHITE);//界面設定為黑色
 
+
+
 			if (!back_mp.isPlaying()) {
 				back_mp.prepareAsync();
 				back_mp.start();
@@ -538,8 +542,17 @@ implements SurfaceHolder.Callback{
 				Graphic.drawPic(canvas, ww_bar, bar_m, 720 / 2, 0, 255, paint);
 
 			}
+			paint.setTextSize((paint.getTextSize() * 5));
 
-		}
+			//mface=Typeface.createFromAsset(getContext().getAssets(),"wcl_02");
+			//mface=Typeface.createFromFile("assets/wcl_02");
+			paint.setTypeface(mface);
+			paint.setColor(Color.rgb(255, 255, 0));
+			canvas.drawText("33333幹什麼", 720, 640, paint);
+
+
+			paint.reset();
+		}//這裡
 
 	}
 	@Override
