@@ -158,7 +158,7 @@ implements SurfaceHolder.Callback{
         wrmax[4] = Graphic.bitSize(LoadBitmap(R.drawable.main2_wr_4), 1280, 720);*/
 
 		for(int i=0;i<5;i++) {
-			wrmaxg[i] = Graphic.LoadBitmap(activity.getResources(), R.drawable.main2_wr_0g+(i*2), 1280, 720, false);//Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_0), 1280,720);
+			wrmaxg[i] = Graphic.LoadBitmap(activity.getResources(), R.drawable.main2_wr_0g+(i*2), 1280, 180, false);//Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_0), 1280,720);
 		}
 		/*wrmaxg[0] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr), 1280,720);
 		wrmaxg[1] = Graphic.bitSize(LoadBitmap( R.drawable.main2_wr_1g), 1280,720);
@@ -502,7 +502,9 @@ implements SurfaceHolder.Callback{
 					staffList.drawBtm(canvas, paint);
 				}
 			}
-
+			if (mbx<1000&& mbx > 655) {//時間限制參數
+				really_mbx = Coordinate.AnalogSpeedMove(really_mbx, 1600);
+			}
 			if (mbx >= 730) {
 
 
@@ -510,9 +512,7 @@ implements SurfaceHolder.Callback{
 
 				//Graphic.drawPic(canvas, w_bar, mbx, 360, 0, BBB_S_B, paint);//b
 
-				if (mbx<1000&& mbx > 655) {//時間限制參數
-					really_mbx = Coordinate.AnalogSpeedMove(really_mbx, 1280);
-				}
+
 
 					Graphic.drawRect(canvas,Color.argb(255,001,248,255),0,360-90,really_mbx,360+90,paint);//畫出色塊
 				if (mbx<730+50){
