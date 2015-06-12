@@ -29,6 +29,8 @@ implements SurfaceHolder.Callback{
 
 
 	int mbx=1000000;//白棒飛行速度 "yo"
+	int really_mbx=0;
+
 	int BBB_S=300;
 	int BBB_S_B=255;
 
@@ -168,7 +170,7 @@ implements SurfaceHolder.Callback{
 			if(i==0||i==1||i==7||i==8){
 				main2_fs_sp[i] = Graphic.LoadBitmap(activity.getResources(), R.drawable.touch_0 , 50, 50, false);
 			}else {
-				main2_fs_sp[i] = Graphic.LoadBitmap(activity.getResources(), R.drawable.aonbar_0 + (i-1), 50, 50, false);
+				main2_fs_sp[i] = Graphic.LoadBitmap(activity.getResources(), R.drawable.touch_0 + (i-1), 50, 50, false);
 			}
 		}
 
@@ -214,10 +216,10 @@ implements SurfaceHolder.Callback{
 		w_bar= Graphic.LoadBitmap(activity.getResources(), R.drawable.w_bar, 1280, 720, false);//Graphic.bitSize(LoadBitmap( R.drawable.w_bar), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		BBB=Graphic.LoadBitmap(activity.getResources(),R.drawable.fv_star_s,1280,720,false);//Graphic.bitSize(LoadBitmap( R.drawable.fv_star_s), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		B_bar=Graphic.LoadBitmap(activity.getResources(),R.drawable.tati_g,1280,720,false);//Graphic.bitSize(LoadBitmap( R.drawable.tati_g), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		ms_cl[0] = Graphic.LoadBitmap(activity.getResources(),R.drawable.ms_b1,1280,720,false);//Graphic.bitSize(LoadBitmap( R.drawable.ms_b1), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-	    ms_cl[1] = Graphic.LoadBitmap(activity.getResources(),R.drawable.ms_b2,1280,720,false);//Graphic.bitSize(LoadBitmap( R.drawable.ms_b2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		ms_cl[2] = Graphic.LoadBitmap(activity.getResources(),R.drawable.ms_b3,1280,720,false);//Graphic.bitSize(LoadBitmap( R.drawable.ms_b3), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		ms_cl[3] =Graphic.LoadBitmap(activity.getResources(),R.drawable.ms_b4,1280,720,false); //Graphic.bitSize(LoadBitmap( R.drawable.ms_b4), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		ms_cl[0] = Graphic.LoadBitmap(activity.getResources(),R.drawable.ms_b1,1280,180,false);//Graphic.bitSize(LoadBitmap( R.drawable.ms_b1), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+	    ms_cl[1] = Graphic.LoadBitmap(activity.getResources(),R.drawable.ms_b2,1280,180,false);//Graphic.bitSize(LoadBitmap( R.drawable.ms_b2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		ms_cl[2] = Graphic.LoadBitmap(activity.getResources(),R.drawable.ms_b3,1280,180,false);//Graphic.bitSize(LoadBitmap( R.drawable.ms_b3), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		ms_cl[3] =Graphic.LoadBitmap(activity.getResources(),R.drawable.ms_b4,1280,180,false); //Graphic.bitSize(LoadBitmap( R.drawable.ms_b4), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 
 
 
@@ -506,7 +508,13 @@ implements SurfaceHolder.Callback{
 
 				Graphic.drawPic(canvas, big_bg, 1280 / 2, 720 / 2, 0, 255, paint);//black bg
 
-				Graphic.drawPic(canvas, w_bar, mbx, 360, 0, BBB_S_B, paint);//b
+				//Graphic.drawPic(canvas, w_bar, mbx, 360, 0, BBB_S_B, paint);//b
+
+				if (mbx<1000&& mbx > 655) {//時間限制參數
+					really_mbx = Coordinate.AnalogSpeedMove(really_mbx, 1280);
+				}
+
+					Graphic.drawRect(canvas,Color.argb(255,001,248,255),0,360-90,really_mbx,360+90,paint);//畫出色塊
 				if (mbx<730+50){
 					BBB_S_B=Coordinate.AnalogSpeedMove(BBB_S_B, 0);
 				}
@@ -517,6 +525,7 @@ implements SurfaceHolder.Callback{
 
 			if (mbx < 730 && mbx > 655) {
 				Graphic.drawPic(canvas, BBB, 1280 / 2, 720 / 2, 0, 255, paint);
+
 			}
 			if (mbx < 657) {
 
