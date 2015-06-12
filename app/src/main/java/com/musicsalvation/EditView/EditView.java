@@ -22,6 +22,8 @@ import com.musicsalvation.Graphic;
 import com.musicsalvation.Constant;
 import com.musicsalvation.touchPoint;
 
+import org.json.JSONObject;
+
 @SuppressLint("ViewConstructor")
 public class EditView extends SurfaceView implements SurfaceHolder.Callback{
     MainActivity activity;
@@ -71,7 +73,7 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
         if (charts!=null) {
             ce.ct.chart_key = charts.readChartsKey();
         }else {
-            ce.ct.chart_key=new SparseArray<>();
+            ce.ct.chart_key=new SparseArray<JSONObject>();
         }
 
 
