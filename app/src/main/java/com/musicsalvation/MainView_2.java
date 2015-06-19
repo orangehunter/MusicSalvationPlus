@@ -583,8 +583,8 @@ implements SurfaceHolder.Callback{
                             }
 
                             if(creatbtm.isIn(pointx, pointy)){
-                                //TODO 還沒有改進創遊模式
-                                activity.changeView(8);
+                                //TODO 劇情介面測試中
+                                activity.changeView(12);
                             }
                         }
                     }
