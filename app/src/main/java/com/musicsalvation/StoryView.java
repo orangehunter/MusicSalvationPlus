@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
@@ -35,6 +36,7 @@ implements SurfaceHolder.Callback{
 	Bitmap createmode;
 	Bitmap main_title;
 	Bitmap main_touchstart;
+	Chat chat;
 
 	Bitmap left_xia;
 	//Bitmap right_miku;
@@ -73,6 +75,8 @@ implements SurfaceHolder.Callback{
 
 	String stage1[] = {"aa","bb","cc"};
 
+	String string = "RRR";
+
 
 	int alpha = 5;
 	int alpha2 = 0;
@@ -106,11 +110,13 @@ implements SurfaceHolder.Callback{
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
 		paint = new Paint();//建立畫筆
-		paint.setAntiAlias(true);//開啟抗鋸齒
-		/*main_back=			Graphic.bitSize(LoadBitmap( R.drawable.main_back3), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		main_back2=			Graphic.bitSize(LoadBitmap( R.drawable.main_back2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		main_back3=			Graphic.bitSize(LoadBitmap( R.drawable.tellyouworld), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		*/
+		paint.setAntiAlias(true);//開啟抗鋸齒.
+
+		chat.Fontsize(45, paint);
+		chat.Fontcolor(android.R.color.white,paint);
+
+
+
 
         mv_background = Graphic.bitSize(LoadBitmap( R.drawable.mv_background), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         mv_background_2= Graphic.bitSize(LoadBitmap( R.drawable.mv_background_2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
@@ -192,10 +198,15 @@ implements SurfaceHolder.Callback{
 	@SuppressLint("DrawAllocation")
 	@Override
 	protected void onDraw(Canvas canvas) {//重新定義的繪制方法
-		if(canvas!=null){
+		if (canvas != null) {
 			super.onDraw(canvas);
-			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
+			canvas.clipRect(new Rect(0, 0, Constant.SCREEN_WIDTH, Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
 			canvas.drawColor(Color.BLACK);//界面設定為黑色
+
+
+
+			chat.DrawFont(string,640,360,canvas,paint);
+
 
 			if(!back_mp.isPlaying()){
 				back_mp.prepareAsync();
@@ -204,65 +215,8 @@ implements SurfaceHolder.Callback{
 
             Graphic.drawPic(canvas, mv_background, 1280/2, 720/2, 0, 255, paint);//背景
 
-            spp=spp+20;
 
-            if (spp>=255){
-                spp=0;
-            }
-            Graphic.drawPic(canvas, mv_background_2, 1280/2, 720/2, 0, 150-spp, paint);//背景
-			/*if(!hidden_flag){
-				if(apa<= 10){
-					a =7;
-				}
-				if(apa >240){
-					a = -7;
-				}
-				apa+= a;
-				Graphic.drawPic(canvas, main_back, 1280/2, 720/2, 0, 255, paint);//背景
-				Graphic.drawPic(canvas, main_back2, 1280/2, 720/2, 0, apa, paint);
-			}else{
-				Graphic.drawPic(canvas, main_back3, 1280/2, 720/2, 0, 255, paint);//背景
-			}*/
 
-			if(mainFlag==0){
-				if(i<250)
-					i+=j;//透明度參數
-				Graphic.drawPic(canvas, main_title, mtx, mty, 0, i, paint);//Title
-				mty=Coordinate.AnalogSpeedMove(mty, mty1);
-				if(mty==mty1){
-					mtoa+=mtoc;
-					Graphic.drawPic(canvas, main_touchstart, 1280/2, mtoy, 0, mtoa, paint);
-					if(mtoa>235)
-						mtoc=-7;
-					if(mtoa<20)
-						mtoc=7;
-				}
-
-				paint.reset();
-			}
-			if(mainFlag!=0){
-				Graphic.drawPic(canvas, main_title, mtx, mty, 0, 255, paint);//Title
-				mty=Coordinate.AnalogSpeedMove(mty, mty2);
-
-				Graphic.drawPic(canvas, left_xia, mlx, mly, 0, 255, paint);//Left
-				mlx=Coordinate.AnalogSpeedMove(mlx, mlx1);
-
-				//Graphic.drawPic(canvas, right_miku, mrx, mry, 0, 255, paint);//Right
-				mrx=Coordinate.AnalogSpeedMove(mrx, mrx1);
-
-				/*alpha2+=alpha;
-				if(alpha2 > 250){
-					alpha = -10;
-				}
-				if(alpha2 <100){
-					alpha = 10;
-				}*/
-				storybtm.drawBtm(canvas, paint);
-				creatbtm.drawBtm(canvas, paint);
-				if(hidden_flag){
-					staffList.drawBtm(canvas, paint);
-				}
-			}
 		}
 	}
 	@Override
@@ -274,47 +228,14 @@ implements SurfaceHolder.Callback{
 			{
 			case MotionEvent.ACTION_DOWN://按下
 				if(deJump == true){
-                    if(mainFlag==0) {
-                        sp.play(btn_se[1], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-                        mainFlag = 1;
 
-                    }else if(mainFlag !=0){
-                        if(storybtm.isIn(pointx, pointy)){
-                            sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-                            mainFlag = 2;
-                        }
-                        if(creatbtm.isIn(pointx, pointy)){
-                            sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-                            creatbtm.setBottomTo(true);
-                            mainFlag = 3;
-                        }
-                        if(hidden_flag){
-                            if(staffList.isIn(pointx, pointy)){
-                                mainFlag = 4;
-                            }
-                        }
-                    }
 				}
 				deJump = false;
 				break;
                 case MotionEvent.ACTION_UP://抬起
                     if(deJump==false) {//防止彈跳part2
-                        if (mainFlag == 2) {
-                            if (storybtm.isIn(pointx, pointy)) {//進入地圖畫面
-                                activity.io.video_select = 1;
-                                activity.changeView(0);
-                            }
-                        }else if(mainFlag == 3) {
-                            if (creatbtm.isIn(pointx, pointy)) {
-                                //TODO 還沒有改進創遊模式
-                                activity.changeView(8);
-                            }
-                        }else if(mainFlag == 4){
-                            if(staffList.isIn(pointx, pointy)) {
-                                activity.io.video_select = 3;
-                                activity.changeView(0);
-                            }
-                        }
+
+
                     }
                     deJump=true;
                     break;

@@ -213,6 +213,7 @@ public class MainActivity extends Activity{
         Message msg = toastHandler.obtainMessage(1,what);
         toastHandler.sendMessage(msg);
     }
+
     Handler toastHandler = new Handler(){//處理各個SurfaceView傳送的Alert訊息
         public void handleMessage(Message msg) {
             createAlartDialog((String)msg.obj);
