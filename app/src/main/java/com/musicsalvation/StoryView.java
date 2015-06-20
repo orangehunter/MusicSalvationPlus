@@ -254,8 +254,8 @@ implements SurfaceHolder.Callback{
 				if(alpha2 <100){
 					alpha = 10;
 				}*/
-				storybtm.drawBtm(canvas, paint);
-				creatbtm.drawBtm(canvas, paint);
+				//storybtm.drawBtm(canvas, paint);
+				//creatbtm.drawBtm(canvas, paint);
 				if(hidden_flag){
 					staffList.drawBtm(canvas, paint);
 				}

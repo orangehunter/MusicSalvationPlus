@@ -93,7 +93,7 @@ public class MainActivity extends Activity{
                     break;
                 case 12:
                     goToStoryView();
-
+                    break;
 
                 case 255:
                     Exit();
@@ -298,11 +298,11 @@ public class MainActivity extends Activity{
                     break;
                 case 8:
                     Constant.Flag=false;
-                    this.changeView(1);
+                    this.changeView(11);
                     break;
                 case 2:
                     Constant.Flag=false;
-                    this.changeView(1);
+                    this.changeView(11);
                     break;
                 case 6:
                     Constant.Flag=false;
