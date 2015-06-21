@@ -44,6 +44,8 @@ implements SurfaceHolder.Callback{
 	Botton creatbtm;
 	Botton staffList;
 
+	String string = "RRRRRRRRRRRRRRRRRRRR";
+
 
 
 	int mainFlag=0;
@@ -107,7 +109,9 @@ implements SurfaceHolder.Callback{
 		/*main_back=			Graphic.bitSize(LoadBitmap( R.drawable.main_back3), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		main_back2=			Graphic.bitSize(LoadBitmap( R.drawable.main_back2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 		main_back3=			Graphic.bitSize(LoadBitmap( R.drawable.tellyouworld), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+
 		*/
+
 
         mv_background = Graphic.bitSize(LoadBitmap( R.drawable.mv_background), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
         mv_background_2= Graphic.bitSize(LoadBitmap( R.drawable.mv_background_2), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
@@ -191,22 +195,27 @@ implements SurfaceHolder.Callback{
 	protected void onDraw(Canvas canvas) {//重新定義的繪制方法
 		if(canvas!=null){
 			super.onDraw(canvas);
-			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
+			canvas.clipRect(new Rect(0, 0, Constant.SCREEN_WIDTH, Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
 			canvas.drawColor(Color.BLACK);//界面設定為黑色
 
 			if(!back_mp.isPlaying()){
 				back_mp.prepareAsync();
 				back_mp.start();
 			}
+			paint.setTextSize(45);
+			paint.setColor(Color.WHITE);
+			canvas.drawText(string,640,320,paint);
 
-            Graphic.drawPic(canvas, mv_background, 1280/2, 720/2, 0, 255, paint);//背景
+
+
+            //Graphic.drawPic(canvas, mv_background, 1280/2, 720/2, 0, 255, paint);//背景
 
             spp=spp+20;
 
             if (spp>=255){
                 spp=0;
             }
-            Graphic.drawPic(canvas, mv_background_2, 1280/2, 720/2, 0, 150-spp, paint);//背景
+           // Graphic.drawPic(canvas, mv_background_2, 1280/2, 720/2, 0, 150-spp, paint);//背景
 			/*if(!hidden_flag){
 				if(apa<= 10){
 					a =7;
@@ -221,7 +230,7 @@ implements SurfaceHolder.Callback{
 				Graphic.drawPic(canvas, main_back3, 1280/2, 720/2, 0, 255, paint);//背景
 			}*/
 
-			if(mainFlag==0){
+			/*if(mainFlag==0){
 				if(i<250)
 					i+=j;//透明度參數
 				Graphic.drawPic(canvas, main_title, mtx, mty, 0, i, paint);//Title
@@ -236,8 +245,8 @@ implements SurfaceHolder.Callback{
 				}
 
 				paint.reset();
-			}
-			if(mainFlag!=0){
+			}*/
+			/*if(mainFlag!=0){
 				Graphic.drawPic(canvas, main_title, mtx, mty, 0, 255, paint);//Title
 				mty=Coordinate.AnalogSpeedMove(mty, mty2);
 
@@ -256,10 +265,10 @@ implements SurfaceHolder.Callback{
 				}*/
 				//storybtm.drawBtm(canvas, paint);
 				//creatbtm.drawBtm(canvas, paint);
-				if(hidden_flag){
+				/*if(hidden_flag){
 					staffList.drawBtm(canvas, paint);
-				}
-			}
+				}*/
+			//}
 		}
 	}
 	@Override

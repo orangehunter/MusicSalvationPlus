@@ -10,6 +10,7 @@ import android.util.Log;
  * Created by Ryo on 2015/6/18.
  */
 public class Chat {
+    MainActivity activity;
     public static void Fontsize(int size,Paint paint){
         paint.setTextSize(size);
     }
