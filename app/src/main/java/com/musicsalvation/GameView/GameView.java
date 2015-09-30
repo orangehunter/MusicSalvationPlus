@@ -209,6 +209,12 @@ public class GameView extends SurfaceView
     int Hitcount = 0;
     //控制判定顯示FLAG------------------------------
 
+    //combo震動特效
+    int combo_efc=0;
+
+    //combo震動特效
+
+
     int pointx;
     int pointy;
 
@@ -640,6 +646,20 @@ public class GameView extends SurfaceView
             canvas.clipRect(new Rect(0, 0, Constant.SCREEN_WIDTH, Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
             canvas.drawColor(Color.BLACK);//界面設定為黑色
             Graphic.drawPic(canvas, bg, 1280 / 2, 720 / 2, 0, 255, paint);//背景
+            //TAG combo顯示============================================================
+            Graphic.drawPic(canvas, hits, 290, 200, 0, 255, paint);
+            score.setSize(200, 280);
+            if(combo<=9) {
+                if(combo==1){//fix
+                    combo_efc+=5;
+                    if(combo_efc>=20){
+                        combo_efc=0;
+                    }
+                }
+                score.drawNumberRightStart(835, 360+combo_efc, combo, Number.Cyan, canvas, paint);//置中
+            }
+
+            //combo顯示-------------------------------------------------------------
             Graphic.drawPic(canvas, track, 450, 390, 0, 255, paint);
             Graphic.drawPic(canvas, track, 575, 390, 0, 255, paint);
             Graphic.drawPic(canvas, track, 700, 390, 0, 255, paint);
@@ -826,11 +846,7 @@ public class GameView extends SurfaceView
             score.drawNumberRightStart(1250, 20, sc_score, Number.Wite, canvas, paint);
 
 
-            //TAG combo顯示============================================================
-            Graphic.drawPic(canvas, hits, 290, 200, 0, 255, paint);
-            score.setSize(50, 70);
-            score.drawNumberRightStart(230, 190, combo, Number.Cyan, canvas, paint);
-            //combo顯示-------------------------------------------------------------
+
 
             //Graphic.drawPic(canvas, hpfont_red, 95, 50, 0, 255, paint);
 
