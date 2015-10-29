@@ -649,15 +649,9 @@ public class GameView extends SurfaceView
             //TAG combo顯示============================================================
             Graphic.drawPic(canvas, hits, 290, 200, 0, 255, paint);
             score.setSize(200, 280);
-            if(combo<=9) {
-                if(combo==1){//fix
-                    combo_efc+=5;
-                    if(combo_efc>=20){
-                        combo_efc=0;
-                    }
-                }
+
                 score.drawNumberRightStart(835, 360+combo_efc, combo, Number.Cyan, canvas, paint);//置中
-            }
+
 
             //combo顯示-------------------------------------------------------------
             Graphic.drawPic(canvas, track, 450, 390, 0, 255, paint);
