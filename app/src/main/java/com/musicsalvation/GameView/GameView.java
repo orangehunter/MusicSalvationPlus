@@ -209,9 +209,10 @@ public class GameView extends SurfaceView
     int Hitcount = 0;
     //控制判定顯示FLAG------------------------------
 
-    //combo震動特效
+    //combo震動特效 rick
     int combo_efc=0;
-
+    boolean rick_combo_efc_flag=false;
+    int rick_combo_efc_Sc=0;
     //combo震動特效
 
 
@@ -648,9 +649,19 @@ public class GameView extends SurfaceView
             Graphic.drawPic(canvas, bg, 1280 / 2, 720 / 2, 0, 255, paint);//背景
             //TAG combo顯示============================================================
             Graphic.drawPic(canvas, hits, 290, 200, 0, 255, paint);
-            score.setSize(200, 280);
+            if(rick_combo_efc_flag){
+                score.setSize(500, 500);
+                rick_combo_efc_Sc++;
+                if(rick_combo_efc_Sc>=5){
+                    score.setSize(200, 280);
+                    rick_combo_efc_flag=false;
+                }
+            }else {
+                score.setSize(200, 280);
+                rick_combo_efc_Sc=0;
+            }
 
-                score.drawNumberRightStart(835, 360+combo_efc, combo, Number.Cyan, canvas, paint);//置中
+                score.drawNumberRightStart(835, 360 + combo_efc, combo, Number.Cyan, canvas, paint);//置中
 
 
             //combo顯示-------------------------------------------------------------
@@ -1146,6 +1157,9 @@ public class GameView extends SurfaceView
         }
         switch(dis){
             case 0:  //NICE
+                rick_combo_efc_flag=true;
+
+
                 percent++;
                 combo++;
                 sc_score+=200*2;
@@ -1157,6 +1171,7 @@ public class GameView extends SurfaceView
                 }
                 break;
             case 1: //HIT
+                rick_combo_efc_flag=true;
                 percent++;
                 combo++;
                 sc_score+=100*2;
