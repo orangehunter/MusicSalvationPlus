@@ -490,10 +490,10 @@ public class GameView extends SurfaceView
         chart_x=Graphic.LoadBitmap(getResources(), R.drawable.virus_blue, 80, 80,true);
 
         for(int i=0;i<chartObject;i++){
-            cr_btm[i]=new gameChartBottom(-100,650, 820,activity, chart_r, chart_r,450);
-            cs_btm[i]=new gameChartBottom(-100,650,820, activity, chart_s, chart_s,575);
-            ct_btm[i]=new gameChartBottom(-100,650,820, activity, chart_t, chart_t,700);
-            cx_btm[i]=new gameChartBottom(-100,650,820,activity, chart_x, chart_x,825);
+            cr_btm[i]=new gameChartBottom(-100,600, 820,activity, chart_r, chart_r,450);
+            cs_btm[i]=new gameChartBottom(-100,600,820, activity, chart_s, chart_s,575);
+            ct_btm[i]=new gameChartBottom(-100,600,820, activity, chart_t, chart_t,700);
+            cx_btm[i]=new gameChartBottom(-100,600,820,activity, chart_x, chart_x,825);
         }
 
 
@@ -723,10 +723,10 @@ public class GameView extends SurfaceView
                 }
             }
 
-            Graphic.drawPic(canvas, sight, 450, 650, 0, 255, paint);
-            Graphic.drawPic(canvas, sight, 575, 650, 0, 255, paint);
-            Graphic.drawPic(canvas, sight, 700, 650, 0, 255, paint);
-            Graphic.drawPic(canvas, sight, 825, 650, 0, 255, paint);
+            Graphic.drawPic(canvas, sight, 450, 600, 0, 255, paint);
+            Graphic.drawPic(canvas, sight, 575, 600, 0, 255, paint);
+            Graphic.drawPic(canvas, sight, 700, 600, 0, 255, paint);
+            Graphic.drawPic(canvas, sight, 825, 600, 0, 255, paint);
             if (!boss_attack_Flag) {
                 btn_circle.drawBtm(canvas, paint);
                 btn_square.drawBtm(canvas, paint);
