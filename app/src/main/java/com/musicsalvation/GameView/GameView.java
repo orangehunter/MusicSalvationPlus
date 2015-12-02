@@ -273,7 +273,7 @@ public class GameView extends SurfaceView
         if(activity.io.speed==0){
             activity.io.speed=1;
         }
-        time_dis=3000/activity.io.speed;
+        time_dis=5000/activity.io.speed;//rick改過 原本3000
         warning_alpha=0;
         warning_flag=false;
         attack_flag=false;
