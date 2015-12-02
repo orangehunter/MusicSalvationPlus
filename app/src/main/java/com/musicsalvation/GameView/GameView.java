@@ -445,16 +445,16 @@ public class GameView extends SurfaceView
             Effect_Cyan[i]=new smallAnimax(Cyan);
 
             Effect_Red[i]=new smallAnimax(Red);
-            Effect_Red[i].setPosition(450,600);
+            Effect_Red[i].setPosition(450,650);
 
             Effect_Yellow[i]=new smallAnimax(Yellow);
-            Effect_Yellow[i].setPosition(575, 600);
+            Effect_Yellow[i].setPosition(575, 650);
 
             Effect_Green[i]=new smallAnimax(Green);
-            Effect_Green[i].setPosition(700, 600);
+            Effect_Green[i].setPosition(700, 650);
 
             Effect_Blue[i]=new smallAnimax(Blue);
-            Effect_Blue[i].setPosition(825, 600);
+            Effect_Blue[i].setPosition(825, 650);
         }
 
         change_enebar = new smallAnimax(enebar);
