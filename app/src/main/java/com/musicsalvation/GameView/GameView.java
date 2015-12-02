@@ -652,25 +652,16 @@ public class GameView extends SurfaceView
             if(rick_combo_efc_flag){
                 score.setSize(500, 500);
                 rick_combo_efc_Sc++;
-                if(combo>=10){
-                    combo_efc=325;
-                    score.setSize(400, 560);
-                }
-                combo_efc=300;
                 if(rick_combo_efc_Sc>=5){
                     score.setSize(200, 280);
                     rick_combo_efc_flag=false;
-                    combo_efc=0;
                 }
             }else {
                 score.setSize(200, 280);
                 rick_combo_efc_Sc=0;
             }
-            if(combo>=10){
-                score.drawNumberRightStart(835 + combo_efc+100, 360, combo, Number.Cyan, canvas, paint);//置中
-            }else {
-                score.drawNumberRightStart(835 + combo_efc, 360, combo, Number.Cyan, canvas, paint);//置中
-            }
+
+                score.drawNumberRightStart(835, 360 + combo_efc, combo, Number.Cyan, canvas, paint);//置中
 
 
             //combo顯示-------------------------------------------------------------
