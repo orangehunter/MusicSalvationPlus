@@ -46,20 +46,20 @@ implements SurfaceHolder.Callback{
 
 
     //按鈕宣告
-	Bottom newbtn;
-	Bottom heavybtn;
-	Bottom easybtn;
-    Bottom normalbtn;
-    Bottom hardbtn;
-    Bottom seachbtn;
-    Bottom pumenbtn[] = new Bottom[5];
+	Botton newbtn;
+	Botton heavybtn;
+	Botton easybtn;
+    Botton normalbtn;
+    Botton hardbtn;
+    Botton seachbtn;
+    Botton pumenbtn[] = new Botton[5];
 
 
-    Bottom mgbtn;
-    Bottom starroadbtn;
-    Bottom ssbtn;
-    Bottom utabtn;
-    Bottom windbtn;
+    Botton mgbtn;
+    Botton starroadbtn;
+    Botton ssbtn;
+    Botton utabtn;
+    Botton windbtn;
 
 
 	int pointx;//觸控到螢幕的x座標
@@ -119,18 +119,18 @@ implements SurfaceHolder.Callback{
         dv_starroadbtn = Graphic.bitSize(LoadBitmap( R.drawable.dv_starroadbtn), 1235, 100);
 
 
-		newbtn = 	new Bottom(activity, dv_newbtn_1,dv_newbtn_0, 120, 68);
-		heavybtn = 	new Bottom(activity, dv_heavybtn_1, dv_heavybtn_0, 300, 68);
-        easybtn = 	new Bottom(activity, dv_easybtn_1, dv_easybtn_0, 480, 68);
-        normalbtn = new Bottom(activity, dv_normalbtn_1, dv_normalbtn_0, 660, 68);
-        hardbtn = 	new Bottom(activity, dv_hardbtn_1, dv_hardbtn_0, 840, 68);
-        seachbtn = 	new Bottom(activity, dv_seachbtn_1, dv_seachbtn_0, 1100, 68);
+		newbtn = 	new Botton(activity, dv_newbtn_1,dv_newbtn_0, 120, 68);
+		heavybtn = 	new Botton(activity, dv_heavybtn_1, dv_heavybtn_0, 300, 68);
+        easybtn = 	new Botton(activity, dv_easybtn_1, dv_easybtn_0, 480, 68);
+        normalbtn = new Botton(activity, dv_normalbtn_1, dv_normalbtn_0, 660, 68);
+        hardbtn = 	new Botton(activity, dv_hardbtn_1, dv_hardbtn_0, 840, 68);
+        seachbtn = 	new Botton(activity, dv_seachbtn_1, dv_seachbtn_0, 1100, 68);
 
-        pumenbtn[0] = new Bottom(activity, dv_starroadbtn, dv_starroadbtn, 640, 190);
-        pumenbtn[1] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 305);
-        pumenbtn[2] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 420);
-        pumenbtn[3] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 535);
-        pumenbtn[4] = new Bottom(activity, dv_pumen_bar, dv_pumen_bar, 640, 650);
+        pumenbtn[0] = new Botton(activity, dv_starroadbtn, dv_starroadbtn, 640, 190);
+        pumenbtn[1] = new Botton(activity, dv_pumen_bar, dv_pumen_bar, 640, 305);
+        pumenbtn[2] = new Botton(activity, dv_pumen_bar, dv_pumen_bar, 640, 420);
+        pumenbtn[3] = new Botton(activity, dv_pumen_bar, dv_pumen_bar, 640, 535);
+        pumenbtn[4] = new Botton(activity, dv_pumen_bar, dv_pumen_bar, 640, 650);
 
         newbtn.setBottomTo(true);
         heavybtn.setBottomTo(false);

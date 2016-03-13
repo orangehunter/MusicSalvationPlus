@@ -15,12 +15,81 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 
 @SuppressLint({ "ViewConstructor", "WrongCall", "ClickableViewAccessibility" })
 public class MapView extends SurfaceView
-implements SurfaceHolder.Callback{
+		implements SurfaceHolder.Callback{
 
+	//======新介面圖片宣告===============
+	Bitmap map_back;
+	//Bitmap map_frame;
+
+	Bitmap map_frame_upbar;
+	Bitmap map_frame_leftbar;
+	Bitmap map_frame_rightbar;
+	Bitmap map_frame_underbar;
+
+
+	Bitmap map_set_btn;
+	Bitmap map_set_btn2; //會轉的小齒輪
+	Bitmap map_set_btn2_back;
+
+	Bitmap map_stage01;
+	Bitmap map_stage02;
+	Bitmap map_stage03;
+	Bitmap map_stage01_back;
+	Bitmap map_stage02_back;
+	Bitmap map_stage03_back;
+
+	Bitmap map_easy_btn_f;
+	Bitmap map_easy_btn_t;
+	Bitmap map_normal_btn_f;
+	Bitmap map_normal_btn_t;
+	Bitmap map_hard_btn_f;
+	Bitmap map_hard_btn_t;
+
+	Bitmap map_start_btn;
+	Bitmap map_startbar;
+	Bitmap map_start_btn_back;
+
+	Bitmap map_hand;
+	Bitmap map_quest_btn;
+	Bitmap map_quest_back;
+	Bitmap map_sc_rank_bar;
+
+
+
+	Botton setting_btn;
+	Botton quest_btn;
+
+	//最終確認欄位元件
+	Bitmap map_checK_bar;
+	Bitmap map_check_font;
+	Bitmap map_check_return;
+	Bitmap map_check_light;
+	Bitmap map_check_dark;
+	Bitmap map_s01data;
+	Bitmap map_s02data;
+	Bitmap map_s03data;
+	Bitmap map_virusdata_grey;
+	Bitmap map_virusdata;
+	Bitmap map_check_easy;
+	Bitmap map_check_nornmal;
+	Bitmap map_check_hard;
+	Bitmap map_ok_btn;
+	Bitmap map_ok_btn2;
+	Botton return_btn;
+	Botton check_ok_btn;
+	//Botton stageselect;
+
+	Setting setting;
+
+	Boolean set_baralpha_Flag = false;
+
+
+
+
+	//--------------------新介面圖片宣告-----------------------
 	Bitmap wmap;
 	Bitmap left_back;
 	Bitmap left_exit;    //<<箭頭-淺色  離開MENU用
@@ -105,96 +174,98 @@ implements SurfaceHolder.Callback{
 	Bitmap model_ch;
 
 
-	Bottom menubtm; //MENU按鈕
-	Bottom left_btm1;
-	Bottom left_btm2;
-	Bottom left_btm3;
-	Bottom left_btm4;
-	Bottom left_btm5;
-	Bottom speed_left_arrow;
-	Bottom speed_right_arrow;
-	Bottom timing_left_arrow;
-	Bottom timing_right_arrow;
+	Botton menubtm; //MENU按鈕
+	Botton left_btm1;
+	Botton left_btm2;
+	Botton left_btm3;
+	Botton left_btm4;
+	Botton left_btm5;
+	Botton speed_left_arrow;
+	Botton speed_right_arrow;
+	Botton timing_left_arrow;
+	Botton timing_right_arrow;
 	MySeekBar mp_Volume_bar;
 	MySeekBar sp_Volume_bar;
 
 
-	Bottom sebtm1;
-	Bottom sebtm2;
-	Bottom sebtm3;
-	Bottom sebtm4;
-	Bottom sebtm5;
+	Botton sebtm1;
+	Botton sebtm2;
+	Botton sebtm3;
+	Botton sebtm4;
+	Botton sebtm5;
 
-	Bottom stbtn01;
+	Botton stbtn01;
 	boolean st_02_flag;
-	Bottom stbtn02;  //第二關按鈕
+	Botton stbtn02;  //第二關按鈕
 	boolean st_03_flag;
-	Bottom stbtn03;  //第三關按鈕
-	Bottom easy;
-	Bottom normal;
-	Bottom hard;
-	Bottom model;
-	Bottom start;
+	Botton stbtn03;  //第三關按鈕
+	Botton easy;
+	Botton normal;
+	Botton hard;
+
+	Botton start;
+
 
 	//箭頭按鈕宣告================================================
-	Bottom arrow;
+	Botton arrow;
 	//箭頭按鈕宣告------------------------------------------------
 
 
 	MediaPlayer mp;
 	SoundPool sp;
-	int sp_id[];
+	int sp_id_s[];
 
 	int pointx;//觸控到螢幕的x座標
 	int pointy;//觸控到螢幕的y座標
 	boolean deJump = true;
 
 	float rot=0;
-	int ma=5;
-	int x = 0;
-	int alpha = 10;
-	int x2=0;
+	int x2=100;
 	int alpha2 = 10;
 
-	//FLAG宣告區域
-	int menuFlag = 0;   //世界地圖左半部
-	int stageFlag = 0;  //右半部
 
-	int mbgx = -500;
-	int mbgx2 = 13;
+	int stageFlag = 1;  //右半部
 
-	int leftbtmmx1 = -400;
-	int leftbtmmove1 = 77;
 
-	int leftbtmmx2 = -400;
-	int leftbtmmove2 = 114;
-
-	int leftbtmmx3 = -400;
-	int leftbtmmove3 = 138;
-
-	int leftbtmmx4 = -400;
-	int leftbtmmove4 = 114;
-
-	int leftbtmmx5 = -400;
-	int leftbtmmove5 = 77;
-
-	int sevolmx = -200;
-	int songvolmx = -200;
-	int sevolmovex = 381;
-	int songvolmovex = 425;
-	int sechx = -254;
-	int sechmovex = 344;
-
-	int baralpha = 0;
-	int sebaralpha = 0;
-	int speedbaralpha = 0;
-
-	int right_board_x=1680;
 
 	int set_speed = 6;
 	int set_timing = 5;
+	int setalpha = 0;
+	int start_alpha;
+
+	int check_alpha = 0;
+
+	int upbar_my = -67;
+	int upbar_my2 = 67;
+	int rightbar_mx = 1325;
+	int rightbar_mx2 = 1235;
+	int leftbar_mx = -50;
+	int leftbar_mx2 = 50;
+	int underbar_my = 767;
+	int underbar_my2 = 673;
+	int set_btn_mx = -47;
+	int set_btn_mx2 = 47;
+	int set_btn2_mx = -55,set_btn2_mx2 = 39;
+	int sc_rank_bar_my = 790 , sc_rank_bar_my2 = 648;
+	int hand_mx = 915,hand_mx2 = 1155,hand_count=3,hand_alpha = 0,hand_recount = 0;
+
+	int checkbar_mx = 1860,checkbar_mx2 = 640;
+	int checkbar_light_mx = 1270,checkbar_light_mx2 = 52;
+	boolean check_Flag;
+	//int start_btn_my = 805 , getStart_btn_my2 = 635;
+
+
+	int song[] = new int[3];
 
 	int stagecount = 0;
+
+	int downX = 0;
+	int downY = 0;
+	int upX = 0;
+	int upY = 0;
+	int stageselect = 0;
+	int stage_standby_Flag = 0;
+
 
 
 	//RANK===============================
@@ -223,122 +294,88 @@ implements SurfaceHolder.Callback{
 		set_timing=activity.io.timing+5;
 		paint = new Paint();//建立畫筆
 		paint.setAntiAlias(true);//開啟抗鋸齒
-		wmap =Graphic.bitSize(LoadBitmap( R.drawable.wmap), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
-		left_back=Graphic.bitSize(LoadBitmap( R.drawable.menubackground), 846, 871);
-		left_exit = Graphic.bitSize(LoadBitmap( R.drawable.left_exit1), 134, 75);
-		left_exit2 = Graphic.bitSize(LoadBitmap( R.drawable.left_exit2), 134, 75);
-		left_exitback = Graphic.bitSize(LoadBitmap( R.drawable.left_exitback) , 229, 78);
-		menubtn  = Graphic.bitSize(LoadBitmap( R.drawable.menubtn) , 134, 75);
-		menubtn2  = Graphic.bitSize(LoadBitmap( R.drawable.menubtn2) , 134, 75);
-		left_btmback = Graphic.bitSize(LoadBitmap( R.drawable.left_btmback) , 369, 72);
-		btnvol = Graphic.bitSize(LoadBitmap( R.drawable.button_vol) , 215, 67);
-		btnvol2 = Graphic.bitSize(LoadBitmap( R.drawable.button_vol2) , 208, 67);
-		chbtmse = Graphic.bitSize(LoadBitmap( R.drawable.chbtmse) , 267, 69);
-		chbtmse2 = Graphic.bitSize(LoadBitmap( R.drawable.chbtmse2) , 263, 65);
-		song_vol = Graphic.bitSize(LoadBitmap( R.drawable.song_vol) , 221, 66);
-		song_vol2 = Graphic.bitSize(LoadBitmap( R.drawable.song_voltou) , 215, 66);
-		remain = Graphic.bitSize(LoadBitmap( R.drawable.re_title) , 149, 53);
-		remain2 = Graphic.bitSize(LoadBitmap( R.drawable.re_title2) , 149, 53);
-		timing = Graphic.bitSize(LoadBitmap( R.drawable.speed_timing_font) , 253, 52);
-		timing2 = Graphic.bitSize(LoadBitmap( R.drawable.speed_timing_font2) , 253, 52);
-		volchback =  Graphic.bitSize(LoadBitmap(R.drawable.volchange_back),402 ,67 );
-		volBar = Graphic.bitSize(LoadBitmap(R.drawable.volbar),216 ,37 );
-		volbtn = Graphic.bitSize(LoadBitmap(R.drawable.volbtn),31 ,31 );
-		sechange = Graphic.bitSize(LoadBitmap(R.drawable.sechange),254 ,324 );
-
-		right_board = Graphic.bitSize(LoadBitmap(R.drawable.right_stageboard), 418, 714);
-		right_chmodel = Graphic.bitSize(LoadBitmap(R.drawable.right_chmodel), 250, 250);
-		right_stage01 = Graphic.bitSize(LoadBitmap(R.drawable.right_stage01), 266, 62);
-		right_freely = Graphic.bitSize(LoadBitmap(R.drawable.right_freely), 378, 58);
-		right_boss01 =Graphic.bitSize(LoadBitmap(R.drawable.boss_color4), 402, 246);
-		right_boss01_gray= Graphic.bitSize(LoadBitmap(R.drawable.right_boss01), 402, 246);
-		right_st01Font = Graphic.bitSize(LoadBitmap(R.drawable.right_stage01infor), 389, 336);
-		right_easy = Graphic.bitSize(LoadBitmap(R.drawable.easyv2), 205, 80);
-		right_normal = Graphic.bitSize(LoadBitmap(R.drawable.normalv2psd), 205, 80);
-		right_hard = Graphic.bitSize(LoadBitmap(R.drawable.hardv2), 205, 80);
-		right_start = Graphic.bitSize(LoadBitmap(R.drawable.startv2), 175, 75);
-
-		//顯示難易度的按鈕與展開選單的箭頭===============================================================
-		model_ch =  Graphic.bitSize(LoadBitmap(R.drawable.model), 205, 80);
-		right_easy_ch = Graphic.bitSize(LoadBitmap(R.drawable.easyv2_ch), 205, 80);
-		right_normal_ch = Graphic.bitSize(LoadBitmap(R.drawable.normalv2_ch), 205, 80);
-		right_hard_ch = Graphic.bitSize(LoadBitmap(R.drawable.hardv2_ch), 205, 80);
-		right_arrow_left = Graphic.bitSize(LoadBitmap(R.drawable.map_arrow), 35, 50);
-		right_arrow_left2 = Graphic.bitSize(LoadBitmap(R.drawable.map_arrow2), 35, 50);
-		right_arrow_right = Graphic.bitSize(LoadBitmap(R.drawable.map_arrow_right), 35, 50);
-		right_arrow_right2 = Graphic.bitSize(LoadBitmap(R.drawable.map_arrow_right2), 35, 50);
-
-		//顯示難易度的按鈕與展開選單的箭頭---------------------------------------------------------------
-
-		//新增的2、3關卡資訊====================================================================
-		right_stage02info = Graphic.bitSize(LoadBitmap(R.drawable.right_stage02infor), 389, 336);
-		right_stage03info = Graphic.bitSize(LoadBitmap(R.drawable.right_stage03infor), 389, 336);
-		right_stage2 = Graphic.bitSize(LoadBitmap(R.drawable.right_stage02), 266, 62);
-		right_stage3 = Graphic.bitSize(LoadBitmap(R.drawable.right_stage03), 266, 62);
-		stagebtn_green = Graphic.bitSize(LoadBitmap(R.drawable.stagebtn_green), 64, 64);
-		stagebtn_green_l = Graphic.bitSize(LoadBitmap(R.drawable.stagebtn_green_l), 64, 64);
 
 
-		//新增的2、3關卡資訊---------------------------------------------------------------------
+		//===============新介面圖片載入=======================
 
-		stage01btn0 = Graphic.bitSize(LoadBitmap(R.drawable.stage01btn0), 64, 64);
-		stage01btn = Graphic.bitSize(LoadBitmap(R.drawable.stage01btn1), 64, 64);
+		stage_standby_Flag=0;
+		hand_count = 3;
+		set_baralpha_Flag = false;
+		upbar_my = -67;
+		rightbar_mx = 1325;
+		leftbar_mx = -53;
+		underbar_my = 767;
+		set_btn_mx = -47;
+		set_btn2_mx = -55;
+		sc_rank_bar_my = 790;
+		hand_mx = 915;
+		hand_alpha = 0;
+		start_alpha = setalpha;
+		hand_recount = 0;
+		checkbar_mx = 1860;
+		checkbar_light_mx = 1270;
+		check_Flag = false;
 
-		se01 = Graphic.bitSize(LoadBitmap(R.drawable.se01),70 ,70 );
-		se01l = Graphic.bitSize(LoadBitmap(R.drawable.se01l),70 ,70 );
-		se02 = Graphic.bitSize(LoadBitmap(R.drawable.se02),70 ,70 );
-		se02l = Graphic.bitSize(LoadBitmap(R.drawable.se02l),70 ,70 );
-		se03 = Graphic.bitSize(LoadBitmap(R.drawable.se03),70 ,70 );
-		se03l = Graphic.bitSize(LoadBitmap(R.drawable.se03l),70 ,70 );
-		se04 = Graphic.bitSize(LoadBitmap(R.drawable.se04),70 ,70 );
-		se04l = Graphic.bitSize(LoadBitmap(R.drawable.se04l),70 ,70 );
-		se05 = Graphic.bitSize(LoadBitmap(R.drawable.se05),70 ,70 );
-		se05l = Graphic.bitSize(LoadBitmap(R.drawable.se05l),70 ,70 );
 
-		//速度與判定==============================================================
-		timing_back = Graphic.bitSize(LoadBitmap(R.drawable.timing_back), 390 ,295 );
-		timing_l_arrow = Graphic.bitSize(LoadBitmap(R.drawable.timing_l_arrow),45 ,40 );
-		timing_r_arrow = Graphic.bitSize(LoadBitmap(R.drawable.timing_r_arrow),45 ,40 );
-		timing_num[0] = Graphic.bitSize(LoadBitmap(R.drawable.ne5),48 ,48 );
-		timing_num[1] = Graphic.bitSize(LoadBitmap(R.drawable.ne4),48 ,48 );
-		timing_num[2] = Graphic.bitSize(LoadBitmap(R.drawable.ne3),48 ,48 );
-		timing_num[3] = Graphic.bitSize(LoadBitmap(R.drawable.ne2),48 ,48 );
-		timing_num[4] = Graphic.bitSize(LoadBitmap(R.drawable.ne1),48 ,48 );
-		timing_num[5] = Graphic.bitSize(LoadBitmap(R.drawable.zero),48 ,48 );
-		timing_num[6] = Graphic.bitSize(LoadBitmap(R.drawable.one),48 ,48 );
-		timing_num[7] = Graphic.bitSize(LoadBitmap(R.drawable.two),48 ,48 );
-		timing_num[8] = Graphic.bitSize(LoadBitmap(R.drawable.three),48 ,48 );
-		timing_num[9] = Graphic.bitSize(LoadBitmap(R.drawable.four),48 ,48 );
-		timing_num[10] = Graphic.bitSize(LoadBitmap(R.drawable.five),48 ,48 );
-		timing_num[11] = Graphic.bitSize(LoadBitmap(R.drawable.num_06),48 ,48 );
-		timing_num[12] = Graphic.bitSize(LoadBitmap(R.drawable.num_07),48 ,48 );
-		timing_num[13] = Graphic.bitSize(LoadBitmap(R.drawable.num_08),48 ,48 );
-		timing_num[14] = Graphic.bitSize(LoadBitmap(R.drawable.num_09),48 ,48 );
-		timing_num[15] = Graphic.bitSize(LoadBitmap(R.drawable.num_10),48 ,48 );
-		//速度與判定----------------------------------------------------------------------
 
-		menubtm = new Bottom(activity, left_exitback, left_exitback, 110, 35);
-		left_btm1= new Bottom(activity, btnvol2, btnvol, 114, 166);
-		left_btm2= new Bottom(activity, song_vol2, song_vol, 114, 257);
-		left_btm3= new Bottom(activity, chbtmse2, chbtmse, 136, 355);
-		left_btm4= new Bottom(activity, timing2, timing, 134, 451);
-		left_btm5= new Bottom(activity, remain2, remain, 114, 542);
+		map_back = Graphic.bitSize(LoadBitmap(R.drawable.mapview_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		map_stage01_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage01_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		map_stage02_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage02_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
+		map_stage03_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage03_back), Constant.DEFULT_WIDTH, Constant.DEFULT_HIGHT);
 
-		//速度與判定按鈕===========================================================
-		speed_right_arrow = new Bottom(activity , timing_r_arrow,timing_r_arrow, 435 ,545);
-		speed_left_arrow = new Bottom(activity , timing_l_arrow,timing_l_arrow, 322 ,545);
-		timing_left_arrow = new Bottom(activity, timing_l_arrow , timing_l_arrow ,322 , 660);
-		timing_right_arrow = new Bottom(activity, timing_r_arrow , timing_r_arrow ,435 , 660);
-		//速度與判定按鈕------------------------------------------------------------
+		map_stage01 = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage1_font), 234, 63);
+		map_stage02 = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage2_font), 234, 63);
+		map_stage03 = Graphic.bitSize(LoadBitmap( R.drawable.mapview_stage3_font), 234, 63);
 
-		sebtm1 = new Bottom(activity, se01, se01l, 390, 390);
-		sebtm2 = new Bottom(activity, se02, se02l, 393, 451);
-		sebtm3 = new Bottom(activity, se03, se03l, 393, 511);
-		sebtm4 = new Bottom(activity, se04, se04l, 393, 569);
-		sebtm5 = new Bottom(activity, se05, se05l, 393, 628);
-		stbtn01 = new Bottom(activity, stage01btn , stage01btn0 , 644, 609);
-		stbtn02 = new Bottom(activity, stage01btn , stage01btn0 , 815, 165);
-		stbtn03 = new Bottom(activity, stage01btn , stage01btn0 , 430, 335);
+		map_start_btn = Graphic.bitSize(LoadBitmap( R.drawable.mapview_start_btn), 241, 171);
+		map_startbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_startbar), 342, 342);
+		map_start_btn_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_start2_btn), 241, 171);
+
+		map_set_btn = Graphic.bitSize(LoadBitmap( R.drawable.mapview_set_btn), 95, 146);
+		map_set_btn2 = Graphic.bitSize(LoadBitmap( R.drawable.map_set_btn2), 59, 59);
+		map_set_btn2_back = Graphic.bitSize(LoadBitmap( R.drawable.map_set_btn2_back), 59, 59);
+		map_easy_btn_f = Graphic.bitSize(LoadBitmap( R.drawable.mapview_easy_btn_f), 393, 104);
+		map_easy_btn_t = Graphic.bitSize(LoadBitmap( R.drawable.mapview_easy_btn_t), 393, 104);
+		map_normal_btn_f = Graphic.bitSize(LoadBitmap( R.drawable.mapview_normal_btn_f), 393, 104);
+		map_normal_btn_t = Graphic.bitSize(LoadBitmap( R.drawable.mapview_normal_btn_t), 393, 104);
+		map_hard_btn_f = Graphic.bitSize(LoadBitmap( R.drawable.mapview_hard_btn_f), 393, 104);
+		map_hard_btn_t = Graphic.bitSize(LoadBitmap( R.drawable.mapview_hard_btn_t), 393, 104);
+
+		map_frame_leftbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_leftbar), 102, 605);
+		map_frame_rightbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_rightbar), 90, 720);
+		map_frame_underbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_underbar), 1280, 94);
+		map_frame_upbar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_frame_upbar), 1280, 134);
+
+		map_hand = Graphic.bitSize(LoadBitmap( R.drawable.mapview_hand), 63, 76);
+		map_quest_btn = Graphic.bitSize(LoadBitmap( R.drawable.mapview_quest_btn), 105, 198);
+		map_quest_back = Graphic.bitSize(LoadBitmap( R.drawable.mapview_quest_back), 105, 198);
+		map_sc_rank_bar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_sc_rank_bar), 1163, 140);
+
+
+
+		setting = new Setting(activity);
+		setting_btn = new Botton(activity, map_set_btn, map_set_btn, set_btn_mx, 160);
+		quest_btn = new Botton(activity,map_quest_back,map_quest_btn,set_btn_mx-1,621);
+
+		map_checK_bar = Graphic.bitSize(LoadBitmap( R.drawable.mapview_checkbar), 1280, 412);
+		map_check_font = Graphic.bitSize(LoadBitmap( R.drawable.mapview_finallcheck_font), 1246, 107);
+		map_check_return = Graphic.bitSize(LoadBitmap( R.drawable.mapview_check_return_btn), 140, 131);
+		map_check_light = Graphic.bitSize(LoadBitmap( R.drawable.mapview_checkbar_light), 77, 174);
+		map_check_dark = Graphic.bitSize(LoadBitmap( R.drawable.mapview_checkbar_dark), 77, 174);
+		map_s01data = Graphic.bitSize(LoadBitmap( R.drawable.mapview_s01data), 415, 287);
+		map_s02data = Graphic.bitSize(LoadBitmap( R.drawable.mapview_s02data), 415, 287);;
+		map_s03data = Graphic.bitSize(LoadBitmap( R.drawable.mapview_s03data), 415, 287);;
+		map_virusdata_grey = Graphic.bitSize(LoadBitmap( R.drawable.map_bvirus_live), 596, 292);
+		map_virusdata = Graphic.bitSize(LoadBitmap( R.drawable.map_bvirus_dead), 596, 292);
+		map_check_easy = Graphic.bitSize(LoadBitmap( R.drawable.mapview_fn_easy), 137, 50);
+		map_check_nornmal = Graphic.bitSize(LoadBitmap( R.drawable.mapview_fn_normal), 137, 50);
+		map_check_hard = Graphic.bitSize(LoadBitmap( R.drawable.mapview_fn_hard), 137, 50);
+		map_ok_btn = Graphic.bitSize(LoadBitmap( R.drawable.mapview_ok_btn), 241, 147);
+		map_ok_btn2 = Graphic.bitSize(LoadBitmap( R.drawable.mapview_ok_btn2), 241, 147);
+
+		return_btn = new Botton(activity, map_check_return, map_check_return, 1210, 275);
+		check_ok_btn = new Botton(activity, map_ok_btn, map_ok_btn, 640, 647);
+
 
 		st_02_flag=false;
 		st_03_flag=false;
@@ -351,65 +388,50 @@ implements SurfaceHolder.Callback{
 			}
 		}
 
-		switch (activity.io.sp_num) {
-		case 0:
-			sebtm1.setBottomTo(true);
-			break;
-		case 1:
-			sebtm2.setBottomTo(true);
-			break;
-		case 2:
-			sebtm3.setBottomTo(true);
-			break;
-		case 3:
-			sebtm4.setBottomTo(true);
-			break;
-		case 4:
-			sebtm5.setBottomTo(true);
-			break;
-		}
-
-		mp_Volume_bar=new MySeekBar(activity, volBar, volbtn, -300, 259);
-		mp_Volume_bar.setSeekBarFloat((int)(activity.io.mp_Voiume*100));
-		sp_Volume_bar=new MySeekBar(activity, volBar, volbtn, -300, 167);
-		sp_Volume_bar.setSeekBarFloat((int)(activity.io.sp_Voiume*100));
-
-		start = new Bottom(activity, right_start, right_start, 1161, 655);
-
-		//目前使用的難度
-		//TODO (功能待補)
-		model = new Bottom(activity, model_ch, model_ch, 969, 655);
-		//選擇難度使用的選擇按鈕
-		easy  = new Bottom(activity, right_easy_ch, right_easy, 741, 514);
-		normal  = new Bottom(activity, right_normal_ch, right_normal, 741, 588);
-		hard  = new Bottom(activity, right_hard_ch, right_hard, 741, 662);
 
 
-		mp = MediaPlayer.create(this.getContext(), R.raw.map_bgm);
+		start = new Botton(activity, map_start_btn, map_start_btn, 1280/2, 635);
+
+
+		easy  = new Botton(activity, map_easy_btn_t, map_easy_btn_f, 450, 50);
+		normal  = new Botton(activity, map_normal_btn_t, map_normal_btn_f, 770, 50);
+		hard  = new Botton(activity, map_hard_btn_t, map_hard_btn_f, 1090, 50);
+
+		set_baralpha_Flag = false;
+		setalpha = 0;
+
+		song[0] = R.raw.celluloid_yuyao_cut;
+		song[1] = R.raw.tipsydessert_yuyao_cut;
+		song[2] = R.raw.kokoronashi_cut;
+
+		mp = MediaPlayer.create(this.getContext(),song[activity.io.level]);
+
 		mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
 		mp.setLooping(true);
 		mp.start();
 
 		sp=new SoundPool(4, AudioManager.STREAM_MUSIC, 5);
-		sp_id=new int[11];
-		sp_id[0]=sp.load(activity, R.raw.tambourine, 1);
-		sp_id[1]=sp.load(activity, R.raw.drum_cymbal, 1);
-		sp_id[2]=sp.load(activity, R.raw.drum_snare, 1);
-		sp_id[3]=sp.load(activity, R.raw.fall, 1);
-		sp_id[4]=sp.load(activity, R.raw.voice_dog, 1);
-		sp_id[5]=sp.load(activity, R.raw.left_menu_on, 1);
-		sp_id[6]=sp.load(activity, R.raw.left_menu_off, 1);
-		sp_id[7]=sp.load(activity, R.raw.leftm_btn, 1);
-		sp_id[8]=sp.load(activity, R.raw.left_num, 1);
-		sp_id[9]=sp.load(activity, R.raw.stagebtn, 1);
-		sp_id[10]=sp.load(activity, R.raw.start, 1);
+		sp_id_s=new int[11];
+		sp_id_s[0]=sp.load(activity, R.raw.tambourine, 1);
+		sp_id_s[1]=sp.load(activity, R.raw.drum_cymbal, 1);
+		sp_id_s[2]=sp.load(activity, R.raw.drum_snare, 1);
+		sp_id_s[3]=sp.load(activity, R.raw.fall, 1);
+		sp_id_s[4]=sp.load(activity, R.raw.voice_dog, 1);
+		sp_id_s[5]=sp.load(activity, R.raw.left_menu_on, 1);
+		sp_id_s[6]=sp.load(activity, R.raw.left_menu_off, 1);
+		sp_id_s[7]=sp.load(activity, R.raw.leftm_btn, 1);
+		sp_id_s[8]=sp.load(activity, R.raw.left_num, 1);
+		sp_id_s[9]=sp.load(activity, R.raw.stagebtn, 1);
+		sp_id_s[10]=sp.load(activity, R.raw.start, 1);
+
+
 
 		num=new Number(getResources());
-		num.setSize(25, 35);
+		num.setSize(28, 50);
 		rank=new Bitmap[7];
-		rank[6]=Graphic.LoadBitmap(getResources(), R.drawable.r_s, 45,60,true);
+		rank[6]=Graphic.LoadBitmap(getResources(), R.drawable.r_s, 54,72,true);
 		for(int i=0;i<=5;i++){
-			rank[i]=Graphic.LoadBitmap(getResources(), R.drawable.r_f-i, 45, 60,true);
+			rank[i]=Graphic.LoadBitmap(getResources(), R.drawable.r_f-i, 54, 72,true);
 		}
 
 		Constant.Flag=true;
@@ -443,678 +465,403 @@ implements SurfaceHolder.Callback{
 			canvas.clipRect(new Rect(0,0,Constant.SCREEN_WIDTH,Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
 			canvas.drawColor(Color.BLACK);//界面設定為黑色
 
-			if(!mp.isPlaying()){
-				mp.prepareAsync();
-				mp.start();
-			}
 
-			Graphic.drawPic(canvas, wmap, 1280/2, 720/2, 0, 255, paint);//地圖
-			if(stbtn01.getBottom()){
-				Graphic.drawPic(canvas, stage01btn0, 644, 609, 0, 255, paint);
-				stbtn01.drawBtm(canvas, paint,x2);  //第一關按鈕
-			}else{
-				stbtn01.drawBtm(canvas, paint);
-			}
-
-			//2、3關按鈕==============================================================
-			if(st_02_flag){
-				if(stbtn02.getBottom()){
-					Graphic.drawPic(canvas, stage01btn0, 815, 165, 0, 255, paint);
-					stbtn02.drawBtm(canvas, paint,x2);
-				}else{
-					stbtn02.drawBtm(canvas, paint);
-				}
-
-			}
-			if(st_03_flag){
-				if(stbtn03.getBottom()){
-					Graphic.drawPic(canvas, stage01btn0, 430, 335, 0, 255, paint);
-					stbtn03.drawBtm(canvas, paint,x2);
-				}else{
-					stbtn03.drawBtm(canvas, paint);
-				}
-			}
-
-			//2、3關按鈕-------------------------------------------------------------
-			if(mbgx!=-500){
-				Graphic.drawPic(canvas, left_back, mbgx, 374, rot, 255, paint);
-				Graphic.drawPic(canvas, timing_back, 270, 560, 0, speedbaralpha, paint);
-				Graphic.drawPic(canvas, sechange,344, 504, 0, sebaralpha ,paint);
-				Graphic.drawPic(canvas, volchback,sevolmx, 167, 0, baralpha, paint);
-				Graphic.drawPic(canvas, volchback,songvolmx, 259, 0, baralpha, paint);
-				mp_Volume_bar.drawSeekBar(canvas, paint);
-				sp_Volume_bar.drawSeekBar(canvas, paint);
-			}
-
-
-			x+=alpha;
-			if(x >= 250){
-				alpha = -5;
-			}
-			if(x < 10){
-				alpha = 5;
-			}
+			//新介面==================================================
 			x2+=alpha2;
 			if(x2 >= 250){
 				alpha2 = -10;
 			}
-			if(x2 < 140){
+			if(x2 < 50){
 				alpha2 = 10;
 			}
-			stagecount--;
-			if(stagecount < 0){
-				stagecount = 0;
+			Graphic.drawPic(canvas, map_back, 640, 360, 0, 255, paint);
+
+			//切換關卡時的動作============================================
+
+			if(stage_standby_Flag !=0) {
+				if (set_baralpha_Flag) {
+					setalpha -= 40;
+					start_alpha = setalpha;
+					if (setalpha < 0) {
+
+						setalpha = 0;
+						set_baralpha_Flag = false;
+
+						if(stageselect!=0){
+							stageFlag+=stageselect;
+							stageselect=0;
+							if (stageFlag >= activity.io.levels ) {
+								stageFlag = 1;
+							}
+							if (stageFlag <= 0 ) {
+								stageFlag = activity.io.levels;
+							}
+							activity.io.level = stageFlag - 1;
+
+							if (mp != null) {
+								mp.stop();
+								mp.release();
+								mp = null;
+								mp = MediaPlayer.create(this.getContext(), song[activity.io.level]);
+								mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
+								mp.setLooping(true);
+								mp.start();
+							}
+						}
+                        /*簡化後程式碼位於上方if (stageselect == 1) {
+                            stageselect = 0;
+                            stageFlag++;
+                            if (stageFlag > 3 || stageFlag == 0) {
+                                stageFlag = 1;
+                            }
+                            activity.io.level = stageFlag - 1;
+
+                            if (mp != null) {
+
+                                mp.stop();
+                                mp.release();
+                                mp = null;
+                                mp = MediaPlayer.create(this.getContext(), song[activity.io.level]);
+                                mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
+                                mp.setLooping(true);
+                                mp.start();
+
+                            }
+
+                        } else if (stageselect == -1) {
+                            stageselect = 0;
+                            stageFlag--;
+                            if (stageFlag == 0) {
+                                stageFlag = 3;
+                            }
+                            activity.io.level = stageFlag - 1;
+
+                            if (mp != null) {
+
+                                mp.stop();
+                                mp.release();
+                                mp = null;
+                                mp = MediaPlayer.create(this.getContext(), song[activity.io.level]);
+                                mp.setVolume(activity.io.mp_Voiume, activity.io.mp_Voiume);
+                                mp.setLooping(true);
+                                mp.start();
+
+                            }
+                        }*/
+					}
+				} else if (!set_baralpha_Flag) {
+					setalpha += 40;
+					if (setalpha >= 255) {
+						setalpha = 255;
+						start_alpha = x2;
+					}
+				}
 			}
-			//左半部選單控制================================================
-			if(menuFlag == 0){
-				menubtm.drawBtm(canvas, paint);
-				Graphic.drawPic(canvas, menubtn, 66, 34, 0, 255, paint);
-				Graphic.drawPic(canvas, menubtn2, 66, 34, 0, x, paint);
-				mbgx=Coordinate.AnalogSpeedMove(mbgx, -500);
-				leftbtmmx1 = Coordinate.AnalogSpeedMove(leftbtmmx1,-400);
-				leftbtmmx2 = Coordinate.AnalogSpeedMove(leftbtmmx2,-400);
-				leftbtmmx3 = Coordinate.AnalogSpeedMove(leftbtmmx3,-400);
-				leftbtmmx4 = Coordinate.AnalogSpeedMove(leftbtmmx4,-400);
-				leftbtmmx5 = Coordinate.AnalogSpeedMove(leftbtmmx5,-400);
-				sevolmx = Coordinate.AnalogSpeedMove(sevolmx, -300);
-				songvolmx= Coordinate.AnalogSpeedMove(songvolmx, -300);
-				if(sevolmx!=-300)
-					sp_Volume_bar.Move(sevolmx, 167);
-				if(songvolmx!=-300)
-					mp_Volume_bar.Move(songvolmx, 259);
-				baralpha = 0;
-				speedbaralpha = 0;
-				sebaralpha = 0;
-			}else if(menuFlag == 1)  {
-				rot-= 0.5;
-				if(rot == -360){
-					rot = 0;
-				}
-				//左menu背景
-				mbgx=Coordinate.AnalogSpeedMove(mbgx, mbgx2);
-				menubtm.drawBtm(canvas, paint);
-				Graphic.drawPic(canvas, left_exit, 66, 34, 0, 255, paint);
-				Graphic.drawPic(canvas, left_exit2, 66, 34, 0, x, paint);
-
-				Graphic.drawPic(canvas, left_btmback,leftbtmmx1, 166, 0, 255, paint);
-				Graphic.drawPic(canvas, left_btmback,leftbtmmx2, 257, 0, 255, paint);
-				Graphic.drawPic(canvas, left_btmback,leftbtmmx3, 354, 0, 255, paint);
-				Graphic.drawPic(canvas, left_btmback,leftbtmmx4, 450, 0, 255, paint);
-				Graphic.drawPic(canvas, left_btmback,leftbtmmx5, 542, 0, 255, paint);
-
-				leftbtmmx1 = Coordinate.AnalogSpeedMove(leftbtmmx1, leftbtmmove1);
-				leftbtmmx2 = Coordinate.AnalogSpeedMove(leftbtmmx2, leftbtmmove2);
-				leftbtmmx3 = Coordinate.AnalogSpeedMove(leftbtmmx3, leftbtmmove3);
-				leftbtmmx4 = Coordinate.AnalogSpeedMove(leftbtmmx4, leftbtmmove4);
-				leftbtmmx5 = Coordinate.AnalogSpeedMove(leftbtmmx5, leftbtmmove5);
-
-				left_btm1.move(mbgx+101, 166);
-				left_btm2.move(mbgx+101, 257);
-				left_btm3.move(mbgx+123, 355);
-				left_btm4.move(mbgx+120, 451);
-				left_btm5.move(mbgx+101, 542);
-				left_btm1.drawBtm(canvas, paint);
-				left_btm2.drawBtm(canvas, paint);
-				left_btm3.drawBtm(canvas, paint);
-				left_btm4.drawBtm(canvas, paint);
-				left_btm5.drawBtm(canvas, paint);
-				//選單按鈕===============================================================
-				if(left_btm1.getBottom()){
-					if(sevolmx!=sevolmovex){
-						sevolmx = Coordinate.AnalogSpeedMove(sevolmx, sevolmovex);
-						baralpha = 255;
-						sp_Volume_bar.Move(sevolmx, 167);
-					}
-				}
-				else {
-					if(sevolmx!=-300){
-						sevolmx = Coordinate.AnalogSpeedMove(sevolmx, -300);
-						sp_Volume_bar.Move(sevolmx, 167);
-					}
-				}
-				if(left_btm2.getBottom()){
-					if(songvolmx!=songvolmovex){
-						songvolmx = Coordinate.AnalogSpeedMove(songvolmx, songvolmovex);
-						baralpha = 255;
-						mp_Volume_bar.Move(songvolmx, 259);
-					}
-				}
-				else{
-					if(songvolmx!=-300){
-						songvolmx = Coordinate.AnalogSpeedMove(songvolmx, -300);
-						mp_Volume_bar.Move(songvolmx, 259);
-					}
-				}
-				if(left_btm3.getBottom()){
-					sebtm1.drawBtm(canvas, paint);
-					sebtm2.drawBtm(canvas, paint);
-					sebtm3.drawBtm(canvas, paint);
-					sebtm4.drawBtm(canvas, paint);
-					sebtm5.drawBtm(canvas, paint);
-					sebaralpha = 255;
-				}
-				else{
-					sebaralpha = 0;
-				}
-				if(left_btm4.getBottom()){
-					speedbaralpha = 255;
-					speed_left_arrow.drawBtm(canvas, paint);
-					speed_right_arrow.drawBtm(canvas, paint);
-					Graphic.drawPic(canvas, timing_num[set_speed], 380, 545, 0, 255, paint);
-					timing_left_arrow.drawBtm(canvas, paint);
-					timing_right_arrow.drawBtm(canvas, paint);
-					Graphic.drawPic(canvas, timing_num[set_timing], 380, 660, 0, 255, paint);
-
-				}else{
-					speedbaralpha = 0;
-
-				}
-				//選單按鈕----------------------------------------------------------------------------------------------------
-			}
-
-
-			//左半部選單控制至此=======================================================
-
-
-			//右半部關卡選單控制==========================================
+			//切換關卡時的動作-------------------------------------
 			switch(stageFlag){
-			case 0:
-				if(right_board_x!=1680){
-					right_board_x=Coordinate.AnalogSpeedMove(right_board_x, 1680);
-					Graphic.drawPic(canvas, right_board, right_board_x, 355, 0, 255, paint);
-					//箭頭顯示==================================================
-					if(!model.getBottom()){
+				case 0:
+					break;
+				case 1:
+					Graphic.drawPic(canvas,map_stage01_back , 1280/2, 720/2, 0, setalpha, paint);
+					break;
+				case 2:
+					Graphic.drawPic(canvas,map_stage02_back , 1280/2, 720/2, 0, setalpha, paint);
+					break;
+				case 3:
+					Graphic.drawPic(canvas,map_stage03_back , 1280/2, 720/2, 0, setalpha, paint);
+					break;
+			}
 
-						Graphic.drawPic(canvas, right_arrow_left, right_board_x-86, 665, 0, 255,  paint);
-						Graphic.drawPic(canvas, right_arrow_left2, right_board_x-86, 665, 0, x2,  paint);
-					}else if(model.getBottom()){
-						Graphic.drawPic(canvas, right_arrow_right, right_board_x-86, 665, 0, 255,  paint);
-						Graphic.drawPic(canvas, right_arrow_right2, right_board_x-86, 665, 0, x2,  paint);
+
+
+			if(stage_standby_Flag == 0)
+			{
+				start_alpha = setalpha;
+				underbar_my = Coordinate.AnalogSpeedMove(underbar_my,underbar_my2);
+				leftbar_mx = Coordinate.AnalogSpeedMove(leftbar_mx,leftbar_mx2);
+				rightbar_mx = Coordinate.AnalogSpeedMove(rightbar_mx,rightbar_mx2);
+				upbar_my = Coordinate.AnalogSpeedMove(upbar_my,upbar_my2);
+				set_btn2_mx = Coordinate.AnalogSpeedMove(set_btn2_mx,set_btn2_mx2);
+				set_btn_mx = Coordinate.AnalogSpeedMove(set_btn_mx,set_btn_mx2);
+				sc_rank_bar_my = Coordinate.AnalogSpeedMove(sc_rank_bar_my,sc_rank_bar_my2);
+
+				if(underbar_my == underbar_my2 && leftbar_mx == leftbar_mx2 && rightbar_mx == rightbar_mx2 && upbar_my == upbar_my2){
+					stage_standby_Flag = 1;
+
+				}
+
+			}
+
+			Graphic.drawPic(canvas, map_sc_rank_bar, 641, sc_rank_bar_my, 0, setalpha, paint);
+			Graphic.drawPic(canvas, map_frame_underbar, 640, underbar_my, 0, 255, paint);
+			Graphic.drawPic(canvas, map_frame_leftbar, leftbar_mx, 340, 0, 255, paint);
+			Graphic.drawPic(canvas, map_frame_rightbar, rightbar_mx, 360, 0, 255, paint);
+			Graphic.drawPic(canvas, map_frame_upbar, 640, upbar_my, 0, 255, paint);
+
+
+			if(stageFlag == 1) {
+				Graphic.drawPic(canvas, map_stage01, 120, 43, 0, setalpha, paint);
+			}else if(stageFlag == 2){
+				Graphic.drawPic(canvas, map_stage02, 120, 43, 0, setalpha, paint);
+			}else if(stageFlag == 3){
+				Graphic.drawPic(canvas, map_stage03, 120, 43, 0, setalpha, paint);
+			}
+			rot+= 3;
+			if(rot == 360){
+				rot = 0;
+			}
+			if(activity.io.hight_rank[activity.io.level][activity.io.difficulty]!=0){
+				Graphic.drawPic(canvas, rank[activity.io.hight_rank[activity.io.level][activity.io.difficulty]-1], 1160, 650, 0, setalpha, paint);
+			}
+			num.drawNumberRightStart(430, 650, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Blue, canvas, paint);
+			setting_btn.drawBtm(canvas, paint,set_btn_mx,160);
+			quest_btn.drawBtm(canvas,paint,set_btn_mx+1,621);
+			Graphic.drawPic(canvas, map_set_btn2_back, set_btn2_mx, 121, rot, setalpha, paint);
+			Graphic.drawPic(canvas, map_set_btn2, set_btn2_mx, 121, rot, start_alpha, paint);
+			Graphic.drawPic(canvas, map_quest_back, set_btn_mx+1, 621, 0, start_alpha, paint);
+			easy.drawBtm(canvas, paint,setalpha);
+			normal.drawBtm(canvas, paint,setalpha);
+			hard.drawBtm(canvas, paint,setalpha);
+			if(!check_Flag) {
+				Graphic.drawPic(canvas, map_start_btn_back, 640, 635, 0, setalpha, paint);
+				start.drawBtm(canvas, paint, start_alpha);
+				Graphic.drawPic(canvas, map_startbar, 640, 669, rot, setalpha, paint);
+			}
+
+			//控制觸控手勢提示==========================================================
+			if(stage_standby_Flag !=0 && hand_count > 0){
+
+				Graphic.drawPic(canvas, map_hand, hand_mx, 570, 0, hand_alpha, paint);
+				if(hand_mx != hand_mx2){
+					hand_alpha+=40;
+				}
+				if(hand_alpha > 255){
+					hand_alpha = 255;
+					hand_mx = Coordinate.AnalogSpeedMove(hand_mx,hand_mx2);
+				}
+				if(hand_mx == hand_mx2){
+					hand_alpha-=40;
+					if(hand_alpha < 0) {
+						hand_alpha = 0;
+						hand_count--;
+						hand_mx = 915;
 					}
-					//箭頭顯示----------------------------------------------------
-					start.drawBtm(canvas, paint,right_board_x+101, 645);
-					model.drawBtm(canvas, paint,right_board_x-86, 667);
+				}
+			}
+			if(hand_count <= 0){
 
-					//追加條件:當Flag = 0 會顯示easy=================================================
+				hand_recount++;
+				if(hand_recount >=1800){
+					hand_recount = 0;
+					hand_count = 3;
+				}
+			}
+			//控制觸控手勢提示-----------------------------------------------------------------
+
+
+
+
+			if(activity.io.difficulty==0){
+
+				Graphic.drawPic(canvas, map_easy_btn_t, 450, 50, 0, start_alpha, paint);
+				//追加條件Flag = 0 會顯示easy-----------------------------------------------
+			}else if(activity.io.difficulty==1){
+
+				Graphic.drawPic(canvas, map_normal_btn_t, 770, 50, 0, start_alpha, paint);
+			}else if(activity.io.difficulty==2){
+
+				Graphic.drawPic(canvas, map_hard_btn_t, 1090, 50, 0, start_alpha, paint);
+			}
+			//最終確認欄============================================================
+			Graphic.drawPic(canvas, map_checK_bar, checkbar_mx, 395, 0, 255, paint);
+			Graphic.drawPic(canvas, map_check_dark, checkbar_light_mx, 383, 0, 255, paint);
+			Graphic.drawPic(canvas, map_check_light, checkbar_light_mx, 383, 0, start_alpha, paint);
+
+			if(check_Flag){
+				checkbar_mx = Coordinate.AnalogSetSpeedMove(checkbar_mx,checkbar_mx2,2);
+				checkbar_light_mx = Coordinate.AnalogSetSpeedMove(checkbar_light_mx,checkbar_light_mx2,2);
+
+
+				if(checkbar_mx == checkbar_mx2 && checkbar_light_mx == checkbar_light_mx2){
+					check_alpha = 255;
+
+					Graphic.drawPic(canvas, map_ok_btn2, 640, 647, 0, 255, paint);
+
+					Graphic.drawPic(canvas, map_check_font, 675, 244, 0, check_alpha, paint);
+					return_btn.drawBtm(canvas,paint);
+					check_ok_btn.drawBtm(canvas,paint,start_alpha);
+					switch(stageFlag){
+						case 0:
+							break;
+						case 1:
+							Graphic.drawPic(canvas,map_s01data , 267, 419, 0, check_alpha, paint);
+							if(activity.io.level_clear[activity.io.level][activity.io.difficulty]){
+
+								Graphic.drawPic(canvas, map_virusdata, 887, 424, 0, 255, paint);
+							}else{
+								Graphic.drawPic(canvas, map_virusdata_grey, 887,424, 0, 255, paint);
+							}
+							break;
+						case 2:
+							Graphic.drawPic(canvas,map_s02data , 267, 419, 0, check_alpha, paint);
+							if(activity.io.level_clear[activity.io.level][activity.io.difficulty]){
+
+								Graphic.drawPic(canvas, map_virusdata, 887, 424, 0, 255, paint);
+							}else{
+								Graphic.drawPic(canvas, map_virusdata_grey, 887,424, 0, 255, paint);
+							}
+							break;
+						case 3:
+							Graphic.drawPic(canvas,map_s03data , 267, 419, 0, check_alpha, paint);
+							if(activity.io.level_clear[activity.io.level][activity.io.difficulty]){
+
+								Graphic.drawPic(canvas, map_virusdata, 887, 424, 0, 255, paint);
+							}else{
+								Graphic.drawPic(canvas, map_virusdata_grey, 887,424, 0, 255, paint);
+							}
+							break;
+					}
 					if(activity.io.difficulty==0){
-
-						Graphic.drawPic(canvas, right_easy_ch, right_board_x-86, 655, 0, 255, paint);
+						Graphic.drawPic(canvas, map_check_easy, 289, 535, 0, check_alpha, paint);
 						//追加條件Flag = 0 會顯示easy-----------------------------------------------
 					}else if(activity.io.difficulty==1){
-
-						Graphic.drawPic(canvas, right_normal_ch, right_board_x-86, 667, 0, 255, paint);	
+						Graphic.drawPic(canvas, map_check_nornmal, 289, 535, 0, check_alpha, paint);
 					}else if(activity.io.difficulty==2){
-
-						Graphic.drawPic(canvas, right_hard_ch, right_board_x-86, 667, 0, 255, paint);	
+						Graphic.drawPic(canvas, map_check_hard, 289, 535, 0, check_alpha, paint);
 					}
 				}
-				break;
-			case 1:
-				right_board_x=Coordinate.AnalogSpeedMove(right_board_x, 1062);
-				Graphic.drawPic(canvas, right_board, right_board_x, 355, 0, 255, paint);
-				Graphic.drawPic(canvas, right_stage01, right_board_x+11, 37, 0, 255, paint);
-				if(activity.io.level_clear[activity.io.level][activity.io.difficulty]){
+			}else{
+				check_alpha = 0;
 
-				Graphic.drawPic(canvas, right_boss01, right_board_x+2, 179, 0, 255, paint);
-				}else{
-					Graphic.drawPic(canvas, right_boss01_gray, right_board_x+2, 179, 0, 255, paint);
-				}
-				Graphic.drawPic(canvas, right_st01Font, right_board_x+3, 465, 0, 255, paint);
-				start.drawBtm(canvas, paint,right_board_x+101, 655,x2);
-				model.drawBtm(canvas, paint,right_board_x-86, 667);
+				checkbar_mx = Coordinate.AnalogSetSpeedMove(checkbar_mx,1860,2);
+				checkbar_light_mx = Coordinate.AnalogSetSpeedMove(checkbar_light_mx,1270,2);
+                /*if(checkbar_light_mx <= 1270){
+                    int x = 1860 -checkbar_mx ;
+                    if(x>150){
+                        checkbar_light_mx +=150;
+                    }else{
+                        checkbar_light_mx = 1270;
+                    }
+                }*/
 
-				break;
-			case 2:
-				right_board_x=Coordinate.AnalogSpeedMove(right_board_x, 1062);
-				Graphic.drawPic(canvas, right_board, right_board_x, 355, 0, 255, paint);
-				Graphic.drawPic(canvas, right_stage2, right_board_x+11, 37, 0, 255, paint);
-				if(activity.io.level_clear[activity.io.level][activity.io.difficulty]){
-					Graphic.drawPic(canvas, right_boss01, right_board_x+2, 179, 0, 255, paint);
-					}else{
-						Graphic.drawPic(canvas, right_boss01_gray, right_board_x+2, 179, 0, 255, paint);
-					}
-				Graphic.drawPic(canvas, right_stage02info, right_board_x-4, 465, 0, 255, paint);
-				start.drawBtm(canvas, paint,right_board_x+101, 655,x2);
-				model.drawBtm(canvas, paint,right_board_x-86, 667);
 
-				break;
-			case 3:
-				right_board_x=Coordinate.AnalogSpeedMove(right_board_x, 1062);
-				Graphic.drawPic(canvas, right_board, right_board_x, 355, 0, 255, paint);
-				Graphic.drawPic(canvas, right_stage3, right_board_x+11, 37, 0, 255, paint);
-				if(activity.io.level_clear[activity.io.level][activity.io.difficulty]){
-					Graphic.drawPic(canvas, right_boss01, right_board_x+2, 179, 0, 255, paint);
-					}else{
-						Graphic.drawPic(canvas, right_boss01_gray, right_board_x+2, 179, 0, 255, paint);
-					}
-				Graphic.drawPic(canvas, right_stage03info, right_board_x-4, 465, 0, 255, paint);
-				start.drawBtm(canvas, paint,right_board_x+101, 655,x2);
-				model.drawBtm(canvas, paint,right_board_x-86, 667);
-
-				break;
 			}
 
-			//當stageFlag不等於0，就會顯示難易度與選擇難易度
-			if(stageFlag !=0){
-				if(activity.io.hight_rank[activity.io.level][activity.io.difficulty]!=0){
-					Graphic.drawPic(canvas, rank[activity.io.hight_rank[activity.io.level][activity.io.difficulty]-1], right_board_x+68, 585, 0, 255, paint);
-				}
-				num.drawNumberLeftStart(right_board_x-10, 535, activity.io.hight_score[activity.io.level][activity.io.difficulty], Number.Wite, canvas, paint);
-				//追加條件:當Flag = 0 會顯示easy=================================================
-				if(activity.io.difficulty==0){
-					Graphic.drawPic(canvas, right_easy_ch, right_board_x-86, 655, 0, 255, paint);
-					//追加條件Flag = 0 會顯示easy-----------------------------------------------
 
-				}else if(activity.io.difficulty==1){
-					Graphic.drawPic(canvas, right_normal_ch, right_board_x-86, 655, 0, 255, paint);
 
-				}else if(activity.io.difficulty==2){
-					Graphic.drawPic(canvas, right_hard_ch, right_board_x-86, 655, 0, 255, paint);
-
-				}
-
-				//箭頭顯示=========================================================================
-				if(!model.getBottom()){
-					Graphic.drawPic(canvas, right_arrow_left, right_board_x-150, 655, 0, 255,  paint);
-					Graphic.drawPic(canvas, right_arrow_left2, right_board_x-150, 655, 0, x2,  paint);
-				}else if(model.getBottom()){
-					Graphic.drawPic(canvas, right_arrow_right, right_board_x-150, 655, 0, 255,  paint);
-					Graphic.drawPic(canvas, right_arrow_right2, right_board_x-150, 655,0, x2,  paint);
-				}
-				//箭頭---------------------------------------------------------------------------
-
-				//必須在選擇關卡時才能調整難易度
-				if(model.getBottom()){
-					Graphic.drawPic(canvas, right_chmodel, 741, 588, 0, 255, paint);
-
-					//追加透明度變化，目前選擇的難度為亮，其餘難度為暗=======================================
-					if(activity.io.difficulty==0){
-						easy.drawBtm(canvas, paint, 255);
-						normal.drawBtm(canvas, paint,150);
-						hard.drawBtm(canvas, paint, 150);
-					}else if(activity.io.difficulty == 1){
-						easy.drawBtm(canvas, paint, 150);
-						normal.drawBtm(canvas, paint,255);
-						hard.drawBtm(canvas, paint, 150);
-					}else if(activity.io.difficulty == 2){
-						easy.drawBtm(canvas, paint, 150);
-						normal.drawBtm(canvas, paint,150);
-						hard.drawBtm(canvas, paint, 255);
-					}
-
-					//追加透明度變化，目前選擇的難度為亮，其餘難度為暗----------------------------------------
-				}
-			}
-
+			setting.Draw(canvas, paint);
 			//canvas.drawText(String.valueOf(menuFlag), Coordinate.CoordinateX(360), Coordinate.CoordinateY(360), paint);
+
+
+
+
+
 		}
 	}
+
 	@Override
 	public boolean onTouchEvent(MotionEvent event){
 		pointx=(int) event.getX();
 		pointy=(int) event.getY();
 		switch(event.getAction())
 		{
-		case MotionEvent.ACTION_DOWN://按下
-			if(deJump == true)
-			{
-				//左半部選單按鈕事件====================================
-				if(menubtm.isIn(pointx, pointy)){
-					if(menuFlag == 0){
-						sp.play(sp_id[5], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-						menuFlag = 1;
-					}
-					else if(menuFlag == 1){
-						sp.play(sp_id[6], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-						left_btm1.setBottomTo(false);
-                        left_btm2.setBottomTo(false);
-                        left_btm3.setBottomTo(false);
-                        left_btm4.setBottomTo(false);
-                        left_btm5.setBottomTo(false);
-						menuFlag = 0;
-					}
-				}
-				//------------------------------
-				if(menuFlag == 1)
+			case MotionEvent.ACTION_DOWN://按下
+				if(deJump == true)
 				{
-					if(left_btm1.isIn(pointx, pointy)){
-						if(!left_btm1.getBottom()){
-							sp.play(sp_id[7], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-							left_btm1.setBottomTo(true);
-							left_btm2.setBottomTo(false);
-							left_btm3.setBottomTo(false);
-							left_btm4.setBottomTo(false);
-							left_btm5.setBottomTo(false);
-						}
-						else if(left_btm1.getBottom()){
-							left_btm1.setBottomTo(false);
-
-						}
-					}
-					else if(left_btm2.isIn(pointx, pointy))
-					{
-						if(!left_btm2.getBottom()){
-							sp.play(sp_id[7], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-							left_btm1.setBottomTo(false);
-							left_btm2.setBottomTo(true);
-							left_btm3.setBottomTo(false);
-							left_btm4.setBottomTo(false);
-							left_btm5.setBottomTo(false);
-						}
-						else if(left_btm2.getBottom()){
-							left_btm2.setBottomTo(false);
-
-						}
-					}
-					else if(left_btm3.isIn(pointx, pointy)){
-						if(!left_btm3.getBottom()){
-							sp.play(sp_id[7], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-							left_btm1.setBottomTo(false);
-							left_btm2.setBottomTo(false);
-							left_btm3.setBottomTo(true);
-							left_btm4.setBottomTo(false);
-							left_btm5.setBottomTo(false);
-						}
-						else if(left_btm3.getBottom()){
-							left_btm3.setBottomTo(false);
-
-						}
-
-					}
-					else if(left_btm4.isIn(pointx, pointy)){
-						if(!left_btm4.getBottom()){
-							sp.play(sp_id[7], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-							left_btm1.setBottomTo(false);
-							left_btm2.setBottomTo(false);
-							left_btm3.setBottomTo(false);
-							left_btm4.setBottomTo(true);
-							left_btm5.setBottomTo(false);
-
-						}else if(left_btm4.getBottom()){
-							left_btm4.setBottomTo(false);
-
-						}
-					}
-					else if(left_btm5.isIn(pointx, pointy)){
-						if(!left_btm5.getBottom()){
-
-							activity.changeView(1);
-
-						}
+					if(setting.main_flag) {
+						setting.Action_Dowm(pointx, pointy);
 					}
 
-					//-------------音效按鈕切換區------------------
-					if(left_btm3.getBottom()){ //只有按鈕為true時才生效
+					if(!setting.main_flag) {
+						//新介面用關卡選擇----------------------------
+						if(check_Flag){
+							if(check_ok_btn.isIn(pointx,pointy)){
+								sp.play(sp_id_s[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+								check_Flag = false;
 
-						if(sebtm1.isIn(pointx, pointy)){
-							if(!sebtm1.getBottom()){
-								sebtm1.setBottomTo(true);
-								sebtm2.setBottomTo(false);
-								sebtm3.setBottomTo(false);
-								sebtm4.setBottomTo(false);
-								sebtm5.setBottomTo(false);
-								sp.play(sp_id[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-								activity.io.sp_num=0;
-								activity.io.writeData();
+								activity.io.video_select=2;
+								activity.changeView(0);
 							}
-							else if(sebtm1.getBottom()){
-								sebtm1.setBottomTo(false);
-								activity.io.sp_num=-1;
-								activity.io.writeData();
+							if(return_btn.isIn(pointx,pointy)){
+								check_Flag = false;
 							}
 						}
-						else if(sebtm2.isIn(pointx, pointy)){
-							if(!sebtm2.getBottom()){
-								sebtm1.setBottomTo(false);
-								sebtm2.setBottomTo(true);
-								sebtm3.setBottomTo(false);
-								sebtm4.setBottomTo(false);
-								sebtm5.setBottomTo(false);
-								sp.play(sp_id[1], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-								activity.io.sp_num=1;
-								activity.io.writeData();
-							}
-							else if(sebtm2.getBottom()){
-								sebtm2.setBottomTo(false);
-								activity.io.sp_num=-1;
-								activity.io.writeData();
-							}
-						}
-						else if(sebtm3.isIn(pointx, pointy)){
-							if(!sebtm3.getBottom()){
-								sebtm1.setBottomTo(false);
-								sebtm2.setBottomTo(false);
-								sebtm3.setBottomTo(true);
-								sebtm4.setBottomTo(false);
-								sebtm5.setBottomTo(false);
-								sp.play(sp_id[2], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-								activity.io.sp_num=2;
-								activity.io.writeData();
-							}
-							else if(sebtm3.getBottom()){
-								sebtm3.setBottomTo(false);
-								activity.io.sp_num=-1;
-								activity.io.writeData();
-							}
-						}
-						else if(sebtm4.isIn(pointx, pointy)){
-							if(!sebtm4.getBottom()){
-								sebtm1.setBottomTo(false);
-								sebtm2.setBottomTo(false);
-								sebtm3.setBottomTo(false);
-								sebtm4.setBottomTo(true);
-								sebtm5.setBottomTo(false);
-								sp.play(sp_id[3], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-								activity.io.sp_num=3;
-								activity.io.writeData();
-							}
-							else if(sebtm4.getBottom()){
-								sebtm4.setBottomTo(false);
-								activity.io.sp_num=-1;
-								activity.io.writeData();
-							}
-						}
-						else if(sebtm5.isIn(pointx, pointy)){
-							if(!sebtm5.getBottom()){
-								sebtm1.setBottomTo(false);
-								sebtm2.setBottomTo(false);
-								sebtm3.setBottomTo(false);
-								sebtm4.setBottomTo(false);
-								sebtm5.setBottomTo(true);
-								sp.play(sp_id[4], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-								activity.io.sp_num=4;
-								activity.io.writeData();
-							}
-							else if(sebtm5.getBottom()){
-								sebtm5.setBottomTo(false);
-								activity.io.sp_num=-1;
-								activity.io.writeData();
-							}
-						}
-					}
-					if(mp_Volume_bar.isOn(pointx, pointy)){
-						mp_Volume_bar.isOn=true;
-					}
-					if(sp_Volume_bar.isOn(pointx, pointy)){
-						sp_Volume_bar.isOn=true;
-					}
+						if(!check_Flag) {
+							if (start.isIn(pointx, pointy)) {
+								sp.play(sp_id_s[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+								check_Flag = true;
 
-					//速度與判定按鈕事件====================================================
-					if(left_btm4.getBottom())
-					{
-						if(speed_left_arrow.isIn(pointx, pointy)){
-							if(set_speed > 6){
-								sp.play(sp_id[8], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-								set_speed--;
 							}
+							downX = pointx;
+							downY = pointy;
 						}
-						if(speed_right_arrow.isIn(pointx, pointy)){
-							if(set_speed < 10){
-								sp.play(sp_id[8], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-								set_speed++;
-							}
-						}
-						if(timing_left_arrow.isIn(pointx, pointy)){
-							if(set_timing > 0){
-								sp.play(sp_id[8], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-								set_timing--;
-							}
-						}
-						if(timing_right_arrow.isIn(pointx, pointy)){
-							if(set_timing < 15){
-								sp.play(sp_id[8], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-								set_timing++;
-							}
-						}
-					}
-					//速度與判定按鈕事件-----------------------------------------------------
 
-				}
-				//左半部選單按鈕事件至此=====================================================
-
-				//右半部關卡按鈕事件開始====================================================
-				if(stbtn01.isIn(pointx, pointy)){
-					if(!stbtn01.getBottom()){
-						sp.play(sp_id[10],activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-						stageFlag = 1;
-						activity.io.level=0;//設定gameview 關卡參數
-						activity.io.difficulty=0;//gameview難度參數
-						stbtn01.setBottomTo(true);
-						stbtn02.setBottomTo(false);
-						stbtn03.setBottomTo(false);
-
-
-					}
-					else if(stbtn01.getBottom())
-					{
-						stageFlag = 0;
-						stbtn01.setBottomTo(false);
-						model.setBottomTo(false);
-					}
-				}
-				//第二關==================================================
-				if(stbtn02.isIn(pointx, pointy)&&st_02_flag){
-					if(!stbtn02.getBottom()){
-						sp.play(sp_id[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-						stageFlag = 2;
-						activity.io.level=1;//設定gameview 關卡參數
-						activity.io.difficulty=0;//gameview難度參數
-						stbtn02.setBottomTo(true);
-						stbtn01.setBottomTo(false);
-						stbtn03.setBottomTo(false);
-					}
-					else if(stbtn02.getBottom())
-					{
-						stageFlag = 0;
-						stbtn02.setBottomTo(false);
-						model.setBottomTo(false);
-					}
-				}
-				//第二關--------------------------------------------------------
-				//第三關==================================================
-				if(stbtn03.isIn(pointx, pointy)&&st_03_flag){
-					if(!stbtn03.getBottom()){
-						sp.play(sp_id[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-						stageFlag = 3;
-						activity.io.level=2;//設定gameview 關卡參數
-						activity.io.difficulty=0;//gameview難度參數
-						stbtn03.setBottomTo(true);
-						stbtn01.setBottomTo(false);
-						stbtn02.setBottomTo(false);
-					}
-					else if(stbtn03.getBottom())
-					{
-						stageFlag = 0;
-						stbtn03.setBottomTo(false);
-						model.setBottomTo(false);
-					}
-				}
-				//第三關--------------------------------------------------------
-
-				if(stageFlag!=0){
-					if(start.isIn(pointx, pointy)){
-						sp.play(sp_id[10], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-						activity.io.video_select=2;
-						activity.changeView(0);
-					}
-
-					//難易度調整按鈕事件
-					if(model.isIn(pointx, pointy)){
-						if(model.getBottom()){
-
-							model.setBottomTo(false);
-						}else{
-							model.setBottomTo(true);
-							sp.play(sp_id[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-						}
-					}
-					if(model.getBottom()){
 						if(easy.isIn(pointx, pointy)){
-							sp.play(sp_id[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+							sp.play(sp_id_s[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 							activity.io.difficulty=0;//gameview難度參數
-							model.setBottomTo(false);
+							//model.setBottomTo(false);
 						}
 						if(normal.isIn(pointx, pointy)){
-							sp.play(sp_id[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+							sp.play(sp_id_s[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 							activity.io.difficulty=1;//gameview難度參數
-							model.setBottomTo(false);
+							//model.setBottomTo(false);
 						}
 						if(hard.isIn(pointx, pointy)){
-							sp.play(sp_id[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+							sp.play(sp_id_s[9], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
 							activity.io.difficulty=2;//gameview難度參數
-							model.setBottomTo(false);
+
 						}
+
+					}
+					//右半部關卡按鈕事件至此====================================================
+
+				}
+				deJump = false;
+				break;
+			case MotionEvent.ACTION_MOVE:
+				if(setting.main_flag) {
+					setting.Action_Move(pointx, pointy);
+					if (setting.getMainFlag()) {
+						break;
 					}
 				}
 
-
-				//右半部關卡按鈕事件至此====================================================
-
-			}
-			deJump = false;
-			break;
-		case MotionEvent.ACTION_MOVE:
-			if(mp_Volume_bar.isOn){
-				mp_Volume_bar.setSeekBarX(pointx);
-			}
-			if(sp_Volume_bar.isOn){
-				sp_Volume_bar.setSeekBarX(pointx);
-			}
-			break;
+				break;
 			//---------------------------------------
-		case MotionEvent.ACTION_UP:
-			if(deJump == false){
-				/*if(left_btm1.isIn(pointx, pointy)){
-				}
-				else if(left_btm2.isIn(pointx, pointy)){
+			case MotionEvent.ACTION_UP:
+				if(deJump == false){
 
-				}
-				else if(left_btm3.isIn(pointx, pointy)){
 
-				}
-				else if(left_btm4.isIn(pointx, pointy)){
+					if(setting.main_flag) {
+						setting.Action_Up(pointx, pointy);
+					}
 
-				}
-				else if(left_btm5.isIn(pointx, pointy)){
+					if(!setting.main_flag) {
+						if(!check_Flag) {
+							upX = pointx;
+							upY = pointy;
 
-				}*/
-				if(mp_Volume_bar.isOn){
-					int temp=(int)mp_Volume_bar.getSeekBarValue();
-					mp_Volume_bar.setSeekBarFloat((temp-(temp%10)));
-					activity.io.mp_Voiume=(float) ((temp-(temp%10))/100.0);
-					activity.io.writeData();
-					mp_Volume_bar.isOn=false;
+							float move_x = upX - downX;
+							if (move_x > 100) {
+								set_baralpha_Flag = true;
+								stageselect = 1;
+
+							} else if (move_x < -100) {
+								set_baralpha_Flag = true;
+								stageselect = -1;
+
+							}
+						}
+
+						if (setting.main_alpha == 0) {
+							if (setting_btn.isIn(pointx, pointy)) {
+								setting.start();
+							}
+						}
+					}
 				}
-				if(sp_Volume_bar.isOn){
-					int temp=(int)sp_Volume_bar.getSeekBarValue();
-					sp_Volume_bar.setSeekBarFloat((temp-(temp%10)));
-					activity.io.sp_Voiume=(float) ((temp-(temp%10))/100.0);
-					activity.io.writeData();
-					sp_Volume_bar.isOn=false;
-				}
-			}
-			deJump  = true;
-			break;
+				deJump  = true;
+				break;
 		}
 		return true;
 	}
@@ -1123,11 +870,64 @@ implements SurfaceHolder.Callback{
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,int height) {
 
 	}
-
 	public void surfaceDestroyed(SurfaceHolder arg0) {//銷毀時被呼叫
+		stage_standby_Flag = 0;
+
+		map_easy_btn_f.recycle();
+		map_stage01.recycle();
+		map_back.recycle();
+		map_set_btn.recycle();
+		map_easy_btn_t.recycle();
+		map_hard_btn_f.recycle();
+		map_hard_btn_t.recycle();
+		map_normal_btn_f.recycle();
+		map_normal_btn_t.recycle();
+		map_stage01_back.recycle();
+		map_stage02.recycle();
+		map_stage02_back.recycle();
+		map_stage03.recycle();
+		map_stage03_back.recycle();
+		map_start_btn.recycle();
+		map_startbar.recycle();
+		map_frame_upbar.recycle();
+		map_frame_underbar.recycle();
+		map_frame_leftbar.recycle();
+		map_frame_rightbar.recycle();
+
+		map_start_btn_back.recycle();
+		map_set_btn2.recycle();
+		map_set_btn2_back.recycle();
+
+		map_hand.recycle();
+		map_sc_rank_bar.recycle();
+		map_quest_back.recycle();
+		map_quest_btn.recycle();
+
+		quest_btn.recycle();
+
+		map_checK_bar.recycle();
+		map_check_font.recycle();
+		map_check_return.recycle();
+		map_check_light.recycle();
+		map_check_dark.recycle();
+		map_s01data.recycle();
+		map_s02data.recycle();
+		map_s03data.recycle();
+		map_virusdata_grey.recycle();
+		map_virusdata.recycle();
+		map_check_easy.recycle();
+		map_check_nornmal.recycle();
+		map_check_hard.recycle();
+		return_btn.recycle();
+		check_ok_btn.recycle();
+		map_ok_btn.recycle();
+		map_ok_btn2.recycle();
+
+
+
 		activity.io.speed=set_speed-5;
 		activity.io.timing=set_timing-5;
-		wmap.recycle();
+/*		wmap.recycle();
 		left_back.recycle();
 		left_exit.recycle();    //<<箭頭-淺色  離開MENU用
 		left_exit2.recycle();   //<<箭頭-深色
@@ -1239,8 +1039,13 @@ implements SurfaceHolder.Callback{
 		normal.recycle();
 		hard.recycle();
 		model.recycle();
+		*/
 		start.recycle();
-
+		setting.recycle();
+		setting_btn.recycle();
+		easy.recycle();
+		normal.recycle();
+		hard.recycle();
 		//箭頭按鈕宣告================================================
 		// arrow.recycle();
 		//箭頭按鈕宣告--------------------------------------------------------------------------------
@@ -1252,6 +1057,9 @@ implements SurfaceHolder.Callback{
 		Constant.Flag=false;
 		sp.release();
 		mp.stop();
+		mp.release();
+
+
 	}
 
 

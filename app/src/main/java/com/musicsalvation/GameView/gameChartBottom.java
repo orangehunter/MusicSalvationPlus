@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import com.musicsalvation.Bottom;
+import com.musicsalvation.Botton;
 import com.musicsalvation.MainActivity;
 
 public class gameChartBottom {
@@ -17,11 +17,11 @@ public class gameChartBottom {
 	int start_time;
 	int time_dis;
 	double move_unit,move;
-	Bottom btm;
+	Botton btm;
 
 	public gameChartBottom(int start,int target,int end,MainActivity activity,Bitmap on,Bitmap off,int x){
 		this.pointx=x;
-		btm=new Bottom(activity, on, off, pointx, -1000);
+		btm=new Botton(activity, on, off, pointx, -1000);
 		btm.setBottomTo(false);
 		this.start=start;
 		this.target=target;

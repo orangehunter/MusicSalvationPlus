@@ -1,7 +1,6 @@
 package com.musicsalvation.GameView;
 //
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
@@ -104,16 +103,16 @@ public class GameView extends SurfaceView
             Effect_Blue		=new smallAnimax[Effect_numbers];
     //特效光宣告----------------------------------
 
-    Bottom btn_circle;
-    Bottom btn_square;
-    Bottom btn_xx;
-    Bottom btn_triangle;
+    Botton btn_circle;
+    Botton btn_square;
+    Botton btn_xx;
+    Botton btn_triangle;
 
     //宣告PAUSE、返回遊戲、從頭開始、返回關卡地圖按鈕==================================================
-    Bottom btn_pause;
-    Bottom btn_re_play;
-    Bottom btn_re_start;
-    Bottom btn_re_map;
+    Botton btn_pause;
+    Botton btn_re_play;
+    Botton btn_re_start;
+    Botton btn_re_map;
     //宣告PAUSE、返回遊戲、從頭開始、返回關卡地圖按鈕--------------------------------------------------
 
     //過關等級================================================
@@ -209,6 +208,12 @@ public class GameView extends SurfaceView
     int Hitflag = 0;
     int Hitcount = 0;
     //控制判定顯示FLAG------------------------------
+
+    //combo震動特效
+    int combo_efc=0;
+
+    //combo震動特效
+
 
     int pointx;
     int pointy;
@@ -425,8 +430,8 @@ public class GameView extends SurfaceView
         attack_sight=Graphic.LoadBitmap(getResources(), R.drawable.boss_sihgt_gray, 288, 284,true);
         attack=new gameChartBottom(-200, 495, 900, activity, attack_pic, attack_pic, 1280/2);
 
-        beam=new bigAnimax(activity, beam_num, 900, 450, R.drawable.beam_00);
-        beam.setPosition(1280/2, 720/2);
+        beam=new bigAnimax(activity, beam_num, 1000, 400, R.drawable.beam_00);
+        beam.setPosition(640, 400);
         beam_sound=sp.load(getContext(), R.raw.beam_cut, 1);
 
 
@@ -456,10 +461,10 @@ public class GameView extends SurfaceView
 
 
 
-        btn_circle = new Bottom(activity, grey_circle, circle, 100, 495);
-        btn_square = new Bottom(activity, grey_square, square, 280, 625);
-        btn_triangle = new Bottom(activity, grey_triangle, triangle, 1000, 625);
-        btn_xx = new Bottom(activity, grey_xx, xx, 1180, 495);
+        btn_circle = new Botton(activity, grey_circle, circle, 100, 495);
+        btn_square = new Botton(activity, grey_square, square, 280, 625);
+        btn_triangle = new Botton(activity, grey_triangle, triangle, 1000, 625);
+        btn_xx = new Botton(activity, grey_xx, xx, 1180, 495);
 
         //浮游砲===========================================================
 		/*
@@ -472,10 +477,10 @@ public class GameView extends SurfaceView
         //浮游砲-----------------------------------------------------------
 
         //PAUSE按鈕=======================================================
-        btn_pause = new Bottom(activity, pause2, pause , 90, 105);
-        btn_re_map = new Bottom(activity, re_map, re_map, 640 , 410);
-        btn_re_play = new Bottom(activity, re_play, re_play,640 , 315);
-        btn_re_start = new Bottom(activity, re_start , re_start,640 ,225);
+        btn_pause = new Botton(activity, pause2, pause , 90, 105);
+        btn_re_map = new Botton(activity, re_map, re_map, 640 , 410);
+        btn_re_play = new Botton(activity, re_play, re_play,640 , 315);
+        btn_re_start = new Botton(activity, re_start , re_start,640 ,225);
         //PAUSE按鈕---------------------------------------------------------
 
         chart_r=Graphic.LoadBitmap(getResources(), R.drawable.virus_red, 80, 80,true);
@@ -545,24 +550,24 @@ public class GameView extends SurfaceView
                 switch (activity.io.level) {//關卡
                     case 0:
                         Log.v("Load Charts", "celluloid_yuyao" + difficulty[activity.io.difficulty]);
-                        this.boss_show = 98000;//TAG BOSS進場時間
-                        boss_kill = 128000;
+                        this.boss_show = 120000;//TAG BOSS進場時間
+                        boss_kill = 154000;
                         json = FilesAndData.readGameChart("celluloid_yuyao" + difficulty[activity.io.difficulty]);
                         break;
                     case 1:
                         Log.v("Load Charts", "tipsydessert_yuyao" + difficulty[activity.io.difficulty]);
                         this.boss_show = 90000;
-                        boss_kill = 120000;
+                        boss_kill = 129800;
                         //this.boss_show=5000;
                         //boss_kill=10000;
-                        percent = 50000;
-                        en = 90;
+                        //percent = 50000;
+                        //en = 90;
                         json = activity.io.readGameChart("tipsydessert_yuyao" + difficulty[activity.io.difficulty]);
                         break;
                     case 2:
                         Log.v("Load Charts", "kokoronashi" + difficulty[activity.io.difficulty]);
                         this.boss_show = 222000;
-                        boss_kill = 260000;
+                        boss_kill = 264000;
                         json = activity.io.readGameChart("kokoronashi" + difficulty[activity.io.difficulty]);
                         break;
                     case 3:
@@ -577,6 +582,7 @@ public class GameView extends SurfaceView
                     mp=MediaPlayer.create(activity,Uri.parse(activity.io.uri_list.optString(activity.io.chosen_int)));
                 }else {
                     mp = MediaPlayer.create(this.getContext(), song[activity.io.level]);
+
                 }
                 mp.setOnCompletionListener(new OnCompletionListener() {
                     @Override
@@ -640,6 +646,14 @@ public class GameView extends SurfaceView
             canvas.clipRect(new Rect(0, 0, Constant.SCREEN_WIDTH, Constant.SCREEN_HIGHT));//只在螢幕範圍內繪制圖片
             canvas.drawColor(Color.BLACK);//界面設定為黑色
             Graphic.drawPic(canvas, bg, 1280 / 2, 720 / 2, 0, 255, paint);//背景
+            //TAG combo顯示============================================================
+            Graphic.drawPic(canvas, hits, 290, 200, 0, 255, paint);
+            score.setSize(200, 280);
+
+                score.drawNumberRightStart(835, 360+combo_efc, combo, Number.Cyan, canvas, paint);//置中
+
+
+            //combo顯示-------------------------------------------------------------
             Graphic.drawPic(canvas, track, 450, 390, 0, 255, paint);
             Graphic.drawPic(canvas, track, 575, 390, 0, 255, paint);
             Graphic.drawPic(canvas, track, 700, 390, 0, 255, paint);
@@ -826,11 +840,7 @@ public class GameView extends SurfaceView
             score.drawNumberRightStart(1250, 20, sc_score, Number.Wite, canvas, paint);
 
 
-            //TAG combo顯示============================================================
-            Graphic.drawPic(canvas, hits, 290, 200, 0, 255, paint);
-            score.setSize(50, 70);
-            score.drawNumberRightStart(230, 190, combo, Number.Cyan, canvas, paint);
-            //combo顯示-------------------------------------------------------------
+
 
             //Graphic.drawPic(canvas, hpfont_red, 95, 50, 0, 255, paint);
 

@@ -9,19 +9,20 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.MediaPlayer;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.MotionEvent;
 import android.util.SparseArray;
 
-import com.musicsalvation.Bottom;
+import com.musicsalvation.Botton;
 import com.musicsalvation.Charts;
 import com.musicsalvation.MainActivity;
 import com.musicsalvation.R;
 import com.musicsalvation.Graphic;
 import com.musicsalvation.Constant;
 import com.musicsalvation.touchPoint;
+
+import org.json.JSONObject;
 
 @SuppressLint("ViewConstructor")
 public class EditView extends SurfaceView implements SurfaceHolder.Callback{
@@ -35,15 +36,15 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
     Bitmap btn_del_0,btn_del_1;
     Bitmap btn_edt_0,btn_edt_1;
     Bitmap play,pause,save;
-    Bottom btn_del_mod,btn_edt_mod,btn_mp_ctrl,btn_save;
+    Botton btn_del_mod,btn_edt_mod,btn_mp_ctrl,btn_save;
     boolean del_mod_flag;
     boolean drag_flag;
 
     Bitmap BR,BS,BT,BX,BB;
-    Bottom btn_r;
-    Bottom btn_s;
-    Bottom btn_t;
-    Bottom btn_x;
+    Botton btn_r;
+    Botton btn_s;
+    Botton btn_t;
+    Botton btn_x;
 
     int current=0;
 
@@ -72,7 +73,7 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
         if (charts!=null) {
             ce.ct.chart_key = charts.readChartsKey();
         }else {
-            ce.ct.chart_key=new SparseArray<>();
+            ce.ct.chart_key=new SparseArray<JSONObject>();
         }
 
 
@@ -82,18 +83,18 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
 
         btn_del_0=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_del_0,247,125,true);
         btn_del_1=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_del_1,247,125,true);
-        btn_del_mod=new Bottom(activity,btn_del_0,btn_del_1,517,665);
+        btn_del_mod=new Botton(activity,btn_del_0,btn_del_1,517,665);
         btn_del_mod.setBottomTo(true);//將刪除模式按鈕設為滅
 
         btn_edt_0=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_edit_0,247,125,true);
         btn_edt_1=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_edit_1,247,125,true);
-        btn_edt_mod=new Bottom(activity,btn_edt_0,btn_edt_1,763,665);
+        btn_edt_mod=new Botton(activity,btn_edt_0,btn_edt_1,763,665);
 
         play=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_play,164,182,false);
         pause=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_pause,164,182,false);
         save=Graphic.LoadBitmap(rs,R.drawable.edit_view_btn_save,141,216,false);
-        btn_mp_ctrl=new Bottom(activity,pause,play,93,163);
-        btn_save=new Bottom(activity,save,save,1180,180);
+        btn_mp_ctrl=new Botton(activity,pause,play,93,163);
+        btn_save=new Botton(activity,save,save,1180,180);
 
         del_mod_flag=false;//將刪除模式關閉
         drag_flag=false;//拖曳功能初始值
@@ -104,10 +105,10 @@ public class EditView extends SurfaceView implements SurfaceHolder.Callback{
         BT=Graphic.LoadBitmap(rs,R.drawable.bottom_trangle,btn_size,btn_size,true);
         BX=Graphic.LoadBitmap(rs,R.drawable.bottom_x,btn_size,btn_size,true);
         BB=Graphic.LoadBitmap(rs,R.drawable.bottom_pushed,btn_size,btn_size,true);
-        btn_r=new Bottom(activity,BB,BR,90, 455);
-        btn_s = new Bottom(activity, BB, BS, 265, 625);
-        btn_t = new Bottom(activity, BB, BT, 1015, 625);
-        btn_x = new Bottom(activity, BB, BX, 1190, 455);
+        btn_r=new Botton(activity,BB,BR,90, 455);
+        btn_s = new Botton(activity, BB, BS, 265, 625);
+        btn_t = new Botton(activity, BB, BT, 1015, 625);
+        btn_x = new Botton(activity, BB, BX, 1190, 455);
 
         current=0;
 

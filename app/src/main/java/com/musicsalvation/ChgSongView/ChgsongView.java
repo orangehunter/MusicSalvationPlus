@@ -16,15 +16,13 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.musicsalvation.Bottom;
+import com.musicsalvation.Botton;
 import com.musicsalvation.Constant;
 import com.musicsalvation.Graphic;
 import com.musicsalvation.MainActivity;
 import com.musicsalvation.R;
-import com.musicsalvation.Constant;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 @SuppressLint({ "ViewConstructor", "WrongCall", "ClickableViewAccessibility" })
 public class ChgsongView extends SurfaceView
@@ -53,43 +51,43 @@ public class ChgsongView extends SurfaceView
 
     Bitmap set_0;//設定
     Bitmap set_1;//設定
-    Bottom set_btn;//設定按鈕
+    Botton set_btn;//設定按鈕
 
     Bitmap pomeChg_1_0;//1號譜面
     Bitmap pomeChg_1_1;//1號譜面
-    Bottom pomeChg_1_btn;//1號譜面按鈕
+    Botton pomeChg_1_btn;//1號譜面按鈕
 
     Bitmap pomeChg_2_0;//2號譜面
     Bitmap pomeChg_2_1;//2號譜面
-    Bottom pomeChg_2_btn;//2號譜面按鈕
+    Botton pomeChg_2_btn;//2號譜面按鈕
 
     Bitmap pomeChg_3_0;//3號譜面
     Bitmap pomeChg_3_1;//3號譜面
-    Bottom pomeChg_3_btn;//3號譜面按鈕
+    Botton pomeChg_3_btn;//3號譜面按鈕
 
     Bitmap play_0;//遊玩按鈕
     Bitmap play_1;//遊玩按鈕
-    Bottom play_btn;//遊玩按鈕
+    Botton play_btn;//遊玩按鈕
 
     Bitmap shar_0;//分享按鈕
     Bitmap shar_1;//分享按鈕
-    Bottom shar_btn;//分享按鈕
+    Botton shar_btn;//分享按鈕
 
     Bitmap cart_0;//創作按鈕
     Bitmap cart_1;//創作按鈕
-    Bottom cart_btn;//創作按鈕
+    Botton cart_btn;//創作按鈕
 
     Bitmap add_0;//新增按鈕
     Bitmap add_1;//新增按鈕
-    Bottom add_btn;//新增按鈕
+    Botton add_btn;//新增按鈕
 
     Bitmap up_0;
     Bitmap up_1;
-    Bottom up_btn;
+    Botton up_btn;
 
     Bitmap down_0;
     Bitmap down_1;
-    Bottom down_btn;
+    Botton down_btn;
 
     Bitmap sonbar;
 
@@ -108,8 +106,8 @@ public class ChgsongView extends SurfaceView
     Bitmap sicon_1;
     Bitmap sicon_2;
 
-    Bottom sicon_1_btn;
-    Bottom sicon_2_btn;
+    Botton sicon_1_btn;
+    Botton sicon_2_btn;
 
 
 
@@ -223,20 +221,20 @@ public class ChgsongView extends SurfaceView
         sicon_1=Graphic.bitSize(LoadBitmap( R.drawable.dv_chartenter_btn),392,74);
         sicon_2=Graphic.bitSize(LoadBitmap( R.drawable.dv_songadd),392,74);
 
-        add_btn=new Bottom(activity,play_0,add_0,1230, 44);
-        set_btn=new Bottom(activity, set_0, set_0,56, 44);
-        pomeChg_1_btn=new Bottom(activity,  pomeChg_1_1,  pomeChg_1_0,189, 653);
-        pomeChg_2_btn=new Bottom(activity,  pomeChg_2_1,  pomeChg_2_0,282, 653);
-        pomeChg_3_btn=new Bottom(activity,  pomeChg_3_1,  pomeChg_3_0,375, 653);
-        play_btn=new Bottom(activity,  play_0,  play_0,557, 408);
-        shar_btn=new Bottom(activity,  shar_0,  shar_0,628, 294);
-        cart_btn=new Bottom(activity,   cart_0,  cart_0,628, 519);
+        add_btn=new Botton(activity,play_0,add_0,1230, 44);
+        set_btn=new Botton(activity, set_0, set_0,56, 44);
+        pomeChg_1_btn=new Botton(activity,  pomeChg_1_1,  pomeChg_1_0,189, 653);
+        pomeChg_2_btn=new Botton(activity,  pomeChg_2_1,  pomeChg_2_0,282, 653);
+        pomeChg_3_btn=new Botton(activity,  pomeChg_3_1,  pomeChg_3_0,375, 653);
+        play_btn=new Botton(activity,  play_0,  play_0,557, 408);
+        shar_btn=new Botton(activity,  shar_0,  shar_0,628, 294);
+        cart_btn=new Botton(activity,   cart_0,  cart_0,628, 519);
 
-        up_btn=new Bottom(activity,   up_0,  up_0,664, 160);
-        down_btn=new Bottom(activity,   down_0,  down_0,667, 665);
+        up_btn=new Botton(activity,   up_0,  up_0,664, 160);
+        down_btn=new Botton(activity,   down_0,  down_0,667, 665);
 
-        sicon_1_btn=new Bottom(activity,   sicon_1, sicon_1,1025, 145);
-        sicon_2_btn=new Bottom(activity,   sicon_2, sicon_2,1025, 235);
+        sicon_1_btn=new Botton(activity,   sicon_1, sicon_1,1025, 145);
+        sicon_2_btn=new Botton(activity,   sicon_2, sicon_2,1025, 235);
 
         pomeChg_1_btn.setBottomTo(true);
         pomeChg_2_btn.setBottomTo(false);

@@ -2,7 +2,6 @@ package com.musicsalvation;
 //
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -50,8 +49,8 @@ implements SurfaceHolder.Callback{
 	Bitmap normal;
 	Bitmap hard;
 
-	Bitmap y;
-	Bitmap n;
+	//Bitmap y;
+	//Bitmap n;
 	/*Bitmap num_grey;
 	Bitmap num_white;
 	Bitmap num_red;
@@ -79,8 +78,8 @@ implements SurfaceHolder.Callback{
 	Number num;
 	//---------------------------------------------------------------------------------------
 	
-	Bottom exit_btm;
-	Bottom again_btm;
+	Botton exit_btm;
+	Botton again_btm;
 
 	int pointx;//觸控到螢幕的x座標
 	int pointy;//觸控到螢幕的y座標
@@ -164,8 +163,8 @@ implements SurfaceHolder.Callback{
 		normal = Graphic.bitSize(LoadBitmap(R.drawable.normalv2psd), 205, 80);
 		hard = Graphic.bitSize(LoadBitmap(R.drawable.hardv2), 205, 80);
 
-		y = Graphic.bitSize(LoadBitmap(R.drawable.y), 30, 50);
-		n = Graphic.bitSize(LoadBitmap(R.drawable.n), 30, 50);
+		//y = Graphic.bitSize(LoadBitmap(R.drawable.y), 30, 50);
+		//n = Graphic.bitSize(LoadBitmap(R.drawable.n), 30, 50);
 
 		/*num_grey = Graphic.bitSize(LoadBitmap(R.drawable.num_gray), 350, 50);
 		num_red = Graphic.bitSize(LoadBitmap(R.drawable.num_red), 350, 50);
@@ -197,8 +196,8 @@ implements SurfaceHolder.Callback{
 		
 		//按鈕音--------------------------
 		
-		exit_btm = new Bottom(activity, exit, exit, 1120, 670);
-		again_btm = new Bottom(activity, again, again, 825, 670);
+		exit_btm = new Botton(activity, exit, exit, 1120, 670);
+		again_btm = new Botton(activity, again, again, 825, 670);
 		//判定是否過關==============================================================================
 		//條件修正
 		if(activity.io.percent > ((int)activity.io.virus*0.7)&& activity.io.boss_delete)  //如果打擊率超過70%並且擊殺BOSS
@@ -495,8 +494,8 @@ implements SurfaceHolder.Callback{
 		normal.recycle();
 		hard.recycle();
 
-		y.recycle();
-		n.recycle();
+		//y.recycle();
+		//n.recycle();
 		/*num_grey.recycle();
 		num_white.recycle();
 		num_red.recycle();

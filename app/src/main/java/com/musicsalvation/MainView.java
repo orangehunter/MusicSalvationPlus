@@ -40,9 +40,9 @@ implements SurfaceHolder.Callback{
 	//Bitmap right_miku;
 	Bitmap staff;
 
-	Bottom storybtm;
-	Bottom creatbtm;
-	Bottom staffList;
+	Botton storybtm;
+	Botton creatbtm;
+	Botton staffList;
 
 
 
@@ -119,8 +119,8 @@ implements SurfaceHolder.Callback{
 		storymode =  			Graphic.bitSize(LoadBitmap( R.drawable.mv_storymode), 314,85);
 		createmode  =  			Graphic.bitSize(LoadBitmap( R.drawable.mv_createmode), 314,85);
 
-		storybtm = 	new Bottom(activity, storymode,storymode, 640, 518);
-		creatbtm = 	new Bottom(activity, createmode, createmode, 640, 643);
+		storybtm = 	new Botton(activity, storymode,storymode, 640, 518);
+		creatbtm = 	new Botton(activity, createmode, createmode, 640, 643);
 
 		hidden_flag=false;
 		for(int i=0;i<3;i++){
@@ -135,7 +135,7 @@ implements SurfaceHolder.Callback{
 			staff =Graphic.bitSize(LoadBitmap(R.drawable.staff), 314, 85);
 			storybtm.move(640, 450);
 			creatbtm.move(640, 550);
-			staffList=	new Bottom(activity,staff,staff,640,650);
+			staffList=	new Botton(activity,staff,staff,640,650);
 		}
 
 		//載入音樂=============================================================
@@ -210,7 +210,7 @@ implements SurfaceHolder.Callback{
 			/*if(!hidden_flag){
 				if(apa<= 10){
 					a =7;
-				} 
+				}
 				if(apa >240){
 					a = -7;
 				}
@@ -237,7 +237,7 @@ implements SurfaceHolder.Callback{
 
 				paint.reset();
 			}
-			if(mainFlag==1){
+			if(mainFlag!=0){
 				Graphic.drawPic(canvas, main_title, mtx, mty, 0, 255, paint);//Title
 				mty=Coordinate.AnalogSpeedMove(mty, mty2);
 
@@ -266,63 +266,56 @@ implements SurfaceHolder.Callback{
 	public boolean onTouchEvent(MotionEvent event){
 		pointx=(int) event.getX();
 		pointy=(int) event.getY();
-		if(mainFlag==0){
+
 			switch(event.getAction())
 			{
 			case MotionEvent.ACTION_DOWN://按下
 				if(deJump == true){
-					sp.play(btn_se[1], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-					mainFlag=1;
+                    if(mainFlag==0) {
+                        sp.play(btn_se[1], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+                        mainFlag = 1;
+
+                    }else if(mainFlag !=0){
+                        if(storybtm.isIn(pointx, pointy)){
+                            sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+                            mainFlag = 2;
+                        }
+                        if(creatbtm.isIn(pointx, pointy)){
+                            sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
+                            creatbtm.setBottomTo(true);
+                            mainFlag = 3;
+                        }
+                        if(hidden_flag){
+                            if(staffList.isIn(pointx, pointy)){
+                                mainFlag = 4;
+                            }
+                        }
+                    }
 				}
 				deJump = false;
 				break;
-			case MotionEvent.ACTION_UP://抬起
-				if(deJump==false){//防止彈跳part2
-
-				}
-				deJump = true;
-				break;
+                case MotionEvent.ACTION_UP://抬起
+                    if(deJump==false) {//防止彈跳part2
+                        if (mainFlag == 2) {
+                            if (storybtm.isIn(pointx, pointy)) {//進入地圖畫面
+                                activity.io.video_select = 1;
+                                activity.changeView(0);
+                            }
+                        }else if(mainFlag == 3) {
+                            if (creatbtm.isIn(pointx, pointy)) {
+                                //TODO 還沒有改進創遊模式
+                                activity.changeView(8);
+                            }
+                        }else if(mainFlag == 4){
+                            if(staffList.isIn(pointx, pointy)) {
+                                activity.io.video_select = 3;
+                                activity.changeView(0);
+                            }
+                        }
+                    }
+                    deJump=true;
+                    break;
 			}
-		}
-		if(mainFlag==1){
-			switch(event.getAction())
-			{
-			//......................................................................................
-			case MotionEvent.ACTION_DOWN://按下
-				if(deJump==true){//防止彈跳part1
-					if(storybtm.isIn(pointx, pointy)){
-						sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-					}
-					if(creatbtm.isIn(pointx, pointy)){
-						sp.play(btn_se[0], activity.io.sp_Voiume, activity.io.sp_Voiume, 0, 0, 1);
-						creatbtm.setBottomTo(true);
-					}
-					if(hidden_flag){
-						if(staffList.isIn(pointx, pointy)){
-							activity.io.video_select=3;
-							activity.changeView(0);
-						}
-					}
-				}
-				deJump=false;
-				break;
-				//.....................................................................................
-			case MotionEvent.ACTION_UP://抬起
-				if(deJump==false){//防止彈跳part2
-					if(storybtm.isIn(pointx, pointy)){//進入地圖畫面
-							activity.io.video_select=1;
-							activity.changeView(0);
-					}
-
-					if(creatbtm.isIn(pointx, pointy)){
-                            //TODO 還沒有改進創遊模式
-							activity.changeView(8);
-					}
-				}
-				deJump=true;
-				break;
-			}
-		}
 		return true;
 	}
 

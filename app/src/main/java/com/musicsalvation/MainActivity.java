@@ -29,7 +29,7 @@ public class MainActivity extends Activity{
     int first_activity=0;//修改第一畫面
     int nowView=0;
 
-
+    MainView_2 mainview_2;//柏仰開發中
     MainView mainview;
     EditView editview;
     MapView mapview;
@@ -39,6 +39,7 @@ public class MainActivity extends Activity{
     ChartListView chartListView;
     ChartDetailView chartview;
     Video video;
+    StoryView storyview;
 
     final int MAIN=1,MAP=2,GAME=3,SCORE=4,EDIT=6,CHOOSE_FILE=7,CHANGE_SONG=8,CHART=9,DATA=10;
     public static FilesAndData io;
@@ -49,6 +50,7 @@ public class MainActivity extends Activity{
         Message msg = myHandler.obtainMessage(what);
         myHandler.sendMessage(msg);
         nowView=what;
+
     }
 
     Handler myHandler = new Handler(){//處理各個SurfaceView傳送的訊息
@@ -86,7 +88,12 @@ public class MainActivity extends Activity{
                 case 10:
                     goToDataView();
                     break;
-
+                case 11:
+                    goToMainView_2();
+                    break;
+                case 12:
+                    goToStoryView();
+                    break;
 
                 case 255:
                     Exit();
@@ -123,6 +130,15 @@ public class MainActivity extends Activity{
         mainview.requestFocus();//取得焦點
         mainview.setFocusableInTouchMode(true);//設為可觸控
     }
+    private void goToMainView_2() {//柏仰開發中
+        if(mainview_2==null)
+        {
+            mainview_2=new MainView_2(this);
+        }
+        setContentView(mainview_2);
+        mainview_2.requestFocus();//取得焦點
+        mainview_2.setFocusableInTouchMode(true);//設為可觸控
+    }//柏仰開發中
     private void goToMapView() {
         if(mapview==null)
         {
@@ -178,6 +194,15 @@ public class MainActivity extends Activity{
         chartview.requestFocus();
         chartview.setFocusableInTouchMode(true);
     }
+    protected void goToStoryView() {
+        if(storyview ==null)
+        {
+            storyview =new StoryView(this);
+        }
+        setContentView(storyview);
+        storyview.requestFocus();
+        storyview.setFocusableInTouchMode(true);
+    }
     private void Exit() {
         this.io.writeData();
         System.exit(0);//離開游戲
@@ -188,6 +213,7 @@ public class MainActivity extends Activity{
         Message msg = toastHandler.obtainMessage(1,what);
         toastHandler.sendMessage(msg);
     }
+
     Handler toastHandler = new Handler(){//處理各個SurfaceView傳送的Alert訊息
         public void handleMessage(Message msg) {
             createAlartDialog((String)msg.obj);
@@ -260,8 +286,7 @@ public class MainActivity extends Activity{
                     this.changeView(10);
                     break;
                 case 11:
-                    Constant.Flag=false;
-                    this.changeView(10);
+                    Exit();
                     break;
                 case 9:
                     Constant.Flag=false;
@@ -276,9 +301,12 @@ public class MainActivity extends Activity{
                     this.changeView(1);
                     break;
                 case 2:
-                case 6:
                     Constant.Flag=false;
                     this.changeView(1);
+                    break;
+                case 6:
+                    Constant.Flag=false;
+                    this.changeView(8);
                     break;
                 case 3:
                     Constant.Flag=false;
@@ -295,6 +323,8 @@ public class MainActivity extends Activity{
 
             }
             return true;
+        }else{
+            Toast.makeText(this, "key_test : keycode=" + keyCode + "  keyevent=" + e, Toast.LENGTH_SHORT);
         }
 		/*if(keyCode==e.KEYCODE_HOME){
 			 System.exit(0);

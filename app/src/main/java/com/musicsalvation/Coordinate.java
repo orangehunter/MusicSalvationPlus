@@ -38,4 +38,23 @@ public class Coordinate {
 		}
 		return now;
 	}
+	public static int AnalogSetSpeedMove(int now,int tomove,float speed){
+		if(now>tomove){
+			if(now-tomove>20)
+				now-=((now-tomove)/4)*speed;
+			if(now-tomove<=20)
+				now-=2*speed;
+			if(now-tomove<4)
+				now=tomove;
+		}
+		else if(tomove>now){
+			if(tomove-now>20)
+				now+=((tomove-now)/4)*speed;
+			if(tomove-now<=20)
+				now+=2*speed;
+			if(tomove-now<4)
+				tomove=now;
+		}
+		return now;
+	}
 }
