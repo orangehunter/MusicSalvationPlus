@@ -494,8 +494,9 @@ public class MapView extends SurfaceView
 								stageFlag = 1;
 							}
 							if (stageFlag <= 0 ) {
-								stageFlag = activity.io.levels;
+								stageFlag = 3;
 							}
+
 							activity.io.level = stageFlag - 1;
 
 							if (mp != null) {
@@ -848,7 +849,7 @@ public class MapView extends SurfaceView
 
 							} else if (move_x < -100) {
 								set_baralpha_Flag = true;
-								stageselect = -1;
+								stageselect = -1 ;
 
 							}
 						}
