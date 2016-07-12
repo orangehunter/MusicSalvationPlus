@@ -41,7 +41,7 @@ public class FilesAndData {
 
     //選關參數=====================================
     public static int level;//關卡
-    public static int levels=4;//關卡總數
+    public static int levels=3;//關卡總數
     public static int difficulty;//難度
     public static int [][]hight_score=new int [levels][4];
     public static int [][]hight_rank=new int [levels][4];
