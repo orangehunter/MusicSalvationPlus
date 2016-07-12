@@ -490,13 +490,13 @@ public class MapView extends SurfaceView
 						if(stageselect!=0){
 							stageFlag+=stageselect;
 							stageselect=0;
-							if (stageFlag >= activity.io.levels ) {
+							if (stageFlag >= (activity.io.levels-1) ) {
 								stageFlag = 1;
 							}
 							if (stageFlag <= 0 ) {
-								stageFlag = activity.io.levels;
+								stageFlag = (activity.io.levels-1);
 							}
-							activity.io.level = stageFlag - 1;
+							activity.io.level = (stageFlag - 1);
 
 							if (mp != null) {
 								mp.stop();
