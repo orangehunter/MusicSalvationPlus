@@ -26,7 +26,7 @@ import com.musicsalvation.GameView.GameView;
 
 @SuppressLint({ "HandlerLeak", "NewApi" })
 public class MainActivity extends Activity{
-    int first_activity=2;//修改第一畫面
+    int first_activity=0;//修改第一畫面
     int nowView=0;
 
     MainView_2 mainview_2;//柏仰開發中
@@ -298,11 +298,11 @@ public class MainActivity extends Activity{
                     break;
                 case 8:
                     Constant.Flag=false;
-                    this.changeView(11);
+                    this.changeView(1);
                     break;
                 case 2:
                     Constant.Flag=false;
-                    this.changeView(11);
+                    this.changeView(1);
                     break;
                 case 6:
                     Constant.Flag=false;
